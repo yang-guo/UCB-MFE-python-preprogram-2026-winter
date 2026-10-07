@@ -176,4 +176,5 @@ data.db
 # Local assistant state and generated lecture reports
 .claude/
 .env.*
+Lectures/Lecture 2/outputs/
 Lectures/Lecture 4/outputs/
