@@ -78,8 +78,10 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 
 - From the project root, run `uv sync --locked` and select the project's `.venv` Python interpreter as your notebook kernel.
 - Run each notebook with its lecture folder as the working directory. The reorganized data-analysis notebooks also support the repository root and their reference folders.
-- Data analysis has two live notebooks on October 8 (Lecture 2) and three on October 15 (Lecture 4), with a ten-minute break each day. Expanded material is clearly marked as optional reference.
-- Lecture 2 includes a historical sample and synthetic examples; default runs work without an API key. Its Jupyter tutorial is prework.
+- Data analysis has two live notebooks on October 8 (Lecture 2) and three on October 15 (Lecture 4), with a ten-minute break each day. Each notebook has a continuous lesson with visible code and worked examples, followed by an Exercises section. Expanded material is optional reference.
+- Lecture 2 includes a historical sample and a synthetic classroom CSV; default runs work without an API key. Its Jupyter tutorial is optional preparation.
+- Worked examples use different inputs or questions from the final exercises. Exercise prompts, starter cells, and feedback stay together at the end; the lesson runs independently of student answers.
+- Lecture 4's default report batch deliberately includes one invalid ticker: three reports succeed, one failure is recorded, and the comparison uses successful outputs only.
 - Lecture 4 requires the bCourses database at `Lectures/Lecture 4/data/data.db`.
 - Lecture 6's HTTP examples require internet access. Its multiprocessing example uses the adjacent `lecture6_workers.py` module.
 - Lecture 8 uses its built-in demo if the separate homework database at `Lectures/Lecture 8/data/data.db` is absent.

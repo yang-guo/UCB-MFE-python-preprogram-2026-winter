@@ -16,7 +16,7 @@ This homework will teach you production-level data cleaning, notebook parameteri
 
 ## Preparation and notebook map
 
-The two data-analysis sessions are October 8 and October 15. The due date and three deliverables below are unchanged.
+The two data-analysis sessions are October 8 and October 15. The due date and three deliverables below are unchanged. The live notebooks provide worked examples and practice; the homework asks you to apply those patterns independently and add its specified metrics, styling, and broader batch scope.
 
 - Cleaning and plots: [October 8 module 2](3_visualize_and_clean.ipynb).
 - SQL and quality checks: [October 15 module 1](../Lecture%204/1_sql_and_data_quality.ipynb).

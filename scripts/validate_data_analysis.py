@@ -4,6 +4,8 @@ Run from the project environment:
     uv run python scripts/validate_data_analysis.py [--core-only] [--output-dir PATH]
 
 No original database, notebook output, credentials, or user kernel settings are changed.
+Lecture examples, end-of-notebook blank exercises, correct learner attempts, and incorrect attempts
+are checked separately; executing a blank exercise is not counted as student completion.
 """
 from __future__ import annotations
 
@@ -36,32 +38,52 @@ CORE = [
 ]
 CHECKS = {
     CORE[0]: """
-assert np.isclose(portfolio['position_value'].sum(), sum(prices[t] * shares[t] for t in prices.index))
-assert len(portfolio) == len(shares)
-assert set(answer['ticker']) == {'AMZN', 'TSLA', 'BRK-B'}
+assert np.isclose(portfolio['position_value'].sum(), 5000)
+assert np.isclose(sector_weights.loc['Technology'], 80)
+assert len(portfolio) == len(positions)
+assert example_selection['ticker'].tolist() == ['MSFT']
+assert np.isclose(example_rebalanced['position_value'].sum(), 5500)
+assert np.isclose(example_rebalanced.set_index('ticker').loc['AAPL', 'weight_pct'], 2000 / 5500 * 100)
+assert positions.set_index('ticker').loc['JPM', 'shares'] == 10
+assert example_desk['ticker'].tolist() == ['AAPL']
+assert np.isclose(example_financials_weight, 20)
 """,
     CORE[1]: """
-expected = make_prices().sort_values(['ticker', 'date']).reset_index(drop=True)
-assert len(clean) == len(expected)
+expected = pd.read_csv(data_path, parse_dates=['date']).sort_values(['ticker', 'date']).reset_index(drop=True)
+assert len(clean) == len(expected) == 360
 assert clean['close_repaired'].sum() == 4
 assert clean['volume_repaired'].sum() == 2
 unchanged = ~clean['close_repaired']
 np.testing.assert_allclose(clean.loc[unchanged, 'close'], expected.loc[unchanged, 'close'])
-assert not raw.equals(clean)
-assert (output_dir / 'tech_dashboard.png').stat().st_size > 1000
+assert clean.groupby('ticker')['return'].apply(lambda group: group.isna().sum()).eq(1).all()
+assert example_msft['ticker'].eq('MSFT').all() and len(example_msft) == 120
+assert example_bad_prices['ticker'].tolist() == ['DEMO_A']
+assert example_volumes['volume'].tolist() == [100, 0, 200]
+assert example_volumes['volume_repaired'].tolist() == [False, True, False]
+assert example_text['ticker'].iloc[:4].tolist() == ['AAPL', 'AAPL', 'MSFT', 'JPM']
+assert example_text['exchange'].iloc[:4].tolist() == ['NASDAQ', 'NASDAQ', 'NASDAQ', 'NYSE']
+assert example_text['company_name'].iloc[:4].tolist() == ['APPLE INC.', 'APPLE INC.', 'MICROSOFT CORP.', 'JPMORGAN CHASE']
+assert example_text.loc[4, ['exchange', 'ticker', 'company_name']].isna().all()
+np.testing.assert_allclose(example_text['price'].iloc[:3].to_numpy(dtype=float), [150.25, 151, -5])
+assert example_text['price'].iloc[3:].isna().all()
+assert example_text['price_needs_review'].tolist() == [False, False, True, True, True]
+pd.testing.assert_frame_equal(example_text[vendor_text.columns], vendor_text)
+# Whole-field parsing must preserve signs and reject unrelated numbers.
+parse_cases = pd.Series([' PRICE : +20 ', 'price: -2.50', 'price:0', 'price: unavailable', 'batch 7 price:120', None], dtype='string')
+parsed_cases = pd.to_numeric(parse_cases.str.strip().str.lower().str.extract(price_pattern, expand=False), errors='coerce')
+np.testing.assert_allclose(parsed_cases.iloc[:3].to_numpy(dtype=float), [20, -2.5, 0])
+assert parsed_cases.iloc[3:].isna().all()
+assert (output_dir / 'clean_prices.png').stat().st_size > 1000
 """,
     CORE[2]: """
-assert flags['ohlc_bounds'].sum() == 1
-assert flags['missing_or_nonfinite'].sum() == 1
-assert flags['negative_volume'].sum() == 1
-assert len(quality_report) == 3
-assert len(roundtrip) == len(aapl)
-# Current value must not influence its own trailing baseline.
-probe = pd.Series(np.arange(30, dtype=float))
-baseline = rolling_zscore(probe, 5)
-probe.iloc[-1] = 1000
-assert np.isclose(rolling_zscore(probe, 5).iloc[-1], (1000 - np.mean(np.arange(24, 29))) / np.std(np.arange(24, 29), ddof=1))
-assert rolling_zscore(pd.Series([1.] * 30), 5).isna().all()
+assert len(sql_summary) == 3
+assert sql_summary.set_index('ticker').loc['AAPL', 'observations'] == len(aapl)
+pd.testing.assert_frame_equal(example_query_result, example_expected_filter)
+assert not example_query_result.empty and example_query_result['ticker'].eq('AAPL').all()
+assert example_query_result['close'].gt(180).all()
+assert len(joined) == len(aapl)
+pd.testing.assert_frame_equal(roundtrip, sql_summary)
+assert example_extract['ticker'].eq('NVDA').all() and len(example_extract) == 124
 """,
     CORE[3]: """
 assert data_quality_ok
@@ -70,15 +92,18 @@ assert np.isclose(stats['total_return_pct'], (df['adj_close'].iloc[-1] / df['adj
 assert stats['max_drawdown_pct'] <= 0
 np.testing.assert_allclose(df['volatility'].dropna(), df['daily_return'].rolling(volatility_window).std().dropna() * np.sqrt(252))
 assert np.isfinite(yz_vol.dropna()).all()
+np.testing.assert_allclose(example_returns.dropna(), [0.25, -0.1])
+np.testing.assert_allclose(example_drawdown, [0, 0, -0.3, -0.15], atol=1e-12)
 """,
     CORE[4]: """
-assert not failures, failures
+assert len(failures) == 1 and failures[0]['ticker'] == 'NOT_A_TICKER'
 assert len(successful_paths) == 3
-assert set(summary['ticker']) == set(tickers)
-assert len(json.loads((run_dir / 'manifest.json').read_text())['reports']) == 3
+assert set(summary['ticker']) == {'AAPL', 'MSFT', 'NVDA'}
+manifest = json.loads((run_dir / 'manifest.json').read_text())
+assert len(manifest['reports']) == 3 and len(manifest['failures']) == 1
 assert (run_dir / 'portfolio_summary.csv').is_file()
 assert (run_dir / 'comparison.png').stat().st_size > 1000
-# A stale/partial notebook in the folder must never affect manifest-based collection.
+# Incomplete/stale files must never enter a successful-run summary.
 (run_dir / 'stale.ipynb').write_text('{}')
 pd.testing.assert_frame_equal(collect_reports(successful_paths), summary)
 for paths in ([], [first_report, first_report]):
@@ -90,10 +115,74 @@ for paths in ([], [first_report, first_report]):
         raise AssertionError('Empty or duplicate report collection accepted')
 if RUN_EXTENSIONS:
     assert not quarterly_failures, quarterly_failures
-    assert len(quarterly_paths) == 12
-    assert len(quarterly) == 12
+    assert len(quarterly_paths) == len(quarterly) == 12
     assert set(quarterly['period']) == {'Q1', 'Q2', 'Q3', 'Q4'}
+pd.testing.assert_frame_equal(example_drawdown_comparison,
+    summary[['ticker', 'trading_days', 'max_drawdown_pct']].sort_values('max_drawdown_pct'))
 """,
+}
+
+BLANK_PRACTICE = {
+    CORE[0]: 'assert your_selection is None and your_rebalanced is None and your_desk_table is None',
+    CORE[1]: 'assert your_nvda is None and your_bad_prices is None and your_delivery is None and your_text_clean is None',
+    CORE[2]: 'assert your_query_result is None and your_extract is None',
+    CORE[3]: 'assert your_returns is None and your_drawdown is None',
+    CORE[4]: 'assert your_comparison is None',
+}
+
+# Exercise answers are tested separately from default Run All. They do not overwrite source notebooks.
+PRACTICE = {
+    CORE[0]: """
+your_selection = positions.loc[positions['shares'] >= 10, ['ticker', 'shares']]
+your_rebalanced = positions.copy()
+your_rebalanced.loc[your_rebalanced['ticker'] == 'MSFT', 'shares'] = 10
+your_rebalanced['position_value'] = your_rebalanced['shares'] * your_rebalanced['price']
+your_rebalanced['weight_pct'] = your_rebalanced['position_value'] / your_rebalanced['position_value'].sum() * 100
+your_desk_table = portfolio.loc[(portfolio['sector'] != 'Technology') & (portfolio['position_value'] >= 1000), ['ticker', 'position_value']]
+your_sector_weight = sector_weights.max()
+your_conclusion = 'Technology accounts for 80% of portfolio value.'
+""",
+    CORE[1]: """
+your_nvda = prices.loc[prices['ticker'] == 'NVDA'].copy()
+your_bad_prices = raw.loc[raw['close'] > raw['high'], ['date', 'ticker', 'close', 'high']]
+your_delivery = new_delivery.copy()
+bad_volume = ~np.isfinite(your_delivery['volume']) | your_delivery['volume'].lt(0)
+your_delivery.loc[bad_volume, 'volume_repaired'] = True
+your_delivery.loc[bad_volume, 'volume'] = 0
+your_quality_note = 'Zero is a flagged placeholder; observed volume is still unknown.'
+your_text_clean = practice_text.copy()
+symbols = your_text_clean['raw_symbol'].astype('string').str.replace(r'<[^>]+>', '', regex=True).str.strip().str.upper().str.split(':', n=1, expand=True)
+your_text_clean['exchange'] = symbols[0].str.strip()
+your_text_clean['ticker'] = symbols[1].str.strip()
+your_text_clean['company_name'] = your_text_clean['raw_name'].astype('string').str.strip().str.upper().str.replace(r'\\s+', ' ', regex=True)
+quotes = your_text_clean['raw_quote'].astype('string').str.strip().str.lower()
+your_text_clean['price'] = pd.to_numeric(quotes.str.extract(price_pattern, expand=False), errors='coerce')
+your_text_clean['price_needs_review'] = your_text_clean['price'].isna() | your_text_clean['price'].le(0)
+your_text_note = 'An unrelated batch number is not a price; the zero quote is numeric but not a valid equity price.'
+""",
+    CORE[2]: """
+your_query = 'SELECT ts, ticker, close FROM ohlc WHERE ticker = ? AND ts BETWEEN ? AND ? AND close > ? ORDER BY ts'
+your_query_result = pd.read_sql_query(your_query, conn, params=('MSFT', start_date, end_date, 400), parse_dates=['ts'])
+your_extract = pd.read_sql_query(price_query, conn, params=('JPM', start_date, end_date), parse_dates=['ts'])
+your_extract_note = 'The date order, keys and closes passed; calendar coverage needs a separate check.'
+""",
+    CORE[3]: """
+your_returns = calculate_returns(pd.Series([50.0, 55.0, 44.0]))
+your_drawdown = calculate_drawdown(pd.Series([100.0, 120.0, 90.0, 108.0]))
+your_worst_drawdown = your_drawdown.min()
+your_drawdown_explanation = 'The final price recovered, but it is still below the prior peak.'
+""",
+    CORE[4]: """
+your_comparison = summary[['ticker', 'total_return_pct', 'avg_volatility']].sort_values('avg_volatility', ascending=False)
+your_comparison_note = 'NVDA had the greatest mean rolling variability here; this historical sample does not predict future risk.'
+""",
+}
+BAD_PRACTICE = {
+    CORE[0]: "your_selection = positions[['ticker', 'shares']]",
+    CORE[1]: "your_nvda = prices.loc[prices['ticker'] == 'AAPL']",
+    CORE[2]: "your_query_result = expected_filter.iloc[:1]",
+    CORE[3]: "your_returns = pd.Series([np.nan, 10.0, -20.0])",
+    CORE[4]: "your_comparison = summary[['ticker', 'total_return_pct', 'avg_volatility']].sort_values('avg_volatility')",
 }
 
 
@@ -170,7 +259,7 @@ def validate(workspace, core_only):
             rel = path.relative_to(src)
             if any(part in {'.venv', 'outputs', '.ipynb_checkpoints'} for part in rel.parts):
                 continue
-            if path.is_file() and path.suffix in {'.ipynb', '.csv', '.json'}:
+            if path.is_file() and (path.suffix in {'.ipynb', '.csv', '.json'} or path.name == 'report_runtime.py'):
                 dest = workspace / 'Lectures' / lesson / rel
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(path, dest)
@@ -205,7 +294,45 @@ def validate(workspace, core_only):
                 for cell in nb.cells:
                     cell.source = cell.source.replace('RUN_EXTENSIONS = False', 'RUN_EXTENSIONS = True')
             if rel in CHECKS:
-                nb.cells.append(nbformat.v4.new_code_cell(CHECKS[rel]))
+                boundaries = [i for i, cell in enumerate(nb.cells)
+                              if 'exercises-section' in cell.metadata.get('tags', [])]
+                assert len(boundaries) == 1, f'Missing final practice section: {rel}'
+                boundary = boundaries[0]
+                for cell in nb.cells[:boundary]:
+                    assert not {'exercise', 'feedback', 'exercise-prompt'} & set(cell.metadata.get('tags', [])), rel
+                    if cell.cell_type == 'code':
+                        assert 'your_' not in cell.source, f'Lecture depends on practice: {rel}'
+                assert not any('worked-example' in cell.metadata.get('tags', []) for cell in nb.cells[boundary:]), rel
+                assert not any('solution' in cell.metadata.get('tags', []) for cell in nb.cells), rel
+                # Check the complete lecture before any practice variable has been initialized.
+                nb.cells.insert(boundary, nbformat.v4.new_code_cell(CHECKS[rel]))
+                nb.cells.append(nbformat.v4.new_code_cell(BLANK_PRACTICE[rel]))
+                feedback = [cell.source for cell in nb.cells if 'feedback' in cell.metadata.get('tags', [])]
+                assert len(feedback) >= 1, f'Missing learner feedback: {rel}'
+                assert not any(cell.metadata.get('jupyter', {}).get('source_hidden') for cell in nb.cells), f'Hidden live code: {rel}'
+                for i, cell in enumerate(nb.cells):
+                    if 'exercise' in cell.metadata.get('tags', []):
+                        assert 'exercise-prompt' in nb.cells[i - 1].metadata.get('tags', []), rel
+                        assert 'feedback' in nb.cells[i + 1].metadata.get('tags', []), rel
+                assert sum('exercise' in cell.metadata.get('tags', []) for cell in nb.cells) == len(feedback)
+                nb.cells.append(nbformat.v4.new_code_cell(PRACTICE[rel]))
+                nb.cells.extend(nbformat.v4.new_code_cell(source) for source in feedback)
+                # Prove that the first check rejects an actually wrong learner answer.
+                negative_check = BAD_PRACTICE[rel] + '\ntry:\n' + '\n'.join('    ' + line for line in feedback[0].splitlines())
+                negative_check += "\nexcept AssertionError:\n    print('Incorrect practice answer rejected as expected.')\nelse:\n    raise AssertionError('Feedback accepted an incorrect answer.')"
+                nb.cells.append(nbformat.v4.new_code_cell(negative_check))
+                if rel == CORE[1]:
+                    text_feedback = next(source for source in feedback if 'your_text_clean' in source)
+                    # Reject common parsing mistakes without changing the valid learner answer permanently.
+                    for wrong_edit in ("your_text_clean.loc[3, 'price'] = 7.0",
+                                       "your_text_clean.loc[4, 'ticker'] = 'NONE'",
+                                       "your_text_clean.loc[2, 'price_needs_review'] = False"):
+                        text_check = "valid_text_answer = your_text_clean.copy()\n" + wrong_edit
+                        text_check += '\ntry:\n' + '\n'.join('    ' + line for line in text_feedback.splitlines())
+                        text_check += "\nexcept AssertionError:\n    pass\nelse:\n    raise AssertionError('Text feedback accepted an incorrect answer.')\nfinally:\n    your_text_clean = valid_text_answer"
+                        nb.cells.append(nbformat.v4.new_code_cell(text_check))
+                if rel == CORE[2]:
+                    nb.cells.append(nbformat.v4.new_code_cell('conn.close()'))
             started = time.monotonic()
             print(f'RUN {rel}', flush=True)
             # Alternate root/lecture/reference cwd to check path portability.
@@ -249,7 +376,7 @@ def validate(workspace, core_only):
         assert digest(source_db) == before, 'Source database changed during validation.'
         print(f'PASS six report failure cases; source database unchanged', flush=True)
         report = {'notebooks': results, 'numerical_checks': 'passed', 'failure_cases': 6,
-                  'quarterly_extension': not core_only, 'source_database_unchanged': True}
+                  'quarterly_extension': not core_only, 'source_database_unchanged': True, 'exercise_feedback': 'correct and incorrect answers checked'}
         (workspace / 'validation_results.json').write_text(json.dumps(report, indent=2))
         print(f'PASS {len(results)} notebooks. Results: {workspace / "validation_results.json"}', flush=True)
     finally:
