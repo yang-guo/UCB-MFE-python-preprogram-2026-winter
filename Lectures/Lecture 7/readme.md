@@ -106,7 +106,7 @@ By the end of this lecture, you will be able to:
 
 ## Prerequisites
 
-- Lecture 2-4: Pandas, data cleaning, visualization
+- Lectures 2 and 4: Pandas, data cleaning, visualization, SQL
 - Basic understanding of statistics (mean, std, correlation)
 - Familiarity with linear regression concepts (helpful but not required)
 

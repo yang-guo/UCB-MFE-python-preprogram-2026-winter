@@ -14,6 +14,19 @@ This homework will teach you production-level data cleaning, notebook parameteri
 
 ---
 
+## Preparation and notebook map
+
+The two data-analysis sessions are October 8 and October 15. The due date and three deliverables below are unchanged.
+
+- Cleaning and plots: [October 8 module 2](3_visualize_and_clean.ipynb).
+- SQL and quality checks: [October 15 module 1](../Lecture%204/1_sql_and_data_quality.ipynb).
+- Report template: [October 15 module 2](../Lecture%204/2_stock_analysis_template.ipynb).
+- Papermill and result collection: [October 15 module 3](../Lecture%204/3_running_analysis_at_scale.ipynb).
+
+The course database lives at `Lectures/Lecture 4/data/data.db` (download from bCourses). In the assignment below, `data/data.db` means the database path relative to your own homework working directory; use a local working copy when writing cleaned tables. Never commit the database or credentials.
+
+Sort by ticker/date before calculating returns or filling; fill within ticker groups, preserve repair flags, and recheck OHLC bounds afterwards. Forward filling alone can violate today's range. Handle unresolved leading gaps explicitly rather than borrowing a different ticker's value. For adjusted prices, preserve a consistent adjustment convention after any raw-price repair.
+
 ## The Data
 
 You'll work with the `ohlc_hw` table in `data/data.db`. This table contains daily OHLC (Open, High, Low, Close) data for multiple stocks.
@@ -229,7 +242,7 @@ Your script should:
 
 1. Load the list of all tickers from `ohlc_hw_cleaned`
 2. Determine the date range: **last 6 complete months** in the database
-   - If today is Dec 15, 2024: use June 1 - Nov 30, 2024
+   - Anchor to the latest observation date in the database, not the computer clock. If that date is Dec 6, 2024: use June 1 - Nov 30, 2024.
    - Complete months only!
 3. Create an output directory: `reports/{YYYY-MM-DD}/`
 4. For each ticker:
