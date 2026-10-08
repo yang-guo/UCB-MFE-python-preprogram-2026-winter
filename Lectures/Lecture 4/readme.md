@@ -81,9 +81,9 @@ Course connections:
 | Original content | Current home |
 |---|---|
 | Jupyter setup and magics | Optional [prework](../Lecture%202/1_jupyter_tutorial.ipynb); brief in-class start |
-| Series/DataFrame API detail | October 8 module 1 plus its two expanded references |
-| Visualization variants and diagnostics | October 8 module 2 plus its expanded visualization reference |
-| Cleaning methods, string cleanup and parsing | October 8 price repairs and vendor-text example/exercise, plus its cleaning reference |
+| Series/DataFrame foundations | [October 8 pandas basics](../Lecture%202/2_pandas_basics.ipynb) |
+| Plotting and return comparisons | [October 8 visualization and cleaning](../Lecture%202/4_visualize_and_clean.ipynb) |
+| Cleaning methods, string cleanup and parsing | October 8 visualization/cleaning: price repairs and vendor-text examples/exercises |
 | Full multi-asset case | [Full cleaning case study](reference/3_real_world_data_challenge.ipynb) |
 | Rolling/global outliers, reversal flags, Prophet | [Advanced outlier reference](reference/1_advanced_outlier_detection.ipynb) |
 | CSV/JSON, cursor, CTE and SQL detail | [Ingestion reference](reference/2_data_ingestion_and_sql.ipynb) |
@@ -96,4 +96,4 @@ The live core concentrates on transferable Python operations, interpretation, an
 
 [Homework 2](../Lecture%202/hw2.md) remains due **October 29, 2026**, with the same three deliverables. The in-class examples establish the required patterns; students still implement the specified additional metrics (including Sharpe ratio), styling, cleaning choices, and all-stock/six-month expansion themselves. Do not submit the raw database or credentials.
 
-Run `uv run python scripts/validate_data_analysis.py` from the repository root. It executes five live modules, prework, and seven reference notebooks in fresh kernels against a temporary database backup. It checks the lecture results before any exercise variables exist, then checks default blank exercises, correct learner attempts, and rejection of incorrect attempts. It also tests numerical invariants, report failure cases, and the quarterly extension. Use `--core-only` for a shorter check. `--output-dir PATH` keeps the disposable outputs for inspection.
+Run `uv run python scripts/validate_data_analysis.py` from the repository root. It executes six live modules, prework, and three Lecture 4 reference notebooks in fresh kernels against a temporary database backup. It checks the lecture results before any exercise variables exist, then checks default blank exercises, correct learner attempts, and rejection of incorrect attempts. It also tests numerical invariants, report failure cases, and the quarterly extension. Use `--core-only` for a shorter check. `--output-dir PATH` keeps the disposable outputs for inspection.

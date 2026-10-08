@@ -1,87 +1,72 @@
-# October 8: Use Python to explain a portfolio and inspect its data
+# October 8: Pandas, portfolio analysis, and trustworthy data
 
 Yang · 9am-noon Pacific · first of two data-analysis sessions.
 The course schedule calls this **Data Analysis I & II**. Lecture 3 is Aneesh's October 12 LLM session.
 
-The aim is to help beginning and moderately experienced MFE students read, change, and check Python. Each module is complete course material for an instructor-led video walkthrough, starts independently, and ends with a small result students can explain. Financial questions give the code a purpose; the arithmetic is small enough to check by hand before applying it to a table.
+The three notebooks form a progression: learn how pandas identifies and combines rows, apply those operations to a portfolio decision, then investigate the prices and labels that make the analysis possible. Each notebook runs independently and contains visible worked examples. Exercises and feedback stay at the end and use changed inputs or questions.
 
-## Live modules
+## Live modules and pacing
 
-| Time (PT) | Notebook | Student's result |
-|---|---|---|
-| 9:00-10:25 | [What is actually in our portfolio?](2_pandas_to_portfolio.ipynb) | Portfolio weights, sector chart, and one-sentence concentration note |
-| 10:25-10:35 | **Break (10 minutes)** | |
-| 10:35-noon | [Can we trust this price chart?](3_visualize_and_clean.ipynb) | Comparable price chart, documented repairs, and a quality note |
+| Order | Notebook | Focus | Target |
+|---|---|---|---|
+| 1 | [Pandas basics](2_pandas_basics.ipynb) | Series/DataFrames, label lookup, joins and indices, aggregation | 60–65 minutes |
+| | **Break** | | **10 minutes** |
+| 2 | [From pandas to portfolio decisions](3_pandas_to_portfolio.ipynb) | Multiple lots/books, weighted cost, P&L, concentration and a cash-aware rebalance | 40–45 minutes |
+| 3 | [Can we trust this price chart?](4_visualize_and_clean.ipynb) | Generated stock histories, return comparisons, vendor text and data repairs | 50–55 minutes |
 
-**170 instructional minutes + 10-minute break = 180 minutes.** Instructor explanation, examples, discussion, and time to review the final exercises are included in these times.
+**150–165 instructional minutes + 10-minute break = 160–175 minutes (2h40–2h55).** This leaves room within the three-hour session for questions or setup delays. The estimates include explanation and discussion of the worked examples. The final exercises are available for selected review or independent practice; completing every exercise live would require additional time.
+
+One full-length route is basics 9:00–10:05, break 10:05–10:15, portfolio 10:15–11:00, and cleaning 11:00–11:55, with the final five minutes for questions. Timings belong here, not in the student notebooks.
 
 ## Before class
 
-From the repository root, run `uv sync --locked` and select the project's `.venv` interpreter (`.venv/bin/python` on macOS/Linux; `.venv\Scripts\python.exe` on Windows).
-The [Jupyter tutorial](1_jupyter_tutorial.ipynb) is optional preparation: run through the first plot and practice Restart & Run All. The first module includes a setup check and begins with Lecture 1's dictionaries and lists, so missing this prework does not block participation.
+From the repository root, run `uv sync --locked` and select the project's `.venv` Python interpreter. The [Jupyter tutorial](1_jupyter_tutorial.ipynb) is optional preparation. Begin class with pandas basics; the tutorial is not a fourth live module.
 
-Both live notebooks work offline from the repository root or their lecture folder. The first uses a synthetic four-stock snapshot. The second reads `data/classroom_prices.csv`: 120 synthetic business-day observations for each of AAPL, MSFT, and NVDA, generated with NumPy's random generator using seed 42. The ticker labels connect examples; these numbers are not market quotes. Business days here are a teaching approximation, not an exchange calendar. Faults are injected visibly into a copy during the lesson. The live notebooks do not need the bCourses database.
+The three live notebooks work offline from fresh kernels. The basics and portfolio modules contain synthetic execution and holdings tables. The cleaning notebook defines `generate_stock_data`, adapted from the previous visualization material: geometric Brownian price paths, seeded local random generators, positive and internally consistent OHLC, and volume. It creates five assets with different annual drift/volatility inputs and 252 observations each. Business weekdays approximate sessions; the dates are not an exchange calendar. No stock CSV or bCourses database is needed for Lecture 2.
 
-The prework tutorial also offers the existing historical AAPL sample. Live API access is optional, requires `USE_LIVE_API = True`, and uses a locally configured `AV_API_KEY`. Never submit credentials or `.env` files. Generated files go into the ignored `outputs/` folder.
+The optional Jupyter tutorial keeps its historical AAPL sample. Live API access there is opt-in and requires a local `AV_API_KEY`. Credentials and generated output files stay outside Git.
 
-## What students should be able to do afterwards
+## 1. Pandas basics: one execution is one row
 
-- Explain a row, column, Series, and DataFrame using an actual table.
-- Select rows with a condition, distinguish labels from positions, and add a calculated column.
-- Match data on keys, recognize multiplied rows, and summarize values by sector.
-- Sort and group observations before calculating changes; explain the first missing return.
-- Choose a bar, line, or histogram for a question and label its units.
-- Prepare vendor text for portfolio analysis: normalize identifiers and company names, split exchange/ticker fields, parse numeric quotes, and flag values that need review.
-- Use masks to locate faults, make a documented repair, and check that it respects data constraints.
+Use the trade blotter as the common example rather than presenting a catalogue of APIs.
 
-A successful notebook execution is a software check. Evidence of learning is a correct change to the code **and** a student's explanation of the resulting numbers.
+- **Series and DataFrames:** create a labeled Series, then a table of executions; show that selecting one column returns a Series and a list of columns returns a DataFrame.
+- **Labels and positions:** the default index starts at zero, so `.loc[0]` initially looks positional. After sorting, label 0 still identifies T101 while `.iloc[0]` identifies the largest execution. Show `set_index`, `reset_index`, inclusive label slices, and exclusive positional slices.
+- **Alignment:** multiply shuffled ticker-indexed shares and prices. Connect this to Series assignment and column concatenation.
+- **Joins:** XOM exists only in the traded universe; TSLA exists only in the reference table. Compare inner, left, right, and outer results, including `_merge`. Column merges ignore source row indices; index joins require meaningful matching labels. `join(on=...)` matches the left column to the right index.
+- **Cardinality and aggregation:** repeated ticker executions need a many-to-one reference join. Then distinguish executions, unique tickers, and dollar activity; keep unknown sectors with `dropna=False` so missing coverage does not erase activity.
 
-## How to teach the notebooks
+The final exercises change the sort/filter request, the reference coverage, and the grouping question. If time is tight, demonstrate the append/concat cell briefly and save the aggregation stretch for practice. Preserve the sorting example, all four join types, index matching, and the repeated-key check.
 
-Walk through the lecture cells from top to bottom using **predict → run → change → explain**. All code is visible, and complete worked examples stay beside the concepts they explain. The formal exercises are collected at the end of each notebook, so you can narrate and run the lesson continuously. Use the final Exercises section for practice or review after the walkthrough.
+## 2. Portfolio analysis: apply the basics
 
-Exercise cells start with `None` or an empty sentence and are followed by their feedback cells. Worked examples use separate `example_` variables and different inputs or questions: select by price before practicing selection by shares, increase JPM before practicing a change to MSFT, and plot MSFT before practicing with NVDA. The lecture never depends on an exercise answer. Mathematical checks cannot judge a chart's readability or a written explanation; those require discussion or individual review.
+Start directly with eight lots across Core and Tactical books. The notebook uses the earlier pandas patterns; it does not repeat the Series/DataFrame, lookup, or join-type explanations.
 
-For students who are struggling, use the supplied expression shape and ask them to change one condition or column at a time. For faster finishers, use the stretch prompt in each exercise; ask them to explain their answer before introducing another API. Do not turn early completion into an obligation to race through optional references.
+The extra challenge is choosing the correct level of aggregation and denominator:
 
-### Module 1: questions and final exercises
+- Combine lots before assessing issuer exposure. AAPL's share-weighted entry price differs from the simple average of lot prices.
+- Distinguish unrealized P&L, return on cost, and portfolio weight.
+- Use `transform('sum')` to align book totals with lot rows; explain this one new operation where it is used.
+- Apply illustrative limits of 25% per ticker and 55% in Technology.
+- Sell 40 AAPL and buy 20 JPM in the worked scenario. AAPL meets its limit, but Technology still exceeds its limit. Include residual cash in the denominator and reconcile the total portfolio value.
 
-| Question or exercise | Listen for | If it is missing |
-|---|---|---|
-| A: select positions with at least 10 shares | The comparison creates one Boolean per row; `.loc` uses that mask | Display the mask before selecting rows |
-| B: double MSFT shares | All weights share a changed denominator; AAPL falls from 40% to one third | Recompute the $5,000 and $6,000 totals on paper |
-| Sector aggregation | Four names can still mean 80% technology by value | Compare counting names with summing dollars |
-| Desk update | A correct filtered table plus a quantified concentration statement | Ask for one value from the student's own table |
+The final exercises use a corrected lot size and a different AAPL/XOM trade. They require the student to apply the workflow and explain the result, rather than copy the worked scenario's numbers.
 
-Core syntax: column selection, `.loc`, `.iloc`, comparisons, assignment, `sum`, `sort_values`, `merge`, and `groupby`. `pd.concat` appears in the duplicate-key demonstration and the optional new-holding task. Keep the expected merge error short; source selection matters more here than exception mechanics.
+## 3. Visualization and cleaning: inspect the assumptions
 
-### Module 2: questions and final exercises
+Introduce the generator through its inputs and resulting DataFrame; keep the function's construction brief. It supplies reproducible data for changing scenarios, not a separate stochastic-calculus lesson. The generated frame is retained, and faults are injected into a copy.
 
-| Question or exercise | Listen for | If it is missing |
-|---|---|---|
-| Three-price example | +10% then −10% ends at −1%; the first return has no previous observation | Calculate 100 → 110 → 99 by hand |
-| C: histogram | Fractions become percent only for display; the plot answers a distribution question | Ask students to read one axis aloud |
-| D: locate bad prices | A close above the same day's high is inconsistent; a large return alone is not proof of an error | Compare a bounds mask with a return threshold |
-| Vendor quotes | Matching labels and numeric prices are prerequisites for a valuation; a parsed number can still be invalid | Compare the two AAPL spellings and the negative quote |
-| Text-cleaning exercise | JPM/NVDA identifiers match consistently; missing or malformed prices remain flagged | Ask which quotes the student would hold back from a valuation and why |
-| Forward-fill example | Removing a null can create an invalid price relationship | Check the candidate against today's low/high |
-| New-delivery task | An invalid volume is flagged; zero remains a placeholder | Ask what fact the repaired row still does not establish |
+- Compare raw prices with normalized performance; compare AAPL/MSFT daily variability and worst daily moves.
+- Investigate missing prices, impossible OHLC relationships, invalid volumes, label variants, and repeated records.
+- Clean a vendor export for portfolio matching: strip markup/whitespace, standardize case, split exchange/ticker fields, and extract signed numeric quotes. Explain the business consequence of a malformed quote rather than dissecting regex character by character.
+- Show why filling a null can violate the current day's range. Make repairs explicit, preserve flags, and validate the resulting table.
 
-Do not teach the synthetic data generator live. Read the provided dataset, use short cells, and focus on interpreting intermediate values. Teach text cleaning through the vendor-to-portfolio matching question: show before/after identifiers and prices, rather than dissecting the regex character by character. The small two-day forward-fill counterexample is more useful here than cataloguing every missing-value option.
+The final exercises compare NVDA/JPM distributions, build a combined exception table, repair a new volume fault, and clean a different vendor delivery. Keep plot formatting and the small missing-volume recap brief to make room for string parsing and validation.
 
-## Pacing and course connections
+## Flow and course connections
 
-Keep the text example within the existing module by keeping chart formatting and the separate missing-volume example brief. If behind, shorten the duplicate-key demonstration. Preserve the vendor-text example, the return-order discussion, and the final validation. The end-of-notebook exercises can be completed after class. Include brief explanations between cells rather than uninterrupted Run All demonstrations.
+Lecture 1 supplies lists, dictionaries, loops, and simple functions. Pandas basics introduces table operations once; the portfolio module uses them for a decision; cleaning shows why matching keys and valid observations matter to that decision. October 15 then translates table selection into SQL and builds reports from checked data.
 
-Lecture 1 supplies lists, dictionaries, loops, and simple functions. This session extends them to tables. No knowledge of classes, decorators, context managers, or software architecture is expected. The LLM session is not a prerequisite for either data-analysis notebook. October 15 reuses selection, keys, and tiny-data checks; later modeling and backtesting lessons reuse date order, `shift`, and careful treatment of missing data.
+The previous Lecture 2 reference folder has been retired. The relevant Series/DataFrame content is consolidated into pandas basics, and string cleaning remains part of the main cleaning lesson. Lecture 4 retains its separate references for advanced outliers, ingestion, and the full cleaning case.
 
-## Reference library (optional, after class)
-
-The expanded material is retained, but it is not extra required live content.
-
-- [Series in detail](reference/2_pandas_series_basics.ipynb): constructors, slicing, NumPy operations, updates, compounding.
-- [DataFrames in detail](reference/3_pandas_dataframes_basics.ipynb): alternative construction, assignment/renaming/dropping, concat and merge variants.
-- [Visualization in detail](reference/4_visualization_seeing_your_data.ipynb): scatter/box/KDE, plotting styles, scatter matrices, lag/ACF, rolling statistics.
-- [Cleaning methods](reference/5_data_cleaning_fundamentals.ipynb): drop/fill/interpolate, Z-score/IQR/percentile flags, clipping, duplicate policies, strings/regex.
-
-Continue with the [October 15 lesson](../Lecture%204/readme.md). [Homework 2](hw2.md) remains due **October 29, 2026**, with its existing deliverables and grading requirements.
+[Homework 2](hw2.md) remains due **October 29, 2026**, with its existing deliverables. Verify the sequence with `uv run python scripts/validate_data_analysis.py`; use `--core-only` to execute the six live data-analysis notebooks. Validation runs against disposable outputs and a copy of the Lecture 4 database, leaving student notebooks output-free.
