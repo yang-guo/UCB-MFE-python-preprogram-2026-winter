@@ -1,0 +1,24 @@
+# UC Berkeley MFE Python Preprogram - HW1
+# Henri Mertens
+# Commands below are run in Homeworks/HW1/henri_mertens/.
+# uv must be available on PATH (restart your terminal after installing uv).
+
+# Install the exact Python version required by HW1.
+uv python install 3.12.9
+
+# Create the HW1 virtual environment with Python 3.12.9.
+uv venv HW1 --python 3.12.9
+
+# Install the required older version of requests in the HW1 environment.
+uv pip install --python .\HW1\Scripts\python.exe requests==2.24.0
+
+# Upgrade requests to the latest available version.
+uv pip install --python .\HW1\Scripts\python.exe --upgrade requests
+
+# Latest version installed and verified on October 11, 2026: requests 2.34.2.
+
+# PENDING - NOT EXECUTED:
+# Homeworks/HW1/requirements.txt is missing from all fetched remote branches.
+# Once the instructors provide it, install its packages in the HW1 environment:
+# uv pip install --python .\HW1\Scripts\python.exe -r ..\requirements.txt
+# The requirements-file installation portion of HW1 is not yet complete.
