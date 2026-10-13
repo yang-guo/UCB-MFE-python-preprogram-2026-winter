@@ -51,6 +51,7 @@ cp Homeworks/HW1/game_of_life.py Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/game_of_
     - What's the latest version of `requests`?
 - **IMPORTANT**: Do NOT include your virtual environment folder (`HW1/` or `.venv/`) in your submission. It should stay on your local machine only. The repository ignores these environments.
 - Keep this exercise separate from the course-wide environment: use your homework environment when installing, downgrading, and upgrading packages.
+- The downgrade is a package-management exercise only: `requests==2.24.0` installs, but its old dependencies cannot be imported on Python 3.12. Use `uv pip show requests` with your homework environment activated to inspect the installed version, then upgrade before using the library.
 
 ## Python
 - make a copy of `Homeworks/HW1/game_of_life.py` to `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/game_of_life.py`
