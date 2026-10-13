@@ -4,6 +4,9 @@ uv venv HW1 --python 3.12.9
 # Activate it (Git Bash on Windows)
 source HW1/Scripts/activate
 
+# Install the packages from requirements.txt (pins requests==2.25)
+uv pip install -r requirements.txt
+
 # Downgrade requests to version 2.24.0
 uv pip install requests==2.24.0
 
