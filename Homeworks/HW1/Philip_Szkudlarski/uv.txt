@@ -1,0 +1,21 @@
+# uv package-management exercise
+
+# 1. Create the HW1 virtual environment with Python 3.12.9
+uv venv HW1 --python 3.12.9
+
+# 2. Install the required packages
+uv pip install --python HW1/bin/python -r ../requirements.txt
+
+# 3. Downgrade Requests to version 2.24.0
+uv pip install --python HW1/bin/python "requests==2.24.0"
+
+# 4. Verify the downgraded version
+uv pip show --python HW1/bin/python requests
+
+# 5. Upgrade Requests to the latest available version
+uv pip install --python HW1/bin/python --upgrade requests
+
+# 6. Verify the final version
+uv pip show --python HW1/bin/python requests
+
+# Final verified Requests version: 2.34.2
