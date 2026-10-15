@@ -21,7 +21,7 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 - one homework per module
 - Homework is due two weeks (14 calendar days) after the module's last lecture.
 - submission via github pull request (see Lecture 1)
-- Please assign PRs to Kevin Ramlal (`kevinramlal`) and Benjamin Steel (`elfiasco`)
+- Please assign PRs to Kevin Ramlal (`kevinramlal`) and Raghuram Kowdeed (`raghuramkowdeed`)
 
 | Module | Last Lecture | Homework Due |
 | ------ | ------------ | ------------ |
@@ -71,7 +71,7 @@ HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homew
 - [Aneesh Sachdeva](https://www.linkedin.com/in/aneeshsachdeva/)
 
 ## GSIs
-- [Benjamin Steel](https://www.linkedin.com/in/benjaminasteel/)
+- Raghuram Kowdeed
 - [Kevin Ramlal](https://www.linkedin.com/in/kevinramlal/)
 
 
