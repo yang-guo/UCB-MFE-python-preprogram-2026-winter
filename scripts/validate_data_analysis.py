@@ -29,34 +29,66 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-CORE = [
-    'Lecture 2/2_pandas_to_portfolio.ipynb',
-    'Lecture 2/3_visualize_and_clean.ipynb',
-    'Lecture 4/1_sql_and_data_quality.ipynb',
-    'Lecture 4/2_stock_analysis_template.ipynb',
-    'Lecture 4/3_running_analysis_at_scale.ipynb',
-]
+BASICS = 'Lecture 2/2_pandas_basics.ipynb'
+PORTFOLIO = 'Lecture 2/3_pandas_to_portfolio.ipynb'
+CLEANING = 'Lecture 2/4_visualize_and_clean.ipynb'
+SQL = 'Lecture 4/1_sql_and_data_quality.ipynb'
+TEMPLATE = 'Lecture 4/2_stock_analysis_template.ipynb'
+BATCH = 'Lecture 4/3_running_analysis_at_scale.ipynb'
+CORE = [BASICS, PORTFOLIO, CLEANING, SQL, TEMPLATE, BATCH]
+
 CHECKS = {
-    CORE[0]: """
-assert np.isclose(portfolio['position_value'].sum(), 5000)
-assert np.isclose(sector_weights.loc['Technology'], 80)
-assert len(portfolio) == len(positions)
-assert example_selection['ticker'].tolist() == ['MSFT']
-assert np.isclose(example_rebalanced['position_value'].sum(), 5500)
-assert np.isclose(example_rebalanced.set_index('ticker').loc['AAPL', 'weight_pct'], 2000 / 5500 * 100)
-assert positions.set_index('ticker').loc['JPM', 'shares'] == 10
-assert example_desk['ticker'].tolist() == ['AAPL']
-assert np.isclose(example_financials_weight, 20)
+    BASICS: """
+assert isinstance(price_series.index, pd.RangeIndex)
+assert ranked.loc[0, 'trade_id'] == 'T101' and ranked.iloc[0]['trade_id'] == 'T104'
+assert ranked_reset.loc[0, 'trade_id'] == 'T104'
+assert np.isclose(aligned_values.loc['AAPL'], 11100)
+expected_names = {'inner': {'AAPL', 'MSFT', 'JPM'}, 'left': {'AAPL', 'MSFT', 'JPM', 'XOM'},
+                  'right': {'AAPL', 'MSFT', 'JPM', 'TSLA'}, 'outer': {'AAPL', 'MSFT', 'JPM', 'XOM', 'TSLA'}}
+for how, names in expected_names.items():
+    assert set(join_results[how]['ticker']) == names
+assert column_to_index_join.index.equals(traded_names.index)
+assert index_join.index.tolist() == traded_names['ticker'].tolist()
+assert pd.isna(index_join.loc['XOM', 'sector'])
+assert join_results['left'].index.tolist() == [0, 1, 2, 3]
+assert len(enriched) == len(trades) == 6
+assert stacked.index.duplicated().sum() == 1
+assert not appended.index.duplicated().any() and len(appended) == 7
+assert desk_summary.loc['Core', 'executions'] == 3
+assert np.isclose(desk_summary.loc['Core', 'gross_notional'], 35340)
+assert np.isclose(sector_activity['gross_notional'].sum(), 57520)
+assert sector_activity['sector'].isna().sum() == 1
 """,
-    CORE[1]: """
-expected = pd.read_csv(data_path, parse_dates=['date']).sort_values(['ticker', 'date']).reset_index(drop=True)
-assert len(clean) == len(expected) == 360
+    PORTFOLIO: """
+assert np.isclose(portfolio_value, 89410)
+assert len(valued) == 8 and len(asset_summary) == 6
+assert np.isclose(asset_summary.loc['AAPL', 'weighted_entry_price'], 176.25)
+assert np.isclose(asset_summary['unrealized_pnl'].sum(), valued['market_value'].sum() - valued['cost_basis'].sum())
+np.testing.assert_allclose(valued.groupby('book')['weight_in_book_pct'].sum(), [100, 100])
+assert np.isclose(sector_summary.loc['Technology', 'market_value'], 56850)
+assert breaches.index.tolist() == ['AAPL']
+assert np.isclose(scenario_cash, 3440) and np.isclose(scenario_total, portfolio_value)
+assert scenario.loc['AAPL', 'weight_pct'] <= ticker_limit
+assert scenario_sector_weights.loc['Technology'] > technology_limit
+assert np.isclose(scenario['weight_pct'].sum() + scenario_cash / scenario_total * 100, 100)
+assert positions.loc[positions['lot_id'] == 'L2', 'shares'].item() == 40
+""",
+    CLEANING: """
+expected = generated_prices.sort_values(['ticker', 'date']).reset_index(drop=True)
+assert len(clean) == len(expected) == 1260
+assert len(stocks) == 5 and all(len(frame) == 252 for frame in stocks.values())
+pd.testing.assert_frame_equal(stocks['AAPL'], generate_stock_data('AAPL', 185, 0.25, 0.10, seed=42))
+assert not stocks['AAPL']['close'].equals(generate_stock_data('AAPL', 185, 0.25, 0.10, seed=99)['close'])
+assert generated_prices['close'].between(generated_prices['low'], generated_prices['high']).all()
+assert generated_prices['open'].between(generated_prices['low'], generated_prices['high']).all()
+assert generated_prices[['open', 'high', 'low', 'close']].gt(0).all().all()
+assert not generated_prices.duplicated(['ticker', 'date']).any()
 assert clean['close_repaired'].sum() == 4
 assert clean['volume_repaired'].sum() == 2
 unchanged = ~clean['close_repaired']
 np.testing.assert_allclose(clean.loc[unchanged, 'close'], expected.loc[unchanged, 'close'])
 assert clean.groupby('ticker')['return'].apply(lambda group: group.isna().sum()).eq(1).all()
-assert example_msft['ticker'].eq('MSFT').all() and len(example_msft) == 120
+assert example_msft['ticker'].eq('MSFT').all() and len(example_msft) == 252
 assert example_bad_prices['ticker'].tolist() == ['DEMO_A']
 assert example_volumes['volume'].tolist() == [100, 0, 200]
 assert example_volumes['volume_repaired'].tolist() == [False, True, False]
@@ -75,7 +107,7 @@ np.testing.assert_allclose(parsed_cases.iloc[:3].to_numpy(dtype=float), [20, -2.
 assert parsed_cases.iloc[3:].isna().all()
 assert (output_dir / 'clean_prices.png').stat().st_size > 1000
 """,
-    CORE[2]: """
+    SQL: """
 assert len(sql_summary) == 3
 assert sql_summary.set_index('ticker').loc['AAPL', 'observations'] == len(aapl)
 pd.testing.assert_frame_equal(example_query_result, example_expected_filter)
@@ -85,7 +117,7 @@ assert len(joined) == len(aapl)
 pd.testing.assert_frame_equal(roundtrip, sql_summary)
 assert example_extract['ticker'].eq('NVDA').all() and len(example_extract) == 124
 """,
-    CORE[3]: """
+    TEMPLATE: """
 assert data_quality_ok
 assert stats['trading_days'] == len(df)
 assert np.isclose(stats['total_return_pct'], (df['adj_close'].iloc[-1] / df['adj_close'].iloc[0] - 1) * 100)
@@ -95,7 +127,7 @@ assert np.isfinite(yz_vol.dropna()).all()
 np.testing.assert_allclose(example_returns.dropna(), [0.25, -0.1])
 np.testing.assert_allclose(example_drawdown, [0, 0, -0.3, -0.15], atol=1e-12)
 """,
-    CORE[4]: """
+    BATCH: """
 assert len(failures) == 1 and failures[0]['ticker'] == 'NOT_A_TICKER'
 assert len(successful_paths) == 3
 assert set(summary['ticker']) == {'AAPL', 'MSFT', 'NVDA'}
@@ -123,28 +155,47 @@ pd.testing.assert_frame_equal(example_drawdown_comparison,
 }
 
 BLANK_PRACTICE = {
-    CORE[0]: 'assert your_selection is None and your_rebalanced is None and your_desk_table is None',
-    CORE[1]: 'assert your_nvda is None and your_bad_prices is None and your_delivery is None and your_text_clean is None',
-    CORE[2]: 'assert your_query_result is None and your_extract is None',
-    CORE[3]: 'assert your_returns is None and your_drawdown is None',
-    CORE[4]: 'assert your_comparison is None',
+    BASICS: 'assert your_ranked is None and your_coverage is None and your_side_summary is None',
+    PORTFOLIO: 'assert your_asset_summary is None and your_scenario is None and your_cash is None',
+    CLEANING: 'assert your_nvda is None and your_return_comparison is None and your_bad_prices is None and your_delivery is None and your_text_clean is None',
+    SQL: 'assert your_query_result is None and your_extract is None',
+    TEMPLATE: 'assert your_returns is None and your_drawdown is None',
+    BATCH: 'assert your_comparison is None',
 }
 
 # Exercise answers are tested separately from default Run All. They do not overwrite source notebooks.
 PRACTICE = {
-    CORE[0]: """
-your_selection = positions.loc[positions['shares'] >= 10, ['ticker', 'shares']]
-your_rebalanced = positions.copy()
-your_rebalanced.loc[your_rebalanced['ticker'] == 'MSFT', 'shares'] = 10
-your_rebalanced['position_value'] = your_rebalanced['shares'] * your_rebalanced['price']
-your_rebalanced['weight_pct'] = your_rebalanced['position_value'] / your_rebalanced['position_value'].sum() * 100
-your_desk_table = portfolio.loc[(portfolio['sector'] != 'Technology') & (portfolio['position_value'] >= 1000), ['ticker', 'position_value']]
-your_sector_weight = sector_weights.max()
-your_conclusion = 'Technology accounts for 80% of portfolio value.'
+    BASICS: """
+your_ranked = trades.sort_values('notional')
+your_first_trade = your_ranked.iloc[0]['trade_id']
+your_sells = trades.loc[(trades['side'] == 'SELL') & (trades['notional'] >= 10000), ['trade_id', 'ticker', 'notional']]
+your_coverage = traded_names.merge(practice_master, on='ticker', how='outer', indicator=True, validate='one_to_one')
+your_missing_reference = set(your_coverage.loc[your_coverage['_merge'] == 'left_only', 'ticker'])
+your_untraded = set(your_coverage.loc[your_coverage['_merge'] == 'right_only', 'ticker'])
+your_side_summary = trades.groupby('side').agg(executions=('trade_id', 'size'), distinct_tickers=('ticker', 'nunique'), gross_notional=('notional', 'sum'))
 """,
-    CORE[1]: """
+    PORTFOLIO: """
+practice_valued = practice_positions.merge(quotes, on='ticker', how='left', validate='many_to_one')
+practice_valued['cost_basis'] = practice_valued['shares'] * practice_valued['entry_price']
+practice_valued['market_value'] = practice_valued['shares'] * practice_valued['price']
+practice_valued['unrealized_pnl'] = practice_valued['market_value'] - practice_valued['cost_basis']
+your_asset_summary = practice_valued.groupby('ticker')[['shares', 'cost_basis', 'market_value', 'unrealized_pnl']].sum()
+your_asset_summary['weighted_entry_price'] = your_asset_summary['cost_basis'] / your_asset_summary['shares']
+your_cost_note = 'AAPL entry price is 33600/190; the larger lot receives more weight.'
+your_scenario = asset_summary[['shares']].join(quotes.set_index('ticker')[['price', 'sector']], validate='one_to_one')
+your_scenario.loc['AAPL', 'shares'] -= 42
+your_scenario.loc['XOM', 'shares'] += 20
+your_cash = 42 * your_scenario.loc['AAPL', 'price'] - 20 * your_scenario.loc['XOM', 'price']
+your_scenario['market_value'] = your_scenario['shares'] * your_scenario['price']
+your_scenario['weight_pct'] = your_scenario['market_value'] / (your_scenario['market_value'].sum() + your_cash) * 100
+your_scenario_note = 'Both limits are met; the uninvested proceeds remain part of portfolio value.'
+""",
+    CLEANING: """
 your_nvda = prices.loc[prices['ticker'] == 'NVDA'].copy()
-your_bad_prices = raw.loc[raw['close'] > raw['high'], ['date', 'ticker', 'close', 'high']]
+your_return_comparison = prices.loc[prices['ticker'].isin(['NVDA', 'JPM'])].groupby('ticker')['return'].agg(observations='count', daily_vol_pct='std', worst_day_pct='min')
+your_return_comparison[['daily_vol_pct', 'worst_day_pct']] *= 100
+practice_bad_prices = ~np.isfinite(raw['close']) | raw['close'].le(0) | raw['close'].lt(raw['low']) | raw['close'].gt(raw['high'])
+your_bad_prices = raw.loc[practice_bad_prices, ['date', 'ticker', 'close', 'low', 'high']]
 your_delivery = new_delivery.copy()
 bad_volume = ~np.isfinite(your_delivery['volume']) | your_delivery['volume'].lt(0)
 your_delivery.loc[bad_volume, 'volume_repaired'] = True
@@ -160,29 +211,30 @@ your_text_clean['price'] = pd.to_numeric(quotes.str.extract(price_pattern, expan
 your_text_clean['price_needs_review'] = your_text_clean['price'].isna() | your_text_clean['price'].le(0)
 your_text_note = 'An unrelated batch number is not a price; the zero quote is numeric but not a valid equity price.'
 """,
-    CORE[2]: """
+    SQL: """
 your_query = 'SELECT ts, ticker, close FROM ohlc WHERE ticker = ? AND ts BETWEEN ? AND ? AND close > ? ORDER BY ts'
 your_query_result = pd.read_sql_query(your_query, conn, params=('MSFT', start_date, end_date, 400), parse_dates=['ts'])
 your_extract = pd.read_sql_query(price_query, conn, params=('JPM', start_date, end_date), parse_dates=['ts'])
 your_extract_note = 'The date order, keys and closes passed; calendar coverage needs a separate check.'
 """,
-    CORE[3]: """
+    TEMPLATE: """
 your_returns = calculate_returns(pd.Series([50.0, 55.0, 44.0]))
 your_drawdown = calculate_drawdown(pd.Series([100.0, 120.0, 90.0, 108.0]))
 your_worst_drawdown = your_drawdown.min()
 your_drawdown_explanation = 'The final price recovered, but it is still below the prior peak.'
 """,
-    CORE[4]: """
+    BATCH: """
 your_comparison = summary[['ticker', 'total_return_pct', 'avg_volatility']].sort_values('avg_volatility', ascending=False)
 your_comparison_note = 'NVDA had the greatest mean rolling variability here; this historical sample does not predict future risk.'
 """,
 }
 BAD_PRACTICE = {
-    CORE[0]: "your_selection = positions[['ticker', 'shares']]",
-    CORE[1]: "your_nvda = prices.loc[prices['ticker'] == 'AAPL']",
-    CORE[2]: "your_query_result = expected_filter.iloc[:1]",
-    CORE[3]: "your_returns = pd.Series([np.nan, 10.0, -20.0])",
-    CORE[4]: "your_comparison = summary[['ticker', 'total_return_pct', 'avg_volatility']].sort_values('avg_volatility')",
+    BASICS: "your_first_trade = your_ranked.loc[0, 'trade_id']",
+    PORTFOLIO: "your_asset_summary.loc['AAPL', 'weighted_entry_price'] = 177.5",
+    CLEANING: "your_nvda = prices.loc[prices['ticker'] == 'AAPL']",
+    SQL: "your_query_result = expected_filter.iloc[:1]",
+    TEMPLATE: "your_returns = pd.Series([np.nan, 10.0, -20.0])",
+    BATCH: "your_comparison = summary[['ticker', 'total_return_pct', 'avg_volatility']].sort_values('avg_volatility')",
 }
 
 
@@ -290,7 +342,7 @@ def validate(workspace, core_only):
             path = workspace / 'Lectures' / rel
             nb = nbformat.read(path, as_version=4)
             nbformat.validate(nb)
-            if rel == CORE[4] and not core_only:
+            if rel == BATCH and not core_only:
                 for cell in nb.cells:
                     cell.source = cell.source.replace('RUN_EXTENSIONS = False', 'RUN_EXTENSIONS = True')
             if rel in CHECKS:
@@ -321,7 +373,7 @@ def validate(workspace, core_only):
                 negative_check = BAD_PRACTICE[rel] + '\ntry:\n' + '\n'.join('    ' + line for line in feedback[0].splitlines())
                 negative_check += "\nexcept AssertionError:\n    print('Incorrect practice answer rejected as expected.')\nelse:\n    raise AssertionError('Feedback accepted an incorrect answer.')"
                 nb.cells.append(nbformat.v4.new_code_cell(negative_check))
-                if rel == CORE[1]:
+                if rel == CLEANING:
                     text_feedback = next(source for source in feedback if 'your_text_clean' in source)
                     # Reject common parsing mistakes without changing the valid learner answer permanently.
                     for wrong_edit in ("your_text_clean.loc[3, 'price'] = 7.0",
@@ -331,12 +383,12 @@ def validate(workspace, core_only):
                         text_check += '\ntry:\n' + '\n'.join('    ' + line for line in text_feedback.splitlines())
                         text_check += "\nexcept AssertionError:\n    pass\nelse:\n    raise AssertionError('Text feedback accepted an incorrect answer.')\nfinally:\n    your_text_clean = valid_text_answer"
                         nb.cells.append(nbformat.v4.new_code_cell(text_check))
-                if rel == CORE[2]:
+                if rel == SQL:
                     nb.cells.append(nbformat.v4.new_code_cell('conn.close()'))
             started = time.monotonic()
             print(f'RUN {rel}', flush=True)
             # Alternate root/lecture/reference cwd to check path portability.
-            cwd = workspace if rel in (CORE[0], CORE[2], CORE[3]) else path.parent
+            cwd = workspace if rel in (PORTFOLIO, SQL, TEMPLATE) else path.parent
             NotebookClient(nb, timeout=600, kernel_name='course-validation',
                            resources={'metadata': {'path': str(cwd)}}).execute()
             out = executed_dir / rel.replace('/', '__')
@@ -344,7 +396,7 @@ def validate(workspace, core_only):
             elapsed = round(time.monotonic() - started, 2)
             results.append({'notebook': rel, 'seconds': elapsed, 'status': 'passed'})
             print(f'PASS {rel} ({elapsed}s)', flush=True)
-        template = workspace / 'Lectures' / CORE[3]
+        template = workspace / 'Lectures' / TEMPLATE
         check_numerics(template)
         # Validate template failure behavior in independent kernels, including a hostile SQL value.
         cases = [

@@ -18,7 +18,9 @@ This homework will teach you production-level data cleaning, notebook parameteri
 
 The two data-analysis sessions are October 8 and October 15. The due date and three deliverables below are unchanged. The live notebooks provide worked examples and practice; the homework asks you to apply those patterns independently and add its specified metrics, styling, and broader batch scope.
 
-- Cleaning and plots: [October 8 module 2](3_visualize_and_clean.ipynb).
+- Pandas foundations: [October 8 module 1](2_pandas_basics.ipynb).
+- Portfolio analysis: [October 8 module 2](3_pandas_to_portfolio.ipynb).
+- Cleaning and plots: [October 8 module 3](4_visualize_and_clean.ipynb).
 - SQL and quality checks: [October 15 module 1](../Lecture%204/1_sql_and_data_quality.ipynb).
 - Report template: [October 15 module 2](../Lecture%204/2_stock_analysis_template.ipynb).
 - Papermill and result collection: [October 15 module 3](../Lecture%204/3_running_analysis_at_scale.ipynb).
