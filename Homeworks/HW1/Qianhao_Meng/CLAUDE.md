@@ -10,7 +10,7 @@ This directory contains my HW1 submission for the UCB MFE Python preprogram.
 
 ## How to help
 - Explain concepts and commands clearly.
-- Guide me step by step; I want to perform the tasks manually.
+- Guide me step by step: I want to perform the tasks manually.
 - Give hints before providing complete solutions.
 - Ask before modifying files.
 - Do not commit, push, or create a pull request unless I ask.
