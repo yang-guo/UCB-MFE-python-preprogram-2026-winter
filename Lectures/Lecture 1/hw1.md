@@ -1,4 +1,10 @@
 # HW1
+
+**Due: Monday, October 19, 2026, at 11:59 p.m. Pacific Time (PDT, UTC-7).**
+This is two weeks after the Basic Python lecture on October 5.
+
+See [the starter files and submission layout](../../Homeworks/HW1/README.md).
+
 ## Get permissions
 - Step 1: Join the Python Preprogram 2026 Slack channel
 - Step 2: Register a GitHub account if you haven't done so
@@ -14,6 +20,15 @@
 
 ## Git
 - create a branch of the format: `hw_1_<FIRST_NAME>_<LAST_NAME>` (no space!)
+- From the repository root, create your personal submission folder and copy the starter file. Replace `<FIRST_NAME>` and `<LAST_NAME>` with your own names in these commands (use a terminal such as macOS/Linux Terminal or Git Bash on Windows):
+
+```bash
+git switch -c hw_1_<FIRST_NAME>_<LAST_NAME>
+mkdir -p Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>
+cp Homeworks/HW1/game_of_life.py Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/game_of_life.py
+```
+
+- Put your work in your personal folder; leave the shared starter file and requirements file unchanged.
 - Create a file in `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/git.txt` with the following text:
     - `<FIRST_NAME> <LAST_NAME>, <YOUR_FAV_MOVIE>`
 
@@ -29,12 +44,14 @@
 ## uv (Python Package Manager)
 - Install `uv` by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/)
 - Create a file in `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/uv.txt`, write the commands you used to achieve the following:
-    - Create a virtual environment called `HW1` with Python 3.12.9
-    - Install the packages from the requirement file in `Homeworks/HW1/requirements.txt`
+    - Create a virtual environment called `HW1` with Python 3.12.9 inside your personal submission folder
+    - Install the packages from [Homeworks/HW1/requirements.txt](../../Homeworks/HW1/requirements.txt) into that environment
     - Downgrade the `requests` library to version 2.24.0
     - Upgrade the `requests` library to the latest
     - What's the latest version of `requests`?
-- **IMPORTANT**: Do NOT include your virtual environment folder (`.venv`) in your submission. It should stay on your local machine only.
+- **IMPORTANT**: Do NOT include your virtual environment folder (`HW1/` or `.venv/`) in your submission. It should stay on your local machine only. The repository ignores these environments.
+- Keep this exercise separate from the course-wide environment: use your homework environment when installing, downgrading, and upgrading packages.
+- The downgrade is a package-management exercise only: `requests==2.24.0` installs, but its old dependencies cannot be imported on Python 3.12. Use `uv pip show requests` with your homework environment activated to inspect the installed version, then upgrade before using the library.
 
 ## Python
 - make a copy of `Homeworks/HW1/game_of_life.py` to `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/game_of_life.py`
@@ -43,6 +60,7 @@
 - The implemented function should be able to pass the 2 test cases in the file.
 - please run your file `python game_of_life.py` locally to make sure it passes all the test cases before submission.
     - PLEASE MAKE SURE YOU DO THIS STEP.
+    - Run this command from your personal submission folder with your homework environment activated. The starter intentionally fails until you implement `evolve`; keep both supplied test cases.
 
 ## Submission Checklist
 Your submission folder `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/` should contain:
@@ -52,5 +70,17 @@ Your submission folder `Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/` should contain:
 - [ ] `game_of_life.py` - Your implementation of the evolve function
 
 ## Submission
-- **Due date: October 19, 2026** (two weeks after the Basic Python lecture on October 5).
-- commit your changes and submit a pull request, assign to Kevin Ramlal (`kevinramlal`) and Benjamin Steel (`elfiasco`)
+- **Due: Monday, October 19, 2026, at 11:59 p.m. Pacific Time (PDT, UTC-7).**
+- From the repository root, stage only your personal submission folder, review your changes, commit, and push your branch:
+
+```bash
+git add Homeworks/HW1/<FIRST_NAME>_<LAST_NAME>/
+git diff --cached
+git commit -m "Submit HW1 for <FIRST_NAME> <LAST_NAME>"
+git push -u origin hw_1_<FIRST_NAME>_<LAST_NAME>
+```
+
+- Open a pull request into this repository's `main` branch, titled `HW1: <FIRST_NAME> <LAST_NAME>`.
+- Assign the PR to Kevin Ramlal (`kevinramlal`) and Benjamin Steel (`elfiasco`).
+- Check that the PR includes all four checklist files, with no virtual environment, credentials, or changes to another student's folder or the shared files.
+- The course's [late policy](../../README.md#late-policy) applies.
