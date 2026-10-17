@@ -127,6 +127,8 @@ celerybeat.pid
 # Environments
 .env
 .venv
+# HW 1 asks students to name their local environment HW1.
+/Homeworks/HW1/*/HW1/
 env/
 venv/
 ENV/

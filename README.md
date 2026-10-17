@@ -7,9 +7,9 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | Day      | Date       | Time        | Lecturer | Topics |
 | -------- | ---------- | ----------- | -------- | ------ |
 | Monday   | 10/5/2026  | 9am - 12pm  | Aneesh   | Basics: Python syntax, Git, CLI, AI tools |
-| Thursday | 10/8/2026  | 9am - 12pm  | Yang     | [Data Analysis I & II: pandas, plotting](Lectures/Lecture%202/readme.md) |
+| Thursday | 10/8/2026  | 9am - 12pm  | Yang     | [Data Analysis I & II: pandas, portfolio analysis](Lectures/Lecture%202/readme.md) |
 | Monday   | 10/12/2026 | 9am - 12pm  | Aneesh   | [LLM Classification & Agent Evaluation](Lectures/Lecture%203/readme.md) |
-| Thursday | 10/15/2026 | 9am - 12pm  | Yang     | [Data Analysis III: SQL, data quality, automated reports](Lectures/Lecture%204/readme.md) |
+| Thursday | 10/15/2026 | 9am - 12pm  | Yang     | [Data Analysis III: visualization/cleaning, SQL, risk reports](Lectures/Lecture%204/readme.md) |
 | Monday   | 10/19/2026 | 9am - 12pm  | Aneesh   | Advanced Python I: OOP, environments, regex |
 | Thursday | 10/22/2026 | 9am - 12pm  | Aneesh   | Advanced Python II: async, functional programming |
 | Monday   | 10/26/2026 | 9am - 12pm  | Yang     | Modeling I: scikit-learn basics |
@@ -21,16 +21,18 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 - one homework per module
 - Homework is due two weeks (14 calendar days) after the module's last lecture.
 - submission via github pull request (see Lecture 1)
-- Please assign PRs to Kevin Ramlal (`kevinramlal`) and Benjamin Steel (`elfiasco`)
+- Please assign PRs to Kevin Ramlal (`kevinramlal`) and Raghuram Kowdeed (`raghuramkowdeed`)
 
 | Module | Last Lecture | Homework Due |
 | ------ | ------------ | ------------ |
-| Basic Python | 10/5/2026 | 10/19/2026 |
+| [Basic Python (HW 1)](Lectures/Lecture%201/hw1.md) | 10/5/2026 | 10/19/2026, 11:59 p.m. Pacific (PDT) |
 | Data Analysis | 10/15/2026 | 10/29/2026 |
 | Advanced Python | 10/22/2026 | 11/5/2026 |
 | Modeling | 10/29/2026 | 11/12/2026 |
 | Productionization | 11/2/2026 | 11/16/2026 |
 | Advanced Topics | 11/5/2026 | 11/19/2026 |
+
+HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homeworks/HW1/README.md).
 
 ## Goal
 - Level up your coding skills
@@ -69,7 +71,7 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 - [Aneesh Sachdeva](https://www.linkedin.com/in/aneeshsachdeva/)
 
 ## GSIs
-- [Benjamin Steel](https://www.linkedin.com/in/benjaminasteel/)
+- Raghuram Kowdeed
 - [Kevin Ramlal](https://www.linkedin.com/in/kevinramlal/)
 
 
@@ -78,8 +80,8 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 
 - From the project root, run `uv sync --locked` and select the project's `.venv` Python interpreter as your notebook kernel.
 - Run each notebook with its lecture folder as the working directory. The reorganized data-analysis notebooks also support the repository root and their reference folders.
-- Data analysis has three live notebooks on October 8 (Lecture 2) and three on October 15 (Lecture 4), with a ten-minute break each day. Each notebook has a continuous lesson with visible code and worked examples, followed by an Exercises section. Lecture 2 progresses from pandas basics to portfolio analysis to visualization/cleaning; Lecture 4 retains optional references.
-- Lecture 2 generates seeded synthetic stock histories inside its cleaning notebook. Its optional Jupyter tutorial includes a historical sample; default runs work without an API key.
+- Data analysis has two covered notebooks from October 8 (Lecture 2) and four on October 15 (Lecture 4). The deferred visualization/cleaning module opens Lecture 4, followed by SQL, a risk report, and automated reporting. Lecture 4's guide plans 150 minutes including a ten-minute break. Each notebook has a continuous lesson with visible worked examples and exercises at the end; Lecture 4 retains optional references.
+- Lecture 4 generates seeded synthetic stock histories inside its opening cleaning notebook. Lecture 2's optional Jupyter tutorial includes a historical sample; default runs work without an API key.
 - Worked examples use different inputs or questions from the final exercises. Exercise prompts, starter cells, and feedback stay together at the end; the lesson runs independently of student answers.
 - Lecture 4's default report batch deliberately includes one invalid ticker: three reports succeed, one failure is recorded, and the comparison uses successful outputs only.
 - Lecture 4 requires the bCourses database at `Lectures/Lecture 4/data/data.db`.

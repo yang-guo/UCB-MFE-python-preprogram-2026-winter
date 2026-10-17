@@ -20,23 +20,24 @@ The two data-analysis sessions are October 8 and October 15. The due date and th
 
 - Pandas foundations: [October 8 module 1](2_pandas_basics.ipynb).
 - Portfolio analysis: [October 8 module 2](3_pandas_to_portfolio.ipynb).
-- Cleaning and plots: [October 8 module 3](4_visualize_and_clean.ipynb).
-- SQL and quality checks: [October 15 module 1](../Lecture%204/1_sql_and_data_quality.ipynb).
-- Report template: [October 15 module 2](../Lecture%204/2_stock_analysis_template.ipynb).
-- Papermill and result collection: [October 15 module 3](../Lecture%204/3_running_analysis_at_scale.ipynb).
+- Cleaning and plots (deferred from October 8): [October 15 module 1](../Lecture%204/1_visualize_and_clean.ipynb).
+- SQL and quality checks: [October 15 module 2](../Lecture%204/2_sql_and_data_quality.ipynb).
+- Report template: [October 15 module 3](../Lecture%204/3_stock_analysis_template.ipynb).
+- Papermill and result collection: [October 15 module 4](../Lecture%204/4_running_analysis_at_scale.ipynb).
 
 The course database lives at `Lectures/Lecture 4/data/data.db` (download from bCourses). In the assignment below, `data/data.db` means the database path relative to your own homework working directory; use a local working copy when writing cleaned tables. Never commit the database or credentials.
 
-Sort by ticker/date before calculating returns or filling; fill within ticker groups, preserve repair flags, and recheck OHLC bounds afterwards. Forward filling alone can violate today's range. Handle unresolved leading gaps explicitly rather than borrowing a different ticker's value. For adjusted prices, preserve a consistent adjustment convention after any raw-price repair.
+Sort by ticker/date before calculating returns or filling; fill within ticker groups, preserve repair flags, and recheck OHLC bounds afterwards. Forward filling alone can violate today's range. Quarantine unresolved leading gaps or invalid rows with a reason rather than borrowing a different ticker's value. For adjusted prices, preserve a consistent adjustment convention after any raw-price repair.
 
 ## The Data
 
 You'll work with the `ohlc_hw` table in `data/data.db`. This table contains daily OHLC (Open, High, Low, Close) data for multiple stocks.
 
-**Warning**: This data is intentionally dirty! It contains:
-- Missing values (gaps in trading days)
-- Outliers (data entry errors, corporate actions not adjusted)
-- Inconsistencies (you'll need to discover these!)
+The columns are `ts` (observation date), `ticker`, raw `open`, `high`, `low`, `close`, vendor `adj_close`, and `volume`. The lecture's synthetic example calls its date column `date`; rename deliberately when reusing a function.
+
+**Warning**: This data is intentionally dirty! Inspect missing values (including adjusted close), extreme values, ticker formatting, repeated records, and price inconsistencies. Missing cells and missing trading dates are different checks; a check can correctly find zero issues. Do not invent faults to match the checklist.
+
+Normalize ticker markup, whitespace, and case **before** grouping or deduplicating. Remove exact duplicate records; investigate conflicting `(ticker, ts)` keys rather than arbitrarily keeping the first row. Preserve the original labels or an audit of their normalization.
 
 Your first task is to clean it properly.
 
@@ -61,11 +62,13 @@ Write functions to detect:
 - Detect missing trading days (gaps in the time series)
 - Create a summary: "Ticker X is missing Y trading days between [start] and [end]"
 
+For this assignment, the supplied `ohlc` table's dates **for each ticker** are an acceptable reference calendar over that ticker's supplied history. Alternatively, document an exchange-calendar and active-history assumption. Business weekdays alone include exchange holidays. Report zero gaps when appropriate, and demonstrate your detector on a tiny example with one deliberately removed date. Detecting absent rows does not require inventing prices for them.
+
 **Outliers:**
 - Calculate daily returns: `(close - prev_close) / prev_close`
-- Flag returns > 3 standard deviations as potential outliers
+- Flag `abs(return - mean_return) > 3 * std_return` within each ticker, using the sample standard deviation (`ddof=1`); flag both tails. Exclude undefined returns and treat zero/undefined standard deviation explicitly. This retrospective screen is a review flag, not a deletion rule.
 - Flag any day where: `high < close` or `low > close` (impossible!)
-- Flag any day where: `close < 0` (negative prices don't exist)
+- Flag nonpositive or non-finite equity prices, including adjusted close; raw OHLC bounds do not apply to adjusted close
 
 **Inconsistencies:**
 - Verify that `low <= open <= high` and `low <= close <= high`
@@ -76,14 +79,17 @@ Create a **Data Quality Report** DataFrame with columns:
 ticker | issue_type | issue_date | description | severity (high/medium/low)
 ```
 
+Allow multiple issues per observation. Include missing dates as separate issue rows, and explain your severity choices. Retain the diagnosis before repairs; rerun validation afterwards. Demonstrate the detector and repair behavior on small injected examples for required cases absent from your database.
+
 ### 1.3 Clean the Data
 
 Implement cleaning functions:
 
 **Handle Missing Values:**
 - For missing prices: Use forward-fill (carry last known price)
-- For missing volume: Fill with 0 (indicates no trading)
-- Drop rows where ALL price columns (open, high, low, close) are missing
+- For missing volume: Fill with 0 and keep a repair flag (**unknown** volume is not evidence of no trading)
+- Drop rows where ALL raw price columns (open, high, low, close) are missing **before** filling
+- Missing `adj_close` needs a consistent adjustment convention. You may use matched `(ticker, ts)` rows in supplied `ohlc` to obtain a trusted date-specific adjustment factor, document the source, and reconstruct adjusted close from validated raw close. Do not forward-fill a factor across an unverified corporate action. Quarantine unresolved rows and report counts; do not replace the entire dirty dataset with the reference table.
 
 **Handle Outliers:**
 - For impossible price relationships (high < close, etc.):
@@ -96,11 +102,15 @@ Implement cleaning functions:
   - If data error: interpolate using neighboring days
   - If valid (e.g., major news): keep it but flag it
 
+Interpolate only confirmed errors, within a sorted ticker and between valid neighbors; do not extrapolate leading/trailing gaps. Record evidence or a clearly stated uncertainty rather than claiming a split or news event without support. A documented quarantine is acceptable when repair is not defensible. Recheck all raw bounds and adjusted-price consistency after every repair.
+
 **Validation:**
 - Create a new table `ohlc_hw_cleaned` in the database
-- Verify: No missing values in price columns
+- Verify: No missing, non-finite, or nonpositive values in retained raw and adjusted price columns; unique `(ticker, ts)` keys; finite nonnegative volume
 - Verify: All price relationships are valid
 - Show before/after statistics
+
+Account for retained, removed, and quarantined rows and save repair flags with the cleaned data. Keep the raw table unchanged. Store `ts` consistently as ISO dates (`YYYY-MM-DD`) so the report's SQL date filters work.
 
 **Deliverable**:
 - `01_data_cleaning.ipynb` with your analysis and code
@@ -125,11 +135,13 @@ end_date = "2024-12-31"  # Analysis end date
 
 **Tag this cell as "parameters"** in Jupyter (View → Cell Toolbar → Tags)
 
+In JupyterLab, use the Property Inspector → Cell Tags. Verify the metadata tag is present; the `# Parameters` comment alone is insufficient. A `db_path` parameter is also useful for a portable local working copy.
+
 ### 2.2 Data Loading
 
 - Load cleaned data for the specified ticker and date range
 - Display summary: "{Ticker} from {start} to {end}: {N} trading days"
-- Show the first and last few rows
+- Show the first and last few rows and actual first/last observation dates. Validate the input and report insufficient history clearly; 20 returns require at least 21 prices.
 
 ### 2.3 Calculate Risk Metrics
 
@@ -151,15 +163,17 @@ def calculate_volatility(returns: pd.Series, window: int = 20) -> pd.Series:
     pass
 ```
 
-**Maximum Drawdown (cumulative):**
+**Drawdown and Maximum Drawdown:**
 ```python
 def calculate_max_drawdown(prices: pd.Series) -> pd.Series:
-    """Calculate running maximum drawdown from peak"""
+    """Return per-date drawdown from the running price peak."""
     # Hint:
     # 1. Calculate cumulative max price
     # 2. Drawdown = (price - cum_max) / cum_max
     pass
 ```
+
+This function name is retained for the assignment, but the returned Series is **drawdown**, which can recover. Maximum drawdown for the summary is `drawdown.min()`; the running worst drawdown would be `drawdown.cummin()`.
 
 **Sharpe Ratio:**
 ```python
@@ -171,6 +185,8 @@ def calculate_sharpe_ratio(returns: pd.Series, risk_free_rate: float = 0.02) -> 
 
 Apply these functions to your data and display the results.
 
+Use **adjusted close** for report returns and drawdown. Use daily **log returns** for volatility, Sharpe, and daily-return summary statistics; Part 1's simple raw-close returns serve a different diagnostic purpose. The Sharpe hint defines the course approximation with a 2% annual risk-free rate. Return `NaN`/display `N/A` for zero volatility or insufficient returns. Keep fractions in calculations and CSVs; format percentages only for display.
+
 ### 2.4 Visualization
 
 Create a **2x2 subplot grid** showing:
@@ -179,6 +195,7 @@ Create a **2x2 subplot grid** showing:
 - Plot adjusted close prices
 - Add a 50-day moving average
 - Color the line by volatility (high vol = red, low vol = green)
+  - Use mean rolling volatility over the report as the threshold; gray indicates unavailable warm-up estimates. Equal-to-mean can be green. This is retrospective coloring.
 - Title: "{Ticker} Price and 50-day MA"
 
 **Top Right - Daily Returns:**
@@ -194,7 +211,7 @@ Create a **2x2 subplot grid** showing:
 - Title: "{Ticker} Rolling Volatility (20-day)"
 
 **Bottom Right - Drawdown:**
-- Area chart of maximum drawdown (fill below 0)
+- Area chart of per-date drawdown (fill below 0)
 - Color: red/pink gradient
 - Mark the maximum drawdown point
 - Title: "{Ticker} Maximum Drawdown"
@@ -207,6 +224,8 @@ Create a **2x2 subplot grid** showing:
 - Add a main title: "{Ticker} Risk Analysis Report - {start_date} to {end_date}"
 
 Make it pretty :) 
+
+Preserve rolling warm-up gaps; do not fill them with zero. A 50-day moving average is unavailable until 50 prices exist. If a report has fewer observations, show the available data and explain the missing average. Layered transparent red fills are sufficient for the gradient.
 
 ### 2.5 Summary Statistics Table
 
@@ -227,6 +246,8 @@ Average Up Day           +1.23%
 Average Down Day         -1.15%
 ```
 
+Use `last_adjusted_close / first_adjusted_close - 1` for total return. With `n` nonmissing log returns, compounded annualized return is `exp(sum(log_returns) * 252 / n) - 1`; whole-period annualized volatility is `std(log_returns) * sqrt(252)`. It is distinct from the mean rolling volatility used in Part 3. Best/worst and up/down averages use log returns. Positive days are positive returns divided by **all nonmissing** returns, including zero days. An empty up/down subset displays `N/A`.
+
 **Deliverable**:
 - `02_stock_report_template.ipynb` with parameters cell tagged
 - All functions documented with docstrings
@@ -245,8 +266,9 @@ Your script should:
 1. Load the list of all tickers from `ohlc_hw_cleaned`
 2. Determine the date range: **last 6 complete months** in the database
    - Anchor to the latest observation date in the database, not the computer clock. If that date is Dec 6, 2024: use June 1 - Nov 30, 2024.
-   - Complete months only!
+   - For a reproducible rule, use the six calendar months **before the month containing the latest cleaned observation**, including when that observation falls on month-end. A final trading date alone does not certify a complete delivery.
 3. Create an output directory: `reports/{YYYY-MM-DD}/`
+   - This is the run date, independent of the historical analysis window.
 4. For each ticker:
    - Use papermill to execute `02_stock_report_template.ipynb`
    - Pass parameters: ticker, start_date, end_date
@@ -269,6 +291,8 @@ Handle errors gracefully:
 - At the end, print: "Successfully generated N/M reports"
 - Save failed tickers to `failed_stocks.txt`
 
+Use one common requested window for all tickers. Supplied histories end on different dates: disclose each report's actual coverage and explain comparisons with shorter histories. Do not extrapolate prices through trailing gaps. Apply error handling to every ticker and handle an all-failed run without pretending there is a summary.
+
 ### 3.3 Summary Dashboard
 
 After generating all reports, create a **portfolio summary DataFrame**:
@@ -276,16 +300,18 @@ After generating all reports, create a **portfolio summary DataFrame**:
 ```python
 summary_df = pd.DataFrame({
     'ticker': [...],
-    'avg_daily_return': [...],  # Mean daily return over period
+    'avg_daily_return': [...],  # Mean daily log return over period (fraction)
     'avg_volatility': [...],     # Mean of rolling volatility
     'max_drawdown': [...],       # Worst drawdown over entire period
     'sharpe_ratio': [...],       # Annualized Sharpe ratio
-    'total_return': [...],       # (last_close - first_close) / first_close
+    'total_return': [...],       # last_adj_close / first_adj_close - 1
     'report_path': [...]         # Path to generated notebook
 })
 ```
 
 Sort by Sharpe ratio (descending) and display top 10 and bottom 10 stocks.
+
+Collect named outputs from successful executed reports (the lecture uses Scrapbook) or explain an equivalent consistent approach. Never collect every notebook in the folder indiscriminately: failed and stale reports can exist. Exclude undefined Sharpe values from rankings; top and bottom groups may overlap with fewer than 20 successes.
 
 Create a summary visualization:
 - Scatter plot: X-axis = avg volatility, Y-axis = total return
@@ -323,6 +349,8 @@ Save summary to: `reports/{date}/portfolio_summary.csv`
 3. **Sample Output:**
    - Include 2-3 example report notebooks in `reports/`
    - Include the portfolio summary CSV
+
+Generate the full batch locally; commit only the requested 2–3 sample reports and summary CSV. Do **not** commit `data.db`, other database copies, or credentials. The cleaning notebook must recreate `ohlc_hw_cleaned` for the grader. Keep submitted code under your homework directory, with paths and run order documented in your README; do not modify the course's source data or report template.
 
 ### Evaluation Criteria
 

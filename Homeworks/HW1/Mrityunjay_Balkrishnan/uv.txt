@@ -1,0 +1,11 @@
+Commands executed from this submission directory, in order:
+
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+uv pip install -r ../requirements.txt
+uv pip install requests==2.24.0
+uv pip show requests
+uv pip install --upgrade requests
+uv pip show requests
+
+Latest requests version after the upgrade: 2.34.2 (verified with `uv pip show requests` on October 15, 2026).

@@ -31,10 +31,10 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 BASICS = 'Lecture 2/2_pandas_basics.ipynb'
 PORTFOLIO = 'Lecture 2/3_pandas_to_portfolio.ipynb'
-CLEANING = 'Lecture 2/4_visualize_and_clean.ipynb'
-SQL = 'Lecture 4/1_sql_and_data_quality.ipynb'
-TEMPLATE = 'Lecture 4/2_stock_analysis_template.ipynb'
-BATCH = 'Lecture 4/3_running_analysis_at_scale.ipynb'
+CLEANING = 'Lecture 4/1_visualize_and_clean.ipynb'
+SQL = 'Lecture 4/2_sql_and_data_quality.ipynb'
+TEMPLATE = 'Lecture 4/3_stock_analysis_template.ipynb'
+BATCH = 'Lecture 4/4_running_analysis_at_scale.ipynb'
 CORE = [BASICS, PORTFOLIO, CLEANING, SQL, TEMPLATE, BATCH]
 
 CHECKS = {
@@ -106,6 +106,14 @@ parsed_cases = pd.to_numeric(parse_cases.str.strip().str.lower().str.extract(pri
 np.testing.assert_allclose(parsed_cases.iloc[:3].to_numpy(dtype=float), [20, -2.5, 0])
 assert parsed_cases.iloc[3:].isna().all()
 assert (output_dir / 'clean_prices.png').stat().st_size > 1000
+assert gap_dates.tolist() == [pd.Timestamp('2024-01-03')]
+assert list(quality_report.columns) == ['ticker', 'issue_type', 'issue_date', 'description', 'severity']
+assert {'missing_price', 'invalid_volume', 'ohlc_bounds', 'extreme_return'} <= set(quality_report['issue_type'])
+assert all_prices_missing.sum() == 1
+assert retained_example.loc[unresolved_example, 'ticker'].tolist() == ['DEMO_D']
+np.testing.assert_allclose(interpolated_example.iloc[1:4], [100, 102, 104])
+assert interpolated_example.iloc[[0, -1]].isna().all()
+np.testing.assert_allclose(adjustment_example['adj_close'], [50, 50, 51])
 """,
     SQL: """
 assert len(sql_summary) == 3
@@ -116,16 +124,24 @@ assert example_query_result['close'].gt(180).all()
 assert len(joined) == len(aapl)
 pd.testing.assert_frame_equal(roundtrip, sql_summary)
 assert example_extract['ticker'].eq('NVDA').all() and len(example_extract) == 124
+assert hw_preview['adj_close'].isna().any()
+assert not reference_keys.duplicated(['ticker', 'ts']).any()
 """,
     TEMPLATE: """
 assert data_quality_ok
 assert stats['trading_days'] == len(df)
 assert np.isclose(stats['total_return_pct'], (df['adj_close'].iloc[-1] / df['adj_close'].iloc[0] - 1) * 100)
 assert stats['max_drawdown_pct'] <= 0
-np.testing.assert_allclose(df['volatility'].dropna(), df['daily_return'].rolling(volatility_window).std().dropna() * np.sqrt(252))
+np.testing.assert_allclose(df['volatility'].dropna(), df['log_return'].rolling(volatility_window).std().dropna() * np.sqrt(252))
 assert np.isfinite(yz_vol.dropna()).all()
 np.testing.assert_allclose(example_returns.dropna(), [0.25, -0.1])
 np.testing.assert_allclose(example_drawdown, [0, 0, -0.3, -0.15], atol=1e-12)
+assert len(summary_metrics) == 10
+assert np.isclose(stats['positive_days'], metric_returns.gt(0).sum() / metric_returns.count())
+assert np.isclose(stats['annualized_return'], (df['adj_close'].iloc[-1] / df['adj_close'].iloc[0]) ** (252 / metric_returns.count()) - 1)
+assert np.isclose(stats['annualized_volatility'], metric_returns.std() * np.sqrt(252))
+assert np.isclose(stats['sharpe_ratio'], (metric_returns.mean() * 252 - 0.02) / (metric_returns.std() * np.sqrt(252)))
+assert tuple(fig.get_size_inches()) == (16, 12)
 """,
     BATCH: """
 assert len(failures) == 1 and failures[0]['ticker'] == 'NOT_A_TICKER'
@@ -134,6 +150,11 @@ assert set(summary['ticker']) == {'AAPL', 'MSFT', 'NVDA'}
 manifest = json.loads((run_dir / 'manifest.json').read_text())
 assert len(manifest['reports']) == 3 and len(manifest['failures']) == 1
 assert (run_dir / 'portfolio_summary.csv').is_file()
+saved_summary = pd.read_csv(run_dir / 'portfolio_summary.csv')
+assert saved_summary.columns.tolist() == ['ticker', 'avg_daily_return', 'avg_volatility', 'max_drawdown', 'sharpe_ratio', 'total_return', 'report_path']
+assert saved_summary['sharpe_ratio'].is_monotonic_decreasing
+assert (run_dir / 'failed_stocks.txt').read_text().splitlines() == ['NOT_A_TICKER']
+assert (hw_start, hw_end) == ('2024-06-01', '2024-11-30')
 assert (run_dir / 'comparison.png').stat().st_size > 1000
 # Incomplete/stale files must never enter a successful-run summary.
 (run_dir / 'stale.ipynb').write_text('{}')
@@ -247,7 +268,7 @@ def notebook_functions(path):
     """Extract actual teaching functions for small numerical regression cases."""
     namespace = {'pd': pd, 'np': np}
     for cell in nbformat.read(path, as_version=4).cells:
-        if cell.cell_type != 'code' or '%' in cell.source:
+        if cell.cell_type != 'code':
             continue
         try:
             tree = ast.parse(cell.source)
@@ -263,6 +284,16 @@ def check_numerics(template):
     functions = notebook_functions(template)
     flags = functions['quality_flags']
     yz = functions['yang_zhang_volatility']
+    log_returns = functions['calculate_log_returns']
+    sharpe = functions['calculate_sharpe_ratio']
+    # Compounding and undefined ratios: avoid a plausible-looking but wrong risk statistic.
+    path = pd.Series([80., 100., 70., 85.])
+    np.testing.assert_allclose(log_returns(path).dropna(), np.log([1.25, .7, 85 / 70]))
+    assert np.isclose(np.expm1(log_returns(path).sum()), 85 / 80 - 1)
+    for returns in [pd.Series(dtype=float), pd.Series([.01]), pd.Series([.01, .01])]:
+        assert pd.isna(sharpe(returns))
+    known = pd.Series([np.nan, .01, -.01])
+    assert np.isclose(sharpe(known), -.02 / (np.sqrt(.0002) * np.sqrt(252)))
     dates = pd.bdate_range('2024-01-02', periods=30)
     frame = pd.DataFrame({name: 100. for name in ['open', 'high', 'low', 'close', 'adj_close']}, index=dates)
     frame['volume'] = 1000.
@@ -296,6 +327,40 @@ def check_numerics(template):
     split.loc[dates[15]:, ['open', 'high', 'low', 'close']] /= 2
     np.testing.assert_allclose(yz(split, 5).dropna(), yz(ranged, 5).dropna())
     print('PASS numerical and quality regressions', flush=True)
+
+
+def check_hw2_patterns(workspace):
+    """Check calendar boundaries and detection behavior independently of the classroom data."""
+    batch = notebook_functions(workspace / 'Lectures' / BATCH)
+    window = batch['six_complete_months']
+    for latest, expected in [
+        ('2024-12-06', ('2024-06-01', '2024-11-30')),
+        ('2025-01-01', ('2024-07-01', '2024-12-31')),
+        ('2024-03-31', ('2023-09-01', '2024-02-29')),
+    ]:
+        assert window(latest) == expected
+    try:
+        window(None)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Empty database date accepted')
+    cleaning = notebook_functions(workspace / 'Lectures' / CLEANING)
+    sessions = pd.to_datetime(['2024-01-02', '2024-01-03', '2024-01-04'])
+    assert len(cleaning['missing_sessions'](pd.DataFrame({'date': sessions}), sessions)) == 0
+    assert cleaning['missing_sessions'](pd.DataFrame({'date': sessions[[0, 2]]}), sessions).tolist() == [sessions[1]]
+    # Both tails must be flagged; grouping must not manufacture a return across ticker boundaries.
+    frames = []
+    for symbol, scale in [('A', 100), ('B', 10000)]:
+        returns = np.zeros(60)
+        returns[[20, 40]] = [.5, -.5]
+        prices = scale * np.r_[1., np.cumprod(1 + returns)]
+        frames.append(pd.DataFrame({'ticker': symbol, 'date': pd.bdate_range('2024-01-02', periods=61),
+            'open': prices, 'high': prices * 1.01, 'low': prices * .99, 'close': prices, 'volume': 1000.}))
+    issue_table = cleaning['price_issue_report'](pd.concat(frames).sample(frac=1, random_state=3))
+    extremes = issue_table.loc[issue_table['issue_type'] == 'extreme_return']
+    assert extremes.groupby('ticker').size().to_dict() == {'A': 2, 'B': 2}
+    print('PASS HW2 gap detection, two-tailed grouped outliers, and month boundaries', flush=True)
 
 
 def validate(workspace, core_only):
@@ -398,6 +463,7 @@ def validate(workspace, core_only):
             print(f'PASS {rel} ({elapsed}s)', flush=True)
         template = workspace / 'Lectures' / TEMPLATE
         check_numerics(template)
+        check_hw2_patterns(workspace)
         # Validate template failure behavior in independent kernels, including a hostile SQL value.
         cases = [
             ({'ticker': "AAPL' OR 1=1 --"}, 'need at least'),
@@ -427,7 +493,7 @@ def validate(workspace, core_only):
         assert not (workspace / 'absent.db').exists()
         assert digest(source_db) == before, 'Source database changed during validation.'
         print(f'PASS six report failure cases; source database unchanged', flush=True)
-        report = {'notebooks': results, 'numerical_checks': 'passed', 'failure_cases': 6,
+        report = {'notebooks': results, 'numerical_checks': 'passed', 'hw2_patterns': 'passed', 'failure_cases': 6,
                   'quarterly_extension': not core_only, 'source_database_unchanged': True, 'exercise_feedback': 'correct and incorrect answers checked'}
         (workspace / 'validation_results.json').write_text(json.dumps(report, indent=2))
         print(f'PASS {len(results)} notebooks. Results: {workspace / "validation_results.json"}', flush=True)

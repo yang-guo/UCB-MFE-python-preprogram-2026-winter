@@ -908,6 +908,7 @@ dependencies = [
     { name = "scipy" },
     { name = "scrapbook" },
     { name = "sortedcontainers" },
+    { name = "tqdm" },
 ]
 
 [package.metadata]
@@ -927,6 +928,7 @@ requires-dist = [
     { name = "scipy", specifier = ">=1.9.3" },
     { name = "scrapbook", specifier = ">=0.5.0" },
     { name = "sortedcontainers", specifier = ">=2.4.0" },
+    { name = "tqdm", specifier = ">=4.67.1" },
 ]
 
 [[package]]
