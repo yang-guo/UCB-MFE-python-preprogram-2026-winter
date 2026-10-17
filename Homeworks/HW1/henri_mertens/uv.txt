@@ -9,16 +9,18 @@ uv python install 3.12.9
 # Create the HW1 virtual environment with Python 3.12.9.
 uv venv HW1 --python 3.12.9
 
-# Install the required older version of requests in the HW1 environment.
+# Package-management exercise completed on October 17, 2026.
+# Install the official requirements in the homework environment (requests 2.25.0).
+uv pip install --python .\HW1\Scripts\python.exe -r ..\requirements.txt
+uv pip show --python .\HW1\Scripts\python.exe requests
+
+# Downgrade requests to 2.24.0 and inspect its version without importing it.
 uv pip install --python .\HW1\Scripts\python.exe requests==2.24.0
+uv pip show --python .\HW1\Scripts\python.exe requests
 
 # Upgrade requests to the latest available version.
 uv pip install --python .\HW1\Scripts\python.exe --upgrade requests
+uv pip show --python .\HW1\Scripts\python.exe requests
 
-# Latest version installed and verified on October 11, 2026: requests 2.34.2.
-
-# PENDING - NOT EXECUTED:
-# Homeworks/HW1/requirements.txt is missing from all fetched remote branches.
-# Once the instructors provide it, install its packages in the HW1 environment:
-# uv pip install --python .\HW1\Scripts\python.exe -r ..\requirements.txt
-# The requirements-file installation portion of HW1 is not yet complete.
+# Latest requests version after upgrading: 2.34.2.
+# Verified on October 17, 2026, using the final uv pip show command above.
