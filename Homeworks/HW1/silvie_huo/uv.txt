@@ -13,7 +13,7 @@ write the commands you used to achieve the following:
 
 
     Upgrade the requests library to the latest
-    uv pip --upgrade requests
+    uv pip install --upgrade requests
 
     What's the latest version of requests?
     2.34.2
