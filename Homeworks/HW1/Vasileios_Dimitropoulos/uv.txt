@@ -1,0 +1,27 @@
+# HW1: uv Package Management
+
+# 1. Install Python 3.12.9
+uv python install 3.12.9
+
+# 2. Create a virtual environment named HW1
+uv venv HW1 --python 3.12.9
+
+# 3. Activate the environment in Git Bash
+source HW1/Scripts/activate
+
+# 4. Install packages from requirements.txt
+uv pip install -r ../requirements.txt
+
+# 5. Downgrade requests to version 2.24.0
+uv pip install "requests==2.24.0"
+
+# 6. Verify the downgraded version
+uv pip show requests
+
+# 7. Upgrade requests to the latest version
+uv pip install --upgrade requests
+
+# 8. Verify the upgraded version
+uv pip show requests
+
+# Latest installed requests version: 2.34.2
