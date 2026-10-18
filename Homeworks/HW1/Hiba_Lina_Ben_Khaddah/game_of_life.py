@@ -1,13 +1,23 @@
 def evolve(initial_state):
+    """Return the next generation of a Conway's Game of Life board.
+
+    The input is a rectangular list of lists where 1 represents a living
+    cell and 0 represents a dead cell. The function returns a new board and
+    does not modify the original board.
+    """
+    # Determine the dimensions of the board.
     rows = len(initial_state)
 
+    # An empty board remains empty.
     if rows == 0:
         return []
 
     columns = len(initial_state[0])
 
+    # Start with a new board containing only dead cells.
     next_state = [[0 for _ in range(columns)] for _ in range(rows)]
 
+    # Visit each cell and calculate its next state from the original board.
     for row in range(rows):
         for column in range(columns):
             living_neighbors = 0
