@@ -1,0 +1,25 @@
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create a virtual environment named HW1 with Python 3.12.9
+uv venv --python 3.12.9 HW1
+
+# Activate the virtual environment
+source HW1/bin/activate
+
+# Install packages from the HW1 requirements file
+uv pip install -r ../requirements.txt
+
+# Downgrade requests to version 2.24.0
+uv pip install requests==2.24.0
+
+# Inspect the installed requests version
+uv pip show requests
+# Version: 2.24.0
+
+# Upgrade requests to the latest version
+uv pip install --upgrade requests
+
+# Inspect the upgraded requests version
+uv pip show requests
+# Version: 2.34.2
