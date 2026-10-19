@@ -1,0 +1,2 @@
+This homework submission is for lesson 1 of a python course. It shows understanding of using Git, uv, and managing virtual environments. 
+Two .txt files and one .py file will be created and submitted with contents, namely git.txt, uv.txt, and game_of_life.py.
