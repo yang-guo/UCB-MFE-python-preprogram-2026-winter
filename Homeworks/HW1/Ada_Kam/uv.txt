@@ -12,4 +12,4 @@ $ uv pip install --upgrade requests
 
 What's the latest version of requests?
 $ uv pip show requests
-Version: 2.24.0
+Version: 2.34.2
