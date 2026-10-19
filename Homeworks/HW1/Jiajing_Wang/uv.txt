@@ -1,0 +1,26 @@
+# Working directory: Homeworks/HW1/Jiajing_Wang/
+
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install Python and create the HW1 virtual environment
+uv python install 3.12.9
+uv venv HW1 --python 3.12.9
+HW1/bin/python --version
+
+# Download the instructor's requirements file
+curl -fL "https://raw.githubusercontent.com/yang-guo/UCB-MFE-python-preprogram-2026-winter/main/Homeworks/HW1/requirements.txt" -o ../requirements.txt
+
+# Install the required packages
+uv pip install --python HW1/bin/python -r ../requirements.txt
+
+# Downgrade requests to 2.24.0 and verify
+uv pip install --python HW1/bin/python "requests==2.24.0"
+HW1/bin/python -c "from importlib.metadata import version; print(version('requests'))"
+
+# Upgrade requests to the latest version and verify
+uv pip install --python HW1/bin/python --upgrade requests
+HW1/bin/python -c "from importlib.metadata import version; print(version('requests'))"
+
+# Latest requests version installed: 2.34.2
