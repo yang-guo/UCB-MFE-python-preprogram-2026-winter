@@ -1,0 +1,23 @@
+# Create a virtual environment called HW1 with Python 3.12.9 inside your personal submission folder
+
+cd "/Users/philipsyan/Desktop/Pre-MFE Python/github_work/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW1/Xiaofei_Yan"
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+python --version
+
+# Install the packages from Homeworks/HW1/requirements.txt into that environment
+
+uv pip install -r ../requirements.txt
+
+# Downgrade the requests library to version 2.24.0
+
+uv pip install requests==2.24.0
+uv pip show requests
+
+# Upgrade the requests library to the latest
+
+uv pip install --upgrade requests
+
+# What's the latest version of requests?
+
+uv pip show requests
