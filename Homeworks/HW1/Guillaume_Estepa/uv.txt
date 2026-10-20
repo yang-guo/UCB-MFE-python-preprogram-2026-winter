@@ -1,0 +1,11 @@
+# Create a virtual environment called HW1 with Python 3.12.9
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+# Install the packages from the requirements file
+uv pip install -r ../requirements.txt
+# Downgrade requests to version 2.24.0
+uv pip install requests==2.24.0
+# Upgrade requests to the latest version
+uv pip install --upgrade requests
+# What is the latest version of requests?
+uv pip show requests -> Version: 2.34.2
