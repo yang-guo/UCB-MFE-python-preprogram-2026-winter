@@ -1,0 +1,20 @@
+Commands run from Homeworks/HW1/Emil_Blaignan/
+
+1. Create a virtual environment called HW1 with Python 3.12.9, then activate it:
+   uv venv HW1 --python 3.12.9
+   source HW1/bin/activate
+
+2. Install the packages from requirements.txt (requests==2.25):
+   uv pip install -r ../requirements.txt
+
+3. Downgrade requests to 2.24.0:
+   uv pip install requests==2.24.0
+
+4. Upgrade requests to the latest:
+   uv pip install --upgrade requests
+
+5. Inspect the installed version (used after each step above):
+   uv pip show requests
+
+What's the latest version of requests?
+   2.34.2
