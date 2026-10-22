@@ -1,0 +1,30 @@
+# Install uv on Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Go to my submission folder from the repo root
+cd Homeworks/HW1/Arav_Shanghavi
+
+# Make the HW1 environment with Python 3.12.9
+uv venv HW1 --python 3.12.9
+
+# Turn it on (Windows path, uses Scripts instead of bin)
+HW1\Scripts\activate
+
+# Install the shared requirements, which pins requests 2.25
+uv pip install -r ../requirements.txt
+
+# Go down to requests 2.24.0
+uv pip install requests==2.24.0
+
+# Check it took
+uv pip show requests
+# Version: 2.24.0
+
+# Go back up to the newest requests
+uv pip install --upgrade requests
+
+# Check again
+uv pip show requests
+# Version: 2.34.2
+
+Latest version of requests: 2.34.2
