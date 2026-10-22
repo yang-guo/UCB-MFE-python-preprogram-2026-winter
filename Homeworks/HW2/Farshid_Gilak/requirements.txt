@@ -1,0 +1,11 @@
+# HW2 dependencies (tested with Python 3.13.5; the course requires >= 3.12)
+pandas==2.3.3
+numpy==2.3.5
+matplotlib==3.10.7
+papermill==2.6.0
+scrapbook==0.5.0
+pyarrow==22.0.0      # used by scrapbook to store the price table inside each report
+tqdm==4.67.1
+nbformat==5.10.4
+nbclient==0.10.2
+ipykernel==7.1.0     # kernel that papermill uses to run the reports
