@@ -1,0 +1,18 @@
+# All commands run from Homeworks/HW1/Farshid_Gilak/
+
+# 1. Create a virtual environment called HW1 with Python 3.12.9
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+
+# 2. Install the packages from Homeworks/HW1/requirements.txt
+uv pip install -r ../requirements.txt
+
+# 3. Downgrade requests to 2.24.0
+uv pip install requests==2.24.0
+uv pip show requests          # Version: 2.24.0
+
+# 4. Upgrade requests to the latest
+uv pip install --upgrade requests
+uv pip show requests          # Version: 2.34.2
+
+# 5. Latest version of requests: 2.34.2
