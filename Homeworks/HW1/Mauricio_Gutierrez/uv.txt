@@ -1,0 +1,19 @@
+# Create the Python 3.12.9 environment
+uv venv --clear HW1 --python 3.12.9
+
+# Activate it in Git Bash
+source ./HW1/Scripts/activate
+
+# Install the course requirements
+uv pip install -r ../requirements.txt
+ 
+# Downgrade requests
+uv pip install "requests==2.24.0" 
+uv pip show requests
+
+# Upgrade requests
+uv pip install --upgrade requests 
+uv pip show requests
+
+# Latest version installed after upgrading
+requests: 2.34.2
