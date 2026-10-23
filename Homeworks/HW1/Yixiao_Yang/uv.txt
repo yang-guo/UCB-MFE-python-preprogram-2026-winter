@@ -1,0 +1,31 @@
+# Run from Homeworks/HW1/Yixiao_Yang/ (macOS/Linux or Git Bash).
+
+# Create and activate the separate homework environment.
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+python --version
+# Output: Python 3.12.9
+
+# Install the shared homework requirements without changing requirements.txt.
+uv pip install -r ../requirements.txt
+uv pip show requests
+# Version: 2.25.0
+
+# Downgrade requests and inspect its installed metadata.
+uv pip install requests==2.24.0
+uv pip show requests
+# Version: 2.24.0
+# Do not import this legacy version on Python 3.12: its old dependencies
+# are incompatible. This step is only a package-management exercise.
+
+# Upgrade to the latest stable release and verify it after upgrading.
+uv pip install --upgrade requests
+uv pip show requests
+python -c 'import requests; print(requests.__version__)'
+# Latest stable requests version observed on 2026-10-18: 2.34.2
+
+# Run the two supplied Game of Life tests in the homework environment.
+python game_of_life.py
+
+# Keep HW1/ local; do not commit the virtual environment.
+deactivate
