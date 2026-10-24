@@ -3,14 +3,13 @@
 Henri Mertens
 
 The pipeline cleans the supplied equity data, creates a parameterized single-stock
-risk report, and runs the same analysis over every cleaned ticker. All code and
-outputs belong to this homework directory; course lecture files are unchanged.
+risk report, and runs the same analysis over every cleaned ticker.
 
 ## Files and run order
 
 1. `01_data_cleaning.ipynb`: inspect `ohlc_hw`, preserve the diagnosis, repair or
    quarantine invalid observations, and recreate `ohlc_hw_cleaned`.
-2. `02_stock_report_template.ipynb`: a Papermill template with a genuinely tagged
+2. `02_stock_report_template.ipynb`: a Papermill template with a tagged
    `parameters` cell, four charts, ten summary statistics and named Scrapbook results.
 3. `03_run_all_stocks.py`: execute the template for every cleaned ticker, isolate
    failures, collect this run's successful reports and create the summary dashboard.
@@ -21,7 +20,6 @@ outputs belong to this homework directory; course lecture files are unchanged.
 Tested on Windows with Python 3.12.9. These PowerShell commands use `uv`.
 Run from **this homework directory**. Put a local copy of the instructor's database
 at `data/data.db`; it must contain `ohlc_hw` and the supplied `ohlc` reference.
-The database is intentionally excluded from Git.
 
 ```powershell
 uv venv --python 3.12.9 .venv
@@ -29,10 +27,9 @@ uv pip install --python .venv/Scripts/python.exe -r requirements.txt
 .\.venv\Scripts\python.exe -m ipykernel install --sys-prefix --name python3 --display-name "HW2 Python"
 ```
 
-The kernel installation above is confined to the virtual environment.
 If the environment already exists, reuse it rather than recreating it.
 
-Execute cleaning first. Its executed copy goes into the ignored environment:
+Run the cleaning notebook first:
 
 ```powershell
 .\.venv\Scripts\papermill.exe 01_data_cleaning.ipynb .venv/cleaning_executed.ipynb --kernel python3 --cwd .
@@ -89,11 +86,10 @@ fingerprints before and after writing.
   a ticker and without endpoint extrapolation. Controlled fixtures demonstrate this;
   no real raw-close error was established in this snapshot.
 
-The reference supports the assignment's adjustment convention and date coverage;
-it is not an independent guarantee that every original observation is correct.
-Raw OHLC bounds do not apply to adjusted close.
+The reference provides the date-specific adjustment factors and trading dates.
+OHLC bounds are checked on the raw prices.
 
-### Supplied-snapshot results
+### Cleaning results
 
 Inspection began with 397,711 rows and 150 presentation labels representing 30 stocks.
 Cleaning retained 368,246 rows, removed 29,460 redundant copies and quarantined five
@@ -150,7 +146,7 @@ this calculation.
 Each run writes to `reports/<run-date>/`:
 
 - `<ticker>_report.ipynb`: executed report.
-- `portfolio_summary.csv`: the seven required columns plus requested/actual
+- `portfolio_summary.csv`: return and risk metrics, report paths, requested/actual
   coverage, price/return counts and coverage notes.
 - `portfolio_risk_return.png`: mean rolling annualized volatility versus total
   return, colored by Sharpe, with the five highest plotted returns labeled.
@@ -174,20 +170,34 @@ logs and no current CSV/chart. Same-day reruns replace this driver's summary/cha
 and requested reports; unrelated old notebook files stay untouched and are not
 collected. Any failed report gives a nonzero exit code after all tickers are attempted.
 
-## Verified full run (October 24, 2026)
+## Run results (October 24, 2026)
 
 All 30/30 reports completed with no failures for the requested June 1–November 30,
 2024 window. Twenty-two stocks have 97 prices ending October 18; eight have 126
 prices ending November 29. Each has one four-panel figure and named metric output.
-The working database's full-file hash was unchanged throughout reporting.
 
 Batch behavior checks also verified month-end/year-boundary/leap-year windows,
 continuation after a controlled failure, exclusion of stale notebooks and undefined
 Sharpe ratios, and an all-failed rerun that cannot retain an old summary/chart.
 
-## Submission
+## Submitted files
 
-Keep the full batch locally. Submit the three code files, this README,
-`requirements.txt`, the summary CSV, and only 2–3 selected executed reports.
-Do not submit the database, environment, temporary checks or credentials.
-The cleaning notebook recreates the cleaned table for the grader.
+The batch produced **30 report notebooks**. The included examples are
+**AAPL, IBM and MRK**; the other 27 reports are available locally.
+The summary CSV still contains results for all 30 stocks; its report paths refer to
+the complete generated batch, of which only these three examples are submitted.
+
+| Included file | Purpose |
+|---|---|
+| [01_data_cleaning.ipynb](01_data_cleaning.ipynb) | Inspection, cleaning, controlled checks and validation |
+| [02_stock_report_template.ipynb](02_stock_report_template.ipynb) | Parameterized report with four charts and ten summary statistics |
+| [03_run_all_stocks.py](03_run_all_stocks.py) | Full-universe report execution and summary generation |
+| [requirements.txt](requirements.txt) | Pinned dependencies |
+| README.md | Setup, run order, design choices, assumptions and interpretation |
+| [AAPL report](reports/2026-10-24/AAPL_report.ipynb) | Example with shorter supplied coverage, ending October 18 |
+| [IBM report](reports/2026-10-24/IBM_report.ipynb) | Example covering the full available requested window, with a positive return |
+| [MRK report](reports/2026-10-24/MRK_report.ipynb) | Example covering the full available requested window, with a negative return |
+| [portfolio_summary.csv](reports/2026-10-24/portfolio_summary.csv) | Numeric summary and actual coverage for all 30 stocks |
+
+Each example report contains the four-panel visualization and the ten-statistic
+table directly inside the notebook.
