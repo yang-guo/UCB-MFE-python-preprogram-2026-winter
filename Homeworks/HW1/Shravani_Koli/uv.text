@@ -1,0 +1,30 @@
+Berkeley MFE — Homework 1: uv Package Management
+
+1. Install Python 3.12.9:
+   `uv python install 3.12.9`
+
+2. Create a virtual environment named HW1:
+   `uv venv HW1 --python 3.12.9`
+
+3. Activate the virtual environment:
+   `.\HW1\Scripts\Activate.ps1`
+
+4. Verify the Python version:
+   `python --version`
+
+5. Install packages from requirements.txt:
+   `uv pip install -r ..\requirements.txt`
+
+6. Downgrade requests to version 2.24.0:
+   `uv pip install requests==2.24.0`
+
+7. Verify the downgraded version:
+   `uv pip show requests`
+
+8. Upgrade requests to the latest version:
+   `uv pip install --upgrade requests`
+
+9. Check the latest installed version:
+   `uv pip show requests`
+
+**Latest installed requests version:** 2.34.2
