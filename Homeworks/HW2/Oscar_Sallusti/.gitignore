@@ -1,0 +1,6 @@
+# Generated reports: only the sample reports and the portfolio summary CSV are committed
+reports/*/*
+!reports/*/IBM_report.ipynb
+!reports/*/NVDA_report.ipynb
+!reports/*/MRK_report.ipynb
+!reports/*/portfolio_summary.csv
