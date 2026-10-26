@@ -1,0 +1,5 @@
+# Local database copies and full report batches are not submitted
+data/
+*.db
+reports/*/run.log
+.ipynb_checkpoints/
