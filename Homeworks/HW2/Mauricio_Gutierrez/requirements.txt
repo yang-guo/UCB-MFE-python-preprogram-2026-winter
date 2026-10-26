@@ -1,0 +1,9 @@
+# HW2 dependencies (Python 3.12). Versions are the ones the homework was run and tested with.
+# sqlite3, pathlib, logging and contextlib are part of the Python standard library.
+pandas==2.3.3        # tables, time series, SQL reads
+numpy==2.3.5         # log returns, sqrt, NaN handling
+matplotlib==3.10.7   # report charts and the risk-return plot
+papermill==2.6.0     # runs the parameterized report notebook for every ticker (Part 3)
+scrapbook==0.5.0     # saves report metrics in each notebook and reads them back (Parts 2-3)
+tqdm==4.67.1         # progress bar for the batch run
+ipykernel==7.1.0     # Jupyter kernel used to execute the notebooks
