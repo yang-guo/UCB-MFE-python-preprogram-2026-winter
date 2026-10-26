@@ -1,0 +1,18 @@
+# First, I create a virtual environment called HW1 with Python 3.12.9,
+# then I activate it so that the next commands install packages into it.
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+
+# I install the packages listed in the shared requirements file.
+uv pip install -r ../requirements.txt
+
+# I downgrade requests to version 2.24.0 and check that the version changed.
+uv pip install requests==2.24.0
+uv pip show requests
+
+# I upgrade requests to the latest version
+uv pip install --upgrade requests
+
+# Then I check the version
+uv pip show requests
+# Here is the answer : the latest version of requests is 2.34.2.
