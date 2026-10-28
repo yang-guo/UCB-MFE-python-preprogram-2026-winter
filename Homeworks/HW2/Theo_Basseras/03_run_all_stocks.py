@@ -9,6 +9,7 @@ Outputs, in reports/<run date YYYY-MM-DD>/:
     run.log                    one line per ticker: success, or the error message
     portfolio_summary.csv      metrics of the successful reports, sorted by Sharpe ratio
     risk_return.png            avg volatility vs total return, colored by Sharpe ratio
+A rerun on the same day replaces that day's outputs (stale reports and summaries are deleted first).
 """
 
 from __future__ import annotations
@@ -133,6 +134,10 @@ def main() -> int:
     db_path, template = Path(args.db), Path(args.template)
     out_dir = Path("reports") / date.today().isoformat()   # run date, independent of the data window
     out_dir.mkdir(parents=True, exist_ok=True)
+    # The folder must only show this run: clear what an earlier run on the same day left behind, so a stale
+    # summary or report can't be mistaken for this run's (for example when every report fails this time).
+    for stale in [*out_dir.glob("*_report.ipynb"), out_dir / "portfolio_summary.csv", out_dir / "risk_return.png"]:
+        stale.unlink(missing_ok=True)
 
     logging.basicConfig(filename=out_dir / "run.log", filemode="w", level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s")
