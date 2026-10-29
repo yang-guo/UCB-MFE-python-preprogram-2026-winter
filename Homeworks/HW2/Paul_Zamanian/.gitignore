@@ -1,0 +1,7 @@
+data/
+.venv/
+reports/*/*
+!reports/*/portfolio_summary.csv
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+!reports/*/AAPL_report.ipynb
