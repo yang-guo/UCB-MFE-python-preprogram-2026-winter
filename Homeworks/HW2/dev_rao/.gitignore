@@ -1,0 +1,11 @@
+# local working copy of the db (never commit it)
+data/
+
+# full batch stays local, only commit the samples + summary
+reports/*/*
+!reports/*/portfolio_summary.csv
+!reports/*/risk_return_profile.png
+!reports/*/failed_stocks.txt
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
