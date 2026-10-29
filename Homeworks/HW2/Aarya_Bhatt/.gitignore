@@ -1,0 +1,11 @@
+# Ignore databases and data folders
+data/
+*.db
+*.sqlite3
+
+# Ignore Python virtual environments and caches
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
