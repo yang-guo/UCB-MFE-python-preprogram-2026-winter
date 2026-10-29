@@ -1,0 +1,8 @@
+ipykernel
+ipython
+matplotlib
+nbformat
+numpy
+pandas
+papermill
+tqdm
