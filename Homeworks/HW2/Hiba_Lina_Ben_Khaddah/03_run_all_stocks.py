@@ -113,6 +113,7 @@ def generate_reports(
             pm.execute_notebook(
                 input_path=str(TEMPLATE_PATH),
                 output_path=str(report_path),
+                kernel_name="python3",
                 parameters={
                     "ticker": ticker,
                     "start_date": start_date,
@@ -315,18 +316,20 @@ def save_portfolio_outputs(
         return summary_path, None
 
     figure, axis = plt.subplots(
-        figsize=(10, 7),
+        figsize=(11, 7.5),
         layout="constrained",
+        facecolor="#F7F8FA",
     )
 
     scatter = axis.scatter(
         plot_data["avg_volatility"],
         plot_data["total_return"],
         c=plot_data["sharpe_ratio"],
-        cmap="viridis",
-        s=70,
-        alpha=0.8,
-        edgecolor="black",
+        cmap="RdYlGn",
+        s=85,
+        alpha=0.88,
+        edgecolor="white",
+        linewidth=0.8,
     )
 
     colorbar = figure.colorbar(
@@ -340,23 +343,57 @@ def save_portfolio_outputs(
         "total_return",
     )
 
-    for row in top_returns.itertuples():
+    annotation_offsets = [
+        (8, 10),
+        (8, -18),
+        (8, 10),
+        (8, -18),
+        (8, 10),
+    ]
+
+    for row, offset in zip(
+        top_returns.itertuples(),
+        annotation_offsets,
+    ):
         axis.annotate(
             row.ticker,
             (
                 row.avg_volatility,
                 row.total_return,
             ),
-            xytext=(5, 5),
+            xytext=offset,
             textcoords="offset points",
+            fontweight="semibold",
+            bbox={
+                "boxstyle": "round,pad=0.2",
+                "fc": "white",
+                "ec": "none",
+                "alpha": 0.82,
+            },
         )
 
-    axis.set_title("Risk-Return Profile of Portfolio")
+    axis.axhline(
+        0,
+        color="#6B7280",
+        linewidth=0.9,
+        linestyle="--",
+        alpha=0.7,
+    )
+    axis.set_title(
+        "Risk-Return Profile of Portfolio",
+        fontsize=16,
+        fontweight="bold",
+        pad=12,
+    )
     axis.set_xlabel("Average annualized rolling volatility")
     axis.set_ylabel("Total return")
     axis.xaxis.set_major_formatter(PercentFormatter(xmax=1))
     axis.yaxis.set_major_formatter(PercentFormatter(xmax=1))
-    axis.grid(True, alpha=0.3)
+    axis.set_facecolor("#FCFCFD")
+    axis.set_axisbelow(True)
+    axis.grid(True, color="#B0B7C3", alpha=0.28, linewidth=0.8)
+    axis.spines["top"].set_visible(False)
+    axis.spines["right"].set_visible(False)
 
     plot_path = output_directory / "portfolio_risk_return.png"
 

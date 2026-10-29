@@ -3,6 +3,10 @@
 This project cleans the supplied market data, generates parameterized
 single-stock risk reports, and runs the analysis across all cleaned tickers.
 
+<p align="center">
+  <img src="assets/hw2_workstation_banner.png" alt="Quantitative-finance analysis workstation" width="900">
+</p>
+
 ## Setup
 
 Place the bCourses database at:
@@ -88,3 +92,7 @@ reports/YYYY-MM-DD/
   formatting is applied only for display.
 - Higher return does not necessarily imply better risk-adjusted performance;
   compare total return, volatility, drawdown, and Sharpe ratio together.
+
+<p align="center">
+  <img src="assets/hw2_analysis_pipeline.gif" alt="Animated stock-analysis pipeline using the homework results" width="900">
+</p>
