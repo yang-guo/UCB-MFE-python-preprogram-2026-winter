@@ -1,0 +1,19 @@
+# HW2 dependencies. Tested with Python 3.12 and the versions pinned below.
+# Install: pip install -r requirements.txt
+# sqlite3, pathlib, argparse, logging, re, contextlib, datetime are in the standard library.
+
+# Data and charts (all three parts)
+pandas==2.3.3
+numpy==2.3.5
+matplotlib==3.10.7
+
+# Notebook execution and result collection (02 template, 03 batch script)
+papermill==2.6.0
+scrapbook==0.5.0
+ipykernel==7.1.0  # the Python kernel papermill runs the template on; also provides IPython.display
+
+# Progress bar (03 batch script)
+tqdm==4.67.1
+
+# To open and edit the notebooks interactively, also install a front end, e.g.:
+#   pip install jupyterlab
