@@ -186,3 +186,18 @@ Lectures/Lecture 4/outputs/
 *.duckdb.wal
 Lectures/modeling/outputs/
 Homeworks/HW4/*/outputs/
+
+
+# Course-provided data — do not commit
+course_file_export/
+
+# Python virtual environment and cache
+.venv/
+__pycache__/
+*.py[cod]
+
+# Jupyter checkpoint files
+.ipynb_checkpoints/
+
+# Local environment/configuration
+.env
