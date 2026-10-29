@@ -1,0 +1,9 @@
+# Generate the full batch locally; commit only three sample reports plus the summary outputs.
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+reports/*/run.log
+# Never commit the database or any copy of it.
+*.db
+*.duckdb
