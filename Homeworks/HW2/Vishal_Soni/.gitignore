@@ -1,0 +1,5 @@
+# The full batch is generated locally; only these sample reports are committed.
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
