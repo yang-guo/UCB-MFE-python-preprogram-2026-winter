@@ -1,0 +1,12 @@
+# Local working copy of the course database (and any other copies) - never commit
+data/
+*.db
+# Batch output stays local except the submitted run's summary and three sample reports.
+# Pinned to that run so a later rerun (new date folder) is never committed by accident.
+reports/*
+!reports/2026-10-29/
+reports/2026-10-29/*_report.ipynb
+!reports/2026-10-29/AAPL_report.ipynb
+!reports/2026-10-29/IBM_report.ipynb
+!reports/2026-10-29/MRK_report.ipynb
+reports/2026-10-29/failed_stocks.txt
