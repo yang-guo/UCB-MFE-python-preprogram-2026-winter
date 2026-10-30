@@ -50,4 +50,4 @@ Lecture 1 supplies lists, dictionaries, loops, and simple functions. Pandas basi
 
 The Lecture 2 reference folder remains retired. Series/DataFrame foundations are consolidated into pandas basics, and vendor string parsing remains in the main cleaning notebook, now in Lecture 4.
 
-[Homework 2](hw2.md) is due **October 29, 2026**. The two sessions together provide the required patterns; see Lecture 4's requirement-by-requirement coverage audit. Verify all six main notebooks with `uv run python scripts/validate_data_analysis.py --core-only`.
+[Homework 2](hw2.md) is due **October 29, 2026**. The two sessions together provide the required patterns; see Lecture 4's requirement-by-requirement coverage audit.
