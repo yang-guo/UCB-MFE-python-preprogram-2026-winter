@@ -1,0 +1,276 @@
+<!doctype html><meta charset="utf-8"><title>Thursday demonstrations — saved results</title><style>body{font:20px/1.6 system-ui;color:#17364b;max-width:1100px;margin:40px auto;padding:0 28px}h1,h2{color:#002b49}pre{background:#f0f4f7;padding:24px;overflow:auto;font:17px/1.5 monospace}a{color:#005a9c}.output{background:#e6f3ed}section{margin:50px 0}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ccd6dd;padding:14px;text-align:left;vertical-align:top}th{background:#002b49;color:white}</style><body><p><a href="../README.md">Lesson materials</a> · <a href="Thursday_Prepared_Notebook.ipynb">Notebook</a> · <a href="KV_Cache_Walkthrough.html">KV walkthrough</a></p><section><h1>Thursday: prepared demonstrations</h1><p>Run top to bottom in Jupyter. Core examples use only the Python standard library. No API keys, remote requests or GPU required. Saved outputs provide a fallback. Timings are observations on this machine, not universal speed ratios.</p><p></p><p>Core route: A3 → B1/B2 → C → D. A1/A2 are optional during algorithms. Each section includes a prediction before execution.</p></section><section><h2>A1. Search traces — optional</h2><p>Predict the comparisons needed to find 42 in the same sorted list shown on slides 14–15.</p></section><details><summary>Show code</summary><pre>values = [3, 7, 11, 14, 18, 21, 26, 31, 35, 42, 48, 53, 60, 66, 72, 80]
+
+def linear_trace(values, target):
+    seen = []
+    for i, value in enumerate(values):
+        seen.append(value)
+        if value == target:
+            return i, seen
+    return None, seen
+
+def binary_trace(values, target):
+    lo, hi = 0, len(values) - 1
+    seen = []
+    while lo &lt;= hi:
+        mid = (lo + hi) // 2
+        seen.append(values[mid])
+        if values[mid] == target:
+            return mid, seen
+        if values[mid] &lt; target:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return None, seen
+
+linear_index, linear_seen = linear_trace(values, 42)
+binary_index, binary_seen = binary_trace(values, 42)
+assert linear_index == binary_index == 9
+assert linear_seen == values[:10]
+assert binary_seen == [31, 53, 42]
+print(&#x27;Linear:&#x27;, len(linear_seen), &#x27;comparisons&#x27;, linear_seen)
+print(&#x27;Binary:&#x27;, len(binary_seen), &#x27;comparisons&#x27;, binary_seen)
+</pre></details><pre class="output">Linear: 10 comparisons [3, 7, 11, 14, 18, 21, 26, 31, 35, 42]
+Binary: 3 comparisons [31, 53, 42]
+</pre><section><p>The trace lists are extra instrumentation and grow with the trace length. Search without these lists needs only a few variables. Binary search assumes the input is already sorted.</p></section><section><h2>A2. Build cost and repeated queries — optional</h2><p>Predict when the cost of building a set is worthwhile. Include that cost in the comparison. We use identical, absent integer keys so list membership scans the full list. No file, network or API calls occur inside the measurement.</p></section><details><summary>Show code</summary><pre>from statistics import median
+from timeit import repeat
+
+def list_queries(items, queries):
+    return [query in items for query in queries]
+
+def build_and_query(items, queries):
+    lookup = set(items)
+    return [query in lookup for query in queries]
+
+def milliseconds(function):
+    return 1000 * median(repeat(function, number=1, repeat=5))
+
+print(f&quot;{&#x27;n&#x27;:&gt;7} {&#x27;q&#x27;:&gt;6} {&#x27;list ms&#x27;:&gt;12} {&#x27;build+query ms&#x27;:&gt;16} {&#x27;set query ms&#x27;:&gt;14}&quot;)
+for n in (1_000, 10_000):
+    items = list(range(n))
+    for q in (1, 1_000):
+        queries = list(range(n, n + q))
+        lookup = set(items)
+        expected = [False] * q
+        assert list_queries(items, queries) == build_and_query(items, queries) == expected
+        assert [query in lookup for query in queries] == expected
+        a = milliseconds(lambda: list_queries(items, queries))
+        b = milliseconds(lambda: build_and_query(items, queries))
+        c = milliseconds(lambda: [query in lookup for query in queries])
+        print(f&#x27;{n:7,d} {q:6,d} {a:12.4f} {b:16.4f} {c:14.4f}&#x27;)
+</pre></details><pre class="output">      n      q      list ms   build+query ms   set query ms
+  1,000      1       0.0034           0.0053         0.0002
+  1,000  1,000       3.1848           0.0152         0.0105
+ 10,000      1       0.0370           0.0458         0.0001
+ 10,000  1,000      31.4183           0.0553         0.0092
+</pre><section><p>Discuss the end-to-end column first. Query-only timing assumes the set already exists. The set adds O(n) auxiliary storage; both versions also retain the same O(q) output list here. Average/expected hash costs assume ordinary hashing behavior. These timings include result construction and interpreter overhead.</p></section><section><h2>3. Recursion and iteration</h2><p>The functions match slides 11–12. Predict the live calls for [2, 4, 6]. No slicing is used.</p></section><details><summary>Show code</summary><pre>def recursive_total(values, i=0):
+    if i == len(values):
+        return 0
+    return values[i] + recursive_total(values, i + 1)
+
+def iterative_total(values):
+    result = 0
+    for value in values:
+        result += value
+    return result
+
+for example in ([], [2, 4, 6], [-3, 5, 9]):
+    expected = sum(example)
+    assert recursive_total(example) == iterative_total(example) == expected
+    print(example, &#x27;=&gt;&#x27;, expected)
+</pre></details><pre class="output">[] =&gt; 0
+[2, 4, 6] =&gt; 12
+[-3, 5, 9] =&gt; 11
+</pre><section><p>For [2, 4, 6], four calls are live at maximum depth, including the base case. Both approaches visit all n values. Recursion retains O(n) frames; iteration uses O(1) extra space under the usual unit-cost arithmetic model. Input storage is excluded. Do not raise the recursion limit as a substitute for choosing an iterative approach for long lists.</p></section><section><h2>A3. Generators: when does work happen?</h2><p>Predict what prints when `values()` is called, then at each `next`. Calling a generator function does not start its body.</p><p></p><p>Slides 26–28. Core demo: about 4 minutes.</p></section><details><summary>Show code</summary><pre>def values():
+    for value in (2, 4, 6):
+        print(&#x27;producing&#x27;, value)
+        yield value
+
+g = values()
+print(&#x27;generator created&#x27;)
+assert next(g) == 2
+assert next(g) == 4
+assert next(g) == 6
+assert list(g) == []
+print(&#x27;generator exhausted&#x27;)</pre></details><pre class="output">generator created
+producing 2
+producing 4
+producing 6
+generator exhausted
+</pre><section><h3>Same answer, different retained intermediates</h3><p>Predict which peak grows as n grows. Both versions do O(n) arithmetic under a fixed-size arithmetic model. `range` avoids a preloaded input list. `tracemalloc` measures traced Python allocations, not total process RAM. Runtime is measured separately from memory tracing.</p></section><details><summary>Show code</summary><pre>import gc, tracemalloc
+from time import perf_counter
+
+def materialized(n):
+    return sum([x*x for x in range(n)])
+
+def streamed(n):
+    return sum(x*x for x in range(n))
+
+print(&#x27;n       method          peak KiB    time ms&#x27;)
+for n in (10_000, 100_000):
+    expected = n*(n-1)*(2*n-1)//6
+    for fn in (materialized, streamed):
+        gc.collect()
+        tracemalloc.start()
+        answer = fn(n)
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        start = perf_counter()
+        check = fn(n)
+        elapsed = perf_counter()-start
+        assert answer == check == expected
+        print(f&#x27;{n:&lt;7} {fn.__name__:&lt;14} {peak/1024:9.1f} {elapsed*1000:10.2f}&#x27;)</pre></details><pre class="output">n       method          peak KiB    time ms
+10000   materialized       395.2       0.20
+10000   streamed             0.5       0.26
+100000  materialized      3906.8       2.26
+100000  streamed             0.5       2.63
+</pre><section><p>Debrief: streaming reduces retained intermediate storage here; it does not remove the arithmetic or guarantee lower runtime. Consuming a generator into a list would retain those values again.</p></section><section><h2>B1. Overlapping waits, with a limit</h2><p>Slides 38–41. Predict six independent 0.4-second waits with limits 1, 2 and 6: ideal elapsed times 2.4, 1.2 and 0.4 seconds. These are simulated waits, not actual quote retrieval. The semaphore limits in-flight operations; it is not a rate limiter or a bound on all queued task objects.</p></section><details><summary>Show code</summary><pre>import asyncio
+
+async def quote_run(limit, fail_id=None):
+    semaphore = asyncio.Semaphore(limit)
+    active = peak_active = 0
+    events = []
+    epoch = perf_counter()
+    async def fetch(i):
+        nonlocal active, peak_active
+        async with semaphore:
+            active += 1
+            peak_active = max(peak_active, active)
+            start = perf_counter()-epoch
+            try:
+                await asyncio.sleep(0.4)
+                if i == fail_id:
+                    raise ValueError(&#x27;simulated unavailable quote&#x27;)
+                return {&#x27;id&#x27;: i, &#x27;value&#x27;: 100+i, &#x27;error&#x27;: None}
+            except ValueError as exc:
+                return {&#x27;id&#x27;: i, &#x27;value&#x27;: None, &#x27;error&#x27;: str(exc)}
+            finally:
+                events.append((i, start, perf_counter()-epoch))
+                active -= 1
+    results = await asyncio.gather(*(fetch(i) for i in range(6)))
+    elapsed = perf_counter()-epoch
+    assert active == 0 and peak_active &lt;= limit
+    assert [r[&#x27;id&#x27;] for r in results] == list(range(6))
+    return results, elapsed, peak_active, sorted(events)
+
+runs = {}
+for limit in (1, 2, 6):
+    results, elapsed, peak, events = await quote_run(limit)
+    assert [r[&#x27;value&#x27;] for r in results] == list(range(100, 106))
+    assert all(r[&#x27;error&#x27;] is None for r in results)
+    runs[limit] = (results, elapsed, peak, events)
+    print(f&#x27;limit={limit}: {elapsed:.2f}s, peak in flight={peak}, values={[r[&quot;value&quot;] for r in results]}&#x27;)
+print(&#x27;All three runs produced the same ordered results.&#x27;)</pre></details><pre class="output">limit=1: 2.41s, peak in flight=1, values=[100, 101, 102, 103, 104, 105]
+limit=2: 1.20s, peak in flight=2, values=[100, 101, 102, 103, 104, 105]
+limit=6: 0.40s, peak in flight=6, values=[100, 101, 102, 103, 104, 105]
+All three runs produced the same ordered results.
+</pre><section><h3>Inspect the timing, not just the total</h3><p>Each row below is an operation. The measured interval is when that operation held a semaphore slot. Starts differ slightly because scheduling has overhead.</p></section><details><summary>Show code</summary><pre>for limit, (_, elapsed, peak, events) in runs.items():
+    print(f&#x27;\nLimit {limit}&#x27;)
+    for i, start, end in events:
+        print(f&#x27;  request {i}: {start:4.2f}s → {end:4.2f}s&#x27;)</pre></details><pre class="output">
+Limit 1
+  request 0: 0.00s → 0.40s
+  request 1: 0.40s → 0.80s
+  request 2: 0.80s → 1.21s
+  request 3: 1.21s → 1.61s
+  request 4: 1.61s → 2.01s
+  request 5: 2.01s → 2.41s
+
+Limit 2
+  request 0: 0.00s → 0.40s
+  request 1: 0.00s → 0.40s
+  request 2: 0.40s → 0.80s
+  request 3: 0.40s → 0.80s
+  request 4: 0.80s → 1.20s
+  request 5: 0.80s → 1.20s
+
+Limit 6
+  request 0: 0.00s → 0.40s
+  request 1: 0.00s → 0.40s
+  request 2: 0.00s → 0.40s
+  request 3: 0.00s → 0.40s
+  request 4: 0.00s → 0.40s
+  request 5: 0.00s → 0.40s
+</pre><section><h2>B2. Account for a failed request</h2><p>Predict how many outcomes we need if request 3 fails. Faster completion does not justify silently dropping an input. This example catches one expected application error per request; real cancellation, timeouts and retry policy require deliberate handling.</p></section><details><summary>Show code</summary><pre>results, elapsed, peak, events = await quote_run(2, fail_id=3)
+assert len(results) == 6
+assert sum(r[&#x27;error&#x27;] is not None for r in results) == 1
+assert results[3][&#x27;value&#x27;] is None and results[3][&#x27;error&#x27;]
+assert all(r[&#x27;value&#x27;] == 100+r[&#x27;id&#x27;] for r in results if r[&#x27;error&#x27;] is None)
+assert peak &lt;= 2
+for r in results:
+    print(r)
+print(&#x27;CHECK: six inputs accounted for; five values and one explicit failure.&#x27;)</pre></details><pre class="output">{&#x27;id&#x27;: 0, &#x27;value&#x27;: 100, &#x27;error&#x27;: None}
+{&#x27;id&#x27;: 1, &#x27;value&#x27;: 101, &#x27;error&#x27;: None}
+{&#x27;id&#x27;: 2, &#x27;value&#x27;: 102, &#x27;error&#x27;: None}
+{&#x27;id&#x27;: 3, &#x27;value&#x27;: None, &#x27;error&#x27;: &#x27;simulated unavailable quote&#x27;}
+{&#x27;id&#x27;: 4, &#x27;value&#x27;: 104, &#x27;error&#x27;: None}
+{&#x27;id&#x27;: 5, &#x27;value&#x27;: 105, &#x27;error&#x27;: None}
+CHECK: six inputs accounted for; five values and one explicit failure.
+</pre><section><h2>C. KV-cache byte budget</h2><p>Slides 47–51. Use the accompanying interactive walkthrough for the token steps. This calculation models dense full-attention KV storage; it is not a live transformer benchmark.</p><p></p><p>Predict the effect of doubling context or active sequences. Assumptions: 32 layers, 8 KV heads, head dimension 128, 2 bytes/value; no prefix sharing, compression, offloading or sliding-window cap. Model weights and temporary buffers are excluded.</p></section><details><summary>Show code</summary><pre>def kv_bytes(tokens, sequences=1, layers=32, kv_heads=8, head_dim=128, bytes_per_value=2):
+    return 2*layers*sequences*tokens*kv_heads*head_dim*bytes_per_value
+
+assert kv_bytes(1) == 128*1024
+assert kv_bytes(4096) == 512*1024**2
+assert kv_bytes(8192) == 1024**3
+assert kv_bytes(8192, 4) == 4*1024**3
+for tokens, sequences in ((4096,1), (8192,1), (8192,4)):
+    size = kv_bytes(tokens, sequences)
+    print(f&#x27;{tokens:5} tokens × {sequences} sequences: {size/1024**2:7.0f} MiB ({size/1024**3:.2f} GiB)&#x27;)
+print(&#x27;K and V give the leading factor of two. Cache growth does not change model weights.&#x27;)</pre></details><pre class="output"> 4096 tokens × 1 sequences:     512 MiB (0.50 GiB)
+ 8192 tokens × 1 sequences:    1024 MiB (1.00 GiB)
+ 8192 tokens × 4 sequences:    4096 MiB (4.00 GiB)
+K and V give the leading factor of two. Cache growth does not change model weights.
+</pre><section><h2>D. Prepared tool call → execution → independent checks</h2><p>Slides 54–55. This is an instructor-authored request, not output from a live model. Narrow contract: finite nonnegative shares and price, for a long-only position. Predict why returning a number is insufficient evidence of correctness.</p></section><details><summary>Show code</summary><pre>import math
+
+def position_value(shares, price):
+    return shares*price
+
+def execute(request):
+    if set(request) != {&#x27;name&#x27;, &#x27;arguments&#x27;} or request[&#x27;name&#x27;] != &#x27;position_value&#x27;:
+        raise ValueError(&#x27;unsupported request&#x27;)
+    args = request[&#x27;arguments&#x27;]
+    if set(args) != {&#x27;shares&#x27;, &#x27;price&#x27;}:
+        raise ValueError(&#x27;expected shares and price&#x27;)
+    for value in args.values():
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value &lt; 0:
+            raise ValueError(&#x27;finite nonnegative numbers required&#x27;)
+    result = position_value(**args)
+    if not math.isfinite(result):
+        raise ValueError(&#x27;result must be finite&#x27;)
+    return result
+
+request = {&#x27;name&#x27;: &#x27;position_value&#x27;, &#x27;arguments&#x27;: {&#x27;shares&#x27;: 2, &#x27;price&#x27;: 100}}
+print(&#x27;Prepared request:&#x27;, request)
+print(&#x27;Executed result:&#x27;, execute(request))
+assert execute(request) == 200
+
+def candidate_bad(shares, price):
+    return shares+price
+
+cases = [(2,100,200), (0,100,0), (0.5,80,40)]
+for fn in (candidate_bad, position_value):
+    failures = []
+    for shares, price, expected in cases:
+        actual = fn(shares, price)
+        if actual != expected:
+            failures.append((shares, price, expected, actual))
+    print(fn.__name__, &#x27;:&#x27;, len(cases)-len(failures), &#x27;/&#x27;, len(cases), &#x27;checks passed&#x27;)
+    for shares, price, expected, actual in failures:
+        print(f&#x27;  {shares} × {price}: expected {expected}, got {actual}&#x27;)
+    assert len(failures) == (3 if fn is candidate_bad else 0)
+
+for invalid in (-1, float(&#x27;nan&#x27;), float(&#x27;inf&#x27;), True):
+    try:
+        execute({&#x27;name&#x27;:&#x27;position_value&#x27;,&#x27;arguments&#x27;:{&#x27;shares&#x27;:invalid,&#x27;price&#x27;:100}})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(&#x27;invalid input accepted&#x27;)
+print(&#x27;Input checks passed. These narrow checks do not establish general agent reliability.&#x27;)</pre></details><pre class="output">Prepared request: {&#x27;name&#x27;: &#x27;position_value&#x27;, &#x27;arguments&#x27;: {&#x27;shares&#x27;: 2, &#x27;price&#x27;: 100}}
+Executed result: 200
+candidate_bad : 0 / 3 checks passed
+  2 × 100: expected 200, got 102
+  0 × 100: expected 0, got 100
+  0.5 × 80: expected 40, got 80.5
+position_value : 3 / 3 checks passed
+Input checks passed. These narrow checks do not establish general agent reliability.
+</pre><section><h2>Instructor wrap-up</h2><p>A: same result, different retained storage. B: overlap independent waits, bound resources, account for every result. C: reuse prior attention state at a memory cost. D: independent expected results distinguish execution from correctness.</p><p></p><p>Sources: January Lesson 6 demo notebook (search/sort, async, memory profiling); Python documentation for generators, asyncio and tracemalloc; Hugging Face Transformers cache explanation. The KV walkthrough and narrow tool checks are tailored to this Thursday continuation.</p></section>

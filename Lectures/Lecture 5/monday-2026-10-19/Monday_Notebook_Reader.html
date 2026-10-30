@@ -1,0 +1,378 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Monday prepared notebook</title><style>body{font-family:Arial,sans-serif;color:#183348;background:#f4f5f6;margin:0;line-height:1.6}main{max-width:1040px;margin:32px auto;background:white;padding:48px 64px}h1{font-size:34px;color:#002b49}h2{margin-top:42px;color:#002b49}h3{margin-top:28px}a{color:#075982}pre{background:#092e48;color:#fff;padding:22px;overflow:auto;border-radius:3px;font-size:16px;line-height:1.55}pre.output{background:#f0f2f4;color:#183348;border-left:4px solid #fdb515}details{padding:14px 20px;background:#f8f5ea;margin:14px 0}summary{font-weight:bold;cursor:pointer}table{border-collapse:collapse;width:100%;margin:20px 0}td,th{text-align:left;padding:9px 12px;border-bottom:1px solid #d8e0e5}th{background:#002b49;color:white}.meta{color:#627482;font-size:14px}.slide{margin:38px 0;padding-top:18px;border-top:2px solid #d5a638}blockquote{font-size:22px;color:#002b49;border-left:4px solid #fdb515;padding-left:20px}code{font-family:Menlo,monospace}.toc{columns:2}.note{background:#f8f5ea;padding:16px}@media print{main{margin:0;padding:12px}details{display:block}.slide{break-inside:avoid}pre{white-space:pre-wrap}}</style><main><h1>Python, memory and systems</h1><p>Prepared notebook reader · October 19, 2026</p><p>Use this offline page if a notebook kernel is unavailable. This reader preserves the original 20 prepared examples. The companion notebook also includes additions and changes made during class. Answers are collapsed until opened.</p><p>Saved timings are illustrative and machine-dependent. This page does not execute Python.</p><nav class="toc"><p><a href="#D01">D01 · Scope and hidden inputs</a></p><p><a href="#D02">D02 · Mutation, reassignment, identity</a></p><p><a href="#D03">D03 · A shallow copy keeps nested references</a></p><p><a href="#D04">D04 · Mutable defaults</a></p><p><a href="#D05">D05 · A calculation with explicit inputs</a></p><p><a href="#D06">D06 · Functions can be inputs</a></p><p><a href="#D07">D07 · A timing decorator</a></p><p><a href="#D08">D08 · Classes and independent instance state</a></p><p><a href="#D09">D09 · Shared class attributes</a></p><p><a href="#D10">D10 · Composition: a portfolio has positions</a></p><p><a href="#D11">D11 · A small inheritance example</a></p><p><a href="#D12">D12 · An iterator remembers progress</a></p><p><a href="#D13">D13 · A generator yields one result at a time</a></p><p><a href="#D14">D14 · Materializing versus streaming</a></p><p><a href="#D15">D15 · Representation changes the memory budget</a></p><p><a href="#D16">D16 · Caching reuses work</a></p><p><a href="#D17">D17 · A Python loop and a NumPy operation</a></p><p><a href="#D18">D18 · A Python function as an agent tool</a></p><p><a href="#D19">D19 · Independent checks catch a plausible defect</a></p><p><a href="#D20">D20 · Transfer question: a new check</a></p></nav><section id="D01"><h2>D01 · Scope and hidden inputs</h2><p class="meta">Core · about 5 minutes</p><blockquote>What changes between the two calls to quoted_value? Does the function receive a new argument?</blockquote><pre>rate = 1.10
+
+def quoted_value(amount):
+    return amount * rate
+
+print(round(quoted_value(100), 2))
+rate = 1.20
+print(round(quoted_value(100), 2))
+
+def explicit_value(amount, fx_rate):
+    return amount * fx_rate
+
+print(round(explicit_value(100, 1.10), 2))
+from math import isclose
+assert isclose(explicit_value(100, 1.10), 110.0)</pre><pre class="output">110.0
+120.0
+110.0
+</pre><details><summary>Instructor answer and teaching notes</summary><p>110.0, 120.0, 110.0. The first function reads the current global rate when called. The explicit version makes that dependency visible. This is name lookup and hidden state, not random behavior.</p><p>Ask for all three outputs before running. Explain local, enclosing, global, built-in lookup. A notebook kernel keeps globals between cell executions. Restarting and running top-to-bottom helps expose accidental dependencies.</p></details></section><section id="D02"><h2>D02 · Mutation, reassignment, identity</h2><p class="meta">Core · about 6 minutes</p><blockquote>After append, which names see 30? After b is reassigned, do a and b still refer to the same list?</blockquote><pre>a = [10, 20]
+b = a
+c = a.copy()
+print(&#x27;Before:&#x27;, a == c, a is c, a is b)
+b.append(30)
+print(&#x27;After mutation:&#x27;, a, b, c)
+b = [99]
+print(&#x27;After reassignment:&#x27;, a, b, a is b)
+assert a == [10, 20, 30] and c == [10, 20]</pre><pre class="output">Before: True False True
+After mutation: [10, 20, 30] [10, 20, 30] [10, 20]
+After reassignment: [10, 20, 30] [99] False
+</pre><details><summary>Instructor answer and teaching notes</summary><p>Before: True False True. Mutation: a and b both show [10, 20, 30], while c is [10, 20]. Reassignment changes what b names; a stays [10, 20, 30]. == compares values; is compares identity.</p><p>Use the phrase “two names, one object.” A Python name binding is a logical relationship. Do not claim id() is a portable physical RAM address. Connect shared references to surprising changes in research code.</p></details></section><section id="D03"><h2>D03 · A shallow copy keeps nested references</h2><p class="meta">Core · about 4 minutes</p><blockquote>Does copying the outer dictionary isolate the inner list?</blockquote><pre>from copy import deepcopy
+original = {&#x27;prices&#x27;: [100.0, 101.0]}
+shallow = original.copy()
+independent = deepcopy(original)
+shallow[&#x27;prices&#x27;].append(102.0)
+print(&#x27;Original:&#x27;, original[&#x27;prices&#x27;])
+print(&#x27;Deep copy:&#x27;, independent[&#x27;prices&#x27;])
+print(&#x27;Shared inner list:&#x27;, shallow[&#x27;prices&#x27;] is original[&#x27;prices&#x27;])
+assert independent[&#x27;prices&#x27;] == [100.0, 101.0]</pre><pre class="output">Original: [100.0, 101.0, 102.0]
+Deep copy: [100.0, 101.0]
+Shared inner list: True
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The original becomes [100.0, 101.0, 102.0]. The deep copy remains [100.0, 101.0]. The inner list is shared by original and shallow.</p><p>Copy depth follows the structure you need to isolate. Deep copying may cost time and memory and is not a universal fix. Keep this to one nested container.</p></details></section><section id="D04"><h2>D04 · Mutable defaults</h2><p class="meta">Optional · about 3 minutes</p><blockquote>Why does the second call contain both tickers?</blockquote><pre>def add_ticker(ticker, tickers=[]):
+    tickers.append(ticker)
+    return tickers
+
+print(add_ticker(&#x27;AAPL&#x27;))
+print(add_ticker(&#x27;MSFT&#x27;))
+
+def add_ticker_safely(ticker, tickers=None):
+    if tickers is None:
+        tickers = []
+    tickers.append(ticker)
+    return tickers
+
+print(add_ticker_safely(&#x27;AAPL&#x27;))
+print(add_ticker_safely(&#x27;MSFT&#x27;))</pre><pre class="output">[&#x27;AAPL&#x27;]
+[&#x27;AAPL&#x27;, &#x27;MSFT&#x27;]
+[&#x27;AAPL&#x27;]
+[&#x27;MSFT&#x27;]
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The default list is created once when def executes, so the calls share it. The corrected version creates a fresh list when the argument is omitted. If a caller explicitly passes a list, the corrected function still mutates that supplied list.</p><p>Optional interview extension. Freshly run this whole cell when demonstrating so the intentionally shared default starts empty.</p></details></section><section id="D05"><h2>D05 · A calculation with explicit inputs</h2><p class="meta">Core · about 5 minutes</p><blockquote>What is the value? What should happen if one price is missing?</blockquote><pre>from math import isclose
+
+def portfolio_value(positions, prices):
+    missing = set(positions) - set(prices)
+    if missing:
+        raise ValueError(f&#x27;Missing prices: {sorted(missing)}&#x27;)
+    return sum(shares * prices[ticker]
+               for ticker, shares in positions.items())
+
+holdings = {&#x27;AAPL&#x27;: 2, &#x27;MSFT&#x27;: 1}
+prices = {&#x27;AAPL&#x27;: 100.0, &#x27;MSFT&#x27;: 200.0}
+print(&#x27;Value:&#x27;, portfolio_value(holdings, prices))
+assert isclose(portfolio_value(holdings, prices), 400.0)
+assert holdings == {&#x27;AAPL&#x27;: 2, &#x27;MSFT&#x27;: 1}
+try:
+    portfolio_value(holdings, {&#x27;AAPL&#x27;: 100.0})
+except ValueError as error:
+    print(&#x27;Expected failure:&#x27;, error)</pre><pre class="output">Value: 400.0
+Expected failure: Missing prices: [&#x27;MSFT&#x27;]
+</pre><details><summary>Instructor answer and teaching notes</summary><p>400.0. A missing MSFT price raises a specific ValueError. The calculation returns a value without modifying its input dictionaries. The instructor supplies the known-answer check independently of the implementation.</p><p>Name the contract before the code: holdings and matching prices in one currency; value out; missing coverage is an error. This small example checks coverage, not every production concern such as timestamps or currency conversion.</p></details></section><section id="D06"><h2>D06 · Functions can be inputs</h2><p class="meta">Core · about 3 minutes</p><blockquote>Which position appears first when sorting by dollar value?</blockquote><pre>positions = [(&#x27;AAPL&#x27;, 2, 100.0), (&#x27;MSFT&#x27;, 1, 250.0)]
+
+def dollar_value(position):
+    ticker, shares, price = position
+    return shares * price
+
+ordered = sorted(positions, key=dollar_value, reverse=True)
+print(ordered)
+print(sorted(positions, key=lambda p: p[1] * p[2], reverse=True))
+assert ordered[0][0] == &#x27;MSFT&#x27;</pre><pre class="output">[(&#x27;MSFT&#x27;, 1, 250.0), (&#x27;AAPL&#x27;, 2, 100.0)]
+[(&#x27;MSFT&#x27;, 1, 250.0), (&#x27;AAPL&#x27;, 2, 100.0)]
+</pre><details><summary>Instructor answer and teaching notes</summary><p>MSFT appears first: 250 is greater than 200. sorted receives the function itself and calls it for each item. The lambda expresses the same single calculation.</p><p>Contrast key=dollar_value with calling dollar_value immediately. Keep map/filter/reduce as reference vocabulary rather than adding a syntax tour.</p></details></section><section id="D07"><h2>D07 · A timing decorator</h2><p class="meta">Core · about 4 minutes</p><blockquote>Does the decorated function still return 400? Which code handles timing?</blockquote><pre>from functools import wraps
+from time import perf_counter
+
+def timed(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        start = perf_counter()
+        result = function(*args, **kwargs)
+        elapsed_ms = (perf_counter() - start) * 1000
+        print(f&#x27;{function.__name__}: {elapsed_ms:.3f} ms&#x27;)
+        return result
+    return wrapper
+
+@timed
+def position_value(shares, price):
+    return shares * price
+
+print(&#x27;Returned:&#x27;, position_value(2, 200.0))
+assert position_value.__name__ == &#x27;position_value&#x27;</pre><pre class="output">position_value: 0.000 ms
+Returned: 400.0
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The return value is 400.0. The wrapper measures elapsed time and returns the original result. @timed is equivalent to rebinding position_value = timed(position_value). wraps preserves useful metadata. Exact elapsed time varies.</p><p>The goal is reading this pattern, not memorizing nested syntax. This simple wrapper reports successful calls; it does not report timing if the function raises. Logging itself is a side effect.</p></details></section><section id="D08"><h2>D08 · Classes and independent instance state</h2><p class="meta">Core · about 6 minutes</p><blockquote>If we change first.shares, does second change? What does self refer to?</blockquote><pre>class Position:
+    asset_type = &#x27;equity&#x27;
+
+    def __init__(self, ticker, shares):
+        self.ticker = ticker
+        self.shares = shares
+
+    def market_value(self, price):
+        return self.shares * price
+
+first = Position(&#x27;AAPL&#x27;, 2)
+second = Position(&#x27;AAPL&#x27;, 2)
+first.shares = 3
+print(&#x27;Values:&#x27;, first.market_value(100), second.market_value(100))
+print(&#x27;Class attribute:&#x27;, Position.asset_type)
+assert first.shares == 3 and second.shares == 2</pre><pre class="output">Values: 300 200
+Class attribute: equity
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The values are 300 and 200. first and second hold distinct instance state. self names the instance receiving the method call. asset_type is a class attribute.</p><p>Trace construction, state, and one method call. Equivalent call: Position.market_value(first, 100). __init__ initializes a newly created instance; avoid claiming it alone allocates the object.</p></details></section><section id="D09"><h2>D09 · Shared class attributes</h2><p class="meta">Core · about 4 minutes</p><blockquote>Why does the second watchlist see the first ticker?</blockquote><pre>class SharedWatchlist:
+    tickers = []
+
+left = SharedWatchlist()
+right = SharedWatchlist()
+left.tickers.append(&#x27;AAPL&#x27;)
+print(&#x27;Shared:&#x27;, right.tickers)
+
+class Watchlist:
+    def __init__(self):
+        self.tickers = []
+
+left = Watchlist()
+right = Watchlist()
+left.tickers.append(&#x27;AAPL&#x27;)
+print(&#x27;Independent:&#x27;, right.tickers)
+assert right.tickers == []</pre><pre class="output">Shared: [&#x27;AAPL&#x27;]
+Independent: []
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The first list belongs to the class and both instances find that same list. The second version assigns a new list to each instance during initialization.</p><p>Connect this directly to D02 rather than treating it as a separate trick. Mutation acts on the shared object; assignment to an instance attribute is a different operation.</p></details></section><section id="D10"><h2>D10 · Composition: a portfolio has positions</h2><p class="meta">Core · about 6 minutes</p><blockquote>Which object knows how to value one position? Which object combines the results?</blockquote><pre>class Position:
+    def __init__(self, ticker, shares):
+        self.ticker = ticker
+        self.shares = shares
+
+    def market_value(self, price):
+        return self.shares * price
+
+class Portfolio:
+    def __init__(self, positions):
+        self.positions = list(positions)
+
+    def market_value(self, prices):
+        return sum(p.market_value(prices[p.ticker])
+                   for p in self.positions)
+
+    def __len__(self):
+        return len(self.positions)
+
+book = Portfolio([Position(&#x27;AAPL&#x27;, 2), Position(&#x27;MSFT&#x27;, 1)])
+print(&#x27;Positions:&#x27;, len(book))
+print(&#x27;Value:&#x27;, book.market_value({&#x27;AAPL&#x27;: 100, &#x27;MSFT&#x27;: 200}))
+assert len(book) == 2</pre><pre class="output">Positions: 2
+Value: 400
+</pre><details><summary>Instructor answer and teaching notes</summary><p>Position values itself at a supplied price. Portfolio holds positions and aggregates their values. len(book) returns 2 via __len__. This is a has-a relationship.</p><p>The list constructor copies the outer container, not the Position objects. That is a deliberate return to reference semantics. A class is useful when related state and behavior belong together; a simple stateless calculation can remain a function.</p></details></section><section id="D11"><h2>D11 · A small inheritance example</h2><p class="meta">Optional · about 3 minutes</p><blockquote>What behavior does the subclass reuse and what does it add?</blockquote><pre>class Position:
+    def __init__(self, ticker, shares):
+        self.ticker = ticker
+        self.shares = shares
+
+    def market_value(self, price):
+        return self.shares * price
+
+class TaggedPosition(Position):
+    def __init__(self, ticker, shares, strategy):
+        super().__init__(ticker, shares)
+        self.strategy = strategy
+
+position = TaggedPosition(&#x27;AAPL&#x27;, 2, &#x27;value&#x27;)
+print(position.market_value(100), position.strategy)
+assert isinstance(position, Position)</pre><pre class="output">200 value
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The subclass reuses market_value and initializes the inherited state through super(). It adds a strategy tag. A tag alone may not justify a subclass in a real design; an extra field could be simpler.</p><p>Use this to teach reading inheritance, then ask whether the subclass is necessary. Keep multiple inheritance and method-resolution-order details in optional study.</p></details></section><section id="D12"><h2>D12 · An iterator remembers progress</h2><p class="meta">Core · about 4 minutes</p><blockquote>What happens when we consume the iterator a second time?</blockquote><pre>prices = [100, 102, 101]
+cursor = iter(prices)
+print(&#x27;First:&#x27;, next(cursor))
+print(&#x27;Remaining:&#x27;, list(cursor))
+print(&#x27;Again:&#x27;, list(cursor))
+print(&#x27;Fresh iterator:&#x27;, list(iter(prices)))
+assert list(cursor) == []</pre><pre class="output">First: 100
+Remaining: [102, 101]
+Again: []
+Fresh iterator: [100, 102, 101]
+</pre><details><summary>Instructor answer and teaching notes</summary><p>First: 100. Remaining: [102, 101]. Again: []. A fresh iterator over the list gives all three values. The iterable can produce an iterator; the iterator tracks its own progress.</p><p>Explain StopIteration briefly without leaving a failing cell in the notebook. A list is iterable but not itself an iterator.</p></details></section><section id="D13"><h2>D13 · A generator yields one result at a time</h2><p class="meta">Core · about 5 minutes</p><blockquote>Does creating the generator execute its body? What remains after one next call?</blockquote><pre>def daily_returns(prices):
+    for previous, current in zip(prices, prices[1:]):
+        yield current / previous - 1
+
+stream = daily_returns([100.0, 110.0, 99.0])
+print(&#x27;First return:&#x27;, round(next(stream), 3))
+print(&#x27;Remaining:&#x27;, [round(x, 3) for x in stream])
+print(&#x27;Exhausted:&#x27;, list(stream))
+assert list(stream) == []</pre><pre class="output">First return: 0.1
+Remaining: [-0.1]
+Exhausted: []
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The body starts when iteration begins. It yields 0.1, then -0.1, then finishes. yield suspends the function and retains its execution state.</p><p>This generator makes its outputs lazy, but the input list remains in memory and prices[1:] creates a slice. Do not present it as fully streaming from disk. D14 supplies a cleaner memory comparison.</p></details></section><section id="D14"><h2>D14 · Materializing versus streaming</h2><p class="meta">Core · about 5 minutes</p><blockquote>Both calculations visit N values. Which needs to retain all of them?</blockquote><pre>from time import perf_counter
+import gc
+import tracemalloc
+
+N = 100_000
+
+def measure(function):
+    gc.collect()
+    tracemalloc.start()
+    start = perf_counter()
+    result = function()
+    elapsed_ms = (perf_counter() - start) * 1000
+    _, peak_bytes = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    return result, peak_bytes / (1024 ** 2), elapsed_ms
+
+materialized = measure(lambda: sum([i * i for i in range(N)]))
+streamed = measure(lambda: sum(i * i for i in range(N)))
+for label, (result, peak_mib, elapsed_ms) in [
+    (&#x27;list&#x27;, materialized), (&#x27;generator&#x27;, streamed)
+]:
+    print(f&#x27;{label:9} peak={peak_mib:.3f} MiB  time={elapsed_ms:.1f} ms&#x27;)
+print(&#x27;Equal answers:&#x27;, materialized[0] == streamed[0])
+assert materialized[0] == streamed[0] == N * (N - 1) * (2 * N - 1) // 6</pre><pre class="output">list      peak=3.815 MiB  time=29.7 ms
+generator peak=0.000 MiB  time=28.0 ms
+Equal answers: True
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The results agree. The list retains all squared values; the generator supplies them incrementally. Both do O(N) arithmetic. Streaming avoids the O(N) retained collection, but is not guaranteed to run faster.</p><p>Measurements are Python allocations observed by tracemalloc, not total process RAM. Instrumentation affects timing. Do not read a universal speed ratio from this tiny example; explain the memory trend.</p></details></section><section id="D15"><h2>D15 · Representation changes the memory budget</h2><p class="meta">Core · about 5 minutes</p><blockquote>How much element storage do 100,000 float64 values need? What changes with float32?</blockquote><pre>import numpy as np
+import sys
+
+N = 100_000
+values = [float(i) for i in range(N)]
+wide = np.array(values, dtype=np.float64)
+narrow = wide.astype(np.float32)
+list_estimate = sys.getsizeof(values) + sum(sys.getsizeof(x) for x in values)
+print(f&#x27;List + distinct floats, approximate: {list_estimate:,} bytes&#x27;)
+print(f&#x27;float64 element buffer: {wide.nbytes:,} bytes&#x27;)
+print(f&#x27;float32 element buffer: {narrow.nbytes:,} bytes&#x27;)
+print(&#x27;0.1 represented as float32:&#x27;, format(float(np.float32(0.1)), &#x27;.17g&#x27;))
+assert wide.nbytes == N * 8 and narrow.nbytes == N * 4</pre><pre class="output">List + distinct floats, approximate: 3,200,984 bytes
+float64 element buffer: 800,000 bytes
+float32 element buffer: 400,000 bytes
+0.1 represented as float32: 0.10000000149011612
+</pre><details><summary>Instructor answer and teaching notes</summary><p>float64 uses 800,000 element-buffer bytes and float32 uses 400,000. The list estimate includes its references and the distinct float objects created here. NumPy nbytes excludes array-object metadata. Lower precision changes representable values and rounding.</p><p>Compare the units and accounting boundaries, not only the totals. Numeric NumPy arrays store fixed-width elements contiguously in this example. Do not claim all arrays are contiguous or all lower precision is acceptable in financial calculations.</p></details></section><section id="D16"><h2>D16 · Caching reuses work</h2><p class="meta">Core · about 4 minutes</p><blockquote>How many times does the function body run? What happens when its hidden rate changes?</blockquote><pre>from functools import lru_cache
+
+rate = 0.05
+executions = 0
+
+@lru_cache(maxsize=16)
+def discounted_value(amount, years):
+    global executions
+    executions += 1
+    return amount / (1 + rate) ** years
+
+print(round(discounted_value(110, 2), 2))
+print(round(discounted_value(110, 2), 2))
+rate = 0.10
+print(&#x27;After hidden rate change:&#x27;, round(discounted_value(110, 2), 2))
+print(&#x27;Body executions:&#x27;, executions)
+print(&#x27;Cache:&#x27;, discounted_value.cache_info())
+
+@lru_cache(maxsize=16)
+def explicit_discounted_value(amount, years, rate):
+    return amount / (1 + rate) ** years
+
+print(&#x27;Explicit new rate:&#x27;, round(explicit_discounted_value(110, 2, 0.10), 2))
+assert executions == 1
+assert round(explicit_discounted_value(110, 2, 0.10), 2) == 90.91</pre><pre class="output">99.77
+99.77
+After hidden rate change: 99.77
+Body executions: 1
+Cache: CacheInfo(hits=2, misses=1, maxsize=16, currsize=1)
+Explicit new rate: 90.91
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The body executes once. All three initial calls return about 99.77 because the cache key contains amount and years, not the global rate. Passing the rate explicitly makes the changed dependency part of the key; the corrected result is 90.91.</p><p>Cache hits trade retained memory for avoided work. Cached arguments must be hashable. This example deliberately combines a hidden global and caching to make stale results visible. A CPU cache and a KV cache store different information.</p></details></section><section id="D17"><h2>D17 · A Python loop and a NumPy operation</h2><p class="meta">Optional · about 3 minutes</p><blockquote>Will NumPy use a GPU here? Does faster arithmetic prove the whole program is faster?</blockquote><pre>import numpy as np
+from time import perf_counter
+from statistics import median
+
+values = [float(i) for i in range(100_000)]
+array = np.array(values, dtype=np.float64)
+
+def loop_total():
+    return sum(x * x for x in values)
+
+def array_total():
+    return float(np.sum(array * array))
+
+def median_ms(function):
+    samples = []
+    for _ in range(5):
+        start = perf_counter()
+        function()
+        samples.append((perf_counter() - start) * 1000)
+    return median(samples)
+
+assert np.isclose(loop_total(), array_total())
+print(&#x27;Loop ms:&#x27;, round(median_ms(loop_total), 3))
+print(&#x27;NumPy ms:&#x27;, round(median_ms(array_total), 3))
+print(&#x27;Array construction is outside the timed region.&#x27;)</pre><pre class="output">Loop ms: 1.809
+NumPy ms: 0.03
+Array construction is outside the timed region.
+</pre><details><summary>Instructor answer and teaching notes</summary><p>This ordinary NumPy example runs on the CPU. Its numerical work executes in compiled routines, reducing Python-level overhead. Array construction is excluded, and the array multiplication creates a temporary. Exact speed ratios depend on the system.</p><p>Optional. Useful if students assume NumPy automatically means GPU or parallelism. Compare equivalent outputs before timings; state precisely what the timed region includes.</p></details></section><section id="D18"><h2>D18 · A Python function as an agent tool</h2><p class="meta">Core · about 6 minutes</p><blockquote>Which component proposes the arguments? Which component actually runs Python? What happens to invalid input?</blockquote><pre>import math
+
+# Long-only, single-currency classroom example. Type hints are not validation.
+def position_value(shares: float, price: float) -&gt; float:
+    for name, value in [(&#x27;shares&#x27;, shares), (&#x27;price&#x27;, price)]:
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f&#x27;{name} must be a number&#x27;)
+        if not math.isfinite(value) or value &lt; 0:
+            raise ValueError(f&#x27;{name} must be finite and nonnegative&#x27;)
+    result = shares * price
+    if not math.isfinite(result):
+        raise ValueError(&#x27;position value overflow&#x27;)
+    return result
+
+# Illustrative request, authored for class. No model or network call occurs.
+request = {&#x27;tool&#x27;: &#x27;position_value&#x27;, &#x27;arguments&#x27;: {&#x27;shares&#x27;: 2, &#x27;price&#x27;: 100.0}}
+tools = {&#x27;position_value&#x27;: position_value}
+value = tools[request[&#x27;tool&#x27;]](**request[&#x27;arguments&#x27;])
+print({&#x27;status&#x27;: &#x27;ok&#x27;, &#x27;value&#x27;: value, &#x27;currency&#x27;: &#x27;USD&#x27;})
+
+for arguments in [{&#x27;shares&#x27;: -2, &#x27;price&#x27;: 100.0}, {&#x27;shares&#x27;: 2, &#x27;price&#x27;: float(&#x27;nan&#x27;)}]:
+    try:
+        tools[&#x27;position_value&#x27;](**arguments)
+    except ValueError as error:
+        print({&#x27;status&#x27;: &#x27;error&#x27;, &#x27;message&#x27;: str(error)})
+assert value == 200.0</pre><pre class="output">{&#x27;status&#x27;: &#x27;ok&#x27;, &#x27;value&#x27;: 200.0, &#x27;currency&#x27;: &#x27;USD&#x27;}
+{&#x27;status&#x27;: &#x27;error&#x27;, &#x27;message&#x27;: &#x27;shares must be finite and nonnegative&#x27;}
+{&#x27;status&#x27;: &#x27;error&#x27;, &#x27;message&#x27;: &#x27;price must be finite and nonnegative&#x27;}
+</pre><details><summary>Instructor answer and teaching notes</summary><p>In a real agent, a model may propose a tool name and arguments; the harness validates/dispatches and executes the function. Here a prepared dictionary stands in for the request. Valid input returns 200.0. Negative shares and NaN fail under this deliberately long-only contract.</p><p>Trace request, dispatch, function, result. This is a tiny dispatcher, not a production harness. Validation remains necessary even with type hints. Short positions would require a different contract; negative shares are not universally invalid finance data.</p></details></section><section id="D19"><h2>D19 · Independent checks catch a plausible defect</h2><p class="meta">Core · about 6 minutes</p><blockquote>A function returns a number without crashing. What evidence would show that it is wrong?</blockquote><pre>from math import isclose
+
+# Reference answers are defined independently of either candidate.
+CASES = [
+    (&#x27;ordinary&#x27;, 2, 100.0, 200.0),
+    (&#x27;zero holdings&#x27;, 0, 100.0, 0.0),
+    (&#x27;fractional&#x27;, 0.5, 80.0, 40.0),
+]
+
+def candidate_bad(shares, price):
+    return shares + price
+
+def candidate_fixed(shares, price):
+    return shares * price
+
+def grade(function, cases):
+    passed = 0
+    for name, shares, price, expected in cases:
+        actual = function(shares, price)
+        ok = isclose(actual, expected, rel_tol=1e-12, abs_tol=1e-12)
+        passed += int(ok)
+        print(f&#x27;{name}: {&quot;PASS&quot; if ok else &quot;FAIL&quot;}; actual={actual}; expected={expected}&#x27;)
+    return passed
+
+print(&#x27;Candidate A&#x27;)
+a_passed = grade(candidate_bad, CASES)
+print(&#x27;Candidate B&#x27;)
+b_passed = grade(candidate_fixed, CASES)
+assert a_passed == 0 and b_passed == 3
+print(&#x27;Development checks passed:&#x27;, b_passed, &#x27;/&#x27;, len(CASES))</pre><pre class="output">Candidate A
+ordinary: FAIL; actual=102.0; expected=200.0
+zero holdings: FAIL; actual=100.0; expected=0.0
+fractional: FAIL; actual=80.5; expected=40.0
+Candidate B
+ordinary: PASS; actual=200.0; expected=200.0
+zero holdings: PASS; actual=0.0; expected=0.0
+fractional: PASS; actual=40.0; expected=40.0
+Development checks passed: 3 / 3
+</pre><details><summary>Instructor answer and teaching notes</summary><p>The faulty addition implementation fails all three checks. Multiplication passes them. The checks assess this arithmetic behavior, not an entire agent’s reliability. The reference answers come from hand-computable cases.</p><p>Run A before B; ask students to identify the defect from actual versus expected. A self-check instruction tells an agent what to inspect. An independent grader measures the artifact. Since all cases and code are visible here, these are development checks, not held-out evidence.</p></details></section><section id="D20"><h2>D20 · Transfer question: a new check</h2><p class="meta">Core · about 3 minutes</p><blockquote>Write the expected result before running: 3 shares at 12.5. Then name one failure mode this case does not test.</blockquote><pre>from math import isclose
+
+def position_value(shares, price):
+    return shares * price
+
+expected = 37.5
+actual = position_value(3, 12.5)
+print(&#x27;Transfer check:&#x27;, actual)
+assert isclose(actual, expected)</pre><pre class="output">Transfer check: 37.5
+</pre><details><summary>Instructor answer and teaching notes</summary><p>37.5. This case does not test input validation, missing prices, incorrect timestamps, currency mismatches, tool selection, or a multi-step workflow. Once students see or tune against it, it is no longer an untouched final evaluation.</p><p>Use during the closing discussion. Ask for a new case and its expected behavior before looking at implementation.</p></details></section></main></html>

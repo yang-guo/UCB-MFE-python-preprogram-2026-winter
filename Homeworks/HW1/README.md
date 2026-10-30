@@ -33,6 +33,6 @@ Your local Python environment (`HW1/` inside your personal folder, or `.venv/`) 
 1. Complete all four files listed above.
 2. Run your `game_of_life.py` with your homework environment activated and confirm that both supplied assertions pass.
 3. Review your staged changes to make sure they contain only your submission files.
-4. Push your `hw_1_<FIRST_NAME>_<LAST_NAME>` branch and open a PR into `main`, assigning `kevinramlal` and `elfiasco`.
+4. Push your `hw_1_<FIRST_NAME>_<LAST_NAME>` branch and open a PR into `main`, assigning `kevinramlal` and `raghuramkowdeed`.
 
 The full assignment includes the folder-creation and Git submission commands. The course's [late policy](../../README.md#late-policy) applies.

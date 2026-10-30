@@ -1,0 +1,76 @@
+{
+  "created_at_utc": "2026-10-26T04:53:04.442818+00:00",
+  "history_start": "2000-01-01",
+  "history_end": "2026-09-30",
+  "universe_definition": "Up to 2000 securities per calendar quarter, ranked at the preceding market close by close times latest known positive quarterly shares; valid filing date +1 day <= selection date; fiscal age <=18 months; ticker breaks ties. US stock metadata on NYSE/NASDAQ/AMEX/OTC; no current-active or future-history filter.",
+  "selection_frequency": "quarterly",
+  "target_per_quarter": 2000,
+  "quarter_count": 107,
+  "quarters_below_target": 46,
+  "minimum_selected": 1206,
+  "maximum_selected": 2000,
+  "ranking_caveat": "Recorded-date reconstruction, not certified point-in-time data: source is latest fiscal-period vintages with undated security metadata, incomplete inactive/delisted coverage and no delisting proceeds; share/price split bases and share classes may differ.",
+  "class_selection": "30 names from 2010-Q1 historical membership: AAPL/MSFT anchors, then sector round robin by that quarter's rank; no future return, survival, or history-completeness screen; apply quarterly membership within this fixed teaching pool",
+  "files": {
+    "equities_top2000.duckdb": {
+      "rows": {
+        "universe": 3849,
+        "universe_membership": 195970,
+        "universe_candidates": 262694,
+        "universe_rebalances": 107,
+        "prices": 15839788,
+        "fundamentals": 284198,
+        "benchmark": 6726,
+        "calendar": 6726,
+        "dividends": 19625
+      },
+      "fundamental_quality": {
+        "rows": 284198,
+        "invalid_filing_dates": 23664,
+        "unknown_currency": 269164,
+        "missing_market_cap": 273351
+      },
+      "price_quality": {
+        "off_calendar_rows": 28,
+        "invalid_adjusted_price_rows": 275
+      },
+      "union_currently_inactive": 1355,
+      "union_with_recorded_delisting_date": 2,
+      "size_bytes": 330051584,
+      "sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+      "price_start": "2000-01-01",
+      "financial_start": "2000-01-01",
+      "history_end": "2026-09-30"
+    },
+    "equities_class.duckdb": {
+      "rows": {
+        "universe": 30,
+        "universe_membership": 937,
+        "universe_candidates": 942,
+        "universe_rebalances": 32,
+        "prices": 59286,
+        "fundamentals": 1059,
+        "benchmark": 2015,
+        "calendar": 2015,
+        "dividends": 110
+      },
+      "fundamental_quality": {
+        "rows": 1059,
+        "invalid_filing_dates": 14,
+        "unknown_currency": 1058,
+        "missing_market_cap": 981
+      },
+      "price_quality": {
+        "off_calendar_rows": 0,
+        "invalid_adjusted_price_rows": 0
+      },
+      "union_currently_inactive": 4,
+      "union_with_recorded_delisting_date": 0,
+      "size_bytes": 4468736,
+      "sha256": "e6d703b82a7e04b9475c5747f6a7e1d2c6a6154b8fd84fbde8eb68f323d44d54",
+      "price_start": "2008-01-01",
+      "financial_start": "2007-01-01",
+      "history_end": "2015-12-31"
+    }
+  }
+}

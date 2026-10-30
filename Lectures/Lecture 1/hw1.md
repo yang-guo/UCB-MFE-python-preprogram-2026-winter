@@ -81,6 +81,6 @@ git push -u origin hw_1_<FIRST_NAME>_<LAST_NAME>
 ```
 
 - Open a pull request into this repository's `main` branch, titled `HW1: <FIRST_NAME> <LAST_NAME>`.
-- Assign the PR to Kevin Ramlal (`kevinramlal`) and Benjamin Steel (`elfiasco`).
+- Assign the PR to Kevin Ramlal (`kevinramlal`) and Raghuram Kowdeed (`raghuramkowdeed`).
 - Check that the PR includes all four checklist files, with no virtual environment, credentials, or changes to another student's folder or the shared files.
 - The course's [late policy](../../README.md#late-policy) applies.

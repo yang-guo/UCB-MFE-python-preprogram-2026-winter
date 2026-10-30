@@ -91,8 +91,6 @@ HW2 now explicitly distinguishes simple cleaning returns from log report returns
 
 An optional AI-tutor prompt can ask for an explanation or a changed-input example; students should predict and verify it themselves. This carries the syllabus's AI fluency goal without depending on unpublished Lecture 3 material.
 
-## References and verification
+## Optional references
 
 The [advanced outlier reference](reference/1_advanced_outlier_detection.ipynb), [ingestion reference](reference/2_data_ingestion_and_sql.ipynb), [full cleaning case](reference/3_real_world_data_challenge.ipynb), Yang–Zhang appendix, and quarterly batch remain optional. The main notebooks now contain the required HW2 preparation.
-
-Preflight from the repository root with `uv run python scripts/validate_data_analysis.py --core-only`. It executes the six main notebooks (two in Lecture 2, four here) in fresh kernels against a disposable database backup, checks examples and exercise feedback, and verifies numeric and failure cases. Omit `--core-only` to include prework, three references, and the quarterly extension. `--output-dir PATH` preserves executed examples for inspection. Keep source notebooks output-free and the source database unchanged.

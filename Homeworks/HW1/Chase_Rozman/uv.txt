@@ -1,0 +1,5 @@
+uv venv --python 3.12.9 HW1
+uv pip install -r Homeworks/HW1/requirements.txt
+uv pip install requests==2.24.0
+uv pip install --upgrade requests
+# Latest version of requests: 2.34.2

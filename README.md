@@ -10,10 +10,10 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | Thursday | 10/8/2026  | 9am - 12pm  | Yang     | [Data Analysis I & II: pandas, portfolio analysis](Lectures/Lecture%202/readme.md) |
 | Monday   | 10/12/2026 | 9am - 12pm  | Aneesh   | [LLM Classification & Agent Evaluation](Lectures/Lecture%203/readme.md) |
 | Thursday | 10/15/2026 | 9am - 12pm  | Yang     | [Data Analysis III: visualization/cleaning, SQL, risk reports](Lectures/Lecture%204/readme.md) |
-| Monday   | 10/19/2026 | 9am - 12pm  | Aneesh   | Advanced Python I: OOP, environments, regex |
-| Thursday | 10/22/2026 | 9am - 12pm  | Aneesh   | Advanced Python II: async, functional programming |
-| Monday   | 10/26/2026 | 9am - 12pm  | Yang     | Modeling I: scikit-learn basics |
-| Thursday | 10/29/2026 | 9am - 12pm  | Yang     | Modeling II: scikit-learn advanced |
+| Monday   | 10/19/2026 | 9am - 12pm  | Aneesh   | [Advanced Python I: Python, memory and systems](Lectures/Lecture%205/README.md) |
+| Thursday | 10/22/2026 | 9am - 12pm  | Aneesh   | [Advanced Python II: algorithms, async and LLM memory](Lectures/Lecture%206/README.md) |
+| Monday   | 10/26/2026 | 9am - 12pm  | Yang     | [Modeling I: sklearn, financial features, time-aware evaluation](Lectures/Lecture%207/readme.md) |
+| Thursday | 10/29/2026 | 9am - 12pm  | Yang     | [Modeling II: backtesting and research workflow](Lectures/Lecture%208/readme.md) |
 | Monday   | 11/2/2026  | 9am - 12pm  | Aneesh   | Productionization: testing, Docker, CI |
 | Thursday | 11/5/2026  | 9am - 12pm  | Yang     | Advanced topic: on demand |
 
@@ -27,12 +27,14 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | ------ | ------------ | ------------ |
 | [Basic Python (HW 1)](Lectures/Lecture%201/hw1.md) | 10/5/2026 | 10/19/2026, 11:59 p.m. Pacific (PDT) |
 | Data Analysis | 10/15/2026 | 10/29/2026 |
-| Advanced Python | 10/22/2026 | 11/5/2026 |
-| Modeling | 10/29/2026 | 11/12/2026 |
+| [Advanced Python (HW 3)](Homeworks/HW3/README.md) | 10/22/2026 | 11/5/2026, 11:59 p.m. Pacific (PST) |
+| [Modeling (HW4)](Lectures/Lecture%208/hw4.md) | 10/29/2026 | 11/12/2026 |
 | Productionization | 11/2/2026 | 11/16/2026 |
 | Advanced Topics | 11/5/2026 | 11/19/2026 |
 
 HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homeworks/HW1/README.md).
+
+HW 3 instructions, starter code, and automated checks are in [Homeworks/HW3](Homeworks/HW3/README.md).
 
 ## Goal
 - Level up your coding skills
@@ -85,7 +87,6 @@ HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homew
 - Worked examples use different inputs or questions from the final exercises. Exercise prompts, starter cells, and feedback stay together at the end; the lesson runs independently of student answers.
 - Lecture 4's default report batch deliberately includes one invalid ticker: three reports succeed, one failure is recorded, and the comparison uses successful outputs only.
 - Lecture 4 requires the bCourses database at `Lectures/Lecture 4/data/data.db`.
-- Lecture 6's HTTP examples require internet access. Its multiprocessing example uses the adjacent `lecture6_workers.py` module.
-- Lecture 8 uses its built-in demo if the separate homework database at `Lectures/Lecture 8/data/data.db` is absent.
+- Lecture 6's October 22 prepared notebook uses only the standard library, simulated I/O and no external services; its cell outputs are cleared for live teaching. The older reference notebook's HTTP examples require internet access, and its multiprocessing example uses the adjacent `lecture6_workers.py` module.
+- Lectures 7 and 8 use real equity data from `Lectures/modeling/data/equities_class.duckdb` (30 selected stocks, under 5 MiB). HW4 uses `equities_top2000.duckdb` (3,849 stocks across quarterly top-2,000 lists, January 2000–September 2026, about 315 MiB). Download both from bCourses; see the [modeling data guide](Lectures/modeling/README.md). There is no synthetic fallback.
 - Database files, local credentials, and generated reports are not tracked.
-- Verify the reorganized modules with `uv run python scripts/validate_data_analysis.py` (or add `--core-only` for the six live notebooks). The validator uses fresh kernels and a temporary database backup.
