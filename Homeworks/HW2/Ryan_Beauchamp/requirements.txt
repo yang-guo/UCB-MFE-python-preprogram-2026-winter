@@ -1,0 +1,9 @@
+# Python 3.12; install with: uv pip install -r requirements.txt
+ipykernel==7.1.0
+matplotlib==3.10.7
+nbformat==5.10.4
+numpy==2.3.5
+pandas==2.3.3
+papermill==2.6.0
+scrapbook==0.5.0
+tqdm==4.67.1
