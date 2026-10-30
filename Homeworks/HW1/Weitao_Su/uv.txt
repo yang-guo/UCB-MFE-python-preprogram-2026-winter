@@ -1,0 +1,12 @@
+uv python install 3.12.9
+uv venv HW1 --python 3.12.9
+# this is running on windows
+.\HW1\Scripts\Activate.ps1
+uv pip install -r ../requirements.txt
+uv pip install "requests==2.24.0"
+uv pip install --upgrade requests
+uv pip show requests
+
+# Using Python 3.12.9 environment at: HW1
+# Name: requests
+# Version: 2.34.2

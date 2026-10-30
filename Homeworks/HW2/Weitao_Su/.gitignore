@@ -1,0 +1,5 @@
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/AMZN_report.ipynb
+!reports/*/MSFT_report.ipynb
+reports/*/errors.log

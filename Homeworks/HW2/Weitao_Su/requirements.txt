@@ -1,0 +1,8 @@
+numpy==1.26.4
+pandas==2.2.3
+matplotlib==3.10.1
+ipykernel==7.1.0
+papermill==2.7.0
+scrapbook==0.5.0
+tqdm==4.66.5
+tzdata==2024.1
