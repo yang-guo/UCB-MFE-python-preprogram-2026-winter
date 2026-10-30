@@ -1,0 +1,16 @@
+.venv/
+data/
+.ipynb_checkpoints/
+*.db
+*.db-*
+
+# Keep the full batch locally; submit three representative reports.
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+
+# Extra run outputs stay local.
+reports/*/failed_stocks.txt
+reports/*/run_info.json
+reports/*/risk_return_scatter.png
