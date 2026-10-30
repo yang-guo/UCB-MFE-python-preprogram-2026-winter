@@ -1,0 +1,12 @@
+# Local database copy (distributed via bCourses, never committed)
+data/
+
+# Run outputs that don't need to be submitted
+failed_stocks.txt
+reports/*/run.log
+
+# Keep only 3 sample reports: best Sharpe (IBM), worst (MRK), most volatile (NVDA)
+reports/*/*_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+!reports/*/NVDA_report.ipynb
