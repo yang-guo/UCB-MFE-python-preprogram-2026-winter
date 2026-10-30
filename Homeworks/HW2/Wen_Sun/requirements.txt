@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+IPython
+scrapbook
+papermill
+tqdm
+jupyter
+nbformat
+ipykernel
