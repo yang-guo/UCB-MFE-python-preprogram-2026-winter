@@ -1,0 +1,9 @@
+pandas>=2.0
+numpy>=1.24
+matplotlib>=3.6
+papermill>=2.6
+tqdm>=4.66
+ipykernel>=6.28
+nbformat>=5.9
+jinja2>=3.1
+jupyter
