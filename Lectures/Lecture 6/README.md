@@ -2,6 +2,8 @@
 
 Thursday, October 22, 2026 · Advanced Python II · 9 a.m.–noon Pacific.
 
+**Homework:** [HW 3: Advanced Python](../../Homeworks/HW3/README.md), covering Lectures 5 and 6, is due Thursday, November 5, 2026, at 11:59 p.m. Pacific (PST).
+
 ## Thursday lesson materials
 
 - [Google Slides](https://docs.google.com/presentation/d/1K1NefuYkRKFRPo0Qvd5NSLWJXOLY4Fc6qEheDTKv9ug/edit): the current lesson deck.
