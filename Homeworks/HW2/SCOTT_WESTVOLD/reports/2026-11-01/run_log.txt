@@ -1,0 +1,642 @@
+2026-11-01 01:35:22,578 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:22,597 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:35:22,635 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:24,559 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:31,407 INFO AAPL: report written
+2026-11-01 01:35:31,407 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:31,415 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:35:31,423 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:33,363 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:39,358 INFO NVDA: report written
+2026-11-01 01:35:39,376 INFO Done: 2/2 reports succeeded
+2026-11-01 01:38:30,483 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:38:30,494 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:38:30,540 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:38:32,516 INFO Executing notebook with kernel: python3
+2026-11-01 01:38:40,111 INFO AAPL: report written
+2026-11-01 01:38:40,118 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:38:40,120 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:38:40,135 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:38:41,507 INFO Executing notebook with kernel: python3
+2026-11-01 01:38:47,588 INFO NVDA: report written
+2026-11-01 01:38:47,596 INFO Done: 2/2 reports succeeded
+2026-11-01 01:39:20,713 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:39:20,713 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:39:20,729 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:39:22,600 INFO Executing notebook with kernel: python3
+2026-11-01 01:39:30,115 INFO AAPL: report written
+2026-11-01 01:39:30,116 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:39:30,116 INFO Output Notebook: reports\2026-11-01/AMGN_report.ipynb
+2026-11-01 01:39:30,137 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:39:32,213 INFO Executing notebook with kernel: python3
+2026-11-01 01:39:38,672 INFO AMGN: report written
+2026-11-01 01:39:38,672 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:39:38,672 INFO Output Notebook: reports\2026-11-01/AMZN_report.ipynb
+2026-11-01 01:39:38,680 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:39:40,536 INFO Executing notebook with kernel: python3
+2026-11-01 01:39:46,496 INFO AMZN: report written
+2026-11-01 01:39:46,510 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:39:46,515 INFO Output Notebook: reports\2026-11-01/AXP_report.ipynb
+2026-11-01 01:39:46,536 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:39:48,394 INFO Executing notebook with kernel: python3
+2026-11-01 01:39:54,588 INFO AXP: report written
+2026-11-01 01:39:54,594 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:39:54,595 INFO Output Notebook: reports\2026-11-01/BA_report.ipynb
+2026-11-01 01:39:54,607 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:39:56,635 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:03,165 INFO BA: report written
+2026-11-01 01:40:03,171 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:03,176 INFO Output Notebook: reports\2026-11-01/CAT_report.ipynb
+2026-11-01 01:40:03,192 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:05,128 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:11,132 INFO CAT: report written
+2026-11-01 01:40:11,135 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:11,135 INFO Output Notebook: reports\2026-11-01/CRM_report.ipynb
+2026-11-01 01:40:11,151 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:13,057 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:19,419 INFO CRM: report written
+2026-11-01 01:40:19,423 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:19,423 INFO Output Notebook: reports\2026-11-01/CSCO_report.ipynb
+2026-11-01 01:40:19,440 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:21,326 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:28,689 INFO CSCO: report written
+2026-11-01 01:40:28,697 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:28,697 INFO Output Notebook: reports\2026-11-01/CVX_report.ipynb
+2026-11-01 01:40:28,740 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:30,758 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:37,179 INFO CVX: report written
+2026-11-01 01:40:37,188 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:37,190 INFO Output Notebook: reports\2026-11-01/DIS_report.ipynb
+2026-11-01 01:40:37,234 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:39,185 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:46,053 INFO DIS: report written
+2026-11-01 01:40:46,068 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:46,070 INFO Output Notebook: reports\2026-11-01/GS_report.ipynb
+2026-11-01 01:40:46,094 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:47,449 INFO Executing notebook with kernel: python3
+2026-11-01 01:40:52,662 INFO GS: report written
+2026-11-01 01:40:52,662 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:40:52,662 INFO Output Notebook: reports\2026-11-01/HD_report.ipynb
+2026-11-01 01:40:52,678 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:40:54,519 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:00,662 INFO HD: report written
+2026-11-01 01:41:00,662 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:00,673 INFO Output Notebook: reports\2026-11-01/HON_report.ipynb
+2026-11-01 01:41:00,681 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:02,690 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:10,002 INFO HON: report written
+2026-11-01 01:41:10,018 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:10,026 INFO Output Notebook: reports\2026-11-01/IBM_report.ipynb
+2026-11-01 01:41:10,044 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:11,987 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:17,839 INFO IBM: report written
+2026-11-01 01:41:17,846 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:17,848 INFO Output Notebook: reports\2026-11-01/JNJ_report.ipynb
+2026-11-01 01:41:17,857 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:19,241 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:24,751 INFO JNJ: report written
+2026-11-01 01:41:24,760 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:24,761 INFO Output Notebook: reports\2026-11-01/JPM_report.ipynb
+2026-11-01 01:41:24,777 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:26,152 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:31,768 INFO JPM: report written
+2026-11-01 01:41:31,786 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:31,788 INFO Output Notebook: reports\2026-11-01/KO_report.ipynb
+2026-11-01 01:41:31,800 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:33,192 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:39,023 INFO KO: report written
+2026-11-01 01:41:39,031 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:39,031 INFO Output Notebook: reports\2026-11-01/MCD_report.ipynb
+2026-11-01 01:41:39,040 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:40,942 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:50,304 INFO MCD: report written
+2026-11-01 01:41:50,317 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:50,319 INFO Output Notebook: reports\2026-11-01/MMM_report.ipynb
+2026-11-01 01:41:50,329 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:51,686 INFO Executing notebook with kernel: python3
+2026-11-01 01:41:57,102 INFO MMM: report written
+2026-11-01 01:41:57,113 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:41:57,113 INFO Output Notebook: reports\2026-11-01/MRK_report.ipynb
+2026-11-01 01:41:57,127 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:41:58,536 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:04,726 INFO MRK: report written
+2026-11-01 01:42:04,743 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:04,746 INFO Output Notebook: reports\2026-11-01/MSFT_report.ipynb
+2026-11-01 01:42:04,779 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:06,247 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:12,102 INFO MSFT: report written
+2026-11-01 01:42:12,113 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:12,114 INFO Output Notebook: reports\2026-11-01/NKE_report.ipynb
+2026-11-01 01:42:12,130 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:13,497 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:18,799 INFO NKE: report written
+2026-11-01 01:42:18,807 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:18,807 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:42:18,824 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:20,186 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:25,871 INFO NVDA: report written
+2026-11-01 01:42:25,879 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:25,884 INFO Output Notebook: reports\2026-11-01/PG_report.ipynb
+2026-11-01 01:42:25,896 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:27,272 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:33,389 INFO PG: report written
+2026-11-01 01:42:33,393 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:33,393 INFO Output Notebook: reports\2026-11-01/SHW_report.ipynb
+2026-11-01 01:42:33,410 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:34,825 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:40,893 INFO SHW: report written
+2026-11-01 01:42:40,902 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:40,904 INFO Output Notebook: reports\2026-11-01/TRV_report.ipynb
+2026-11-01 01:42:40,917 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:42,340 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:48,684 INFO TRV: report written
+2026-11-01 01:42:48,693 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:48,698 INFO Output Notebook: reports\2026-11-01/UNH_report.ipynb
+2026-11-01 01:42:48,709 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:50,639 INFO Executing notebook with kernel: python3
+2026-11-01 01:42:56,396 INFO UNH: report written
+2026-11-01 01:42:56,405 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:42:56,413 INFO Output Notebook: reports\2026-11-01/V_report.ipynb
+2026-11-01 01:42:56,439 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:42:57,817 INFO Executing notebook with kernel: python3
+2026-11-01 01:43:03,208 INFO V: report written
+2026-11-01 01:43:03,215 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:43:03,219 INFO Output Notebook: reports\2026-11-01/VZ_report.ipynb
+2026-11-01 01:43:03,233 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:43:05,092 INFO Executing notebook with kernel: python3
+2026-11-01 01:43:13,923 INFO VZ: report written
+2026-11-01 01:43:13,929 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:43:13,931 INFO Output Notebook: reports\2026-11-01/WMT_report.ipynb
+2026-11-01 01:43:13,946 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:43:15,823 INFO Executing notebook with kernel: python3
+2026-11-01 01:43:22,013 INFO WMT: report written
+2026-11-01 01:43:22,021 INFO Done: 30/30 reports succeeded
+2026-11-01 01:55:26,918 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:55:26,918 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:55:26,937 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:55:28,464 INFO Executing notebook with kernel: python3
+2026-11-01 01:55:37,091 INFO AAPL: report written
+2026-11-01 01:55:37,091 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:55:37,099 INFO Output Notebook: reports\2026-11-01/AMGN_report.ipynb
+2026-11-01 01:55:37,110 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:55:38,960 INFO Executing notebook with kernel: python3
+2026-11-01 01:55:49,461 INFO AMGN: report written
+2026-11-01 01:55:49,475 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:55:49,483 INFO Output Notebook: reports\2026-11-01/AMZN_report.ipynb
+2026-11-01 01:55:49,501 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:55:51,396 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:00,611 INFO AMZN: report written
+2026-11-01 01:56:00,616 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:00,620 INFO Output Notebook: reports\2026-11-01/AXP_report.ipynb
+2026-11-01 01:56:00,632 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:01,996 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:11,159 INFO AXP: report written
+2026-11-01 01:56:11,183 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:11,197 INFO Output Notebook: reports\2026-11-01/BA_report.ipynb
+2026-11-01 01:56:11,243 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:13,249 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:24,334 INFO BA: report written
+2026-11-01 01:56:24,334 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:24,343 INFO Output Notebook: reports\2026-11-01/CAT_report.ipynb
+2026-11-01 01:56:24,359 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:25,767 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:35,175 INFO CAT: report written
+2026-11-01 01:56:35,175 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:35,188 INFO Output Notebook: reports\2026-11-01/CRM_report.ipynb
+2026-11-01 01:56:35,194 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:37,068 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:46,196 INFO CRM: report written
+2026-11-01 01:56:46,200 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:46,200 INFO Output Notebook: reports\2026-11-01/CSCO_report.ipynb
+2026-11-01 01:56:46,217 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:47,593 INFO Executing notebook with kernel: python3
+2026-11-01 01:56:56,273 INFO CSCO: report written
+2026-11-01 01:56:56,281 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:56:56,285 INFO Output Notebook: reports\2026-11-01/CVX_report.ipynb
+2026-11-01 01:56:56,291 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:56:57,634 INFO Executing notebook with kernel: python3
+2026-11-01 01:57:06,921 INFO CVX: report written
+2026-11-01 01:57:06,952 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:57:06,970 INFO Output Notebook: reports\2026-11-01/DIS_report.ipynb
+2026-11-01 01:57:06,983 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:57:08,862 INFO Executing notebook with kernel: python3
+2026-11-01 01:57:18,166 INFO DIS: report written
+2026-11-01 01:57:18,166 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:57:18,175 INFO Output Notebook: reports\2026-11-01/GS_report.ipynb
+2026-11-01 01:57:18,182 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:57:20,083 INFO Executing notebook with kernel: python3
+2026-11-01 01:57:30,760 INFO GS: report written
+2026-11-01 01:57:30,767 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:57:30,773 INFO Output Notebook: reports\2026-11-01/HD_report.ipynb
+2026-11-01 01:57:30,793 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:57:32,155 INFO Executing notebook with kernel: python3
+2026-11-01 01:57:40,884 INFO HD: report written
+2026-11-01 01:57:40,896 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:57:40,896 INFO Output Notebook: reports\2026-11-01/HON_report.ipynb
+2026-11-01 01:57:40,910 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:57:42,812 INFO Executing notebook with kernel: python3
+2026-11-01 01:57:53,037 INFO HON: report written
+2026-11-01 01:57:53,037 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:57:53,044 INFO Output Notebook: reports\2026-11-01/IBM_report.ipynb
+2026-11-01 01:57:53,061 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:57:54,978 INFO Executing notebook with kernel: python3
+2026-11-01 01:58:05,407 INFO IBM: report written
+2026-11-01 01:58:05,421 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:58:05,428 INFO Output Notebook: reports\2026-11-01/JNJ_report.ipynb
+2026-11-01 01:58:05,452 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:58:07,382 INFO Executing notebook with kernel: python3
+2026-11-01 01:58:17,999 INFO JNJ: report written
+2026-11-01 01:58:18,010 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:58:18,010 INFO Output Notebook: reports\2026-11-01/JPM_report.ipynb
+2026-11-01 01:58:18,016 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:58:19,866 INFO Executing notebook with kernel: python3
+2026-11-01 01:58:29,987 INFO JPM: report written
+2026-11-01 01:58:29,996 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:58:29,999 INFO Output Notebook: reports\2026-11-01/KO_report.ipynb
+2026-11-01 01:58:30,010 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:58:31,914 INFO Executing notebook with kernel: python3
+2026-11-01 01:58:42,245 INFO KO: report written
+2026-11-01 01:58:42,253 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:58:42,253 INFO Output Notebook: reports\2026-11-01/MCD_report.ipynb
+2026-11-01 01:58:42,267 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:58:44,330 INFO Executing notebook with kernel: python3
+2026-11-01 01:58:53,724 INFO MCD: report written
+2026-11-01 01:58:53,738 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:58:53,740 INFO Output Notebook: reports\2026-11-01/MMM_report.ipynb
+2026-11-01 01:58:53,752 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:58:55,178 INFO Executing notebook with kernel: python3
+2026-11-01 01:59:05,312 INFO MMM: report written
+2026-11-01 01:59:05,315 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:59:05,322 INFO Output Notebook: reports\2026-11-01/MRK_report.ipynb
+2026-11-01 01:59:05,335 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:59:07,239 INFO Executing notebook with kernel: python3
+2026-11-01 01:59:17,285 INFO MRK: report written
+2026-11-01 01:59:17,293 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:59:17,296 INFO Output Notebook: reports\2026-11-01/MSFT_report.ipynb
+2026-11-01 01:59:17,307 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:59:19,144 INFO Executing notebook with kernel: python3
+2026-11-01 01:59:31,660 INFO MSFT: report written
+2026-11-01 01:59:31,673 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:59:31,678 INFO Output Notebook: reports\2026-11-01/NKE_report.ipynb
+2026-11-01 01:59:31,686 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:59:33,574 INFO Executing notebook with kernel: python3
+2026-11-01 01:59:43,524 INFO NKE: report written
+2026-11-01 01:59:43,535 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:59:43,535 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:59:43,548 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:59:45,479 INFO Executing notebook with kernel: python3
+2026-11-01 01:59:49,443 INFO NVDA: report written
+2026-11-01 01:59:49,447 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:59:49,447 INFO Output Notebook: reports\2026-11-01/PG_report.ipynb
+2026-11-01 01:59:49,451 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:59:50,737 INFO Executing notebook with kernel: python3
+2026-11-01 01:00:00,243 INFO PG: report written
+2026-11-01 01:00:00,246 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:00:00,246 INFO Output Notebook: reports\2026-11-01/SHW_report.ipynb
+2026-11-01 01:00:00,260 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:00:02,118 INFO Executing notebook with kernel: python3
+2026-11-01 01:00:12,473 INFO SHW: report written
+2026-11-01 01:00:12,484 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:00:12,488 INFO Output Notebook: reports\2026-11-01/TRV_report.ipynb
+2026-11-01 01:00:12,494 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:00:14,405 INFO Executing notebook with kernel: python3
+2026-11-01 01:00:24,817 INFO TRV: report written
+2026-11-01 01:00:24,817 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:00:24,817 INFO Output Notebook: reports\2026-11-01/UNH_report.ipynb
+2026-11-01 01:00:24,836 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:00:26,764 INFO Executing notebook with kernel: python3
+2026-11-01 01:00:38,403 INFO UNH: report written
+2026-11-01 01:00:38,405 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:00:38,408 INFO Output Notebook: reports\2026-11-01/V_report.ipynb
+2026-11-01 01:00:38,414 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:00:39,759 INFO Executing notebook with kernel: python3
+2026-11-01 01:00:49,193 INFO V: report written
+2026-11-01 01:00:49,203 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:00:49,203 INFO Output Notebook: reports\2026-11-01/VZ_report.ipynb
+2026-11-01 01:00:49,225 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:00:51,162 INFO Executing notebook with kernel: python3
+2026-11-01 01:01:00,495 INFO VZ: report written
+2026-11-01 01:01:00,500 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:01:00,502 INFO Output Notebook: reports\2026-11-01/WMT_report.ipynb
+2026-11-01 01:01:00,522 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:01:02,376 INFO Executing notebook with kernel: python3
+2026-11-01 01:01:12,799 INFO WMT: report written
+2026-11-01 01:01:12,817 INFO Done: 30/30 reports succeeded
+2026-11-01 01:23:19,922 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:19,945 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:23:20,001 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:21,913 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:27,319 ERROR AAPL: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:27,334 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:27,339 INFO Output Notebook: reports\2026-11-01/AMGN_report.ipynb
+2026-11-01 01:23:27,368 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:29,353 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:33,354 ERROR AMGN: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:33,360 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:33,366 INFO Output Notebook: reports\2026-11-01/AMZN_report.ipynb
+2026-11-01 01:23:33,397 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:35,258 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:38,592 ERROR AMZN: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:38,598 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:38,600 INFO Output Notebook: reports\2026-11-01/AXP_report.ipynb
+2026-11-01 01:23:38,625 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:40,007 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:44,107 ERROR AXP: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:44,107 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:44,116 INFO Output Notebook: reports\2026-11-01/BA_report.ipynb
+2026-11-01 01:23:44,123 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:46,023 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:49,566 ERROR BA: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:49,569 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:49,574 INFO Output Notebook: reports\2026-11-01/CAT_report.ipynb
+2026-11-01 01:23:49,586 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:51,491 INFO Executing notebook with kernel: python3
+2026-11-01 01:23:55,525 ERROR CAT: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:23:55,533 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:23:55,538 INFO Output Notebook: reports\2026-11-01/CRM_report.ipynb
+2026-11-01 01:23:55,576 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:23:56,931 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:02,782 ERROR CRM: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:02,809 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:02,817 INFO Output Notebook: reports\2026-11-01/CSCO_report.ipynb
+2026-11-01 01:24:02,832 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:04,696 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:11,079 ERROR CSCO: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:11,079 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:11,087 INFO Output Notebook: reports\2026-11-01/CVX_report.ipynb
+2026-11-01 01:24:11,103 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:13,018 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:17,172 ERROR CVX: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:17,179 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:17,181 INFO Output Notebook: reports\2026-11-01/DIS_report.ipynb
+2026-11-01 01:24:17,204 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:19,055 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:22,917 ERROR DIS: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:22,925 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:22,927 INFO Output Notebook: reports\2026-11-01/GS_report.ipynb
+2026-11-01 01:24:22,938 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:24,832 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:28,124 ERROR GS: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:28,124 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:28,133 INFO Output Notebook: reports\2026-11-01/HD_report.ipynb
+2026-11-01 01:24:28,146 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:30,040 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:33,849 ERROR HD: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:33,862 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:33,862 INFO Output Notebook: reports\2026-11-01/HON_report.ipynb
+2026-11-01 01:24:33,879 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:35,300 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:38,870 ERROR HON: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:38,879 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:38,881 INFO Output Notebook: reports\2026-11-01/IBM_report.ipynb
+2026-11-01 01:24:38,898 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:40,308 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:43,733 ERROR IBM: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:43,739 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:43,739 INFO Output Notebook: reports\2026-11-01/JNJ_report.ipynb
+2026-11-01 01:24:43,759 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:45,193 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:48,646 ERROR JNJ: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:48,651 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:48,655 INFO Output Notebook: reports\2026-11-01/JPM_report.ipynb
+2026-11-01 01:24:48,672 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:50,531 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:54,193 ERROR JPM: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:54,201 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:54,201 INFO Output Notebook: reports\2026-11-01/KO_report.ipynb
+2026-11-01 01:24:54,233 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:24:55,708 INFO Executing notebook with kernel: python3
+2026-11-01 01:24:59,627 ERROR KO: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:24:59,635 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:24:59,635 INFO Output Notebook: reports\2026-11-01/MCD_report.ipynb
+2026-11-01 01:24:59,672 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:01,771 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:05,203 ERROR MCD: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:05,208 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:05,211 INFO Output Notebook: reports\2026-11-01/MMM_report.ipynb
+2026-11-01 01:25:05,231 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:07,099 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:10,481 ERROR MMM: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:10,487 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:10,489 INFO Output Notebook: reports\2026-11-01/MRK_report.ipynb
+2026-11-01 01:25:10,500 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:11,917 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:15,182 ERROR MRK: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:15,192 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:15,196 INFO Output Notebook: reports\2026-11-01/MSFT_report.ipynb
+2026-11-01 01:25:15,218 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:17,276 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:23,647 ERROR MSFT: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:23,663 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:23,668 INFO Output Notebook: reports\2026-11-01/NKE_report.ipynb
+2026-11-01 01:25:23,718 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:25,752 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:33,141 ERROR NKE: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:33,150 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:33,153 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:25:33,167 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:34,989 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:38,616 ERROR NVDA: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:38,619 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:38,623 INFO Output Notebook: reports\2026-11-01/PG_report.ipynb
+2026-11-01 01:25:38,639 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:40,047 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:43,200 ERROR PG: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:43,206 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:43,208 INFO Output Notebook: reports\2026-11-01/SHW_report.ipynb
+2026-11-01 01:25:43,223 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:45,051 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:48,729 ERROR SHW: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:48,732 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:48,735 INFO Output Notebook: reports\2026-11-01/TRV_report.ipynb
+2026-11-01 01:25:48,758 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:50,604 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:54,391 ERROR TRV: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:54,405 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:54,408 INFO Output Notebook: reports\2026-11-01/UNH_report.ipynb
+2026-11-01 01:25:54,428 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:25:55,834 INFO Executing notebook with kernel: python3
+2026-11-01 01:25:59,197 ERROR UNH: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:25:59,204 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:25:59,207 INFO Output Notebook: reports\2026-11-01/V_report.ipynb
+2026-11-01 01:25:59,225 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:26:01,139 INFO Executing notebook with kernel: python3
+2026-11-01 01:26:04,932 ERROR V: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:26:04,936 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:26:04,938 INFO Output Notebook: reports\2026-11-01/VZ_report.ipynb
+2026-11-01 01:26:04,951 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:26:06,796 INFO Executing notebook with kernel: python3
+2026-11-01 01:26:10,287 ERROR VZ: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:26:10,287 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:26:10,294 INFO Output Notebook: reports\2026-11-01/WMT_report.ipynb
+2026-11-01 01:26:10,305 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:26:12,170 INFO Executing notebook with kernel: python3
+2026-11-01 01:26:18,537 ERROR WMT: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:26:18,554 INFO Done: 0/30 reports succeeded; failed: AAPL, AMGN, AMZN, AXP, BA, CAT, CRM, CSCO, CVX, DIS, GS, HD, HON, IBM, JNJ, JPM, KO, MCD, MMM, MRK, MSFT, NKE, NVDA, PG, SHW, TRV, UNH, V, VZ, WMT
+2026-11-01 01:30:33,849 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:30:33,849 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:30:33,874 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:30:35,780 INFO Executing notebook with kernel: python3
+2026-11-01 01:30:38,998 ERROR AAPL: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:30:39,003 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:30:39,006 INFO Output Notebook: reports\2026-11-01/AMGN_report.ipynb
+2026-11-01 01:30:39,033 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:30:40,931 INFO Executing notebook with kernel: python3
+2026-11-01 01:30:44,657 ERROR AMGN: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:30:44,666 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:30:44,668 INFO Output Notebook: reports\2026-11-01/AMZN_report.ipynb
+2026-11-01 01:30:44,683 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:30:46,603 INFO Executing notebook with kernel: python3
+2026-11-01 01:30:50,549 ERROR AMZN: report FAILED - NameError: name 'validate_data' is not defined
+2026-11-01 01:30:50,554 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:30:50,554 INFO Output Notebook: reports\2026-11-01/AXP_report.ipynb
+2026-11-01 01:30:50,565 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:30:51,986 INFO Executing notebook with kernel: python3
+2026-11-01 01:31:02,144 INFO AXP: report written
+2026-11-01 01:31:02,150 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:31:02,154 INFO Output Notebook: reports\2026-11-01/BA_report.ipynb
+2026-11-01 01:31:02,184 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:31:04,227 INFO Executing notebook with kernel: python3
+2026-11-01 01:31:14,690 INFO BA: report written
+2026-11-01 01:31:14,691 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:31:14,698 INFO Output Notebook: reports\2026-11-01/CAT_report.ipynb
+2026-11-01 01:31:14,715 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:31:16,122 INFO Executing notebook with kernel: python3
+2026-11-01 01:31:28,507 INFO CAT: report written
+2026-11-01 01:31:28,519 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:31:28,522 INFO Output Notebook: reports\2026-11-01/CRM_report.ipynb
+2026-11-01 01:31:28,535 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:31:29,905 INFO Executing notebook with kernel: python3
+2026-11-01 01:31:38,795 INFO CRM: report written
+2026-11-01 01:31:38,810 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:31:38,814 INFO Output Notebook: reports\2026-11-01/CSCO_report.ipynb
+2026-11-01 01:31:38,843 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:31:40,920 INFO Executing notebook with kernel: python3
+2026-11-01 01:31:51,308 INFO CSCO: report written
+2026-11-01 01:31:51,316 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:31:51,322 INFO Output Notebook: reports\2026-11-01/CVX_report.ipynb
+2026-11-01 01:31:51,337 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:31:52,754 INFO Executing notebook with kernel: python3
+2026-11-01 01:32:02,309 INFO CVX: report written
+2026-11-01 01:32:02,333 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:32:02,336 INFO Output Notebook: reports\2026-11-01/DIS_report.ipynb
+2026-11-01 01:32:02,358 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:32:03,762 INFO Executing notebook with kernel: python3
+2026-11-01 01:32:12,178 INFO DIS: report written
+2026-11-01 01:32:12,206 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:32:12,213 INFO Output Notebook: reports\2026-11-01/GS_report.ipynb
+2026-11-01 01:32:12,242 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:32:13,690 INFO Executing notebook with kernel: python3
+2026-11-01 01:32:24,484 INFO GS: report written
+2026-11-01 01:32:24,492 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:32:24,495 INFO Output Notebook: reports\2026-11-01/HD_report.ipynb
+2026-11-01 01:32:24,527 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:32:26,376 INFO Executing notebook with kernel: python3
+2026-11-01 01:32:36,116 INFO HD: report written
+2026-11-01 01:32:36,125 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:32:36,145 INFO Output Notebook: reports\2026-11-01/HON_report.ipynb
+2026-11-01 01:32:36,178 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:32:38,121 INFO Executing notebook with kernel: python3
+2026-11-01 01:32:48,310 INFO HON: report written
+2026-11-01 01:32:48,328 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:32:48,331 INFO Output Notebook: reports\2026-11-01/IBM_report.ipynb
+2026-11-01 01:32:48,363 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:32:50,282 INFO Executing notebook with kernel: python3
+2026-11-01 01:33:00,391 INFO IBM: report written
+2026-11-01 01:33:00,404 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:33:00,413 INFO Output Notebook: reports\2026-11-01/JNJ_report.ipynb
+2026-11-01 01:33:00,450 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:33:01,942 INFO Executing notebook with kernel: python3
+2026-11-01 01:33:11,344 INFO JNJ: report written
+2026-11-01 01:33:11,361 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:33:11,373 INFO Output Notebook: reports\2026-11-01/JPM_report.ipynb
+2026-11-01 01:33:11,390 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:33:13,341 INFO Executing notebook with kernel: python3
+2026-11-01 01:33:24,410 INFO JPM: report written
+2026-11-01 01:33:24,417 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:33:24,421 INFO Output Notebook: reports\2026-11-01/KO_report.ipynb
+2026-11-01 01:33:24,432 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:33:26,338 INFO Executing notebook with kernel: python3
+2026-11-01 01:33:36,144 INFO KO: report written
+2026-11-01 01:33:36,152 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:33:36,161 INFO Output Notebook: reports\2026-11-01/MCD_report.ipynb
+2026-11-01 01:33:36,175 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:33:38,076 INFO Executing notebook with kernel: python3
+2026-11-01 01:33:49,326 INFO MCD: report written
+2026-11-01 01:33:49,331 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:33:49,333 INFO Output Notebook: reports\2026-11-01/MMM_report.ipynb
+2026-11-01 01:33:49,349 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:33:50,715 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:00,360 INFO MMM: report written
+2026-11-01 01:34:00,369 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:00,369 INFO Output Notebook: reports\2026-11-01/MRK_report.ipynb
+2026-11-01 01:34:00,395 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:01,761 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:11,965 INFO MRK: report written
+2026-11-01 01:34:11,974 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:11,977 INFO Output Notebook: reports\2026-11-01/MSFT_report.ipynb
+2026-11-01 01:34:11,991 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:13,418 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:24,465 INFO MSFT: report written
+2026-11-01 01:34:24,465 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:24,476 INFO Output Notebook: reports\2026-11-01/NKE_report.ipynb
+2026-11-01 01:34:24,495 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:26,411 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:35,010 INFO NKE: report written
+2026-11-01 01:34:35,016 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:35,016 INFO Output Notebook: reports\2026-11-01/NVDA_report.ipynb
+2026-11-01 01:34:35,032 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:37,102 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:46,079 INFO NVDA: report written
+2026-11-01 01:34:46,095 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:46,097 INFO Output Notebook: reports\2026-11-01/PG_report.ipynb
+2026-11-01 01:34:46,111 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:47,967 INFO Executing notebook with kernel: python3
+2026-11-01 01:34:57,266 INFO PG: report written
+2026-11-01 01:34:57,272 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:34:57,276 INFO Output Notebook: reports\2026-11-01/SHW_report.ipynb
+2026-11-01 01:34:57,296 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:34:58,665 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:07,471 INFO SHW: report written
+2026-11-01 01:35:07,476 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:07,478 INFO Output Notebook: reports\2026-11-01/TRV_report.ipynb
+2026-11-01 01:35:07,492 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:08,867 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:17,806 INFO TRV: report written
+2026-11-01 01:35:17,806 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:17,806 INFO Output Notebook: reports\2026-11-01/UNH_report.ipynb
+2026-11-01 01:35:17,837 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:19,711 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:28,597 INFO UNH: report written
+2026-11-01 01:35:28,606 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:28,606 INFO Output Notebook: reports\2026-11-01/V_report.ipynb
+2026-11-01 01:35:28,613 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:30,534 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:39,190 INFO V: report written
+2026-11-01 01:35:39,195 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:39,199 INFO Output Notebook: reports\2026-11-01/VZ_report.ipynb
+2026-11-01 01:35:39,212 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:40,605 INFO Executing notebook with kernel: python3
+2026-11-01 01:35:49,525 INFO VZ: report written
+2026-11-01 01:35:49,530 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:35:49,532 INFO Output Notebook: reports\2026-11-01/WMT_report.ipynb
+2026-11-01 01:35:49,547 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:35:51,584 INFO Executing notebook with kernel: python3
+2026-11-01 01:36:00,815 INFO WMT: report written
+2026-11-01 01:36:00,831 INFO Done: 27/30 reports succeeded; failed: AAPL, AMGN, AMZN
+2026-11-01 01:38:31,438 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:38:31,444 INFO Output Notebook: reports\2026-11-01/AAPL_report.ipynb
+2026-11-01 01:38:31,481 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:38:33,443 INFO Executing notebook with kernel: python3
+2026-11-01 01:38:43,671 INFO AAPL: report written
+2026-11-01 01:38:43,683 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:38:43,685 INFO Output Notebook: reports\2026-11-01/AMZN_report.ipynb
+2026-11-01 01:38:43,719 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:38:45,655 INFO Executing notebook with kernel: python3
+2026-11-01 01:38:55,691 INFO AMZN: report written
+2026-11-01 01:38:55,696 INFO Input Notebook:  02_stock_report_template.ipynb
+2026-11-01 01:38:55,698 INFO Output Notebook: reports\2026-11-01/AMGN_report.ipynb
+2026-11-01 01:38:55,729 WARNING Black is not installed, parameters wont be formatted
+2026-11-01 01:38:57,105 INFO Executing notebook with kernel: python3
+2026-11-01 01:39:05,528 INFO AMGN: report written
+2026-11-01 01:39:05,554 INFO Done: 3/3 reports succeeded
