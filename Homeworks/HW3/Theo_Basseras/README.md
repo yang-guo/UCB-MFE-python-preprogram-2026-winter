@@ -70,24 +70,18 @@ the leftmost node by following the left children.
 I save the nodes on the stack on the way down. Then I pop the top node and
 add its value to the result. I move to its right child and repeat the same
 logic. The parents stay on the stack, waiting until their left subtrees have
-been explored.
-
-The loop continues while there is a current node or there are still nodes
-waiting on the stack.
+been explored. The loop continues while there is a current node or there are
+still nodes waiting on the stack.
 
 ### Post-order
 
-For post-order, I use the same loop-and-stack idea as in-order, but I swap
-the left and right children. I also add the current value on the way down,
-instead of after popping.
-
-I save the current node on the stack, add its value to the result, and go
-down to its right child. After popping a node, I move to its left child and
-repeat.
+For post-order, I use the same loop-and-stack idea as in-order, with the left
+and right children swapped: I save the current node on the stack, add its
+value to the result, and go down to its right child. After popping a node,
+I move to its left child and repeat.
 
 This gives Value, Right, Left. Lastly, I return the reversed list,
 `result[::-1]`, which gives Left, Right, Value: exactly post-order.
 
 All iterative functions use loops and stacks without recursion. Each
-traversal returns a new list without changing the tree. For an empty tree,
-the result is an empty list.
+traversal returns a new list without changing the tree.
