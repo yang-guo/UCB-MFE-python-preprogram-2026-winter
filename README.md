@@ -27,12 +27,14 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | ------ | ------------ | ------------ |
 | [Basic Python (HW 1)](Lectures/Lecture%201/hw1.md) | 10/5/2026 | 10/19/2026, 11:59 p.m. Pacific (PDT) |
 | Data Analysis | 10/15/2026 | 10/29/2026 |
-| Advanced Python | 10/22/2026 | 11/5/2026 |
+| [Advanced Python (HW 3)](Homeworks/HW3/README.md) | 10/22/2026 | 11/5/2026, 11:59 p.m. Pacific (PST) |
 | [Modeling (HW4)](Lectures/Lecture%208/hw4.md) | 10/29/2026 | 11/12/2026 |
 | Productionization | 11/2/2026 | 11/16/2026 |
 | Advanced Topics | 11/5/2026 | 11/19/2026 |
 
 HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homeworks/HW1/README.md).
+
+HW 3 instructions, starter code, and automated checks are in [Homeworks/HW3](Homeworks/HW3/README.md).
 
 ## Goal
 - Level up your coding skills

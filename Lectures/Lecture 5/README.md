@@ -2,6 +2,8 @@
 
 Monday, October 19, 2026 · Advanced Python I · 9 a.m.–noon Pacific.
 
+**Homework:** [HW 3: Advanced Python](../../Homeworks/HW3/README.md), covering Lectures 5 and 6, is due Thursday, November 5, 2026, at 11:59 p.m. Pacific (PST).
+
 This lesson connects interview foundations—scope, mutation, functions, objects, and iteration—to memory use, CPU/GPU roles, and independently checked agent tools. Deeper GPU execution and KV-cache material is reserved for Thursday.
 
 ## Monday teaching package
