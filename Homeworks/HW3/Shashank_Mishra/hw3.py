@@ -12,12 +12,10 @@ def memorize_3s(func):
     cache = {}
 
     def wrapper(arg):
-        current_time = time.monotonic()
-
         # Check if the cache hit is strictly under the 3-second limit
         if arg in cache:
             cached_result, timestamp = cache[arg]
-            if current_time - timestamp < 3.0:
+            if time.monotonic() - timestamp < 3.0:
                 return cached_result
 
         # Recompute on cache miss, expiry, or exactly 3 seconds
