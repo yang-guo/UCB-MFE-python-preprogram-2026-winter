@@ -1,0 +1,10 @@
+data/
+*.db
+.ipynb_checkpoints/
+__pycache__/
+
+# only three sample reports are submitted
+reports/*/*_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/NKE_report.ipynb
+!reports/*/NVDA_report.ipynb
