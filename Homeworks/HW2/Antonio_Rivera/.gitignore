@@ -1,0 +1,10 @@
+# Generated reports: commit only the sample reports and the portfolio summary
+# (the full batch is regenerated locally by 03_run_all_stocks.py)
+reports/*/*
+!reports/*/portfolio_summary.csv
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+!reports/*/AAPL_report.ipynb
+
+# Local database (distributed via bCourses; also ignored by the repo root .gitignore)
+data/
