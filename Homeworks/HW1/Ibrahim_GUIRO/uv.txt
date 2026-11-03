@@ -1,0 +1,19 @@
+# Commands run from Homeworks/HW1/Ibrahim_GUIRO/
+
+# Create and activate the homework environment
+uv venv HW1 --python 3.12.9
+source HW1/bin/activate
+python --version
+
+# Install the required packages
+uv pip install --python HW1/bin/python -r ../requirements.txt
+
+# Downgrade requests and check its version
+uv pip install --python HW1/bin/python "requests==2.24.0"
+uv pip show requests
+
+# Upgrade requests and check its version
+uv pip install --python HW1/bin/python --upgrade requests
+uv pip show requests
+
+# Latest requests version obtained on 2026-10-17: 2.34.2
