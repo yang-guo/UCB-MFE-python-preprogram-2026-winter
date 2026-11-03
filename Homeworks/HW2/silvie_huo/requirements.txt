@@ -1,0 +1,12 @@
+# Python 3.12.3
+pandas>=2.2,<3
+numpy>=1.26,<3
+matplotlib>=3.8,<4
+papermill>=2.5,<3
+scrapbook>=0.5,<1
+tqdm>=4.66
+ipykernel>=6.29
+ipython>=8.20
+jinja2>=3.1        # required by pandas Styler (display(df.style...))
+nbformat>=5.9
+jupyterlab>=4.0    # to open/run the notebooks interactively
