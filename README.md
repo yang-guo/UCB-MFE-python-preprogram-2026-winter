@@ -14,7 +14,7 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | Thursday | 10/22/2026 | 9am - 12pm  | Aneesh   | [Advanced Python II: algorithms, async and LLM memory](Lectures/Lecture%206/README.md) |
 | Monday   | 10/26/2026 | 9am - 12pm  | Yang     | [Modeling I: sklearn, financial features, time-aware evaluation](Lectures/Lecture%207/readme.md) |
 | Thursday | 10/29/2026 | 9am - 12pm  | Yang     | [Modeling II: backtesting and research workflow](Lectures/Lecture%208/readme.md) |
-| Monday   | 11/2/2026  | 9am - 12pm  | Aneesh   | Productionization: testing, Docker, CI |
+| Monday   | 11/2/2026  | 9am - 12pm  | Aneesh   | [Productionization: testing, APIs, Docker, CI](Lectures/Lecture%209/README.md) |
 | Thursday | 11/5/2026  | 9am - 12pm  | Yang     | Advanced topic: on demand |
 
 ## Homework
@@ -29,12 +29,14 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | Data Analysis | 10/15/2026 | 10/29/2026 |
 | [Advanced Python (HW 3)](Homeworks/HW3/README.md) | 10/22/2026 | 11/5/2026, 11:59 p.m. Pacific (PST) |
 | [Modeling (HW4)](Lectures/Lecture%208/hw4.md) | 10/29/2026 | 11/12/2026 |
-| Productionization | 11/2/2026 | 11/16/2026 |
+| [Productionization (HW5)](Homeworks/HW5/hw_5.md) | 11/2/2026 | 11/16/2026, 11:59 p.m. Pacific (PST) |
 | Advanced Topics | 11/5/2026 | 11/19/2026 |
 
 HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homeworks/HW1/README.md).
 
 HW 3 instructions, starter code, and automated checks are in [Homeworks/HW3](Homeworks/HW3/README.md).
+
+HW5 instructions and the API/container starter are in [Homeworks/HW5](Homeworks/HW5/README.md).
 
 ## Goal
 - Level up your coding skills
