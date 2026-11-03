@@ -1,0 +1,8 @@
+# The database and local copies are never submitted
+data/
+
+# The full batch of reports stays local; only the 3 sample reports are submitted
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
