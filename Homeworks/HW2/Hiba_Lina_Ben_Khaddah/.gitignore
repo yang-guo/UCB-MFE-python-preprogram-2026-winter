@@ -1,0 +1,13 @@
+data/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Keep the full generated batch local and submit only three sample reports.
+reports/**/*_report.ipynb
+!reports/**/AAPL_report.ipynb
+!reports/**/IBM_report.ipynb
+!reports/**/MSFT_report.ipynb
+
+# The script recreates this file on every run; it is empty when nothing fails.
+reports/**/failed_stocks.txt

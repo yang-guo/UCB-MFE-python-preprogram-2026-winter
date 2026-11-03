@@ -1,0 +1,8 @@
+ipykernel
+jupyter
+matplotlib
+numpy
+pandas
+papermill
+scrapbook
+tqdm
