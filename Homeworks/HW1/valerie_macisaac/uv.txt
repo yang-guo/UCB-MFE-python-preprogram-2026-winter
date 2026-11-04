@@ -1,0 +1,24 @@
+
+Here are the steps to create a venv called HW1: 
+
+
+### CREATE THE VIRTUAL ENVIRONMENT
+uv venv HW1 --python 3.12.9
+
+## ACTIVATE THE VIRTUAL ENVIRONMENT
+source HW1/bin/activate
+
+## INSTALL PACKAGES FROM REQUIREMENTS.TXT
+cd ..
+uv pip install -r requirements.txt
+
+## DOWNGRADE REQUESTS TO VERSION 2.24.0
+uv pip install requests==2.24.0
+
+## UPGRADE REQUESTS LIBRARY TO THE LATEST
+uv pip install --upgrade requests
+
+## WHATS THE LATEST VERSION OF REQUESTS
+uv pip show requests
+
+## OUTPUTS :2.34.2
