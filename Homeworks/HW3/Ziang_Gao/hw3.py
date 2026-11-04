@@ -36,29 +36,83 @@ class Node:
 
 def pre_order_recursion(root: Node | None) -> list[str]:
     """Return Root, Left, Right order using recursion; None returns []."""
-    raise NotImplementedError("Implement pre_order_recursion")
+    result = []
+    if root is None:
+        return result
+    result.append(root.val)
+    result.extend(pre_order_recursion(root.left))
+    result.extend(pre_order_recursion(root.right))
+    return result
 
 
 def pre_order_iteration(root: Node | None) -> list[str]:
     """Return Root, Left, Right order using a loop and stack(s)."""
-    raise NotImplementedError("Implement pre_order_iteration")
+    result = []
+    if root is None:
+        return result
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        result.append(node.val)
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
+    return result
+    
 
 
 def in_order_recursion(root: Node | None) -> list[str]:
     """Return Left, Root, Right order using recursion; None returns []."""
-    raise NotImplementedError("Implement in_order_recursion")
+    result = []
+    if root is None:
+        return result
+    result.extend(in_order_recursion(root.left))
+    result.append(root.val)
+    result.extend(in_order_recursion(root.right))
+    return result
 
 
 def in_order_iteration(root: Node | None) -> list[str]:
     """Return Left, Root, Right order using a loop and stack(s)."""
-    raise NotImplementedError("Implement in_order_iteration")
+    result = []
+    stack = []
+    current = root
+    while stack or current:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        result.append(current.val)
+        current = current.right
+    return result
 
 
 def post_order_recursion(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using recursion; None returns []."""
-    raise NotImplementedError("Implement post_order_recursion")
-
+    result = []
+    if root is None:
+        return result
+    result.extend(post_order_recursion(root.left))
+    result.extend(post_order_recursion(root.right))
+    result.append(root.val)
+    return result
 
 def post_order_iteration(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using a loop and stack(s)."""
-    raise NotImplementedError("Implement post_order_iteration")
+    result = []
+    if root is None:
+        return result
+    stack1 = [root]
+    stack2 = []
+    while stack1:
+        node = stack1.pop()
+        stack2.append(node)
+        if node.left:
+            stack1.append(node.left)
+        if node.right:
+            stack1.append(node.right)
+    while stack2:
+        node = stack2.pop()
+        result.append(node.val)
+    return result
