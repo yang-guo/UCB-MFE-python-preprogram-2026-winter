@@ -1,0 +1,7 @@
+node_modules/
+runs/
+__pycache__/
+*.pyc
+slides/.build/
+
+.ipynb_checkpoints/

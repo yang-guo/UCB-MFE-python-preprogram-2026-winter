@@ -15,7 +15,7 @@ Fall 2026: October 5-November 5. All times are Pacific Time (PT).
 | Monday   | 10/26/2026 | 9am - 12pm  | Yang     | [Modeling I: sklearn, financial features, time-aware evaluation](Lectures/Lecture%207/readme.md) |
 | Thursday | 10/29/2026 | 9am - 12pm  | Yang     | [Modeling II: backtesting and research workflow](Lectures/Lecture%208/readme.md) |
 | Monday   | 11/2/2026  | 9am - 12pm  | Aneesh   | Productionization: testing, Docker, CI |
-| Thursday | 11/5/2026  | 9am - 12pm  | Yang     | Advanced topic: on demand |
+| Thursday | 11/5/2026  | 9am - 12pm  | Yang     | [Special Topics: building a stock-research harness with Pydantic AI](Lectures/Lecture%2010/readme.md) |
 
 ## Homework
 - one homework per module
@@ -90,3 +90,4 @@ HW 3 instructions, starter code, and automated checks are in [Homeworks/HW3](Hom
 - Lecture 6's October 22 prepared notebook uses only the standard library, simulated I/O and no external services; its cell outputs are cleared for live teaching. The older reference notebook's HTTP examples require internet access, and its multiprocessing example uses the adjacent `lecture6_workers.py` module.
 - Lectures 7 and 8 use real equity data from `Lectures/modeling/data/equities_class.duckdb` (30 selected stocks, under 5 MiB). HW4 uses `equities_top2000.duckdb` (3,849 stocks across quarterly top-2,000 lists, January 2000–September 2026, about 315 MiB). Download both from bCourses; see the [modeling data guide](Lectures/modeling/README.md). There is no synthetic fallback.
 - Database files, local credentials, and generated reports are not tracked.
+- The final lecture uses an executable notebook and a Python research application to build a stock-research harness with Pydantic AI Harness. See the [Lecture 10 guide](Lectures/Lecture%2010/readme.md) for setup and the [presenter notes](Lectures/Lecture%2010/presenter_notes.md) for the three-hour teaching route.
