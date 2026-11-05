@@ -1,0 +1,4 @@
+# Local virtual environment
+HW3/
+# Python bytecode cache
+__pycache__/
