@@ -1,0 +1,24 @@
+# Databases and credentials never go into the PR
+*.db
+*.sqlite
+*.sqlite3
+data/
+.env
+
+# Python / Jupyter
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Generated reports stay local except the submission samples and the summary CSV.
+# (Git cannot re-include a file inside an ignored directory, so ignore contents with
+# "/*" and re-include the run folder before re-including individual files.)
+reports/*
+!reports/2026-10-29/
+reports/2026-10-29/*
+!reports/2026-10-29/AAPL_report.ipynb
+!reports/2026-10-29/IBM_report.ipynb
+!reports/2026-10-29/NKE_report.ipynb
+!reports/2026-10-29/portfolio_summary.csv
