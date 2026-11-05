@@ -9,7 +9,29 @@ def memorize_3s(func):
     The wrapped function takes one positional, hashable argument. Use
     time.monotonic(); cache hits do not reset expiry. See README.md for details.
     """
-    raise NotImplementedError("Implement memorize_3s")
+
+    cache = {}                           # arg -> (result, stored_at)
+
+    def wrapper(x):
+        # 1. If x is cached, read the clock and compute its age.
+        #    Hit only if age < 3: return the stored result.
+        #    (Do NOT update the timestamp on a hit.)
+        if x in cache:
+            (result, stored_at) = cache[x]
+            if time.monotonic() - stored_at < 3:
+                return result
+        
+        # 2. Otherwise (missing OR expired): call func(x).    
+        result = func(x)
+
+        # 3. After it returns, read the clock and store (result, now).
+        cache[x] = (result,time.monotonic())
+
+        # 4. Return the result.
+        return result
+
+    return wrapper
+
 
 
 class Node:
