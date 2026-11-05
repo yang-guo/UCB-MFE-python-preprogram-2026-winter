@@ -1,0 +1,44 @@
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+3edd453fbc11b1d16eb3795fe564900ad56bab4aa9555b059607b5099dc03021
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Thu, 05 Nov 2026 13:09:04 GMT
+server: uvicorn
+content-length: 89
+content-type: application/json
+
+{"prediction":0.5118015993564016,"model_version":"hw4-ridge-alpha1e7-rank-fit2026-07-06"}
+$ sed 's/"mom_21": 0.25709939148073024/"mom_21": "0.257"/' example_request.json | curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @-
+HTTP/1.1 422 Unprocessable Entity
+date: Thu, 05 Nov 2026 13:09:04 GMT
+server: uvicorn
+content-length: 97
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","mom_21"],"msg":"Input should be a valid number"}]}
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+0fdb7c9508e948cb9e9cae155983c8a5fc9e432b78677c70d77313ff3920ba80
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Thu, 05 Nov 2026 13:09:05 GMT
+server: uvicorn
+content-length: 89
+content-type: application/json
+
+{"prediction":0.5118015993564016,"model_version":"hw4-ridge-alpha1e7-rank-fit2026-07-06"}
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:64642 - "GET /docs HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64644 - "POST /predict HTTP/1.1" 200 OK
+
+$ docker stop mfe-hw5
+mfe-hw5
+
