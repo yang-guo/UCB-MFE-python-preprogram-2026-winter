@@ -1,9 +1,0 @@
-numpy
-pandas
-matplotlib
-papermill
-scrapbook
-tqdm
-ipykernel
-nbformat
-jupyterlab
