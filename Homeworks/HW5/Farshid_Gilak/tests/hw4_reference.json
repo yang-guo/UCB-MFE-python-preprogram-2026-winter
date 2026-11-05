@@ -1,0 +1,7 @@
+{
+  "source": "hw4_model.walk_forward score of the top-ranked stock on the last HW4 signal",
+  "symbol": "ALL",
+  "signal_date": "2026-09-28",
+  "model_version": "hw4-ridge-alpha1e7-rank-fit2026-07-06",
+  "prediction": 0.5118015993564016
+}
