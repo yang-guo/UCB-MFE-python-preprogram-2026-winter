@@ -96,9 +96,37 @@ def in_order_iteration(root: Node | None) -> list[str]:
 
 def post_order_recursion(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using recursion; None returns []."""
-    raise NotImplementedError("Implement post_order_recursion")
+    if root is None:
+        return []
+
+    return (
+        post_order_recursion(root.left)
+        + post_order_recursion(root.right)
+        + [root.val]
+    )
 
 
 def post_order_iteration(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using a loop and stack(s)."""
-    raise NotImplementedError("Implement post_order_iteration")
+    if root is None:
+        return []
+
+    result = []
+    stack1 = [root]
+    stack2 = []
+
+    while stack1:
+        node = stack1.pop()
+        stack2.append(node)
+
+        if node.left is not None:
+            stack1.append(node.left)
+
+        if node.right is not None:
+            stack1.append(node.right)
+
+    while stack2:
+        node = stack2.pop()
+        result.append(node.val)
+
+    return result
