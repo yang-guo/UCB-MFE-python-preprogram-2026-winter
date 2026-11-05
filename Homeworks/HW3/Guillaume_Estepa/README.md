@@ -8,7 +8,6 @@ From inside `Homeworks/HW3/Guillaume_Estepa/`, run the test suite using `uv`:
 uv run --no-project python test_hw3.py
 ```
 
-*(Note: The assignment requires Python 3.12 or later, so the default system Python 3.9 is too old; running via `uv` ensures a compatible Python interpreter is used.)*
 
 ## 2. Part 1: When Cache Entries Expire
 
