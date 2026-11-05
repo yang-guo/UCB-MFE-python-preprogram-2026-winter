@@ -70,8 +70,17 @@ def in_order_recursion(root: Node | None) -> list[str]:
 
 
 def in_order_iteration(root: Node | None) -> list[str]:
-    """Return Left, Root, Right order using a loop and stack(s)."""
-    raise NotImplementedError("Implement in_order_iteration")
+    order_list = []
+    stack = []
+    current_node = root
+    while stack or current_node:
+        while current_node is not None:
+            stack.append(current_node)
+            current_node = current_node.left
+        node = stack.pop()
+        order_list.append(node.val)
+        current_node = node.right
+    return order_list
 
 
 def post_order_recursion(root: Node | None) -> list[str]:
