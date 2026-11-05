@@ -30,7 +30,6 @@ class Node:
 
 def pre_order_recursion(root: Node | None) -> list[str]:
     """Return Root, Left, Right order using recursion; None returns []."""
-
     order_list = []
 
     def _preorder(node):
@@ -44,13 +43,22 @@ def pre_order_recursion(root: Node | None) -> list[str]:
 
 def pre_order_iteration(root: Node | None) -> list[str]:
     """Return Root, Left, Right order using a loop and stack(s)."""
-    raise NotImplementedError("Implement pre_order_iteration")
+    order_list = []
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        if node is not None:
+            order_list.append(node.val)
+            stack.append(node.right)
+            stack.append(node.left)
+            
+    return order_list
 
 
 def in_order_recursion(root: Node | None) -> list[str]:
     """Return Left, Root, Right order using recursion; None returns []."""
     order_list = []
-    
+
     def _inorder(node):
         if node is not None:
             _inorder(node.left)
@@ -69,7 +77,7 @@ def in_order_iteration(root: Node | None) -> list[str]:
 def post_order_recursion(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using recursion; None returns []."""
     order_list = []
-    
+
     def _postorder(node):
         if node is not None:
             _postorder(node.left)
