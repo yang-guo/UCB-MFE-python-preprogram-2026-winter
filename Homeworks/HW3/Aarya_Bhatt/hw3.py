@@ -1,114 +1,107 @@
+"""HW 3 starter. Implement the seven functions, then run test_hw3.py."""
+
 import time
 from functools import wraps
 
 
 def memorize_3s(func):
+    """Cache each argument's successful result for three seconds after completion.
+
+    The wrapped function takes one positional, hashable argument. Use
+    time.monotonic(); cache hits do not reset expiry. See README.md for details.
     """
-    Decorator that caches the return value of a single-argument function
-    for strictly less than 3 seconds using time.monotonic().
-    """
-    cache = {}  # Maps arg -> (result, finish_timestamp)
+    cache = {}
 
     @wraps(func)
     def wrapper(arg):
-        now = time.monotonic()
+        t = time.monotonic()
         if arg in cache:
-            result, timestamp = cache[arg]
-            if now - timestamp < 3.0:
-                return result
+            val, ts = cache[arg]
+            if t - ts < 3.0:
+                return val
 
-        # Compute result; if an exception occurs, it propagates naturally without caching
-        result = func(arg)
-        finish_time = time.monotonic()
-        cache[arg] = (result, finish_time)
-        return result
+        res = func(arg)
+        cache[arg] = (res, time.monotonic())
+        return res
 
     return wrapper
 
 
 class Node:
-    def __init__(self, val, left=None, right=None):
-        self.val = val
+    """A binary-tree node; missing children are None. Leave this class unchanged."""
+
+    def __init__(self, key: str, left=None, right=None):
+        self.val = key
         self.left = left
         self.right = right
 
 
-# ==========================================
-# Pre-order Traversal (Root, Left, Right)
-# ==========================================
-
-def pre_order_recursion(root: Node | None) -> list:
-    if root is None:
+def pre_order_recursion(root: Node | None) -> list[str]:
+    """Return Root, Left, Right order using recursion; None returns []."""
+    if not root:
         return []
     return [root.val] + pre_order_recursion(root.left) + pre_order_recursion(root.right)
 
 
-def pre_order_iteration(root: Node | None) -> list:
-    if root is None:
+def pre_order_iteration(root: Node | None) -> list[str]:
+    """Return Root, Left, Right order using a loop and stack(s)."""
+    if not root:
         return []
-    result = []
-    stack = [root]
+    res, stack = [], [root]
     while stack:
-        node = stack.pop()
-        result.append(node.val)
-        if node.right is not None:
-            stack.append(node.right)
-        if node.left is not None:
-            stack.append(node.left)
-    return result
+        n = stack.pop()
+        res.append(n.val)
+        if n.right:
+            stack.append(n.right)
+        if n.left:
+            stack.append(n.left)
+    return res
 
 
-# ==========================================
-# In-order Traversal (Left, Root, Right)
-# ==========================================
-
-def in_order_recursion(root: Node | None) -> list:
-    if root is None:
+def in_order_recursion(root: Node | None) -> list[str]:
+    """Return Left, Root, Right order using recursion; None returns []."""
+    if not root:
         return []
     return in_order_recursion(root.left) + [root.val] + in_order_recursion(root.right)
 
 
-def in_order_iteration(root: Node | None) -> list:
-    result = []
-    stack = []
+def in_order_iteration(root: Node | None) -> list[str]:
+    """Return Left, Root, Right order using a loop and stack(s)."""
+    res, stack = [], []
     curr = root
-    while curr is not None or stack:
-        while curr is not None:
+    while curr or stack:
+        while curr:
             stack.append(curr)
             curr = curr.left
         curr = stack.pop()
-        result.append(curr.val)
+        res.append(curr.val)
         curr = curr.right
-    return result
+    return res
 
 
-# ==========================================
-# Post-order Traversal (Left, Right, Root)
-# ==========================================
-
-def post_order_recursion(root: Node | None) -> list:
-    if root is None:
+def post_order_recursion(root: Node | None) -> list[str]:
+    """Return Left, Right, Root order using recursion; None returns []."""
+    if not root:
         return []
     return post_order_recursion(root.left) + post_order_recursion(root.right) + [root.val]
 
 
-def post_order_iteration(root: Node | None) -> list:
-    if root is None:
+def post_order_iteration(root: Node | None) -> list[str]:
+    """Return Left, Right, Root order using a loop and stack(s)."""
+    if not root:
         return []
-    result = []
-    stack = []
+    res, stack = [], []
     curr = root
-    last_visited = None
-
-    while curr is not None or stack:
-        if curr is not None:
+    last = None
+    while curr or stack:
+        if curr:
             stack.append(curr)
             curr = curr.left
         else:
-            peek_node = stack[-1]
-            if peek_node.right is not None and last_visited is not peek_node.right:
-                curr = peek_node.right
+            peek = stack[-1]
+            if peek.right and last is not peek.right:
+                curr = peek.right
             else:
-                result.append(peek_node.val)
-                last_visited = stack.pop()
-    return result
+                res.append(peek.val)
+                last = stack.pop()
+    return res
