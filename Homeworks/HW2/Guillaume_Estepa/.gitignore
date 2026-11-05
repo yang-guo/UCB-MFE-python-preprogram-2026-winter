@@ -1,0 +1,10 @@
+# Local database copy (distributed via bCourses) - never commit
+data/
+*.db
+
+# Only the sample reports are committed; the full batch stays local.
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+reports/*/run.log
