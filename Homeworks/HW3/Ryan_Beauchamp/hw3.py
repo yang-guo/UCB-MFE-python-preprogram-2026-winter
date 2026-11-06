@@ -99,4 +99,13 @@ def post_order_recursion(root: Node | None) -> list[str]:
 
 def post_order_iteration(root: Node | None) -> list[str]:
     """Return Left, Right, Root order using a loop and stack(s)."""
-    raise NotImplementedError("Implement post_order_iteration")
+    order_list = []
+    stack = [root]
+    while stack:
+        node = stack.pop()
+        if node is not None:
+            stack.append(node.left)
+            stack.append(node.right)
+            order_list.append(node.val)
+    order_list = order_list[::-1]
+    return order_list
