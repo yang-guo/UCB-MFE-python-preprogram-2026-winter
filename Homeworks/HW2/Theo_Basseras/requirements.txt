@@ -1,0 +1,9 @@
+# Tested with Python 3.12.9 and these versions (the course's uv environment provides them all).
+pandas>=2.2,<3
+numpy>=2.0
+matplotlib>=3.8
+papermill>=2.6
+scrapbook>=0.5
+tqdm>=4.66
+ipykernel>=6.29
+nbformat>=5.10
