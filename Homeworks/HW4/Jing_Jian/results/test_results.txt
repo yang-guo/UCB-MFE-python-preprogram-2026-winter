@@ -1,0 +1,25 @@
+test_cash_merger_entitlement_is_reserved_until_original_maturity (test_backtester.AccountingTests.test_cash_merger_entitlement_is_reserved_until_original_maturity) ... ok
+test_cash_not_spent_twice_across_multiple_orders (test_backtester.AccountingTests.test_cash_not_spent_twice_across_multiple_orders) ... ok
+test_entry_fill_price_does_not_change_preplanned_budget (test_backtester.AccountingTests.test_entry_fill_price_does_not_change_preplanned_budget) ... ok
+test_first_entry_fee_counts_toward_drawdown (test_backtester.AccountingTests.test_first_entry_fee_counts_toward_drawdown) ... ok
+test_mandatory_stock_conversion_preserves_original_lot_maturity (test_backtester.AccountingTests.test_mandatory_stock_conversion_preserves_original_lot_maturity) ... ok
+test_matrix_input_matches_long_price_input (test_backtester.AccountingTests.test_matrix_input_matches_long_price_input) ... ok
+test_missing_entry_is_cancelled_without_redistribution (test_backtester.AccountingTests.test_missing_entry_is_cancelled_without_redistribution) ... ok
+test_missing_maturity_quote_stops_instead_of_fabricating_sale (test_backtester.AccountingTests.test_missing_maturity_quote_stops_instead_of_fabricating_sale) ... ok
+test_nonpositive_predictions_leave_cash_uninvested (test_backtester.AccountingTests.test_nonpositive_predictions_leave_cash_uninvested) ... ok
+test_only_prior_session_scores_can_place_orders (test_backtester.AccountingTests.test_only_prior_session_scores_can_place_orders) ... ok
+test_rename_maps_existing_lots_and_later_old_symbol_orders (test_backtester.AccountingTests.test_rename_maps_existing_lots_and_later_old_symbol_orders) ... ok
+test_round_trip_fees_and_weekend_maturity (test_backtester.AccountingTests.test_round_trip_fees_and_weekend_maturity) ... ok
+test_same_close_sale_does_not_expand_prior_cash_budget (test_backtester.AccountingTests.test_same_close_sale_does_not_expand_prior_cash_budget) ... ok
+test_same_ticker_lots_have_independent_maturities (test_backtester.AccountingTests.test_same_ticker_lots_have_independent_maturities) ... ok
+test_short_quote_gap_is_flagged_and_long_gap_stops (test_backtester.AccountingTests.test_short_quote_gap_is_flagged_and_long_gap_stops) ... ok
+test_terminal_open_position_included_without_forced_sale (test_backtester.AccountingTests.test_terminal_open_position_included_without_forced_sale) ... ok
+test_cash_merger_amount_uses_old_adjustment_factor (test_research.TimingTests.test_cash_merger_amount_uses_old_adjustment_factor) ... ok
+test_dated_membership_and_observed_history_are_required (test_research.TimingTests.test_dated_membership_and_observed_history_are_required) ... ok
+test_incomplete_and_future_targets_cannot_change_fit_or_predictions (test_research.TimingTests.test_incomplete_and_future_targets_cannot_change_fit_or_predictions) ... ok
+test_merger_exchange_converts_adjusted_units_through_actual_shares (test_research.TimingTests.test_merger_exchange_converts_adjusted_units_through_actual_shares) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.165s
+
+OK
