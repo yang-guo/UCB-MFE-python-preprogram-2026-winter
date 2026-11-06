@@ -1,0 +1,266 @@
+{
+  "period": "2013-01-02 through 2015-12-31",
+  "database": "equities_top2000.duckdb",
+  "data_audit": {
+    "membership_rows": 109970,
+    "selection_close_over_10000": 1240,
+    "selection_shares_over_20bn": 181
+  },
+  "loader_warnings": [
+    "Quarantining 1 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 275 invalid adjusted-price rows; inspect the raw database and delivery audit."
+  ],
+  "selection_rule": "highest development Sharpe; CAGR tie-break; no missing-quote failures",
+  "trials": [
+    {
+      "name": "price_top10",
+      "specification": {
+        "name": "price_top10",
+        "features": [
+          "momentum_21",
+          "momentum_63",
+          "momentum_252_21",
+          "volatility_63",
+          "drawdown_252"
+        ],
+        "alpha": 100,
+        "screen": {
+          "max_universe_rank": 200,
+          "min_raw_close": 5.0,
+          "max_raw_close": 10000.0,
+          "max_volatility_63": 0.6,
+          "max_abs_daily_return_63": 0.25,
+          "complete_trailing_returns": 252
+        },
+        "portfolio": {
+          "initial_cash": 1000000.0,
+          "top_n": 10,
+          "monthly_fraction": 0.3333333333333333,
+          "cost_bps": 10.0,
+          "max_stale_sessions": 5
+        },
+        "training_signals": "2010-01-01 through 2015-12-31; completed outcomes only",
+        "fit_rule": "once before first evaluation signal; no final-period retraining",
+        "target_winsorization": "training-only 1st/99th percentiles"
+      },
+      "fit_audit": {
+        "fit_before_signal": "2012-12-31",
+        "training_rows": 5959,
+        "latest_training_signal": "2012-08-31",
+        "latest_training_outcome": "2012-12-03",
+        "target_clip_lower": -0.2905029577821618,
+        "target_clip_upper": 0.3516394282277098,
+        "eligible_decisions": 6812,
+        "screened_decisions": 81344
+      },
+      "status": "completed",
+      "metrics": {
+        "strategy": {
+          "final_value": 1313063.2416874147,
+          "cagr": 0.09528653979725132,
+          "max_drawdown": -0.19020141978760485,
+          "sharpe": 0.5292909989855401
+        },
+        "benchmark": {
+          "final_value": 1487843.335734169,
+          "cagr": 0.1419939065938003,
+          "max_drawdown": -0.12036503484077321,
+          "sharpe": 0.9493708051789997
+        }
+      },
+      "stale_marks": 0,
+      "trades": 670
+    },
+    {
+      "name": "price_top20",
+      "specification": {
+        "name": "price_top20",
+        "features": [
+          "momentum_21",
+          "momentum_63",
+          "momentum_252_21",
+          "volatility_63",
+          "drawdown_252"
+        ],
+        "alpha": 100,
+        "screen": {
+          "max_universe_rank": 200,
+          "min_raw_close": 5.0,
+          "max_raw_close": 10000.0,
+          "max_volatility_63": 0.6,
+          "max_abs_daily_return_63": 0.25,
+          "complete_trailing_returns": 252
+        },
+        "portfolio": {
+          "initial_cash": 1000000.0,
+          "top_n": 20,
+          "monthly_fraction": 0.3333333333333333,
+          "cost_bps": 10.0,
+          "max_stale_sessions": 5
+        },
+        "training_signals": "2010-01-01 through 2015-12-31; completed outcomes only",
+        "fit_rule": "once before first evaluation signal; no final-period retraining",
+        "target_winsorization": "training-only 1st/99th percentiles"
+      },
+      "fit_audit": {
+        "fit_before_signal": "2012-12-31",
+        "training_rows": 5959,
+        "latest_training_signal": "2012-08-31",
+        "latest_training_outcome": "2012-12-03",
+        "target_clip_lower": -0.2905029577821618,
+        "target_clip_upper": 0.3516394282277098,
+        "eligible_decisions": 6812,
+        "screened_decisions": 81344
+      },
+      "status": "completed",
+      "metrics": {
+        "strategy": {
+          "final_value": 1387861.18708165,
+          "cagr": 0.11575298710253001,
+          "max_drawdown": -0.14226484580397425,
+          "sharpe": 0.7196404677854472
+        },
+        "benchmark": {
+          "final_value": 1487843.335734169,
+          "cagr": 0.1419939065938003,
+          "max_drawdown": -0.12036503484077321,
+          "sharpe": 0.9493708051789997
+        }
+      },
+      "stale_marks": 0,
+      "trades": 1340
+    },
+    {
+      "name": "price_financial_top10",
+      "specification": {
+        "name": "price_financial_top10",
+        "features": [
+          "momentum_21",
+          "momentum_63",
+          "momentum_252_21",
+          "volatility_63",
+          "drawdown_252",
+          "net_margin",
+          "operating_roa",
+          "debt_to_assets",
+          "cash_to_assets",
+          "fcf_to_assets",
+          "accruals_to_assets",
+          "filing_age_days"
+        ],
+        "alpha": 100,
+        "screen": {
+          "max_universe_rank": 200,
+          "min_raw_close": 5.0,
+          "max_raw_close": 10000.0,
+          "max_volatility_63": 0.6,
+          "max_abs_daily_return_63": 0.25,
+          "complete_trailing_returns": 252
+        },
+        "portfolio": {
+          "initial_cash": 1000000.0,
+          "top_n": 10,
+          "monthly_fraction": 0.3333333333333333,
+          "cost_bps": 10.0,
+          "max_stale_sessions": 5
+        },
+        "training_signals": "2010-01-01 through 2015-12-31; completed outcomes only",
+        "fit_rule": "once before first evaluation signal; no final-period retraining",
+        "target_winsorization": "training-only 1st/99th percentiles"
+      },
+      "fit_audit": {
+        "fit_before_signal": "2012-12-31",
+        "training_rows": 5959,
+        "latest_training_signal": "2012-08-31",
+        "latest_training_outcome": "2012-12-03",
+        "target_clip_lower": -0.2905029577821618,
+        "target_clip_upper": 0.3516394282277098,
+        "eligible_decisions": 6812,
+        "screened_decisions": 81344
+      },
+      "status": "completed",
+      "metrics": {
+        "strategy": {
+          "final_value": 1198688.7206177567,
+          "cagr": 0.06243282848839904,
+          "max_drawdown": -0.16389915022847668,
+          "sharpe": 0.36848791294989425
+        },
+        "benchmark": {
+          "final_value": 1487843.335734169,
+          "cagr": 0.1419939065938003,
+          "max_drawdown": -0.12036503484077321,
+          "sharpe": 0.9493708051789997
+        }
+      },
+      "stale_marks": 0,
+      "trades": 680
+    },
+    {
+      "name": "price_financial_top20",
+      "specification": {
+        "name": "price_financial_top20",
+        "features": [
+          "momentum_21",
+          "momentum_63",
+          "momentum_252_21",
+          "volatility_63",
+          "drawdown_252",
+          "net_margin",
+          "operating_roa",
+          "debt_to_assets",
+          "cash_to_assets",
+          "fcf_to_assets",
+          "accruals_to_assets",
+          "filing_age_days"
+        ],
+        "alpha": 100,
+        "screen": {
+          "max_universe_rank": 200,
+          "min_raw_close": 5.0,
+          "max_raw_close": 10000.0,
+          "max_volatility_63": 0.6,
+          "max_abs_daily_return_63": 0.25,
+          "complete_trailing_returns": 252
+        },
+        "portfolio": {
+          "initial_cash": 1000000.0,
+          "top_n": 20,
+          "monthly_fraction": 0.3333333333333333,
+          "cost_bps": 10.0,
+          "max_stale_sessions": 5
+        },
+        "training_signals": "2010-01-01 through 2015-12-31; completed outcomes only",
+        "fit_rule": "once before first evaluation signal; no final-period retraining",
+        "target_winsorization": "training-only 1st/99th percentiles"
+      },
+      "fit_audit": {
+        "fit_before_signal": "2012-12-31",
+        "training_rows": 5959,
+        "latest_training_signal": "2012-08-31",
+        "latest_training_outcome": "2012-12-03",
+        "target_clip_lower": -0.2905029577821618,
+        "target_clip_upper": 0.3516394282277098,
+        "eligible_decisions": 6812,
+        "screened_decisions": 81344
+      },
+      "status": "completed",
+      "metrics": {
+        "strategy": {
+          "final_value": 1272169.9900554668,
+          "cagr": 0.08376734487121906,
+          "max_drawdown": -0.15067502473098637,
+          "sharpe": 0.5475461799583651
+        },
+        "benchmark": {
+          "final_value": 1487843.335734169,
+          "cagr": 0.1419939065938003,
+          "max_drawdown": -0.12036503484077321,
+          "sharpe": 0.9493708051789997
+        }
+      },
+      "stale_marks": 0,
+      "trades": 1360
+    }
+  ]
+}

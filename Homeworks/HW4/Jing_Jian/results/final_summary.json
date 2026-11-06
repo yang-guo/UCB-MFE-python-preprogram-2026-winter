@@ -1,0 +1,66 @@
+{
+  "period": "2016-04-01 through 2026-09-30",
+  "database": "equities_top2000.duckdb",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "frozen_strategy_sha256": "86eea3518655ec814c97bdff2716f4164b494e8d5a87a731593501f6c81f54b8",
+  "strategy": "price_top20",
+  "fit_audit": {
+    "fit_before_signal": "2016-03-31",
+    "training_rows": 13334,
+    "latest_training_signal": "2015-11-30",
+    "latest_training_outcome": "2016-02-29",
+    "target_clip_lower": -0.26993395094433703,
+    "target_clip_upper": 0.3243673802878967,
+    "eligible_decisions": 23062,
+    "screened_decisions": 355824
+  },
+  "metrics": {
+    "strategy": {
+      "final_value": 2036464.6035250234,
+      "cagr": 0.07010274000105987,
+      "max_drawdown": -0.36441248590545583,
+      "sharpe": 0.35563173192296305
+    },
+    "benchmark": {
+      "final_value": 4402746.776270891,
+      "cagr": 0.1516619250925666,
+      "max_drawdown": -0.3379046158626988,
+      "sharpe": 0.772500797137751
+    }
+  },
+  "accounting": {
+    "nonnegative_cash": true,
+    "daily_nav_reconciles": true,
+    "cash_ledger_reconciles": true,
+    "terminal_holdings_reconcile": true,
+    "all_buy_signals_precede_fills": true,
+    "all_sales_at_least_90_days_after_entry": true,
+    "buy_count": 2420,
+    "sell_count": 2379,
+    "open_lots": 40,
+    "total_fees": 99297.16804095893,
+    "terminal_cash": 708760.8962649241,
+    "terminal_open_value": 1327703.7072600992,
+    "stale_mark_rows": 1,
+    "cancelled_entry_rows": 0,
+    "minimum_cash": 0.0,
+    "every_exit_on_exact_maturity_session": true,
+    "daily_cash_ledger_reconciles": true,
+    "lot_counts_reconcile": true,
+    "mandatory_stock_conversions": 3,
+    "mandatory_cash_settlements": 1,
+    "matured_cash_settlement_lots": 1,
+    "symbol_change_events": 3
+  },
+  "loader_warnings": [
+    "Quarantining 1 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 2 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 275 invalid adjusted-price rows; inspect the raw database and delivery audit.",
+    "Quarantining 3 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 4 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 7 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 8 price rows outside the supplied market calendar; inspect the raw database and delivery audit."
+  ],
+  "excess_final_dollars": -2366282.172745867,
+  "excess_cagr_percentage_points": -8.155918509150673
+}
