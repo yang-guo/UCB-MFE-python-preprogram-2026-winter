@@ -23,6 +23,8 @@ The iteration was extremely challenging.
 1. For root left right, I traversed down the left branch saving the root as I went until I got to the end.
 2. Then I also saved the right branches in a stack and iterated over the right branches until the program completed.
 
+For the second two iterative functions I figured out the trick eventually. I needed to make one ordered LIFO Stack of the branches of the trees sorted in each step by the specified program order. I overthought it by a mile.
+
 ## Caching
 
 My approach for the caching was in hindsight simple but to get there was challenging.

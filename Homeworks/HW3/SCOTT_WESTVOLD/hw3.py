@@ -21,14 +21,13 @@ def memorize_3s(func):
                 result = func(n)
                 cache[n] = [result, time.monotonic()]
                 return cache[n][0]
-        elif n not in cache:
+        if n not in cache:
             result = func(n)
             cache[n] = [result, time.monotonic()]
             return cache[n][0]
-    #print(cache)
-    #print(cache_name) # Different functions indeed had different names
+    # print(cache)
+    # print(cache_name) # Different functions indeed had different names
     return wrapper
-
 
 
 
@@ -59,6 +58,107 @@ def pre_order_recursion(root: Node | None) -> list[str]:
             return(output)
 
 
+def in_order_recursion(root: Node | None) -> list[str]:
+    """Return Left, Root, Right order using recursion; None returns []."""
+    if root is None:
+        return([])
+    if root.left is None:
+        if root.right is None: 
+            return([root.val])
+        else:
+            output = [root.val] + (in_order_recursion(root.right))
+            return(output)
+    else:
+        if root.right is None: 
+            return(in_order_recursion(root.left) + [root.val])
+        else:
+            output = in_order_recursion(root.left) + [root.val]  + (in_order_recursion(root.right))
+            return(output)
+
+
+def post_order_recursion(root: Node | None) -> list[str]:
+    """Return Left, Right, Root order using recursion; None returns []."""
+    if root is None:
+        return([])
+    if root.left is None:
+        if root.right is None: 
+            return([root.val])
+        else:
+            output = post_order_recursion(root.right) + [root.val]
+            return(output)
+    else:
+        if root.right is None: 
+            return(post_order_recursion(root.left) + [root.val])
+        else:
+            output = post_order_recursion(root.left) + (post_order_recursion(root.right)) + [root.val] 
+            return(output)
+
+
+
+def post_order_iteration(root: Node | None) -> list[str]:
+    """Return Left, Right, Root order using a loop and stack(s)."""
+    if root is None:
+        return([])
+    full_output = []
+    current_node = root
+    nodesRemaining = []
+    while type(current_node) != type(None):
+        val_node, left_node, right_node = current_node.val, current_node.left, current_node.right
+
+
+        if (type(left_node) == type(None)) & (type(right_node) == type(None)):
+            full_output = full_output + [val_node]
+        else:
+            nodesRemaining = nodesRemaining + [Node(val_node)]
+        
+        if (type(right_node) != type(None)):   
+            nodesRemaining = nodesRemaining + [right_node]
+        
+
+        if (type(left_node) != type(None)):      
+            nodesRemaining = nodesRemaining + [left_node]
+
+
+        
+        if (len(nodesRemaining) == 0):
+            current_node = None
+        else:
+            current_node = nodesRemaining.pop()
+            
+    return(full_output) 
+
+
+def in_order_iteration(root: Node | None) -> list[str]:
+    """Return Left, Root, Right order using a loop and stack(s)."""
+    if root is None:
+        return([])
+    full_output = []
+    current_node = root
+    nodesRemaining = []
+    while type(current_node) != type(None):
+        val_node, left_node, right_node = current_node.val, current_node.left, current_node.right
+
+        if (type(right_node) != type(None)):   
+            nodesRemaining = nodesRemaining + [right_node]
+        
+        if (type(left_node) == type(None)) & (type(right_node) == type(None)):
+            full_output = full_output + [val_node]
+        else:
+            nodesRemaining = nodesRemaining + [Node(val_node)]
+        
+        if (type(left_node) != type(None)):      
+            nodesRemaining = nodesRemaining + [left_node]
+
+
+        
+        if (len(nodesRemaining) == 0):
+            current_node = None
+        else:
+            current_node = nodesRemaining.pop()
+            
+    return(full_output)                                 
+
+
 def pre_order_iteration(root: Node | None) -> list[str]:
     """Return Root, Left, Right order using a loop and stack(s)."""
     if root is None:
@@ -79,74 +179,4 @@ def pre_order_iteration(root: Node | None) -> list[str]:
             else: # If out of right nodes (& Out of left as the first if has already failed - just break the loop which setting current to null will do)
                 current_node = current_node.left
     return(full_output)
-
-
-def in_order_recursion(root: Node | None) -> list[str]:
-    """Return Left, Root, Right order using recursion; None returns []."""
-    if root is None:
-        return([])
-    if root.left is None:
-        if root.right is None: 
-            return([root.val])
-        else:
-            output = [root.val] + (in_order_recursion(root.right))
-            return(output)
-    else:
-        if root.right is None: 
-            return(in_order_recursion(root.left) + [root.val])
-        else:
-            output = in_order_recursion(root.left) + [root.val]  + (in_order_recursion(root.right))
-            return(output)
-
-
-def in_order_iteration(root: Node | None) -> list[str]:
-    """Return Left, Root, Right order using a loop and stack(s)."""
-    if root is None:
-        return([])
-    full_output = []
-    right_nodes = []
-    root_values = []
-    current_node = root
-    while type(current_node) != type(None):
-            if type(current_node.right) != type(None): # Save right nodes in order LIFO
-                right_nodes = right_nodes + [current_node.right]
-    
-            if type(current_node.left) != type(None): # Iterate down left nodes if they exist, saving the roots as we go
-                    root_values = root_values + [current_node.val]
-                    current_node = current_node.left
-            else:
-                full_output = full_output + [current_node.val]
-                if len(root_values) != 0: # Imagine we're at the end of the branch. We just added the left, now the root, and then we move to the most recent right which will repeat and traverse down the left again and so on.
-                    full_output = full_output + [root_values.pop()]    
-                if len(right_nodes) != 0: # If the left values don't exist we're at the far left of the tree. Save, and then save the corresponding root
-                    current_node = right_nodes.pop() # If no more left, use most recent right
-                else:
-                    if len(root_values) != 0: # Imagine we're at the end of the branch. We just added the left, now the root, and then we move to the most recent right which will repeat and traverse down the left again and so on.
-                        full_output = full_output + root_values
-                    current_node = current_node.left
-    return(full_output)
-
-
-
-
-
-def post_order_recursion(root: Node | None) -> list[str]:
-    """Return Left, Right, Root order using recursion; None returns []."""
-    if root is None:
-        return([])
-    elif root.left is None:
-        if root.right is None: 
-            return([root.val])
-        else:
-            output = post_order_recursion(root.right) + [root.val]
-            return(output)
-    else:
-        if root.right is None: 
-            return(post_order_recursion(root.left) + [root.val])
-        else:
-            output = post_order_recursion(root.left) + (post_order_recursion(root.right)) + [root.val] 
-            return(output)
-
-def post_order_iteration(root: Node | None) -> list[str]:
-    """Return Left, Right, Root order using a loop and stack(s)."""
-    raise NotImplementedError("Implement post_order_iteration")
+       
