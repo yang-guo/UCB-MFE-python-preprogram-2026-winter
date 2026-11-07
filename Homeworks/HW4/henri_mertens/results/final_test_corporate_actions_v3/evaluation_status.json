@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "strategy": {
+    "final_value": 1312631.2851167403,
+    "cagr": 0.026254305431321345,
+    "maximum_drawdown": -0.5371765143060174,
+    "sharpe": 0.1463385972430225
+  },
+  "benchmark": {
+    "final_value": 4402746.776270891,
+    "cagr": 0.1516619250925666,
+    "maximum_drawdown": -0.3379046158626988,
+    "sharpe": 0.772500797137751
+  },
+  "stale_valuation_days": 1,
+  "data_incidents": 13,
+  "final_open_lots": 40
+}

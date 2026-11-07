@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "completed_run": "final_test_corporate_actions_v3",
+  "market_sessions": 2640,
+  "elapsed_calendar_days": 3834,
+  "orders": 2520,
+  "fills": 4998,
+  "minimum_cash": -2.3646862246096134e-11,
+  "maximum_cash_reconciliation_error": 3.6088749766349792e-09,
+  "final_positions_marked_at_actual_test_end_quotes": 40,
+  "final_cash": 627740.6504148971,
+  "final_positions_value": 684890.6347018431,
+  "same_frozen_model_and_forecasts_across_corrections": true,
+  "latest_training_outcome": "2015-12-30 00:00:00",
+  "all_new_buys_in_historical_quarterly_membership": true,
+  "all_orders_planned_one_session_before_entry": true,
+  "all_realized_lots_preserve_90_day_maturity": true
+}

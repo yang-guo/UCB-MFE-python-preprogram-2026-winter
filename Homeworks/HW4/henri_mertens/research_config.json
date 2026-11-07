@@ -1,0 +1,31 @@
+{
+  "seed": 20261107,
+  "development_start": "2010-01-01",
+  "development_end": "2015-12-31",
+  "tuning_label_cutoff": "2013-12-31",
+  "selection_label_cutoff": "2014-12-31",
+  "test_start": "2016-04-01",
+  "test_end": "2026-09-30",
+  "inner_validation_years": [2012, 2013],
+  "selection_year": 2014,
+  "confirmation_year": 2015,
+  "purge_extra_sessions": 5,
+  "max_training_rows": 6000,
+  "optuna_trials_per_model": 12,
+  "boruta_iterations": 30,
+  "boruta_trees": 128,
+  "models": ["elastic_net", "xgboost", "catboost", "mlp", "kalman", "rbf_svr"],
+  "strategy": {
+    "initial_capital": 1000000,
+    "holding_days": 90,
+    "entry_schedule": "first_market_session_of_month",
+    "number_of_stocks": 20,
+    "monthly_nav_budget": 0.25,
+    "maximum_name_weight": 0.05,
+    "allocation": "equal_dollars",
+    "cost_bps_each_side": 10,
+    "cash_interest": 0,
+    "max_stale_sessions": 5,
+    "retrain_during_final_test": false
+  }
+}

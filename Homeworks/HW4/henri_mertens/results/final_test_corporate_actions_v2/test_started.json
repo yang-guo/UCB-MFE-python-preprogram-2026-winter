@@ -1,0 +1,16 @@
+{
+  "started_at_utc": "2026-11-07T14:29:14.508695+00:00",
+  "purpose": "verified corporate-action accounting correction only",
+  "original_failed_run": "final_test",
+  "frozen_model_sha256": "eeda5faa3f14cc59c718c0471475172dcd245b79c57355df1365eb3b245e5f23",
+  "predictions_sha256": "790c76636ccf54ccf507eeb6675aebe90578e225105d5cd1f465dc8598a778c8",
+  "source_sha256": {
+    "backtester.py": "a721becf2a6d65147b2b668a8299bce10d90f409f1bfd60563564321b07d4dc1",
+    "evaluate_corporate_actions.py": "879b9f6bc2d6b954646d1f92629ecb5decc79a5563e51e2a49627628801348da",
+    "corporate_actions.json": "516452a5586ccd5ffaa3911eedd3cf5c925745fb8b99b01f4459991d7fb84469",
+    "supplemental_quotes.csv": "347a245483e7310517fa4c1719327745af1079b5f66eb03ee84028d9301f4205"
+  },
+  "quote_source": "https://query1.finance.yahoo.com/v8/finance/chart/CRVO?period1=1690848000&period2=1701388800&interval=1d&events=div%2Csplits",
+  "quote_source_sha256": "2d4163e4374426e56ef3b653e22f0d33cc59beb4330cc84d50be33eb2cd44f6f",
+  "cash_claim_policy": "mark verified entitlement; restrict cash until original lot maturity; no market-sale fee on cash transfer"
+}
