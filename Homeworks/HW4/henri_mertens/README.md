@@ -256,7 +256,7 @@ file are included, so reproducing the correction does not require an API.
   study, without retuning on the observed final test.
 - [x] Reused-code references and disclosure of Codex assistance.
 - [x] Databases, environment and large intermediate outputs excluded from Git.
-- [ ] Commit and push the reviewed HW4 submission.
+- [x] Commit and push the reviewed HW4 submission.
 - [ ] Open the submission pull request and assign `kevinramlal` and
   `raghuramkowdeed` (due November 12, 2026; no cutoff time is specified).
 
