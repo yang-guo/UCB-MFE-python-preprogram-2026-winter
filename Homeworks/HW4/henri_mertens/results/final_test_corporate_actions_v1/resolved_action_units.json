@@ -1,0 +1,81 @@
+{
+  "MYCC": {
+    "symbol": "MYCC",
+    "kind": "cash",
+    "effective_date": "2017-09-19",
+    "cash_per_share": 17.12,
+    "source": "https://www.sec.gov/Archives/edgar/data/1577095/000157709517000161/holdings-20170918x8xkmerger.htm",
+    "note": "Acquisition completed September 18. Recognize the cash entitlement next session; restrict reinvestment until original lot maturity.",
+    "adjusted_cash_per_unit": 17.12
+  },
+  "DFFN": {
+    "symbol": "DFFN",
+    "kind": "stock",
+    "effective_date": "2023-08-17",
+    "successor": "CRVO",
+    "legal_share_ratio": 0.6666666666666666,
+    "normalized_unit_ratio": 1.0,
+    "source": "https://www.sec.gov/Archives/edgar/data/1053691/000143774923024064/dffn20230816_8k.htm",
+    "note": "DFFN course prices already include the 1-for-1.5 reverse split. Its pre-event adjusted quotes match the CRVO Yahoo history on the same dates, so applying the legal split again would double count it.",
+    "adjusted_unit_ratio": 1.0,
+    "successor_initial_mark": 7.590000152587891
+  },
+  "SABRP": {
+    "symbol": "SABRP",
+    "kind": "stock",
+    "effective_date": "2023-09-01",
+    "successor": "SABR",
+    "legal_share_ratio": 14.2857,
+    "source": "https://www.nasdaqtrader.com/TraderNews.aspx?id=ECA2023-495",
+    "note": "Mandatory conversion into common stock; retain original entry date and maturity. Fractional shares follow the portfolio's fractional-unit convention.",
+    "adjusted_unit_ratio": 14.285699999999999,
+    "successor_initial_mark": 5.37
+  },
+  "ESTE": {
+    "symbol": "ESTE",
+    "kind": "stock",
+    "effective_date": "2023-11-01",
+    "successor": "PR",
+    "legal_share_ratio": 1.446,
+    "source": "https://www.sec.gov/Archives/edgar/data/10254/000119312523270505/d551345d8k.htm",
+    "note": "Ignore predecessor vendor quote rows after the verified merger; use Permian Resources total-return exposure.",
+    "adjusted_unit_ratio": 1.512494890510949,
+    "successor_initial_mark": 13.7
+  },
+  "DISH": {
+    "symbol": "DISH",
+    "kind": "stock",
+    "effective_date": "2024-01-02",
+    "successor": "SATS",
+    "legal_share_ratio": 0.350877,
+    "source": "https://www.sec.gov/Archives/edgar/data/1415404/000110465924000089/tm2333745d3_ex99-1.htm",
+    "note": "Merger effective December 31, 2023. Reject current Yahoo SATS history because its metadata identifies a different issuer. Missing verified EchoStar quotes remain unresolved."
+  },
+  "AGTI": {
+    "symbol": "AGTI",
+    "kind": "cash",
+    "effective_date": "2024-05-07",
+    "cash_per_share": 10.0,
+    "source": "https://www.sec.gov/Archives/edgar/data/1749704/000119312524132655/d828134dex991.htm",
+    "note": "Acquisition completion and cash consideration confirmed by issuer release.",
+    "adjusted_cash_per_unit": 10.0
+  },
+  "KLG": {
+    "symbol": "KLG",
+    "kind": "cash",
+    "effective_date": "2025-09-26",
+    "cash_per_share": 23.0,
+    "source": "https://www.sec.gov/Archives/edgar/data/1959348/000119312525219988/d37512dex991.htm",
+    "note": "Acquisition completed before trading on September 26.",
+    "adjusted_cash_per_unit": 23.0
+  },
+  "ALEX": {
+    "symbol": "ALEX",
+    "kind": "cash",
+    "effective_date": "2026-03-13",
+    "cash_per_share": 20.85,
+    "source": "https://investors.alexanderbaldwin.com/2026-03-12-Alexander-Baldwin-is-Taken-Private-in-2-3-Billion-Transaction",
+    "note": "Merger completed March 12. Net closing payment is 20.85, not headline 21.20: the earlier 0.35 dividend must not be added twice. Recognize next session.",
+    "adjusted_cash_per_unit": 20.85
+  }
+}

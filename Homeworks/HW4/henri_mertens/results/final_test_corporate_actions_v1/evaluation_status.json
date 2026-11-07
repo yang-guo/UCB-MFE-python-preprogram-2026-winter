@@ -1,0 +1,7 @@
+{
+  "status": "unresolved_data_gap",
+  "reason": "VRTV missing 6 sessions on 2023-12-07; no verified exit or recovery.",
+  "model": "xgboost",
+  "no_test_period_retraining": true,
+  "revision": 1
+}

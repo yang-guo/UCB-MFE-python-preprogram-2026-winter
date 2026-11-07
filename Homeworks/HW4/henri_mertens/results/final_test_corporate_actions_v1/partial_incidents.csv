@@ -1,0 +1,12 @@
+date,symbol,kind,stale_sessions
+2017-09-19,MYCC,verified_cash_conversion,
+2023-08-17,DFFN,verified_stock_conversion,
+2023-08-17,DFFN,verified_stock_conversion,
+2023-09-01,SABRP,verified_stock_conversion,
+2023-11-01,ESTE,verified_stock_conversion,
+2023-11-30,VRTV,missing_held_quote,1.0
+2023-12-01,VRTV,missing_held_quote,2.0
+2023-12-04,VRTV,missing_held_quote,3.0
+2023-12-05,VRTV,missing_held_quote,4.0
+2023-12-06,VRTV,missing_held_quote,5.0
+2023-12-07,VRTV,missing_held_quote,6.0

@@ -1,0 +1,13 @@
+feature,confirmed,tentative,rank
+momentum_21,True,False,1
+momentum_63,True,False,1
+momentum_252_21,True,False,1
+volatility_63,True,False,1
+drawdown_252,True,False,1
+net_margin,True,False,1
+operating_roa,True,False,1
+debt_to_assets,True,False,1
+cash_to_assets,False,False,2
+fcf_to_assets,False,False,2
+accruals_to_assets,False,False,3
+filing_age_days,True,False,1

@@ -1,0 +1,21 @@
+{
+  "symbol": "CRVO",
+  "issuer": "CervoMed Inc.",
+  "source": "https://query1.finance.yahoo.com/v8/finance/chart/CRVO?period1=1690848000&period2=1701388800&interval=1d&events=div%2Csplits",
+  "retrieved_at_utc": "2026-11-07T14:31:53.310163+00:00",
+  "raw_sha256": "2d4163e4374426e56ef3b653e22f0d33cc59beb4330cc84d50be33eb2cd44f6f",
+  "csv_sha256": "ebac2c5cccb38647a333ce74bf98220296e78a50d066c8d00053ee9ceaa516f4",
+  "overlap_dates_checked": 12,
+  "maximum_overlap_ratio_error": 0.002044962527326777,
+  "additional_sources": [
+    {
+      "symbol": "ONT",
+      "issuer": "Onterris, Inc.",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/ONT?period1=1776643200&period2=1790812799&interval=1d&events=div%2Csplits",
+      "raw_sha256": "b476ee6079792567fa1aa41610a9220c7f9e493dc9eef93566b54886f087bf7d",
+      "overlap_dates_checked": 25,
+      "maximum_overlap_price_difference": 9.155273446026513e-07
+    }
+  ],
+  "use": "successor holding accounting only, not predictor inputs"
+}

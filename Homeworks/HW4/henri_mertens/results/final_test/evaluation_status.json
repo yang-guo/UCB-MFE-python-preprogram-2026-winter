@@ -1,0 +1,6 @@
+{
+  "status": "unresolved_data_gap",
+  "reason": "MYCC missing 6 sessions on 2017-09-26; no verified exit or recovery.",
+  "model": "xgboost",
+  "no_test_period_retraining": true
+}

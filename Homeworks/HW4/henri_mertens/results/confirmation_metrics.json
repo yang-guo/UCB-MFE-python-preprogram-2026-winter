@@ -1,0 +1,9 @@
+{
+  "model": "xgboost",
+  "rank_ic": 0.019099298858134224,
+  "rmse": 0.19867842933745924,
+  "mae": 0.1332635044916589,
+  "scored_rows": 17915,
+  "scored_months": 9,
+  "predicted_rows": 21904
+}
