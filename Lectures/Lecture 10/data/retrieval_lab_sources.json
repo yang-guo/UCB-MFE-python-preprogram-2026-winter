@@ -1,7 +1,0 @@
-[
-  {"record_id":"aapl-future","ticker":"AAPL","title":"Debt refinancing and liquidity update","available_on":"2024-05-10","source_type":"classroom example","locator":"retrieval-lab/aapl-future#liquidity","text":"Debt refinancing liquidity improved after a new agreement in May. This information arrived after the April research cutoff."},
-  {"record_id":"msft-debt","ticker":"MSFT","title":"Debt refinancing and liquidity","available_on":"2024-02-02","source_type":"classroom example","locator":"retrieval-lab/msft-debt#debt","text":"Debt refinancing liquidity for this issuer appears in this excerpt. Its ticker differs from the assigned research subject."},
-  {"record_id":"aapl-debt","ticker":"AAPL","title":"Debt maturity schedule","available_on":"2024-02-02","source_type":"classroom example","locator":"retrieval-lab/aapl-debt#note-8","text":"Debt of 100 USD million matures in 2025. Refinancing depends on market access."},
-  {"record_id":"aapl-cash","ticker":"AAPL","title":"Cash resources","available_on":"2024-02-02","source_type":"classroom example","locator":"retrieval-lab/aapl-cash#note-3","text":"Cash totals 140 USD million at the reporting date. Liquidity also depends on operating cash needs."},
-  {"record_id":"aapl-supply","ticker":"AAPL","title":"Supplier concentration","available_on":"2024-04-10","source_type":"classroom example","locator":"retrieval-lab/aapl-supply#risks","text":"Supplier concentration could interrupt production. Several critical components have limited alternative suppliers."}
-]
