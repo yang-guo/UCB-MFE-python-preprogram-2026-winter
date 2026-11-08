@@ -1,94 +1,29 @@
-# UCB-MFE-python-preprogram-2026-winter
+# HW3: Memoization and Binary Tree Traversal
 
-## Class Schedule
+`hw3.py` implements the three-second memoization decorator and recursive and
+iterative versions of pre-order, in-order, and post-order tree traversal.
 
-Fall 2026: October 5-November 5. All times are Pacific Time (PT).
+## Run
 
-| Day      | Date       | Time        | Lecturer | Topics |
-| -------- | ---------- | ----------- | -------- | ------ |
-| Monday   | 10/5/2026  | 9am - 12pm  | Aneesh   | Basics: Python syntax, Git, CLI, AI tools |
-| Thursday | 10/8/2026  | 9am - 12pm  | Yang     | [Data Analysis I & II: pandas, portfolio analysis](Lectures/Lecture%202/readme.md) |
-| Monday   | 10/12/2026 | 9am - 12pm  | Aneesh   | [LLM Classification & Agent Evaluation](Lectures/Lecture%203/readme.md) |
-| Thursday | 10/15/2026 | 9am - 12pm  | Yang     | [Data Analysis III: visualization/cleaning, SQL, risk reports](Lectures/Lecture%204/readme.md) |
-| Monday   | 10/19/2026 | 9am - 12pm  | Aneesh   | [Advanced Python I: Python, memory and systems](Lectures/Lecture%205/README.md) |
-| Thursday | 10/22/2026 | 9am - 12pm  | Aneesh   | [Advanced Python II: algorithms, async and LLM memory](Lectures/Lecture%206/README.md) |
-| Monday   | 10/26/2026 | 9am - 12pm  | Yang     | [Modeling I: sklearn, financial features, time-aware evaluation](Lectures/Lecture%207/readme.md) |
-| Thursday | 10/29/2026 | 9am - 12pm  | Yang     | [Modeling II: backtesting and research workflow](Lectures/Lecture%208/readme.md) |
-| Monday   | 11/2/2026  | 9am - 12pm  | Aneesh   | [Productionization: testing, APIs, Docker, CI](Lectures/Lecture%209/README.md) |
-| Thursday | 11/5/2026  | 9am - 12pm  | Yang     | Advanced topic: on demand |
+Use Python 3.12 or later, then run:
 
-## Homework
-- one homework per module
-- Homework is due two weeks (14 calendar days) after the module's last lecture.
-- submission via github pull request (see Lecture 1)
-- Please assign PRs to Kevin Ramlal (`kevinramlal`) and Raghuram Kowdeed (`raghuramkowdeed`)
+```bash
+python test_hw3.py
+```
 
-| Module | Last Lecture | Homework Due |
-| ------ | ------------ | ------------ |
-| [Basic Python (HW 1)](Lectures/Lecture%201/hw1.md) | 10/5/2026 | 10/19/2026, 11:59 p.m. Pacific (PDT) |
-| Data Analysis | 10/15/2026 | 10/29/2026 |
-| [Advanced Python (HW 3)](Homeworks/HW3/README.md) | 10/22/2026 | 11/5/2026, 11:59 p.m. Pacific (PST) |
-| [Modeling (HW4)](Lectures/Lecture%208/hw4.md) | 10/29/2026 | 11/12/2026 |
-| [Productionization (HW5)](Homeworks/HW5/hw_5.md) | 11/2/2026 | 11/16/2026, 11:59 p.m. Pacific (PST) |
-| Advanced Topics | 11/5/2026 | 11/19/2026 |
+## Implementation Notes
 
-HW 1 starter files and the submission folder layout are in [Homeworks/HW1](Homeworks/HW1/README.md).
+Part1
+Each decorated function has its own cache, and each argument has a separate
+result and timestamp. A result is cached after the function successfully
+finishes and remains valid while its age is less than three seconds. At exactly
+three seconds it is recomputed. Cache hits do not reset the timestamp, and
+failed calls are not cached.
 
-HW 3 instructions, starter code, and automated checks are in [Homeworks/HW3](Homeworks/HW3/README.md).
-
-HW5 instructions and the API/container starter are in [Homeworks/HW5](Homeworks/HW5/README.md).
-
-## Goal
-- Level up your coding skills
-- Help you to succeed in an entry-level / internship position of data scientist / quant developer
-
-## How to get the most of this course
-- Attend live sessions and ask a lot of questions
-- Review class materials and do homework right after the class, as learning curve is pretty steep.
-
-## Operating System
-- Most of the class materials are prepared with macOS 
-- All class materials should work seamlessly with both Windows and Linux systems
-
-## Extra Materials
-- Relevant materials will be [linked](...) inline.
-- It's highly recommended, but not a must to go over the linked materials. The course is self-contained.
-
-## Grading
-- Pass / No-Pass
-- In order to pass, students needs to complete all homeworks on-time.
-- Do your homework as soon as possible.
-
-## Late Policy
-- Each student will be given **three** free late days, with each late day being equivalent to 24 hours of lateness. 
-- Assignments are considered either on time or late by whole days; for instance, an assignment is either on time, 1 day late, 2 days late, etc. 
-- Due to the leniency of this policy, no extensions will be granted for assignments under any circumstances. 
-- No assignment will be accepted if it is submitted more than 3 days after its due date.
-
-## Communication
-- Most of the communication and announcement will be sent via Slack.
-- Most of the questions should be asked & answered in the group channel.
-- Yang, Aneesh & GSIs will routinely check the channel to make sure all questions are answered.
-
-## Instructors
-- [Yang Guo](https://www.linkedin.com/in/yang-guo-19494ba/)
-- [Aneesh Sachdeva](https://www.linkedin.com/in/aneeshsachdeva/)
-
-## GSIs
-- Raghuram Kowdeed
-- [Kevin Ramlal](https://www.linkedin.com/in/kevinramlal/)
-
-
-
-## Running the notebooks
-
-- From the project root, run `uv sync --locked` and select the project's `.venv` Python interpreter as your notebook kernel.
-- Run each notebook with its lecture folder as the working directory. The reorganized data-analysis notebooks also support the repository root and their reference folders.
-- Data analysis has two covered notebooks from October 8 (Lecture 2) and four on October 15 (Lecture 4). The deferred visualization/cleaning module opens Lecture 4, followed by SQL, a risk report, and automated reporting. Lecture 4's guide plans 150 minutes including a ten-minute break. Each notebook has a continuous lesson with visible worked examples and exercises at the end; Lecture 4 retains optional references.
-- Lecture 4 generates seeded synthetic stock histories inside its opening cleaning notebook. Lecture 2's optional Jupyter tutorial includes a historical sample; default runs work without an API key.
-- Worked examples use different inputs or questions from the final exercises. Exercise prompts, starter cells, and feedback stay together at the end; the lesson runs independently of student answers.
-- Lecture 4's default report batch deliberately includes one invalid ticker: three reports succeed, one failure is recorded, and the comparison uses successful outputs only.
-- Lecture 4 requires the bCourses database at `Lectures/Lecture 4/data/data.db`.
-- Lecture 6's October 22 prepared notebook uses only the standard library, simulated I/O and no external services; its cell outputs are cleared for live teaching. The older reference notebook's HTTP examples require internet access, and its multiprocessing example uses the adjacent `lecture6_workers.py` module.
-- Lectures 7 and 8 use real equity data from `Lectures/modeling/data/equities_class.duckdb` (30 selected stocks, under 5 MiB). HW4 uses `equities_top2000.duckdb` (3,849 stocks across quarterly top-2,000 lists, January 2000–September 2026, about 315 MiB). Download both from bCourses; see the [modeling data guide](Lectures/modeling/README.md). There is no synthetic fallback.
-- Database files, local credentials, and generated reports are not tracked.
+Part2
+The iterative traversals use explicit stacks to track pending work. Pre-order
+pushes the right child before the left so the left is visited first. In-order
+stores waiting ancestors while moving down the left side, then visits each
+ancestor before its right subtree. Post-order stores `(node, ready)` pairs so a
+node is visited only after both children. Every traversal returns a new list,
+and an empty tree returns `[]`.
