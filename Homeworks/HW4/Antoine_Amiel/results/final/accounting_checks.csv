@@ -1,0 +1,13 @@
+,value
+max_cash_reconstruction_error,1.1701552615761557e-08
+cash_never_negative,True
+max_nav_identity_error,0.0
+final_holdings_rebuild_error,4.656612873077393e-10
+every_buy_after_its_signal,True
+every_sale_held_at_least_90_days,True
+max_days_held,91
+fills_at_that_day_close,True
+fills_without_same_day_quote,0
+lots_sold_at_most_once,True
+sold_plus_open_equals_bought,True
+pnl_identity_error,1.2194504961371422e-08

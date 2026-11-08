@@ -1,0 +1,11 @@
+,value
+final_value,2482217.2077899124
+final_value_if_stale_open_lots_worth_zero,1717384.57850826
+price_incidents,4.0
+final_value_without_incident_jumps,2578803.3022016175
+total_fees,67770.3285250554
+average_cash_fraction_after_ramp_up,0.014642294200437278
+average_open_lots,98.5256012412723
+turnover_bought_over_avg_nav_per_year,3.5824950065518317
+buy_orders_rejected_no_quote,1.0
+exits_delayed_no_quote,23901.0

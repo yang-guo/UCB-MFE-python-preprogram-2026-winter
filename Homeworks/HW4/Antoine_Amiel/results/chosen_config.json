@@ -1,0 +1,19 @@
+{
+  "frozen_on": "2026-11-08, after run_development.py and before run_final_test.py was ever executed",
+  "model": "ridge",
+  "ridge_alpha": 1000.0,
+  "target": "same-date percentile rank of the 90-day return (next-session close to first close on/after +90 calendar days)",
+  "training_rows": "weekly signal dates from 2010-01-04, only rows with label_end < fit date",
+  "refit_schedule": "after the close of 2016-03-31, then at the first session of every quarter (expanding window)",
+  "max_rank": 1000,
+  "names_per_sleeve": 30,
+  "weighting": "equal",
+  "sleeves": 3,
+  "sleeve_gap_sessions": 21,
+  "name_cap": 0.05,
+  "fee_bps": 5,
+  "initial_cash": 1000000,
+  "cash_interest": 0,
+  "data_screen": "exclude candidates with a one-session move above +100% or below -50% in the previous 252 sessions",
+  "rationale": "Ridge had the best development Sharpe ratio with every universe screen and size (0.82-0.92 vs 0.65-0.79 for gradient boosting). Momentum-only results above the benchmark were driven by data incidents (e.g. the LCI ticker re-mapping). Among clean configurations, top-1000 / 30 names had the highest development CAGR (14.7% vs 14.9% for the benchmark) with a Sharpe ratio (0.89) within noise of the best (0.92) and no price incidents."
+}
