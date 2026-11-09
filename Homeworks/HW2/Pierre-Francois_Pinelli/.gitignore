@@ -1,0 +1,16 @@
+# The database is never committed (download data.db from bCourses into data/)
+data/
+*.db
+
+# Commit only the 3 sample reports (plus the summary CSV and the chart)
+reports/*/*_report*.ipynb
+!reports/*/KO_report.ipynb
+!reports/*/AMGN_report.ipynb
+!reports/*/NKE_report.ipynb
+
+.ipynb_checkpoints/
+__pycache__/
+
+# Local Python environment
+.venv/
+.DS_Store
