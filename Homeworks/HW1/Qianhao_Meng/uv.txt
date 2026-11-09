@@ -1,0 +1,55 @@
+HW1 uv exercise — Qianhao Meng
+
+All commands below were run from:
+Homeworks/HW1/Qianhao_Meng
+
+1. Check uv version
+Command:
+uv --version
+
+Result:
+uv 0.12.10
+
+2. Create the HW1 virtual environment with Python 3.12.9
+Commands:
+uv venv --python 3.12.9 HW1
+source HW1/bin/activate
+python --version
+python -c "import sys; print(sys.executable)"
+
+Result:
+Created and activated the HW1 virtual environment inside my submission folder.
+Python version: 3.12.9
+Python executable: /Users/tommeng/Desktop/UCB MFE/Pre-MFE/python/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW1/Qianhao_Meng/HW1/bin/python
+
+3. Install packages from the provided requirements.txt
+Commands:
+uv pip install --python HW1/bin/python -r ../requirements.txt
+uv pip show --python HW1/bin/python requests
+
+Result:
+Installed the required packages in the HW1 environment.
+Verified requests version: 2.25.0
+
+4. Downgrade requests to 2.24.0
+Commands:
+uv pip install --python HW1/bin/python "requests==2.24.0"
+uv pip show --python HW1/bin/python requests
+
+Result:
+requests was downgraded from 2.25.0 to 2.24.0.
+Verified the installed version using uv pip show.
+urllib3 was also downgraded from 1.26.20 to 1.25.11.
+
+5. Upgrade requests to the latest version
+Commands:
+uv pip install --python HW1/bin/python --upgrade requests
+uv pip show --python HW1/bin/python requests urllib3
+HW1/bin/python -c "import requests; print(requests.__version__)"
+
+Result:
+requests was upgraded from 2.24.0 to 2.34.2.
+urllib3 was also upgraded from 1.25.11 to 2.8.0.
+requests imported successfully and printed 2.34.2.
+
+Latest requests version installed during this exercise: 2.34.2
