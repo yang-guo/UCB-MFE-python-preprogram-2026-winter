@@ -1,0 +1,40 @@
+[
+  {
+    "kind": "stock",
+    "effective_date": "2022-02-14",
+    "old_symbol": "XLNX",
+    "new_symbol": "AMD",
+    "share_exchange_ratio": 1.7234,
+    "source": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-22-000031/amd-20220214.htm",
+    "timing_source": "https://www.sec.gov/Archives/edgar/data/2488/000000248823000047/amd-20221231.htm",
+    "note": "Acquisition completed before market open. Preserve original lot maturity. Fractional successor shares retained under the portfolio's fractional-unit approximation, instead of actual cash in lieu. No discretionary merger trading fee."
+  },
+  {
+    "kind": "cash",
+    "effective_date": "2023-11-22",
+    "old_symbol": "VMW",
+    "new_symbol": "CASH:VMW",
+    "cash_per_share": 142.50,
+    "source": "https://www.broadcom.com/company/news/financial-releases/61501",
+    "timing_source": "https://infomemo.theocc.com/infomemos?number=53611",
+    "note": "Default non-electing shareholders received $142.50 per VMW share. No active election is modeled. Cash entitlement valued at completion and reserved, without interest, until original lot maturity; payment/processing delays beyond maturity are not modeled. No discretionary sale or merger fee."
+  },
+  {
+    "kind": "stock",
+    "effective_date": "2024-02-15",
+    "old_symbol": "AESC",
+    "new_symbol": "AES",
+    "share_exchange_ratio": 3.8859,
+    "source": "https://www.sec.gov/Archives/edgar/data/874761/000087476124000054/aes-20240630.htm",
+    "note": "Mandatory conversion of AES corporate equity units. Preferred collateral tendered to satisfy the purchase contract; 3.8859 common shares per corporate unit. Preserve original lot maturity. Do not add contract payments separately to vendor adjusted-price returns. The source universe does not reliably distinguish these units from ordinary shares."
+  },
+  {
+    "kind": "rename",
+    "effective_date": "2025-01-21",
+    "old_symbol": "SQ",
+    "new_symbol": "XYZ",
+    "share_exchange_ratio": 1.0,
+    "source": "https://investors.block.xyz/investor-news/news-details/2025/Block-Announces-Ticker-Symbol-Change-to-XYZ-To-Report-Fourth-Quarter-Results/default.aspx",
+    "note": "Same Block Class A shares; only ticker changes. The database has overlapping SQ/XYZ histories. Remap held lots and old-symbol orders from the effective date; do not change model scores, feature rows, or historical universe ranks, and do not claim deduplicated issuer coverage."
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "name": "price_top20",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252"
+  ],
+  "alpha": 100,
+  "screen": {
+    "max_universe_rank": 200,
+    "min_raw_close": 5.0,
+    "max_raw_close": 10000.0,
+    "max_volatility_63": 0.6,
+    "max_abs_daily_return_63": 0.25,
+    "complete_trailing_returns": 252
+  },
+  "portfolio": {
+    "initial_cash": 1000000.0,
+    "top_n": 20,
+    "monthly_fraction": 0.3333333333333333,
+    "cost_bps": 10.0,
+    "max_stale_sessions": 5
+  },
+  "training_signals": "2010-01-01 through 2015-12-31; completed outcomes only",
+  "fit_rule": "once before first evaluation signal; no final-period retraining",
+  "target_winsorization": "training-only 1st/99th percentiles",
+  "frozen_before_final": true,
+  "selection_source": "development.json",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "code_sha256": {
+    "research.py": "426194762df8c8b97d4416d6a316ce7245049ede74e9ebc976bee8dc2422acfe",
+    "backtester.py": "2cd9f94b9cca245aa4f0ef4b9930adb6a17ebb22b917acd7a1a99612ef05ad0f",
+    "course_data.py": "f14a55a6ebd00c9f50e2f6ffa3c91fa47f2d7e70c6e3241b04f05469c04d1ea6"
+  },
+  "development_winner": "price_top20"
+}

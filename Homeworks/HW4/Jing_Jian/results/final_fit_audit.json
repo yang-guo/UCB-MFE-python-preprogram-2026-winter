@@ -1,0 +1,10 @@
+{
+  "fit_before_signal": "2016-03-31",
+  "training_rows": 13334,
+  "latest_training_signal": "2015-11-30",
+  "latest_training_outcome": "2016-02-29",
+  "target_clip_lower": -0.26993395094433703,
+  "target_clip_upper": 0.3243673802878967,
+  "eligible_decisions": 23062,
+  "screened_decisions": 355824
+}

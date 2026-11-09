@@ -1,0 +1,33 @@
+{
+  "reason": "Initial final run stopped at XLNX on 2022-02-22 after missing quotes. Official AMD filings confirm mandatory conversion on 2022-02-14.",
+  "scope": "Execution accounting only: convert inherited shares at official terms, retaining original lot id and maturity. Model, features, screens, top-N, costs, target processing, training and selection rules unchanged. No strategy retuning after final returns. Also book the documented VMW default cash entitlement, reserving proceeds until original maturity; no active consideration election. Payment delays beyond maturity are not modeled. Also apply documented AES corporate-unit conversion and Block symbol mapping to existing holdings/old-symbol orders. Historical scores and universe rows remain unchanged; overlapping issuer aliases are disclosed as a source limitation.",
+  "original_code_sha256": {
+    "research.py": "426194762df8c8b97d4416d6a316ce7245049ede74e9ebc976bee8dc2422acfe",
+    "backtester.py": "2cd9f94b9cca245aa4f0ef4b9930adb6a17ebb22b917acd7a1a99612ef05ad0f",
+    "course_data.py": "f14a55a6ebd00c9f50e2f6ffa3c91fa47f2d7e70c6e3241b04f05469c04d1ea6"
+  },
+  "amended_code_sha256": {
+    "research.py": "bc1a502ed79e920c49972c141d898cbaccf146eb6213b84c6daab33de9413b42",
+    "backtester.py": "5fc11ff2cb2f16998dd21b63c8a3a88b80ebf17b561102ca2b944efec892de41",
+    "course_data.py": "f14a55a6ebd00c9f50e2f6ffa3c91fa47f2d7e70c6e3241b04f05469c04d1ea6"
+  },
+  "corporate_actions_py_sha256": "df8685fcbe9b1f7c05a6f799fd160093a30f41c8017ee34bd7f18339a9f26aac",
+  "corporate_actions_json_sha256": "2e6ef3ac5b7a94ce46863039661ec91439af29c88bbb99b2347b92d6ff9e2fa8",
+  "initial_failure": {
+    "status": "unresolved",
+    "error": "Held quote gap: XLNX on 2022-02-22 (6 sessions)",
+    "policy": "Stop; do not retune using final survival or fabricate a fill."
+  },
+  "subsequent_failure": {
+    "status": "unresolved",
+    "error": "Held quote gap: VMW on 2023-12-04 (6 sessions)",
+    "policy": "Stop; do not retune using final survival or fabricate a fill."
+  },
+  "observed_incidents": [
+    "XLNX: missing quotes at 2022-02-22",
+    "VMW: missing quotes at 2023-12-04",
+    "AESC: missing quotes at 2024-02-23",
+    "SQ: missing quotes at 2025-03-24"
+  ],
+  "pre_amendment_score_sha256": "e707dab6e77f546f230abcfef2e0c4d091dbd91cc32ca925c449719a3843e01d"
+}
