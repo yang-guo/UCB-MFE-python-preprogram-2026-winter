@@ -1,0 +1,8 @@
+# Python 3.12+. The repository's `uv sync --locked` environment already includes all of these.
+pandas>=2.3
+numpy>=2.3
+matplotlib>=3.10
+papermill>=2.6
+scrapbook>=0.5
+tqdm>=4.67
+ipykernel>=7.1

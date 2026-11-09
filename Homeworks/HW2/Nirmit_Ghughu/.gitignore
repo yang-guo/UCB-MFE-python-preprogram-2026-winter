@@ -1,0 +1,8 @@
+# Local database working copy (also ignored at the repository root)
+data/
+
+# The batch writes all 30 reports locally; only these samples are submitted.
+reports/*/*_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/NVDA_report.ipynb
+!reports/*/MRK_report.ipynb
