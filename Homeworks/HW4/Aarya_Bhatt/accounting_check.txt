@@ -1,0 +1,8 @@
+=== Hand-Verified Backtester Accounting Check ===
+Initial Cash:        $1,000,000.00
+Signal Date (t):     2020-01-02
+Entry Date (t+1):    2020-01-03 | Buy 10,000 sh AAA @ $100.00 | Cash After: $0.00
+90-Day Maturity:     2020-04-02 (90 calendar days)
+Exit Fill:           2020-04-02 | Sell 10,000 sh AAA @ $110.00 | Cash After: $1,100,000.00
+Min Cash Observed:   $0.00 (No double-spending or leverage)
+Accounting Verification Status: PASSED
