@@ -1,0 +1,35 @@
+{
+  "elastic_net": {
+    "alpha": 0.5257563097564121,
+    "l1_ratio": 0.6228849370364342
+  },
+  "xgboost": {
+    "n_estimators": 80,
+    "max_depth": 4,
+    "learning_rate": 0.12971228439674817,
+    "min_child_weight": 16.957565533152664,
+    "subsample": 0.7884794944860062,
+    "colsample_bytree": 0.7326605828047722,
+    "reg_lambda": 1.9199098265013839
+  },
+  "catboost": {
+    "iterations": 240,
+    "depth": 5,
+    "learning_rate": 0.10532837278847698,
+    "l2_leaf_reg": 3.9006988421669924
+  },
+  "mlp": {
+    "architecture": "32,16",
+    "alpha": 0.26937037680813464,
+    "learning_rate_init": 0.0005074355136045265
+  },
+  "kalman": {
+    "process_noise": 0.009398248812111515,
+    "measurement_noise": 0.1847655515183187
+  },
+  "rbf_svr": {
+    "C": 0.5030361544067294,
+    "epsilon": 0.4381139761582473,
+    "gamma": 0.10169240095181417
+  }
+}

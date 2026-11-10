@@ -1,0 +1,14 @@
+date,symbol,kind,stale_sessions
+2017-09-19,MYCC,verified_cash_conversion,
+2023-08-17,DFFN,verified_stock_conversion,
+2023-08-17,DFFN,verified_stock_conversion,
+2023-09-01,SABRP,verified_stock_conversion,
+2023-11-01,ESTE,verified_stock_conversion,
+2023-11-30,VRTV,verified_cash_conversion,
+2024-01-02,DISH,cancelled_nontrading_predecessor,
+2024-05-07,AGTI,verified_cash_conversion,
+2024-05-23,GH,missing_held_quote,1.0
+2025-09-26,KLG,verified_cash_conversion,
+2026-03-13,ALEX,verified_cash_conversion,
+2026-05-04,MEG,verified_stock_conversion,
+2026-05-19,MCW,verified_cash_conversion,
