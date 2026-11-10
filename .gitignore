@@ -186,3 +186,7 @@ Lectures/Lecture 4/outputs/
 *.duckdb.wal
 Lectures/modeling/outputs/
 Homeworks/HW4/*/outputs/
+
+# HW4 local data and feature cache
+Homeworks/HW4/Jordyn_Paszamant/data/
+Homeworks/HW4/Jordyn_Paszamant/processed_features/
