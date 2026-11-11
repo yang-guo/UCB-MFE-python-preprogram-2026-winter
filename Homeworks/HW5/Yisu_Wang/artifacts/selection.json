@@ -1,0 +1,82 @@
+{
+  "summary": {
+    "test_year": 2026,
+    "train_start": "2020-01-01",
+    "train_end_exclusive": "2025-01-01",
+    "validation_year": 2025,
+    "model_active_from": "2026-01-01",
+    "train_rows": 2033909,
+    "valid_rows": 324634,
+    "best_single_valid_ic": 0.04286462473501692,
+    "ensemble_valid_ic": 0.04012315100657567,
+    "ensemble_valid_rank_ic": 0.034380098258373355,
+    "ensemble_top10_target_mean": 0.17225546173168374,
+    "ensemble_top10_excess": 0.1481961045241106,
+    "selected_trials": "30,29,19,22"
+  },
+  "selected_models": [
+    {
+      "rank": 1,
+      "trial": 30,
+      "file": "model_01.txt",
+      "best_round": 2,
+      "valid_ic": 0.04286462473501692,
+      "parameters": {
+        "num_leaves": 255,
+        "max_depth": 12,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 10.0,
+        "feature_fraction": 0.7
+      },
+      "sha256": "556f5e488263ae92bedc59e23c1fa7e7e3e5d6562bf379cf1d6e558ad594fe9e"
+    },
+    {
+      "rank": 2,
+      "trial": 29,
+      "file": "model_02.txt",
+      "best_round": 7,
+      "valid_ic": 0.035799225265108245,
+      "parameters": {
+        "num_leaves": 255,
+        "max_depth": 12,
+        "min_data_in_leaf": 400,
+        "lambda_l2": 10.0,
+        "feature_fraction": 0.7
+      },
+      "sha256": "661f25439a3c35b15b2a8805e2890972b7cda8794eb6377a5f4f049fe7be4b6d"
+    },
+    {
+      "rank": 3,
+      "trial": 19,
+      "file": "model_03.txt",
+      "best_round": 6,
+      "valid_ic": 0.029359569767002228,
+      "parameters": {
+        "num_leaves": 127,
+        "max_depth": 10,
+        "min_data_in_leaf": 400,
+        "lambda_l2": 10.0,
+        "feature_fraction": 0.85
+      },
+      "sha256": "c49b114d3d82048d3ed99e7f93dfe5af2ce71dd788ec8263f40176d1d7eadc05"
+    },
+    {
+      "rank": 4,
+      "trial": 22,
+      "file": "model_04.txt",
+      "best_round": 6,
+      "valid_ic": 0.029205521820212303,
+      "parameters": {
+        "num_leaves": 127,
+        "max_depth": 10,
+        "min_data_in_leaf": 400,
+        "lambda_l2": 1.0,
+        "feature_fraction": 0.85
+      },
+      "sha256": "f41dc2702b6d1f970846936a14be0c55f37472c1271b4468471c115fcd87946c"
+    }
+  ],
+  "selection_metric": "highest individual validation mean daily Pearson IC",
+  "ensemble": "daily 0.5% two-tail winsorization, population z-score, equal weights",
+  "feature_schema": "../run_config.json"
+}
