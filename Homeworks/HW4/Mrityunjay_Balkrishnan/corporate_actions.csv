@@ -1,0 +1,25 @@
+symbol,event_type,effective_date,cash_per_share,source_url,notes
+BID,cash_acquisition,2019-10-03,57.0,https://www.sec.gov/Archives/edgar/data/823094/000082309419000038/a8-kclosingxbrl.htm,"SEC merger filing verifies $57 cash per share and effective date October 3, 2019."
+RAVN,cash_acquisition,2021-11-30,58.0,https://investors.cnh.com/news/news-details/2021/CNH-Industrial-completes-the-acquisition-of-Raven-Industries-11-30-2021/default.aspx,CNH acquisition completion.
+ECOL,cash_acquisition,2022-05-02,48.0,https://investor.republicservices.com/news-releases/news-release-details/republic-services-completes-acquisition-us-ecology,Cash acquisition completion.
+POLY,cash_acquisition,2022-08-29,40.0,https://www.hp.com/us-en/newsroom/press-releases/2022/hp-inc-completes-acquisition-of-poly.html,"HP official completion notice confirms August 29, 2022 close and $40 per share consideration."
+PING,cash_acquisition,2022-10-18,28.5,https://press.pingidentity.com/2022-10-18-Thoma-Bravo-Completes-Acquisition-of-Ping-Identity/1000,Cash acquisition completion.
+BTRS,cash_acquisition,2022-12-16,9.5,https://www.billtrust.com/news/eqt-private-equity-completes-acquisition-of-billtrust,Cash acquisition completion.
+CCXI,cash_acquisition,2022-10-20,52.0,https://www.amgen.com/newsroom/press-releases/2022/10/amgen-successfully-completes-acquisition-of-chemocentryx,Cash acquisition completion.
+AIMC,cash_acquisition,2023-03-27,62.0,https://www.nasdaqtrader.com/TraderNews.aspx?id=ECA2023-183,Cash acquisition completion.
+USER,cash_acquisition,2023-01-12,7.5,https://www.usertesting.com/company/newsroom/press-releases/thoma-bravo-and-sunstone-partners-complete-acquisition-usertesting,Cash acquisition completion.
+COUP,cash_acquisition,2023-02-28,81.0,https://d18rn0p25nwr6d.cloudfront.net/CIK-0001385867/0a65dbca-6dd2-42dc-8aa2-78c41ee0a9da.pdf,Cash acquisition completion.
+VVNT,cash_acquisition,2023-03-10,12.0,https://investors.nrg.com/news-releases/news-release-details/nrg-completes-acquisition-vivint-smart-home-inc-creating-leading,Cash acquisition completion.
+TA,cash_acquisition,2023-05-15,86.0,https://www.nasdaqtrader.com/TraderNews.aspx?id=ECA2023-257,Cash acquisition completion.
+RETA,cash_acquisition,2023-09-26,172.5,https://investors.biogen.com/node/27201,Cash acquisition completion.
+DCPH,cash_acquisition,2024-06-11,25.6,https://prd.ono-pharma.com/en/news/20240611.html,Cash acquisition completion.
+PETQ,cash_acquisition,2024-10-25,31.0,https://www.sec.gov/Archives/edgar/data/1668673/000110465924111319/tm2426836d1_ex99-1.htm,Cash acquisition completion.
+FL,cash_acquisition,2025-09-08,24.0,https://investors.dicks.com/news/press-releases/news-details/2025/DICKS-Sporting-Goods-Completes-Acquisition-of-Foot-Locker/default.aspx,Assumes the default $24 cash election for non-electing holders.
+SPTN,cash_acquisition,2025-09-22,26.9,https://www.nasdaqtrader.com/TraderNews.aspx?id=ECA2025-519,Cash acquisition completion.
+VMEO,cash_acquisition,2025-11-24,7.85,https://www.sec.gov/Archives/edgar/data/1837686/000110465925115501/tm2532050d1_8k.htm,Cash acquisition completion.
+PLYM,cash_acquisition,2026-01-27,22.0,https://www.sec.gov/Archives/edgar/data/1515816/000119312526024519/plym-ex99_1.htm,Cash acquisition completion.
+SEMR,cash_acquisition,2026-04-28,12.0,https://news.adobe.com/news/2026/04/adobe-completes-semrush-acquisition,Cash acquisition completion.
+OLPX,cash_acquisition,2026-07-07,2.06,https://www.henkel.com/investors-and-analysts/investor-relations-news/2026-07-07-henkel-successfully-closes-acquisition-of-premium-hair-care-brand-olaplex-2193848,Cash acquisition completion.
+AVNS,cash_acquisition,2026-07-27,25.0,https://avanos.investorroom.com/2026-07-27-American-Industrial-Partners-Completes-Acquisition-of-Avanos-Medical%2C-Inc,"Official completion notice confirms July 27, 2026 close and $25 cash per share."
+DCT,cash_acquisition,2023-03-30,19.00,https://www.vistaequitypartners.com/news/vista-equity-partners-completes-acquisition-of-duck-creek-technologies/,Cash acquisition completion.
+KAMN,cash_acquisition,2024-04-19,46.00,https://kaman.com/arcline-completes-acquisition-of-kaman/,Cash acquisition completion.
