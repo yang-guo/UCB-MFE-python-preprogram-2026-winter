@@ -1,0 +1,43 @@
+# Homework 4: Stock Prediction and 90-Day Trading Strategy
+
+## 1. How to Run
+From `Homeworks/HW4/Aarya_Bhatt/` (with `equities_top2000.duckdb` placed in `Lectures/modeling/data/`):
+
+    uv run python strategy.py
+
+Running `strategy.py` executes the hand-verified accounting test, builds point-in-time features, runs chronological validation, executes the final test backtest (Apr 1, 2016 - Sep 30, 2026), and saves `accounting_check.txt`, `performance_comparison.csv`, and `cumulative_returns.png`. You can also view the results in `hw4_analysis.ipynb`.
+
+## 2. Features, Model, Validation, and Trading Strategy
+- **Universe & Point-in-Time Filtering:** At each quarter, candidates are restricted to historical members in `universe_membership` to avoid survivorship bias. We also screen for point-in-time close >= $5.00 to avoid distressed/penny-stock microstructure noise. Existing positions are held to their 90-day maturity even if a stock later leaves the universe.
+- **Features (9 Technical & Risk Factors):** Using adjusted close prices (`adj_close`), we compute multi-horizon returns (`ret_5d`, `ret_21d`, `ret_63d`, `ret_126d`), 12-minus-1 month momentum (`mom_12_1` skipping the most recent month to avoid short-term reversal), annualized realized volatility (`vol_21d`, `vol_63d`), distance from the 200-day moving average (`dist_ma200`), and 252-day drawdown (`dd_252d`). Each feature is winsorized daily at the 1st/99th percentiles across eligible universe members and standardized into cross-sectional z-scores.
+- **Model & Validation:** We predict 90-calendar-day forward returns (`target_90d`) aligned with next-session close entry (`t+1`) and maturity exit (`t+1 + 90 calendar days`, or next open session). Inside the 2010-2015 development window, we split chronologically into Train (2010-2013, requiring `exit_date <= 2013-12-31`) and Validation (2014-2015, requiring `exit_date <= 2015-12-31`). We evaluated Ridge regression across L2 penalties `alpha in {10, 100, 500, 1000}` via mean daily Spearman Rank IC, selecting `alpha = 10.0`. During the test period, the model refits annually using an expanding window of strictly completed 90-day targets (`exit_date <= signal_date`).
+- **Stock Selection & Execution Rules:** On each rebalance date (spaced ~31 calendar days apart across 3 staggered tranches), stocks are ranked by a volatility-penalized score (`pred - 0.15 * vol_63d_z`). Each tranche allocates up to 1/3 of current portfolio equity equally across the top 25 available picks, with 5 bps one-way transaction costs, long-only, 0% interest on idle cash, and no leverage.
+
+## 3. Backtester Accounting & Timing Check
+Before running the empirical backtest, `verify_backtester_accounting()` tests a hand-calculable scenario ($1,000,000 initial capital, signal on 2020-01-02, entry fill at 2020-01-03 close @ $100, 90-calendar-day exit on 2020-04-02 @ $110):
+
+    === Hand-Verified Backtester Accounting Check ===
+    Initial Cash:        $1,000,000.00
+    Signal Date (t):     2020-01-02
+    Entry Date (t+1):    2020-01-03 | Buy 10,000 sh AAA @ $100.00 | Cash After: $0.00
+    90-Day Maturity:     2020-04-02 (90 calendar days)
+    Exit Fill:           2020-04-02 | Sell 10,000 sh AAA @ $110.00 | Cash After: $1,100,000.00
+    Min Cash Observed:   $0.00 (No double-spending or leverage)
+    Accounting Verification Status: PASSED
+
+## 4. Performance Comparison (Apr 1, 2016 - Sep 30, 2026)
+
+                           Final Value ($)  CAGR (%)  Max Drawdown (%)  Sharpe Ratio (Rf=2%)
+    Strategy (Ridge 90d)      1,702,115.96      5.20            -38.85                  0.24
+    S&P 500 TR (^SP500TR)     4,402,746.78     15.17            -33.79                  0.77
+
+![Cumulative Returns](cumulative_returns.png)
+
+## 5. Findings, Limitations, and Next Steps
+- **Comparison vs. Benchmark:** The strategy grew $1,000,000 to $1,702,115.96 (5.20% CAGR, -38.85% max drawdown, 0.24 Sharpe), underperforming the buy-and-hold `^SP500TR` benchmark ($4,402,746.78 final value, 15.17% CAGR, -33.79% max drawdown, 0.77 Sharpe) by 9.97% annualized.
+- **Why It Underperformed & Risks Taken:** Equal-weighting 25 stocks per tranche across the broad top-2,000 universe diluted exposure to the mega-cap technology stocks that drove cap-weighted S&P 500 returns over 2016-2026. Furthermore, mean Rank IC during development was negative (-0.0375), meaning linear momentum/trend features suffered from cross-sectional mean reversion at the fixed 90-day horizon, while monthly turnover incurred steady 5 bps transaction cost drag.
+- **Unsuccessful Ideas & Future Changes:** Raw unscaled features were overly sensitive to high-beta outliers during volatile regimes, which cross-sectional winsorization and z-scoring helped stabilize. Next, I would add point-in-time fundamental valuation and profitability ratios from the `fundamentals` table (using `filing_date` to prevent look-ahead), test non-linear gradient boosted trees to capture feature interactions, and weight positions by inverse volatility.
+
+## 6. Citations & Disclosures
+- Database schema conventions and DuckDB table definitions follow the course modeling guide (`Lectures/modeling/README.md`).
+- AI assistance (Gemini) was used to help structure the backtester boilerplate, debug pandas/numpy date-indexing edge cases, and format documentation.
