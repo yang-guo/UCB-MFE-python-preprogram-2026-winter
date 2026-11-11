@@ -1,0 +1,54 @@
+{
+  "database": "equities_top2000.duckdb",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "sector"
+  ],
+  "training_start": "2010-01-01",
+  "development_validation_years": [
+    2012,
+    2013,
+    2014,
+    2015
+  ],
+  "alpha_grid": [
+    1.0,
+    100.0,
+    1000.0
+  ],
+  "selected_alpha": 1000.0,
+  "final_test_start": "2016-04-01",
+  "final_test_end": "2026-09-30",
+  "initial_capital": 1000000.0,
+  "top_n": 20,
+  "monthly_cohort_fraction": 0.3333333333333333,
+  "holding_calendar_days": 90,
+  "fee_bps_per_side": 5.0,
+  "name_cap": 0.05,
+  "sector_cap": 0.25,
+  "risk_free_rate": 0.02,
+  "cash_interest": 0,
+  "universe_policy": "dated quarterly membership at next-session entry; retain held positions after membership exit",
+  "retraining": "quarterly expanding window; fit only on outcomes completed before fit date",
+  "price_policy": "adjusted closes, fractional adjusted-price units; no separately added dividends",
+  "price_quality_policy": "remove nonpositive-volume quote rows; quarantine rows where adj_close/close changes by over 50% or a quote returns after more than five missing sessions; stop scoring that symbol after its first continuity break; censor targets crossing a break; do not apply guessed split corrections",
+  "data_gaps": "Missing entry quote skips buy; documented cash deals settle on effective date; successor shares and ticker aliases settle at 90-day maturity when sourced successor closes are available; BODY May 30 2024 and DISH February 29 2024 still lack verified closes; after five sessions without a quote, freeze unmatched old lots at their last marks and report zero recovery as a stress only.",
+  "non_equity_exclusions": "BWNB senior notes and SOFIW public warrants excluded from the common-stock strategy",
+  "corporate_action_inputs": [
+    "corporate_actions.csv",
+    "reorganization_exits.csv",
+    "supplemental_exit_quotes.csv"
+  ]
+}

@@ -1,0 +1,1 @@
+Manual round trip: $1,000 start; buy $500 inclusive of 10 bps at $10; 49.95004995 adjusted units; due 2020-04-30; sell at $12. Entry fee $0.499500; exit fee $0.599401; final cash $1098.801199; realized PnL $98.801199. Cash, fees, holding date, and realized PnL reconcile.
