@@ -1,0 +1,13 @@
+{
+  "source": "Direct 2026 HW4 LightGBM model predictions before API wrapping",
+  "signal_date": "2026-01-02",
+  "symbol": "A",
+  "model_version": "hw4-2026-top4-60-sessions",
+  "prediction": 0.0035800756786954642,
+  "model_scores": {
+    "model_01": 0.0035800756786954642,
+    "model_02": 0.002456317732415815,
+    "model_03": 0.011181410140692264,
+    "model_04": 0.011644312534500925
+  }
+}
