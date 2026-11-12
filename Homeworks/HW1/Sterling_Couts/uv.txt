@@ -1,0 +1,26 @@
+# Commands run from Homeworks/HW1/Sterling_Couts/ using Git Bash.
+
+# Create the homework environment with Python 3.12.9.
+uv venv HW1 --python 3.12.9
+
+# Activate the environment.
+source HW1/Scripts/activate
+
+# Verify the Python version and executable.
+python --version
+python -c "import sys; print(sys.executable)"
+
+# Install the shared requirements.
+uv pip install -r ../requirements.txt
+uv pip show requests
+# Installed requests version: 2.25.0
+
+# Downgrade requests.
+uv pip install requests==2.24.0
+uv pip show requests
+# Verified requests version: 2.24.0
+
+# Upgrade requests to the latest available version.
+uv pip install --upgrade requests
+uv pip show requests
+# Latest requests version reported after this upgrade: 2.34.2
