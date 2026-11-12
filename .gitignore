@@ -186,3 +186,4 @@ Lectures/Lecture 4/outputs/
 *.duckdb.wal
 Lectures/modeling/outputs/
 Homeworks/HW4/*/outputs/
+Homeworks/HW4/*/HW4/outputs/

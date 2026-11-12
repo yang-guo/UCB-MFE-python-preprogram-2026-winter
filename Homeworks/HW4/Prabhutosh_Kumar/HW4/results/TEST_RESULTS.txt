@@ -1,0 +1,14 @@
+test_added_features_are_causal (test_backtest.AccountingTests.test_added_features_are_causal) ... ok
+test_budget_fees_and_exact_maturity (test_backtest.AccountingTests.test_budget_fees_and_exact_maturity) ... ok
+test_first_day_fees_and_drawdown (test_backtest.AccountingTests.test_first_day_fees_and_drawdown) ... ok
+test_maturity_after_end_stays_open (test_backtest.AccountingTests.test_maturity_after_end_stays_open) ... ok
+test_missing_entry_is_cancelled (test_backtest.AccountingTests.test_missing_entry_is_cancelled) ... ok
+test_missing_exit_is_not_invented (test_backtest.AccountingTests.test_missing_exit_is_not_invented) ... ok
+test_strict_stale_policy (test_backtest.AccountingTests.test_strict_stale_policy) ... ok
+test_training_purges_unfinished_targets (test_backtest.AccountingTests.test_training_purges_unfinished_targets) ... ok
+test_weekend_maturity (test_backtest.AccountingTests.test_weekend_maturity) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.063s
+
+OK
