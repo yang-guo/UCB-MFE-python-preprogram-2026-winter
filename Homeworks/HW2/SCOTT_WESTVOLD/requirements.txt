@@ -1,0 +1,15 @@
+pandas==3.1.0
+numpy==2.5.4
+matplotlib==3.11.2
+papermill==2.7.0
+tqdm==4.70.1
+scrapbook==0.5.0
+pyarrow==12.0.1
+
+# Part of the Python standard library (no install needed):
+# sqlite3
+# datetime
+# typing
+# math
+# os
+# logging
