@@ -1,0 +1,8 @@
+# Local working database (from bCourses) is never committed.
+data/
+
+# Generate the full batch locally, but commit only the sample reports kept below.
+reports/*/*_report.ipynb
+!reports/*/AAPL_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
