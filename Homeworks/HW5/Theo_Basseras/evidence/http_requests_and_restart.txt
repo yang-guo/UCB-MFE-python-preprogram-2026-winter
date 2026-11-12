@@ -1,0 +1,65 @@
+Captured at 2026-11-12T21:59:13.438705+00:00
+Actual localhost HTTP requests to Docker.
+Image: sha256:d01965f1532aa37f6d923c420a01afce5e8003c401a9775731c51d8ed3714546
+Container: 43db328ced19315e18ca40bdac7548b098420ac67c47f8aae661236c0f7d0463
+Started before restart: 2026-11-12T21:58:26.510906974Z
+
+Valid HW4 example before restart
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": -0.056526207605344325, "volatility_63": 0.28350243186986457}
+HTTP 200
+{"prediction":-0.017168045543674057,"model_version":"hw4-model-full-2016-04-01"}
+
+Invalid negative volatility
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": -0.056526207605344325, "volatility_63": -0.2}
+HTTP 422
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be greater than or equal to 0","type":"greater_than_equal"}]}
+
+Regression: momentum 5 and volatility 1e10
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": 5, "volatility_63": 10000000000.0}
+HTTP 422
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be less than or equal to 10","type":"less_than_equal"}]}
+
+momentum_63 = 10.0
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": 10.0, "volatility_63": 0.28350243186986457}
+HTTP 200
+{"prediction":1.0147224781355608,"model_version":"hw4-model-full-2016-04-01"}
+
+momentum_63 = 10.000001
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": 10.000001, "volatility_63": 0.28350243186986457}
+HTTP 422
+{"detail":[{"loc":["body","momentum_63"],"msg":"Input should be less than or equal to 10","type":"less_than_equal"}]}
+
+volatility_63 = 10.0
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": -0.056526207605344325, "volatility_63": 10.0}
+HTTP 200
+{"prediction":-0.013661599578259832,"model_version":"hw4-model-full-2016-04-01"}
+
+volatility_63 = 10.000001
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": -0.056526207605344325, "volatility_63": 10.000001}
+HTTP 422
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be less than or equal to 10","type":"less_than_equal"}]}
+
+Restart command: docker restart mfe-hw5
+Same image after restart: sha256:d01965f1532aa37f6d923c420a01afce5e8003c401a9775731c51d8ed3714546
+Started after restart: 2026-11-12T21:59:16.22653851Z
+
+Valid HW4 example after restart
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+{"momentum_63": -0.056526207605344325, "volatility_63": 0.28350243186986457}
+HTTP 200
+{"prediction":-0.017168045543674057,"model_version":"hw4-model-full-2016-04-01"}

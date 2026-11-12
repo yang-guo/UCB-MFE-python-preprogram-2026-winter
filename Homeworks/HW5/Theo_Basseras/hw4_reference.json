@@ -1,0 +1,9 @@
+{
+  "features": {
+    "momentum_63": -0.056526207605344325,
+    "volatility_63": 0.28350243186986457
+  },
+  "prediction": -0.017168045543674057,
+  "model_version": "hw4-model-full-2016-04-01",
+  "source": "model_full and the first row of predictions_full in hw4.ipynb"
+}
