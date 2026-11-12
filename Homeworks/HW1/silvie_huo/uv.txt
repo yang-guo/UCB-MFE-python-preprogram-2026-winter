@@ -1,0 +1,19 @@
+write the commands you used to achieve the following:
+
+    Create a virtual environment called HW1 with Python 3.12.9
+    uv venv HW1 --python 3.12.9
+
+
+    Install the packages from the requirement file in Homeworks/HW1/requirements.txt
+    uv pip install -r requirements.txt
+
+
+    Downgrade the requests library to version 2.24.0
+    uv pip install requests==2.24.0
+
+
+    Upgrade the requests library to the latest
+    uv pip install --upgrade requests
+
+    What's the latest version of requests?
+    2.34.2
