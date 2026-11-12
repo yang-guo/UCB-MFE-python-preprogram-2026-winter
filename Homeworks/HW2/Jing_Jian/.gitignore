@@ -1,0 +1,19 @@
+# Local Python environment and data
+/HW2/
+/data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+__pycache__/
+.ipynb_checkpoints/
+.env
+.env.*
+
+# Keep the full batch locally; submit only three sample reports.
+/reports/*/*_report.ipynb
+!/reports/2026-10-29/AAPL_report.ipynb
+!/reports/2026-10-29/IBM_report.ipynb
+!/reports/2026-10-29/MRK_report.ipynb
+/reports/*/failed_stocks.txt
+/reports/*/batch.log
