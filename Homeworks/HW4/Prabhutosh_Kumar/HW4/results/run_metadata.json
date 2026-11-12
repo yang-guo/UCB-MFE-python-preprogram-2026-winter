@@ -1,0 +1,8 @@
+{
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "python": "3.12.9",
+  "sklearn": "1.8.0",
+  "pandas": "2.3.3",
+  "config_sha256": "7c418d60fa7ba4eeffd0c6f4f8df7b174541b78b0f549481f70c42e52463bfa5",
+  "full_ledger_directory": "outputs/results"
+}

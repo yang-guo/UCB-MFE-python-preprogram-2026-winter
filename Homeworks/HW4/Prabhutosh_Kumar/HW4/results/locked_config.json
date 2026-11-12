@@ -1,0 +1,36 @@
+{
+  "database": "Lectures/modeling/data/equities_top2000.duckdb",
+  "end": "2026-09-30",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "reversal_5",
+    "volatility_21"
+  ],
+  "ridge_alphas": [
+    10,
+    100,
+    1000
+  ],
+  "top_n": 30,
+  "tranche_fraction": 0.25,
+  "max_stock_weight": 0.05,
+  "capital": 1000000,
+  "fee": 0.001,
+  "holding_days": 90,
+  "stale_limit": 5,
+  "strict_prices": false,
+  "selected_alpha": 10.0,
+  "retraining": "none",
+  "selection": "mean 2013-2015 rank IC"
+}
