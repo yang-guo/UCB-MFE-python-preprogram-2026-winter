@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "evaluation_status": "incomplete",
+  "last_evaluated_date": "2024-10-21",
+  "failed_date": "2024-10-22",
+  "checks": [
+    "daily cash reconciliation",
+    "daily NAV identity",
+    "realized plus unrealized PnL",
+    "failed session excluded",
+    "unresolved positions preserved"
+  ],
+  "retrospective_exclusions": false
+}

@@ -1,0 +1,59 @@
+{
+  "database": "equities_top2000.duckdb",
+  "features": [
+    "return_5",
+    "momentum_21",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "relative_momentum_63",
+    "beta_252",
+    "range_21",
+    "volume_ratio_21_252",
+    "log_dollar_volume_21",
+    "operating_roa",
+    "gross_margin",
+    "revenue_yoy",
+    "asset_growth_yoy",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "current_ratio",
+    "filing_age_days"
+  ],
+  "development_signal_dates": [
+    "2010-01-01",
+    "2015-12-31"
+  ],
+  "validation_years": [
+    2012,
+    2013,
+    2014
+  ],
+  "selection_metric": "mean fold RMSE",
+  "model": "quarterly Ridge",
+  "security_policy": "common-stock-review-v1",
+  "preprocessing": "course quantile clipping, median imputation with missing indicators, standard scaling",
+  "price_quality_policy": {
+    "zero_volume_scale_factor": 100.0,
+    "unresolved_transition_factor": 10.0,
+    "trailing_market_sessions": 253,
+    "censor_labels_crossing_flags": true,
+    "documentation": "README.md: Price quality policy"
+  },
+  "parameter_grid": {
+    "model__alpha": [
+      1,
+      100,
+      1000
+    ]
+  },
+  "chosen_parameters": {
+    "model__alpha": 1000
+  },
+  "validation_rmse": 0.19938931338591448,
+  "initial_fit_signal": "2016-03-31",
+  "last_training_label_end": "2016-03-30",
+  "training_rows": 2912177
+}

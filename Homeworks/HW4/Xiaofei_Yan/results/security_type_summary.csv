@@ -1,0 +1,7 @@
+common_stock_candidate,reason,Securities
+False,explicit_noncommon_name_or_debt_coupon,17
+False,five_character_subordinate_or_uncertain_issue,100
+False,partnership_or_royalty_units_not_common_stock,60
+False,preferred_issue_symbol_review,3
+False,subordinate_issue_type_unconfirmed,20
+True,ordinary_share_candidate,3649
