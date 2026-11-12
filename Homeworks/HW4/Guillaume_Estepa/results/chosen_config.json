@@ -1,0 +1,11 @@
+{
+  "model": "ridge_rank",
+  "n_stocks": 50,
+  "max_liquidity_rank": 1000,
+  "n_tranches": 3,
+  "cost_rate": 0.001,
+  "sector_cap": 0.3,
+  "refit": "at test start, then first signal of each calendar year",
+  "chosen_on": "validation 2012-01-01..2015-12-31",
+  "database": "equities_top2000.duckdb"
+}
