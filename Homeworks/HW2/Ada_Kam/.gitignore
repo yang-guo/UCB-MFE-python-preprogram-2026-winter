@@ -1,0 +1,6 @@
+data/
+
+reports/*/*_report.ipynb
+!reports/*/GS_report.ipynb
+!reports/*/MSFT_report.ipynb
+!reports/*/NVDA_report.ipynb
