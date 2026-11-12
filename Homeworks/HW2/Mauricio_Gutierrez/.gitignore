@@ -1,0 +1,9 @@
+# Only 2-3 sample reports are submitted; the full batch stays local
+reports/*/*_report.ipynb
+!reports/*/IBM_report.ipynb
+!reports/*/MRK_report.ipynb
+!reports/*/HD_report.ipynb
+
+# Editor / Anaconda scratch files
+.virtual_documents/
+anaconda_projects/
