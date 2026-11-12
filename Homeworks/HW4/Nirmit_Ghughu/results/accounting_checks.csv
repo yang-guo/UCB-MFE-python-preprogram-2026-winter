@@ -1,0 +1,19 @@
+,value
+ledger: initial cash + sum(cash changes) == final cash,True
+NAV(end) == cash + open lots x last observed close,True
+NAV(end) - initial == realized PnL + unrealized PnL,True
+cash never negative,True
+every buy decided at the previous session's close,True
+every buy filled at that day's adjusted close,True
+every sale at first quoted close on/after entry + 90 days,True
+min days held (sold lots),90
+max days held (sold lots),92
+no fill after test end,True
+no buy before test start,True
+buys / sells / open lots,13650 / 13250 / 400
+buy orders cancelled (no quote at fill),0
+"lots never exited because quotes stopped (open, stale at end)",75
+total fees paid ($),137672.86
+average cash fraction of NAV,0.0782
+max single-name weight at a month end,0.0461
+max sector weight at a month end,0.3043

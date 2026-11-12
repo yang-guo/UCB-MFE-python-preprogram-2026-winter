@@ -1,0 +1,11 @@
+,CAGR,Sharpe,annual_volatility,beta_to_SP500TR,final_value,max_drawdown,total_return
+chosen (10 bps),0.1095,0.5444,0.1873,0.9556,2976783.4005,-0.3455,1.9768
+fees 0 bps,0.1172,0.5814,0.1873,,3201035.9389,-0.3434,2.2010
+fees 25 bps,0.0971,0.4847,0.1871,,2645551.6244,-0.3520,1.6456
+assumed: stuck lots settled at last close,0.1124,0.5410,0.1966,,3059195.4870,-0.3648,2.0592
+approx: PnL of split-hit lots removed,0.1123,0.5577,0.1874,,3056163.5883,-0.3455,2.0562
+stale open lots written to $0,0.0924,0.4535,0.1934,,2529004.5880,-0.3455,1.5290
+"baseline: 12-1 momentum, same rules",0.1941,0.6541,0.3207,,6437969.8074,-0.4619,5.4380
+"baseline: 12-1 momentum, stuck lots settled",0.2186,0.6825,0.3533,,7969608.3351,-0.4803,6.9696
+baseline: random 25 names (mean of 5 seeds),0.0924,0.4591,0.1887,,2533046.0183,-0.3895,1.5330
+^SP500TR,0.1517,0.7727,0.1782,,4402746.7763,-0.3379,3.4027
