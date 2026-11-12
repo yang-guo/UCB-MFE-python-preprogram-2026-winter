@@ -1,0 +1,20 @@
+{
+  "cash_never_negative": true,
+  "cash_reconciles": true,
+  "value_reconciles": true,
+  "no_short_positions": true,
+  "units_conserved": true,
+  "buys_fill_next_session": true,
+  "all_holds_at_least_90d": true,
+  "sales_on_first_quote_after_maturity": true,
+  "n_assumed_cash_outs": 0,
+  "n_sales_delayed_by_missing_quote": 2,
+  "max_hold_days": 1348.0,
+  "n_buys": 6348,
+  "n_sells": 6156,
+  "n_open_lots_at_end": 192,
+  "n_rejected_orders": 2,
+  "total_fees": 135928.39965368103,
+  "max_stale_value_share": 0.21257772686782025,
+  "final_overdue_value": 562324.41737697
+}

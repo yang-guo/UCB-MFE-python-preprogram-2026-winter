@@ -1,0 +1,15 @@
+{
+  "closed_lots": 6156,
+  "win_rate": 0.5841455490578298,
+  "mean_lot_return": 0.029590969144865784,
+  "median_lot_return": 0.026123986971082425,
+  "distinct_stocks_bought": 776,
+  "average_cash_share": 0.022860261002832838,
+  "lots_with_extreme_return": 8,
+  "pnl_from_extreme_lots": -62685.87185885414,
+  "total_pnl": 1655939.4135079137,
+  "open_lots_value_at_end": 2655939.412832673,
+  "cash_at_end": 0.0006752404988219496,
+  "overdue_unsellable_lots_at_end": 42,
+  "overdue_unsellable_value_at_end": 562324.41737697
+}
