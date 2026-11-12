@@ -1,0 +1,782 @@
+section,name,metric,value
+test_performance,"Strategy (momentum, submitted)",start,2016-04-01
+test_performance,^SP500TR buy & hold,start,2016-04-01
+test_performance,comparison: lgb_excess,start,2016-04-01
+test_performance,comparison: ridge,start,2016-04-01
+test_performance,"Strategy (momentum, submitted)",end,2026-09-30
+test_performance,^SP500TR buy & hold,end,2026-09-30
+test_performance,comparison: lgb_excess,end,2026-09-30
+test_performance,comparison: ridge,end,2026-09-30
+test_performance,"Strategy (momentum, submitted)",final_value,4824110.448596
+test_performance,^SP500TR buy & hold,final_value,4402746.776271
+test_performance,comparison: lgb_excess,final_value,2521504.388898
+test_performance,comparison: ridge,final_value,2814760.75351
+test_performance,"Strategy (momentum, submitted)",total_return,3.82411
+test_performance,^SP500TR buy & hold,total_return,3.402747
+test_performance,comparison: lgb_excess,total_return,1.521504
+test_performance,comparison: ridge,total_return,1.814761
+test_performance,"Strategy (momentum, submitted)",CAGR,0.161733
+test_performance,^SP500TR buy & hold,CAGR,0.151662
+test_performance,comparison: lgb_excess,CAGR,0.092105
+test_performance,comparison: ridge,CAGR,0.103612
+test_performance,"Strategy (momentum, submitted)",ann_vol,0.276465
+test_performance,^SP500TR buy & hold,ann_vol,0.178178
+test_performance,comparison: lgb_excess,ann_vol,0.221806
+test_performance,comparison: ridge,ann_vol,0.170395
+test_performance,"Strategy (momentum, submitted)",sharpe_rf2,0.610703
+test_performance,^SP500TR buy & hold,sharpe_rf2,0.772501
+test_performance,comparison: lgb_excess,sharpe_rf2,0.419998
+test_performance,comparison: ridge,sharpe_rf2,0.548959
+test_performance,"Strategy (momentum, submitted)",max_drawdown,-0.394112
+test_performance,^SP500TR buy & hold,max_drawdown,-0.337905
+test_performance,comparison: lgb_excess,max_drawdown,-0.411126
+test_performance,comparison: ridge,max_drawdown,-0.307481
+test_performance,"Strategy (momentum, submitted)",excess_CAGR_vs_SP500TR,0.010071
+test_performance,^SP500TR buy & hold,excess_CAGR_vs_SP500TR,0.0
+test_performance,comparison: lgb_excess,excess_CAGR_vs_SP500TR,-0.059557
+test_performance,comparison: ridge,excess_CAGR_vs_SP500TR,-0.04805
+test_year_by_year_return,momentum,2016,0.138864
+test_year_by_year_return,^SP500TR,2016,0.097751
+test_year_by_year_return,lgb_excess,2016,0.123345
+test_year_by_year_return,ridge,2016,0.069049
+test_year_by_year_return,momentum,2017,0.226275
+test_year_by_year_return,^SP500TR,2017,0.218316
+test_year_by_year_return,lgb_excess,2017,0.23516
+test_year_by_year_return,ridge,2017,0.224953
+test_year_by_year_return,momentum,2018,-0.152971
+test_year_by_year_return,^SP500TR,2018,-0.043842
+test_year_by_year_return,lgb_excess,2018,-0.168992
+test_year_by_year_return,ridge,2018,-0.124875
+test_year_by_year_return,momentum,2019,0.268255
+test_year_by_year_return,^SP500TR,2019,0.314864
+test_year_by_year_return,lgb_excess,2019,0.12622
+test_year_by_year_return,ridge,2019,0.260099
+test_year_by_year_return,momentum,2020,0.559241
+test_year_by_year_return,^SP500TR,2020,0.183988
+test_year_by_year_return,lgb_excess,2020,0.622143
+test_year_by_year_return,ridge,2020,0.238523
+test_year_by_year_return,momentum,2021,0.111695
+test_year_by_year_return,^SP500TR,2021,0.287054
+test_year_by_year_return,lgb_excess,2021,0.086683
+test_year_by_year_return,ridge,2021,0.222542
+test_year_by_year_return,momentum,2022,-0.094826
+test_year_by_year_return,^SP500TR,2022,-0.181109
+test_year_by_year_return,lgb_excess,2022,-0.199654
+test_year_by_year_return,ridge,2022,-0.178071
+test_year_by_year_return,momentum,2023,0.192466
+test_year_by_year_return,^SP500TR,2023,0.262877
+test_year_by_year_return,lgb_excess,2023,0.166873
+test_year_by_year_return,ridge,2023,0.234858
+test_year_by_year_return,momentum,2024,0.236932
+test_year_by_year_return,^SP500TR,2024,0.250197
+test_year_by_year_return,lgb_excess,2024,0.078453
+test_year_by_year_return,ridge,2024,0.115557
+test_year_by_year_return,momentum,2025,0.206311
+test_year_by_year_return,^SP500TR,2025,0.1788
+test_year_by_year_return,lgb_excess,2025,0.088328
+test_year_by_year_return,ridge,2025,0.086416
+test_year_by_year_return,momentum,2026,0.151783
+test_year_by_year_return,^SP500TR,2026,0.127457
+test_year_by_year_return,lgb_excess,2026,0.004941
+test_year_by_year_return,ridge,2026,0.046509
+test_accounting_checks,cash_reconciles,result,True
+test_accounting_checks,min_cash,result,0.0
+test_accounting_checks,nav_reconciles,result,True
+test_accounting_checks,nav_equals_cash_plus_holdings,result,True
+test_accounting_checks,buys_fill_next_session,result,True
+test_accounting_checks,all_signal_dates_on_grid,result,True
+test_accounting_checks,no_sale_before_maturity,result,True
+test_accounting_checks,sales_at_first_quote_on_or_after_maturity,result,True
+test_accounting_checks,sessions_late_distribution.0.0,result,12678
+test_accounting_checks,sessions_late_distribution.1.0,result,1
+test_accounting_checks,sessions_late_distribution.3.0,result,1
+test_accounting_checks,sampled_fill_prices_match_db,result,True
+test_accounting_checks,fills.buys,result,13096
+test_accounting_checks,fills.sells,result,12680
+test_accounting_checks,fills.open_lots_at_end,result,416
+test_accounting_checks,fees_paid,result,159630.771478
+test_accounting_checks,skipped_orders_no_entry_quote,result,4
+test_accounting_checks,final_nav_if_unquoted_lots_written_to_zero,result,3905990.149522
+test_accounting_checks,worked_example.symbol,result,MXL
+test_accounting_checks,worked_example.signal,result,2016-03-31
+test_accounting_checks,worked_example.entry,result,2016-04-01
+test_accounting_checks,worked_example.due,result,2016-06-30
+test_accounting_checks,worked_example.exit,result,2016-06-30
+test_accounting_checks,worked_example.entry_price,result,18.62
+test_accounting_checks,worked_example.units,result,178.840136
+test_accounting_checks,worked_example.entry_cost_incl_fee,result,3333.333333
+test_accounting_checks,worked_example.exit_price,result,17.98
+test_accounting_checks,worked_example.exit_proceeds_after_fee,result,3212.330097
+test_accounting_checks,worked_example.realized_pnl,result,-121.003236
+test_accounting_checks,worked_example.check_pnl,result,-121.003236
+test_accounting_checks,open_lots_without_final_quote.count,result,119
+test_accounting_checks,open_lots_without_final_quote.value,result,918120.299074
+test_accounting_checks,price_incidents,result,235
+test_unquoted_open_lots,TERN,lots,5
+test_unquoted_open_lots,COMM,lots,5
+test_unquoted_open_lots,CBAY,lots,6
+test_unquoted_open_lots,MDP,lots,6
+test_unquoted_open_lots,HOUS,lots,3
+test_unquoted_open_lots,RNA,lots,6
+test_unquoted_open_lots,GPS,lots,7
+test_unquoted_open_lots,HOME,lots,6
+test_unquoted_open_lots,HMHC,lots,6
+test_unquoted_open_lots,CIFRW,lots,5
+test_unquoted_open_lots,ROVR,lots,5
+test_unquoted_open_lots,ANAT,lots,4
+test_unquoted_open_lots,SGFY,lots,5
+test_unquoted_open_lots,ETRN,lots,3
+test_unquoted_open_lots,HIBB,lots,4
+test_unquoted_open_lots,ALPN,lots,3
+test_unquoted_open_lots,GATO,lots,3
+test_unquoted_open_lots,ISEE,lots,4
+test_unquoted_open_lots,DWAC,lots,2
+test_unquoted_open_lots,TA,lots,3
+test_unquoted_open_lots,VVNT,lots,3
+test_unquoted_open_lots,MTOR,lots,3
+test_unquoted_open_lots,VSCO,lots,1
+test_unquoted_open_lots,GBT,lots,2
+test_unquoted_open_lots,APGE,lots,2
+test_unquoted_open_lots,MFH,lots,3
+test_unquoted_open_lots,TE,lots,4
+test_unquoted_open_lots,CCXI,lots,1
+test_unquoted_open_lots,BSGM,lots,2
+test_unquoted_open_lots,KDNY,lots,1
+test_unquoted_open_lots,HPY,lots,2
+test_unquoted_open_lots,GCP,lots,1
+test_unquoted_open_lots,ALJ,lots,1
+test_unquoted_open_lots,TELZ,lots,1
+test_unquoted_open_lots,CVT,lots,1
+test_unquoted_open_lots,TERN,market_value,63595.172514
+test_unquoted_open_lots,COMM,market_value,60156.241729
+test_unquoted_open_lots,CBAY,market_value,53758.092805
+test_unquoted_open_lots,MDP,market_value,51244.818746
+test_unquoted_open_lots,HOUS,market_value,49314.908672
+test_unquoted_open_lots,RNA,market_value,49112.306249
+test_unquoted_open_lots,GPS,market_value,48368.020883
+test_unquoted_open_lots,HOME,market_value,43517.472152
+test_unquoted_open_lots,HMHC,market_value,42502.313812
+test_unquoted_open_lots,CIFRW,market_value,36877.291091
+test_unquoted_open_lots,ROVR,market_value,36862.520818
+test_unquoted_open_lots,ANAT,market_value,30750.684099
+test_unquoted_open_lots,SGFY,market_value,29618.5803
+test_unquoted_open_lots,ETRN,market_value,28457.19739
+test_unquoted_open_lots,HIBB,market_value,25117.871844
+test_unquoted_open_lots,ALPN,market_value,22746.706698
+test_unquoted_open_lots,GATO,market_value,22245.651122
+test_unquoted_open_lots,ISEE,market_value,21694.526999
+test_unquoted_open_lots,DWAC,market_value,20654.115469
+test_unquoted_open_lots,TA,market_value,19959.171641
+test_unquoted_open_lots,VVNT,market_value,18758.470444
+test_unquoted_open_lots,MTOR,market_value,18517.479439
+test_unquoted_open_lots,VSCO,market_value,17155.239249
+test_unquoted_open_lots,GBT,market_value,15452.994257
+test_unquoted_open_lots,APGE,market_value,14612.74937
+test_unquoted_open_lots,MFH,market_value,13486.713634
+test_unquoted_open_lots,TE,market_value,13351.841842
+test_unquoted_open_lots,CCXI,market_value,12010.425442
+test_unquoted_open_lots,BSGM,market_value,11996.567136
+test_unquoted_open_lots,KDNY,market_value,6908.5336
+test_unquoted_open_lots,HPY,market_value,6862.792228
+test_unquoted_open_lots,GCP,market_value,5366.939948
+test_unquoted_open_lots,ALJ,market_value,3931.338363
+test_unquoted_open_lots,TELZ,market_value,1840.860098
+test_unquoted_open_lots,CVT,market_value,1313.68899
+test_unquoted_open_lots,TERN,last_quote,2026-05-15
+test_unquoted_open_lots,COMM,last_quote,2026-01-14
+test_unquoted_open_lots,CBAY,last_quote,2024-03-25
+test_unquoted_open_lots,MDP,last_quote,2021-12-01
+test_unquoted_open_lots,HOUS,last_quote,2026-01-08
+test_unquoted_open_lots,RNA,last_quote,2026-09-30
+test_unquoted_open_lots,GPS,last_quote,2024-09-18
+test_unquoted_open_lots,HOME,last_quote,2021-07-22
+test_unquoted_open_lots,HMHC,last_quote,2022-04-06
+test_unquoted_open_lots,CIFRW,last_quote,2025-12-26
+test_unquoted_open_lots,ROVR,last_quote,2024-03-07
+test_unquoted_open_lots,ANAT,last_quote,2022-05-24
+test_unquoted_open_lots,SGFY,last_quote,2023-03-28
+test_unquoted_open_lots,ETRN,last_quote,2024-07-22
+test_unquoted_open_lots,HIBB,last_quote,2024-07-25
+test_unquoted_open_lots,ALPN,last_quote,2024-05-20
+test_unquoted_open_lots,GATO,last_quote,2025-01-15
+test_unquoted_open_lots,ISEE,last_quote,2023-07-10
+test_unquoted_open_lots,DWAC,last_quote,2024-03-25
+test_unquoted_open_lots,TA,last_quote,2023-05-15
+test_unquoted_open_lots,VVNT,last_quote,2023-03-09
+test_unquoted_open_lots,MTOR,last_quote,2022-08-02
+test_unquoted_open_lots,VSCO,last_quote,2026-07-13
+test_unquoted_open_lots,GBT,last_quote,2022-10-04
+test_unquoted_open_lots,APGE,last_quote,2026-09-02
+test_unquoted_open_lots,MFH,last_quote,2026-01-12
+test_unquoted_open_lots,TE,last_quote,2026-09-30
+test_unquoted_open_lots,CCXI,last_quote,2026-09-30
+test_unquoted_open_lots,BSGM,last_quote,2025-09-11
+test_unquoted_open_lots,KDNY,last_quote,2023-08-18
+test_unquoted_open_lots,HPY,last_quote,2016-04-22
+test_unquoted_open_lots,GCP,last_quote,2022-09-26
+test_unquoted_open_lots,ALJ,last_quote,2017-06-30
+test_unquoted_open_lots,TELZ,last_quote,2024-10-31
+test_unquoted_open_lots,CVT,last_quote,2023-06-14
+test_trade_stats,momentum,lot_hit_rate,0.511987
+test_trade_stats,momentum,mean_lot_return,0.057805
+test_trade_stats,momentum,median_lot_return,0.007828
+test_trade_stats,momentum,avg_names_held,105.529167
+test_trade_stats,momentum,avg_cash_weight,0.114935
+test_pnl_by_symbol,RUBY,realized_pnl,-37498.027918
+test_pnl_by_symbol,AMRS,realized_pnl,-37382.44622
+test_pnl_by_symbol,PACB,realized_pnl,-36888.570603
+test_pnl_by_symbol,WULF,realized_pnl,-35699.27421
+test_pnl_by_symbol,RIOT,realized_pnl,-35060.463406
+test_pnl_by_symbol,ASAN,realized_pnl,-34226.673728
+test_pnl_by_symbol,SEEL,realized_pnl,-33939.215788
+test_pnl_by_symbol,APLT,realized_pnl,-33718.305901
+test_pnl_by_symbol,PRCH,realized_pnl,-33263.402076
+test_pnl_by_symbol,DYN,realized_pnl,-32682.888572
+test_pnl_by_symbol,ENPH,realized_pnl,84100.710872
+test_pnl_by_symbol,RKLB,realized_pnl,94667.534766
+test_pnl_by_symbol,PL,realized_pnl,96520.965933
+test_pnl_by_symbol,MU,realized_pnl,103330.862145
+test_pnl_by_symbol,MSTR,realized_pnl,105742.016861
+test_pnl_by_symbol,VKTX,realized_pnl,117988.420249
+test_pnl_by_symbol,SMCI,realized_pnl,120036.980173
+test_pnl_by_symbol,BE,realized_pnl,123365.268558
+test_pnl_by_symbol,APP,realized_pnl,141832.993747
+test_pnl_by_symbol,CVNA,realized_pnl,169514.65905
+test_ranking_quality,momentum,mean_rank_IC,0.013894
+test_ranking_quality,lgb_excess,mean_rank_IC,0.017618
+test_ranking_quality,ridge,mean_rank_IC,0.02975
+test_ranking_quality,momentum,IC_t_stat,1.577375
+test_ranking_quality,lgb_excess,IC_t_stat,2.929913
+test_ranking_quality,ridge,IC_t_stat,4.279485
+test_ranking_quality,momentum,pct_dates_IC>0,0.51938
+test_ranking_quality,lgb_excess,pct_dates_IC>0,0.585271
+test_ranking_quality,ridge,pct_dates_IC>0,0.643411
+test_ranking_quality,momentum,top_decile_minus_all_90d,0.014845
+test_ranking_quality,lgb_excess,top_decile_minus_all_90d,0.005898
+test_ranking_quality,ridge,top_decile_minus_all_90d,0.002484
+test_ranking_quality,momentum,top50_median_minus_all_median_90d,-0.003828
+test_ranking_quality,lgb_excess,top50_median_minus_all_median_90d,-0.013671
+test_ranking_quality,ridge,top50_median_minus_all_median_90d,0.006857
+test_ranking_quality,momentum,dates,258.0
+test_ranking_quality,lgb_excess,dates,258.0
+test_ranking_quality,ridge,dates,258.0
+test_model_refits,2016-03-31,train_rows,593835
+test_model_refits,2017-04-11,train_rows,697322
+test_model_refits,2018-04-10,train_rows,796702
+test_model_refits,2019-04-08,train_rows,896070
+test_model_refits,2020-04-03,train_rows,995320
+test_model_refits,2021-04-01,train_rows,1094293
+test_model_refits,2022-04-12,train_rows,1196119
+test_model_refits,2023-04-12,train_rows,1293758
+test_model_refits,2024-04-10,train_rows,1391712
+test_model_refits,2025-04-09,train_rows,1489312
+test_model_refits,2026-04-09,train_rows,1586680
+test_model_refits,2016-03-31,last_label_end,2016-03-28
+test_model_refits,2017-04-11,last_label_end,2017-04-10
+test_model_refits,2018-04-10,last_label_end,2018-04-05
+test_model_refits,2019-04-08,last_label_end,2019-04-04
+test_model_refits,2020-04-03,last_label_end,2020-04-01
+test_model_refits,2021-04-01,last_label_end,2021-03-29
+test_model_refits,2022-04-12,last_label_end,2022-04-11
+test_model_refits,2023-04-12,last_label_end,2023-04-10
+test_model_refits,2024-04-10,last_label_end,2024-04-09
+test_model_refits,2025-04-09,last_label_end,2025-04-07
+test_model_refits,2026-04-09,last_label_end,2026-04-06
+test_model_refits,2016-03-31,predict_from,2016-03-31
+test_model_refits,2017-04-11,predict_from,2017-04-11
+test_model_refits,2018-04-10,predict_from,2018-04-10
+test_model_refits,2019-04-08,predict_from,2019-04-08
+test_model_refits,2020-04-03,predict_from,2020-04-03
+test_model_refits,2021-04-01,predict_from,2021-04-01
+test_model_refits,2022-04-12,predict_from,2022-04-12
+test_model_refits,2023-04-12,predict_from,2023-04-12
+test_model_refits,2024-04-10,predict_from,2024-04-10
+test_model_refits,2025-04-09,predict_from,2025-04-09
+test_model_refits,2026-04-09,predict_from,2026-04-09
+test_model_refits,2016-03-31,predict_to,2017-03-28
+test_model_refits,2017-04-11,predict_to,2018-03-26
+test_model_refits,2018-04-10,predict_to,2019-03-25
+test_model_refits,2019-04-08,predict_to,2020-03-20
+test_model_refits,2020-04-03,predict_to,2021-03-18
+test_model_refits,2021-04-01,predict_to,2022-03-29
+test_model_refits,2022-04-12,predict_to,2023-03-28
+test_model_refits,2023-04-12,predict_to,2024-03-26
+test_model_refits,2024-04-10,predict_to,2025-03-26
+test_model_refits,2025-04-09,predict_to,2026-03-25
+test_model_refits,2026-04-09,predict_to,2026-09-16
+test_lightgbm_feature_importance,r_sales_to_price,2016,0.181576
+test_lightgbm_feature_importance,r_idio_vol_252,2016,0.131654
+test_lightgbm_feature_importance,r_mom_12_1,2016,0.129258
+test_lightgbm_feature_importance,r_earnings_change,2016,0.111394
+test_lightgbm_feature_importance,r_gross_profitability,2016,0.107717
+test_lightgbm_feature_importance,r_debt_to_assets,2016,0.065826
+test_lightgbm_feature_importance,r_asset_growth,2016,0.062959
+test_lightgbm_feature_importance,r_earnings_yield,2016,0.061517
+test_lightgbm_feature_importance,r_accruals,2016,0.05474
+test_lightgbm_feature_importance,r_beta_252,2016,0.046275
+test_lightgbm_feature_importance,r_volume_trend,2016,0.024046
+test_lightgbm_feature_importance,r_rev_1m,2016,0.023039
+test_lightgbm_feature_importance,r_sales_to_price,2017,0.218114
+test_lightgbm_feature_importance,r_idio_vol_252,2017,0.133176
+test_lightgbm_feature_importance,r_mom_12_1,2017,0.100092
+test_lightgbm_feature_importance,r_earnings_change,2017,0.105423
+test_lightgbm_feature_importance,r_gross_profitability,2017,0.06834
+test_lightgbm_feature_importance,r_debt_to_assets,2017,0.072478
+test_lightgbm_feature_importance,r_asset_growth,2017,0.053447
+test_lightgbm_feature_importance,r_earnings_yield,2017,0.064173
+test_lightgbm_feature_importance,r_accruals,2017,0.046322
+test_lightgbm_feature_importance,r_beta_252,2017,0.076867
+test_lightgbm_feature_importance,r_volume_trend,2017,0.030982
+test_lightgbm_feature_importance,r_rev_1m,2017,0.030584
+test_lightgbm_feature_importance,r_sales_to_price,2018,0.19863
+test_lightgbm_feature_importance,r_idio_vol_252,2018,0.115702
+test_lightgbm_feature_importance,r_mom_12_1,2018,0.089907
+test_lightgbm_feature_importance,r_earnings_change,2018,0.127479
+test_lightgbm_feature_importance,r_gross_profitability,2018,0.077108
+test_lightgbm_feature_importance,r_debt_to_assets,2018,0.068356
+test_lightgbm_feature_importance,r_asset_growth,2018,0.027931
+test_lightgbm_feature_importance,r_earnings_yield,2018,0.076068
+test_lightgbm_feature_importance,r_accruals,2018,0.055866
+test_lightgbm_feature_importance,r_beta_252,2018,0.098606
+test_lightgbm_feature_importance,r_volume_trend,2018,0.047678
+test_lightgbm_feature_importance,r_rev_1m,2018,0.01667
+test_lightgbm_feature_importance,r_sales_to_price,2019,0.185095
+test_lightgbm_feature_importance,r_idio_vol_252,2019,0.116795
+test_lightgbm_feature_importance,r_mom_12_1,2019,0.063643
+test_lightgbm_feature_importance,r_earnings_change,2019,0.112075
+test_lightgbm_feature_importance,r_gross_profitability,2019,0.097166
+test_lightgbm_feature_importance,r_debt_to_assets,2019,0.073332
+test_lightgbm_feature_importance,r_asset_growth,2019,0.039846
+test_lightgbm_feature_importance,r_earnings_yield,2019,0.11222
+test_lightgbm_feature_importance,r_accruals,2019,0.069826
+test_lightgbm_feature_importance,r_beta_252,2019,0.073687
+test_lightgbm_feature_importance,r_volume_trend,2019,0.038142
+test_lightgbm_feature_importance,r_rev_1m,2019,0.018174
+test_lightgbm_feature_importance,r_sales_to_price,2020,0.177037
+test_lightgbm_feature_importance,r_idio_vol_252,2020,0.102905
+test_lightgbm_feature_importance,r_mom_12_1,2020,0.077762
+test_lightgbm_feature_importance,r_earnings_change,2020,0.099848
+test_lightgbm_feature_importance,r_gross_profitability,2020,0.095535
+test_lightgbm_feature_importance,r_debt_to_assets,2020,0.072133
+test_lightgbm_feature_importance,r_asset_growth,2020,0.044051
+test_lightgbm_feature_importance,r_earnings_yield,2020,0.117
+test_lightgbm_feature_importance,r_accruals,2020,0.077985
+test_lightgbm_feature_importance,r_beta_252,2020,0.067917
+test_lightgbm_feature_importance,r_volume_trend,2020,0.047658
+test_lightgbm_feature_importance,r_rev_1m,2020,0.020169
+test_lightgbm_feature_importance,r_sales_to_price,2021,0.173167
+test_lightgbm_feature_importance,r_idio_vol_252,2021,0.09995
+test_lightgbm_feature_importance,r_mom_12_1,2021,0.062089
+test_lightgbm_feature_importance,r_earnings_change,2021,0.083982
+test_lightgbm_feature_importance,r_gross_profitability,2021,0.110781
+test_lightgbm_feature_importance,r_debt_to_assets,2021,0.066966
+test_lightgbm_feature_importance,r_asset_growth,2021,0.045377
+test_lightgbm_feature_importance,r_earnings_yield,2021,0.103577
+test_lightgbm_feature_importance,r_accruals,2021,0.045101
+test_lightgbm_feature_importance,r_beta_252,2021,0.141297
+test_lightgbm_feature_importance,r_volume_trend,2021,0.054423
+test_lightgbm_feature_importance,r_rev_1m,2021,0.013289
+test_lightgbm_feature_importance,r_sales_to_price,2022,0.254837
+test_lightgbm_feature_importance,r_idio_vol_252,2022,0.116571
+test_lightgbm_feature_importance,r_mom_12_1,2022,0.061792
+test_lightgbm_feature_importance,r_earnings_change,2022,0.068787
+test_lightgbm_feature_importance,r_gross_profitability,2022,0.094587
+test_lightgbm_feature_importance,r_debt_to_assets,2022,0.07026
+test_lightgbm_feature_importance,r_asset_growth,2022,0.024389
+test_lightgbm_feature_importance,r_earnings_yield,2022,0.108632
+test_lightgbm_feature_importance,r_accruals,2022,0.038471
+test_lightgbm_feature_importance,r_beta_252,2022,0.112749
+test_lightgbm_feature_importance,r_volume_trend,2022,0.031528
+test_lightgbm_feature_importance,r_rev_1m,2022,0.017397
+test_lightgbm_feature_importance,r_sales_to_price,2023,0.280952
+test_lightgbm_feature_importance,r_idio_vol_252,2023,0.143083
+test_lightgbm_feature_importance,r_mom_12_1,2023,0.073096
+test_lightgbm_feature_importance,r_earnings_change,2023,0.054901
+test_lightgbm_feature_importance,r_gross_profitability,2023,0.083307
+test_lightgbm_feature_importance,r_debt_to_assets,2023,0.065733
+test_lightgbm_feature_importance,r_asset_growth,2023,0.030225
+test_lightgbm_feature_importance,r_earnings_yield,2023,0.106988
+test_lightgbm_feature_importance,r_accruals,2023,0.041871
+test_lightgbm_feature_importance,r_beta_252,2023,0.081537
+test_lightgbm_feature_importance,r_volume_trend,2023,0.024343
+test_lightgbm_feature_importance,r_rev_1m,2023,0.013966
+test_lightgbm_feature_importance,r_sales_to_price,2024,0.2634
+test_lightgbm_feature_importance,r_idio_vol_252,2024,0.140262
+test_lightgbm_feature_importance,r_mom_12_1,2024,0.076998
+test_lightgbm_feature_importance,r_earnings_change,2024,0.063111
+test_lightgbm_feature_importance,r_gross_profitability,2024,0.094446
+test_lightgbm_feature_importance,r_debt_to_assets,2024,0.06047
+test_lightgbm_feature_importance,r_asset_growth,2024,0.028405
+test_lightgbm_feature_importance,r_earnings_yield,2024,0.102668
+test_lightgbm_feature_importance,r_accruals,2024,0.04066
+test_lightgbm_feature_importance,r_beta_252,2024,0.092663
+test_lightgbm_feature_importance,r_volume_trend,2024,0.020709
+test_lightgbm_feature_importance,r_rev_1m,2024,0.016208
+test_lightgbm_feature_importance,r_sales_to_price,2025,0.259179
+test_lightgbm_feature_importance,r_idio_vol_252,2025,0.149509
+test_lightgbm_feature_importance,r_mom_12_1,2025,0.083235
+test_lightgbm_feature_importance,r_earnings_change,2025,0.073326
+test_lightgbm_feature_importance,r_gross_profitability,2025,0.088307
+test_lightgbm_feature_importance,r_debt_to_assets,2025,0.057477
+test_lightgbm_feature_importance,r_asset_growth,2025,0.032578
+test_lightgbm_feature_importance,r_earnings_yield,2025,0.098746
+test_lightgbm_feature_importance,r_accruals,2025,0.039533
+test_lightgbm_feature_importance,r_beta_252,2025,0.085273
+test_lightgbm_feature_importance,r_volume_trend,2025,0.016814
+test_lightgbm_feature_importance,r_rev_1m,2025,0.016022
+test_lightgbm_feature_importance,r_sales_to_price,2026,0.21288
+test_lightgbm_feature_importance,r_idio_vol_252,2026,0.131269
+test_lightgbm_feature_importance,r_mom_12_1,2026,0.09808
+test_lightgbm_feature_importance,r_earnings_change,2026,0.072891
+test_lightgbm_feature_importance,r_gross_profitability,2026,0.097821
+test_lightgbm_feature_importance,r_debt_to_assets,2026,0.061996
+test_lightgbm_feature_importance,r_asset_growth,2026,0.026023
+test_lightgbm_feature_importance,r_earnings_yield,2026,0.102575
+test_lightgbm_feature_importance,r_accruals,2026,0.039244
+test_lightgbm_feature_importance,r_beta_252,2026,0.123378
+test_lightgbm_feature_importance,r_volume_trend,2026,0.019678
+test_lightgbm_feature_importance,r_rev_1m,2026,0.014164
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,final_value,2102184.232542
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,final_value,1665368.233737
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,final_value,1814744.465708
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,final_value,2016715.625264
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,final_value,1490474.135569
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,final_value,1442276.193205
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,final_value,1403246.582713
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,final_value,1413295.656581
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,final_value,1462017.75503
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,final_value,1485747.095091
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,final_value,1378977.940616
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,final_value,1473898.547121
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,final_value,1363016.161912
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,final_value,1376082.03796
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,final_value,1322906.998738
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,final_value,1369773.971122
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,final_value,1297958.350642
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,final_value,1370768.645411
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,final_value,1312718.506402
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,final_value,1367537.636597
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,final_value,1228123.204976
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,final_value,1247417.289519
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,final_value,1282576.428394
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,final_value,1289032.480134
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,final_value,1431819.960382
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,final_value,1371921.440004
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,final_value,1355943.086985
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,final_value,1364332.770845
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,final_value,1336111.066141
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,final_value,1426593.682751
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,final_value,1353530.632509
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,final_value,1409517.298275
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,final_value,1363910.758812
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,final_value,1422585.689962
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,final_value,1356366.186901
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,final_value,1389805.338275
+validation_backtests_2013_2015,^SP500TR buy&hold,final_value,1477409.353266
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,CAGR,0.284467
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,CAGR,0.18751
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,CAGR,0.222382
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,CAGR,0.266628
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,CAGR,0.143934
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,CAGR,0.131334
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,CAGR,0.120924
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,CAGR,0.123623
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,CAGR,0.136528
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,CAGR,0.142711
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,CAGR,0.114354
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,CAGR,0.139632
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,CAGR,0.109991
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,CAGR,0.113565
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,CAGR,0.098876
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,CAGR,0.111843
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,CAGR,0.09185
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,CAGR,0.112115
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,CAGR,0.096018
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,CAGR,0.111231
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,CAGR,0.071691
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,CAGR,0.077335
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,CAGR,0.087472
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,CAGR,0.089314
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,CAGR,0.128564
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,CAGR,0.11243
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,CAGR,0.108047
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,CAGR,0.110353
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,CAGR,0.10256
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,CAGR,0.127174
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,CAGR,0.107383
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,CAGR,0.12261
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,CAGR,0.110237
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,CAGR,0.126106
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,CAGR,0.108164
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,CAGR,0.117295
+validation_backtests_2013_2015,^SP500TR buy&hold,CAGR,0.140546
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,ann_vol,0.332601
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,ann_vol,0.225821
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,ann_vol,0.345712
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,ann_vol,0.298713
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,ann_vol,0.159395
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,ann_vol,0.149091
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,ann_vol,0.145735
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,ann_vol,0.140818
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,ann_vol,0.188655
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,ann_vol,0.157001
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,ann_vol,0.168756
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,ann_vol,0.151422
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,ann_vol,0.12903
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,ann_vol,0.129138
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,ann_vol,0.125212
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,ann_vol,0.123979
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,ann_vol,0.137588
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,ann_vol,0.133465
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,ann_vol,0.130053
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,ann_vol,0.12831
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,ann_vol,0.134901
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,ann_vol,0.132681
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,ann_vol,0.12716
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,ann_vol,0.126711
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,ann_vol,0.140963
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,ann_vol,0.140686
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,ann_vol,0.135105
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,ann_vol,0.135185
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,ann_vol,0.127883
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,ann_vol,0.129669
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,ann_vol,0.123491
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,ann_vol,0.125295
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,ann_vol,0.131011
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,ann_vol,0.135747
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,ann_vol,0.1286
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,ann_vol,0.130889
+validation_backtests_2013_2015,^SP500TR buy&hold,ann_vol,0.12766
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,sharpe_rf2,0.835351
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,sharpe_rf2,0.780527
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,sharpe_rf2,0.674256
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,sharpe_rf2,0.859222
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,sharpe_rf2,0.798201
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,sharpe_rf2,0.768499
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,sharpe_rf2,0.719363
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,sharpe_rf2,0.756573
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,sharpe_rf2,0.66702
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,sharpe_rf2,0.801099
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,sharpe_rf2,0.607927
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,sharpe_rf2,0.807133
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,sharpe_rf2,0.718749
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,sharpe_rf2,0.743192
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,sharpe_rf2,0.656501
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,sharpe_rf2,0.756366
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,sharpe_rf2,0.562687
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,sharpe_rf2,0.713565
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,sharpe_rf2,0.616807
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,sharpe_rf2,0.730792
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,sharpe_rf2,0.433258
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,sharpe_rf2,0.477848
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,sharpe_rf2,0.566455
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,sharpe_rf2,0.581385
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,sharpe_rf2,0.786913
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,sharpe_rf2,0.68597
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,sharpe_rf2,0.679415
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,sharpe_rf2,0.694472
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,sharpe_rf2,0.671636
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,sharpe_rf2,0.834272
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,sharpe_rf2,0.726324
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,sharpe_rf2,0.826564
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,sharpe_rf2,0.711568
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,sharpe_rf2,0.795876
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,sharpe_rf2,0.707952
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,sharpe_rf2,0.760498
+validation_backtests_2013_2015,^SP500TR buy&hold,sharpe_rf2,0.937585
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,max_drawdown,-0.201832
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,max_drawdown,-0.178662
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,max_drawdown,-0.286164
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,max_drawdown,-0.208428
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,max_drawdown,-0.199644
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,max_drawdown,-0.144271
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,max_drawdown,-0.164623
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,max_drawdown,-0.129517
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,max_drawdown,-0.251968
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,max_drawdown,-0.130272
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,max_drawdown,-0.216543
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,max_drawdown,-0.138585
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,max_drawdown,-0.142753
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,max_drawdown,-0.129252
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,max_drawdown,-0.138277
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,max_drawdown,-0.116359
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,max_drawdown,-0.133676
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,max_drawdown,-0.111194
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,max_drawdown,-0.130583
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,max_drawdown,-0.102584
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,max_drawdown,-0.141903
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,max_drawdown,-0.122209
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,max_drawdown,-0.129517
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,max_drawdown,-0.111977
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,max_drawdown,-0.126523
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,max_drawdown,-0.103254
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,max_drawdown,-0.130563
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,max_drawdown,-0.101787
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,max_drawdown,-0.138184
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,max_drawdown,-0.137923
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,max_drawdown,-0.125989
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,max_drawdown,-0.128028
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,max_drawdown,-0.145326
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,max_drawdown,-0.148541
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,max_drawdown,-0.136228
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,max_drawdown,-0.137378
+validation_backtests_2013_2015,^SP500TR buy&hold,max_drawdown,-0.120365
+validation_backtests_2013_2015,momentum | top 1000 | 25 names | screen off,excess_CAGR_vs_SP500TR,0.143921
+validation_backtests_2013_2015,momentum | top 1000 | 50 names | screen off,excess_CAGR_vs_SP500TR,0.046964
+validation_backtests_2013_2015,momentum | top 2000 | 25 names | screen off,excess_CAGR_vs_SP500TR,0.081836
+validation_backtests_2013_2015,momentum | top 2000 | 50 names | screen off,excess_CAGR_vs_SP500TR,0.126082
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen off,excess_CAGR_vs_SP500TR,0.003388
+validation_backtests_2013_2015,lgb_excess | top 1000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.009212
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.019621
+validation_backtests_2013_2015,lgb_excess | top 1000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.016923
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.004018
+validation_backtests_2013_2015,lgb_excess | top 2000 | 25 names | screen on,excess_CAGR_vs_SP500TR,0.002165
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.026191
+validation_backtests_2013_2015,lgb_excess | top 2000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.000914
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.030554
+validation_backtests_2013_2015,lgb_rank | top 1000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.02698
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.041669
+validation_backtests_2013_2015,lgb_rank | top 1000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.028703
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.048696
+validation_backtests_2013_2015,lgb_rank | top 2000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.028431
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.044528
+validation_backtests_2013_2015,lgb_rank | top 2000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.029315
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.068854
+validation_backtests_2013_2015,lgb_sector | top 1000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.063211
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.053073
+validation_backtests_2013_2015,lgb_sector | top 1000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.051232
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.011982
+validation_backtests_2013_2015,lgb_sector | top 2000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.028116
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.032498
+validation_backtests_2013_2015,lgb_sector | top 2000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.030193
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.037986
+validation_backtests_2013_2015,ridge | top 1000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.013372
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.033163
+validation_backtests_2013_2015,ridge | top 1000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.017936
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen off,excess_CAGR_vs_SP500TR,-0.030309
+validation_backtests_2013_2015,ridge | top 2000 | 25 names | screen on,excess_CAGR_vs_SP500TR,-0.01444
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen off,excess_CAGR_vs_SP500TR,-0.032382
+validation_backtests_2013_2015,ridge | top 2000 | 50 names | screen on,excess_CAGR_vs_SP500TR,-0.023251
+validation_backtests_2013_2015,^SP500TR buy&hold,excess_CAGR_vs_SP500TR,0.0
+validation_rank_ic,lgb_excess,2013,0.013178
+validation_rank_ic,lgb_rank,2013,-0.03604
+validation_rank_ic,lgb_sector,2013,-0.038055
+validation_rank_ic,momentum,2013,0.043312
+validation_rank_ic,ridge,2013,-0.028052
+validation_rank_ic,lgb_excess,2014,0.009163
+validation_rank_ic,lgb_rank,2014,0.046285
+validation_rank_ic,lgb_sector,2014,0.034227
+validation_rank_ic,momentum,2014,-0.012612
+validation_rank_ic,ridge,2014,0.054863
+validation_rank_ic,lgb_excess,2015,0.000796
+validation_rank_ic,lgb_rank,2015,0.074104
+validation_rank_ic,lgb_sector,2015,0.078917
+validation_rank_ic,momentum,2015,0.069713
+validation_rank_ic,ridge,2015,0.068955
+validation_rank_ic,lgb_excess,mean,0.007712
+validation_rank_ic,lgb_rank,mean,0.028117
+validation_rank_ic,lgb_sector,mean,0.02503
+validation_rank_ic,momentum,mean,0.033471
+validation_rank_ic,ridge,mean,0.031922
+feature_screen,idio_vol_252,mean_ic,-0.073475
+feature_screen,vol_63,mean_ic,-0.064504
+feature_screen,earnings_yield,mean_ic,0.054878
+feature_screen,max_ret_21,mean_ic,-0.050368
+feature_screen,debt_to_assets,mean_ic,0.045666
+feature_screen,dist_52w_high,mean_ic,0.038683
+feature_screen,log_mcap,mean_ic,0.038625
+feature_screen,sales_to_price,mean_ic,0.034209
+feature_screen,gross_profitability,mean_ic,0.033737
+feature_screen,earnings_change,mean_ic,0.031579
+feature_screen,mom_12_1,mean_ic,0.027839
+feature_screen,volume_trend,mean_ic,0.020496
+feature_screen,accruals,mean_ic,0.012605
+feature_screen,asset_growth,mean_ic,0.011402
+feature_screen,book_to_market,mean_ic,0.009575
+feature_screen,rev_1m,mean_ic,-0.006951
+feature_screen,beta_252,mean_ic,0.006282
+feature_screen,idio_vol_252,ic_tstat,-5.853208
+feature_screen,vol_63,ic_tstat,-4.54181
+feature_screen,earnings_yield,ic_tstat,8.067269
+feature_screen,max_ret_21,ic_tstat,-4.61182
+feature_screen,debt_to_assets,ic_tstat,9.956773
+feature_screen,dist_52w_high,ic_tstat,3.099074
+feature_screen,log_mcap,ic_tstat,5.873345
+feature_screen,sales_to_price,ic_tstat,3.933408
+feature_screen,gross_profitability,ic_tstat,5.509388
+feature_screen,earnings_change,ic_tstat,7.339965
+feature_screen,mom_12_1,ic_tstat,3.437871
+feature_screen,volume_trend,ic_tstat,4.304086
+feature_screen,accruals,ic_tstat,3.072761
+feature_screen,asset_growth,ic_tstat,2.555594
+feature_screen,book_to_market,ic_tstat,1.468925
+feature_screen,rev_1m,ic_tstat,-0.892912
+feature_screen,beta_252,ic_tstat,0.356383
+feature_screen,idio_vol_252,coverage,0.985546
+feature_screen,vol_63,coverage,1.0
+feature_screen,earnings_yield,coverage,0.907706
+feature_screen,max_ret_21,coverage,1.0
+feature_screen,debt_to_assets,coverage,0.996161
+feature_screen,dist_52w_high,coverage,0.985765
+feature_screen,log_mcap,coverage,0.996985
+feature_screen,sales_to_price,coverage,0.907706
+feature_screen,gross_profitability,coverage,0.907736
+feature_screen,earnings_change,coverage,0.879014
+feature_screen,mom_12_1,coverage,0.980272
+feature_screen,volume_trend,coverage,0.944225
+feature_screen,accruals,coverage,0.902005
+feature_screen,asset_growth,coverage,0.878094
+feature_screen,book_to_market,coverage,0.995972
+feature_screen,rev_1m,coverage,1.0
+feature_screen,beta_252,coverage,0.985546
+feature_screen,idio_vol_252,decision,kept
+feature_screen,vol_63,decision,dropped: |corr| 0.86 with r_idio_vol_252
+feature_screen,earnings_yield,decision,kept
+feature_screen,max_ret_21,decision,dropped: |corr| 0.66 with r_idio_vol_252
+feature_screen,debt_to_assets,decision,kept
+feature_screen,dist_52w_high,decision,dropped: |corr| 0.55 with r_idio_vol_252
+feature_screen,log_mcap,decision,dropped: |corr| 0.65 with r_idio_vol_252
+feature_screen,sales_to_price,decision,kept
+feature_screen,gross_profitability,decision,kept
+feature_screen,earnings_change,decision,kept
+feature_screen,mom_12_1,decision,kept
+feature_screen,volume_trend,decision,kept
+feature_screen,accruals,decision,kept
+feature_screen,asset_growth,decision,kept
+feature_screen,book_to_market,decision,dropped: |corr| 0.42 with r_sales_to_price
+feature_screen,rev_1m,decision,kept
+feature_screen,beta_252,decision,kept
+feature_screen,idio_vol_252,description,252-session residual volatility after beta
+feature_screen,vol_63,description,63-session daily-return volatility
+feature_screen,earnings_yield,description,TTM net income / market cap
+feature_screen,max_ret_21,description,largest daily return in 21 sessions (lottery demand)
+feature_screen,debt_to_assets,description,total debt / total assets
+feature_screen,dist_52w_high,description,price / 252-session high - 1
+feature_screen,log_mcap,description,log(close x latest known shares)
+feature_screen,sales_to_price,description,TTM revenue / market cap
+feature_screen,gross_profitability,description,TTM gross profit / total assets
+feature_screen,earnings_change,description,(NI_q - NI_q-4) / total assets (earnings-surprise proxy)
+feature_screen,mom_12_1,description,12-month return skipping the last month (momentum)
+feature_screen,volume_trend,description,log(21-session avg volume / 252-session avg volume)
+feature_screen,accruals,description,(TTM net income - TTM operating cash flow) / total assets
+feature_screen,asset_growth,description,total assets / total assets 4 quarters earlier - 1
+feature_screen,book_to_market,description,book equity / market cap
+feature_screen,rev_1m,description,last 21-session return (short-term reversal)
+feature_screen,beta_252,description,252-session beta to the S&P 500 TR
+feature_screen,idio_vol_252,kept,True
+feature_screen,vol_63,kept,False
+feature_screen,earnings_yield,kept,True
+feature_screen,max_ret_21,kept,False
+feature_screen,debt_to_assets,kept,True
+feature_screen,dist_52w_high,kept,False
+feature_screen,log_mcap,kept,False
+feature_screen,sales_to_price,kept,True
+feature_screen,gross_profitability,kept,True
+feature_screen,earnings_change,kept,True
+feature_screen,mom_12_1,kept,True
+feature_screen,volume_trend,kept,True
+feature_screen,accruals,kept,True
+feature_screen,asset_growth,kept,True
+feature_screen,book_to_market,kept,False
+feature_screen,rev_1m,kept,True
+feature_screen,beta_252,kept,True

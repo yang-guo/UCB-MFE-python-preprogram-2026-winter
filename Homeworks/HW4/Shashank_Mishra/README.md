@@ -17,7 +17,7 @@ I also built a **LightGBM** model on 12 low-correlation features, and a **Ridge*
 | Maximum drawdown | −39.4% | **−33.8%** | −41.1% | −30.7% |
 | CAGR vs. benchmark | **+1.01 pp** | — | −5.96 pp | −4.80 pp |
 
-The numbers are in [results/test_performance.csv](results/test_performance.csv).
+All my result tables are in one file, [results/results.csv](results/results.csv), with columns `section, name, metric, value`; this table is section `test_performance`.
 
 ## 1. How to run what I did
 
@@ -44,12 +44,12 @@ On Windows, use `.venv\Scripts\pip`.
 
 The committed copy already shows all its outputs.
 
-**The same work as scripts.** This is how I produced the files in `results/`:
+**The same work as scripts.** This is how I produced `results/results.csv` and the two charts:
 
 ```bash
 cd Homeworks/HW4/Shashank_Mishra
 python -m pytest tests -q     # my 8 hand-calculated accounting/timing tests (< 1 s)
-python run_hw4.py dev         # 2010-2015 only: feature screen + validation; writes results/chosen_config.json (~3 min)
+python run_hw4.py dev         # 2010-2015 only: feature screen + validation; confirms the 12 features and final setup (~3 min)
 python run_hw4.py test        # final test 2016-2026: momentum + LightGBM + Ridge, chart, accounting checks (~3 min)
 ```
 
@@ -64,7 +64,22 @@ The first run builds the 1.66M-row feature panel and caches it in `outputs/panel
 | [hw4/model.py](hw4/model.py) | The LightGBM and Ridge models, walk-forward folds, and ranking metrics |
 | [run_hw4.py](run_hw4.py) | The `dev` and `test` stages, accounting checks, and charts |
 | [tests/test_backtest.py](tests/test_backtest.py) | Accounting and timing tests I can verify by hand |
-| [results/](results/) | Small tables and charts from the runs above |
+| [results/results.csv](results/results.csv) | **Every result table in one file** (`section, name, metric, value`), listed below |
+| [results/](results/) | That file plus the two charts: cumulative returns and feature correlations |
+
+**What is in `results/results.csv`** (one row per value):
+
+| Section | What it holds |
+|---|---|
+| `test_performance` | Final value, CAGR, volatility, Sharpe, drawdown for momentum, the S&P, LightGBM, Ridge |
+| `test_year_by_year_return` | Calendar-year returns for all four |
+| `test_accounting_checks` | Cash/NAV reconciliation, fill timing, price checks, fees, the hand-checked lot |
+| `test_unquoted_open_lots` | Positions in stocks that stopped trading, by symbol |
+| `test_trade_stats`, `test_pnl_by_symbol` | Hit rate, average lot return, names held, cash; biggest winners and losers |
+| `test_ranking_quality` | Rank IC and top-50 vs. average for each score in the test |
+| `test_model_refits`, `test_lightgbm_feature_importance` | Each yearly refit's training rows and last label date; LightGBM feature importance by year |
+| `validation_backtests_2013_2015`, `validation_rank_ic` | Every validation backtest (model × universe × names × screen) and rank IC by year |
+| `feature_screen` | IC, correlation and kept/dropped for all 17 candidate features |
 
 ## 2. Data and timing (no look-ahead)
 
@@ -74,7 +89,7 @@ I use only the provided database: prices, `^SP500TR`, quarterly membership, fund
 * **Universe.** A stock is eligible only if it is in the dated top-2000 list **for the quarter of the entry session**, and only if it has 63 complete trailing daily returns. My code asserts that the membership was known on the signal date. I never drop stocks because they later disappear, and I keep positions after a stock leaves the universe.
 * **Fundamentals.** I use them only from `filing_date + 1 day`. A late filing of an old quarter never replaces a newer one. Values more than 550 days past fiscal end are blanked.
 * **Prices.** I use adjusted closes, so dividends are never added twice. I quarantined 275 invalid BHRB rows and dropped 28 off-calendar rows. I never forward-fill prices. The $5 price screen and market cap use the unadjusted close.
-* **Model fits.** Every fit uses only rows whose 90-day outcome had already ended before the fit date, and the code asserts this ([results/test_refits.csv](results/test_refits.csv)). Features are percentiles within each date, so no preprocessing is learned across time.
+* **Model fits.** Every fit uses only rows whose 90-day outcome had already ended before the fit date, and the code asserts this (section `test_model_refits` in [results/results.csv](results/results.csv)). Features are percentiles within each date, so no preprocessing is learned across time.
 
 ## 3. Features
 
@@ -88,7 +103,7 @@ I built **17 standard candidates**:
 
 This dropped five features: 63-day volatility, maximum daily return, log market cap, and distance from the 52-week high, all too close to idiosyncratic volatility; and book-to-market, too close to sales-to-price.
 
-**The 12 I kept:** `idio_vol_252, earnings_yield, debt_to_assets, sales_to_price, gross_profitability, earnings_change, mom_12_1, volume_trend, accruals, asset_growth, rev_1m, beta_252`. The largest remaining correlation is 0.38 ([results/feature_screen.csv](results/feature_screen.csv)).
+**The 12 I kept:** `idio_vol_252, earnings_yield, debt_to_assets, sales_to_price, gross_profitability, earnings_change, mom_12_1, volume_trend, accruals, asset_growth, rev_1m, beta_252`. The largest remaining correlation is 0.38 (section `feature_screen` in [results/results.csv](results/results.csv)).
 
 ![Feature correlations](results/feature_correlation_selected.png)
 
@@ -134,7 +149,7 @@ I compared:
 * **Names per round:** 25 or 50.
 * **Momentum screen:** on or off.
 
-The full table is in [results/dev_strategy_validation.csv](results/dev_strategy_validation.csv).
+The full table is section `validation_backtests_2013_2015` in [results/results.csv](results/results.csv).
 
 | Validation 2013–2015 (best setup per model) | CAGR | Sharpe | Max DD | Mean rank IC |
 |---|---:|---:|---:|---:|
@@ -149,7 +164,7 @@ The full table is in [results/dev_strategy_validation.csv](results/dev_strategy_
 1. I first planned to submit the best LightGBM setup, because I wanted a tree model. I tested it with momentum and Ridge running alongside as comparisons; LightGBM made 9.2% a year.
 2. Momentum had clearly the best validation return and the best Sharpe of the three model families. I then chose it as my strategy, with its best validation setup (top 2000, 50 names), which is the same trading rule I used for every model.
 
-I tuned nothing on the test period. But I picked momentum *after* seeing LightGBM's test result, so the +1 pp edge is not a perfectly clean out-of-sample result. [results/chosen_config.json](results/chosen_config.json) records the final setup.
+I tuned nothing on the test period. But I picked momentum *after* seeing LightGBM's test result, so the +1 pp edge is not a perfectly clean out-of-sample result. The final setup is the `FINAL` constant in [run_hw4.py](run_hw4.py), and `run_hw4.py dev` asserts that validation still picks it.
 
 ## 7. Checking the accounting and timing
 
@@ -162,7 +177,7 @@ I tuned nothing on the test period. But I picked momentum *after* seeing LightGB
 * **Metrics.** The metric formulas are correct.
 * **Ticker reuse.** A reused ticker is frozen, not sold.
 
-**Checks on my full test run** ([results/test_accounting_checks.json](results/test_accounting_checks.json)). Each one is re-derived from the trade log, independently of the backtester:
+**Checks on my full test run** (section `test_accounting_checks` in [results/results.csv](results/results.csv)). Each one is re-derived from the trade log, independently of the backtester:
 
 | Check | Result |
 |---|---|

@@ -1,10 +1,11 @@
 """HW4 pipeline.
 
-    python run_hw4.py dev     # 2010-2015 only: feature screen, walk-forward validation, writes results/chosen_config.json
+    python run_hw4.py dev     # 2010-2015 only: feature screen, walk-forward validation, confirms features and final setup
     python run_hw4.py test    # final test Apr 2016 - Sep 2026: momentum (submitted) + LightGBM and Ridge comparisons
 
-Small result tables/plots go to ``results/`` (committed); the cached panel and
-full trade logs go to ``outputs/`` (git-ignored).
+Every result table goes into one file, ``results/results.csv`` (long format:
+section, name, metric, value), next to the two charts. The cached panel and full
+trade logs go to ``outputs/`` (git-ignored).
 """
 
 import argparse
@@ -44,6 +45,33 @@ RULES = {    # name -> score from signal-date columns only (no fitting)
 MODELS = ["momentum", "lgb_excess", "lgb_rank", "lgb_sector", "ridge"]
 COMPARISONS = ["lgb_excess", "ridge"]      # run next to the submitted strategy in the final test
 STRATEGY_GRID = [dict(max_rank=r, top_n=n, min_mom_rank=s) for r in (1000, 2000) for n in (25, 50) for s in (None, 0.5)]
+
+# What `dev` decided (it asserts both), used by `test`:
+#   FEATURES - the 12 features kept by the 2010-2012 low-correlation screen (inputs to LightGBM and Ridge);
+#   FINAL    - momentum with its best 2013-2015 validation-Sharpe setup. LightGBM and Ridge trade under the
+#              same rules; the median-momentum screen was in LightGBM's best setup and never binds for momentum.
+FEATURES = ["idio_vol_252", "earnings_yield", "debt_to_assets", "sales_to_price", "gross_profitability",
+            "earnings_change", "mom_12_1", "volume_trend", "accruals", "asset_growth", "rev_1m", "beta_252"]
+FINAL = dict(model="momentum", comparisons=COMPARISONS, max_rank=2000, top_n=50, min_mom_rank=0.5)
+
+RESULTS_CSV = RESULTS / "results.csv"
+SECTIONS = ["test_performance", "test_year_by_year_return", "test_accounting_checks", "test_unquoted_open_lots",
+            "test_trade_stats", "test_pnl_by_symbol", "test_ranking_quality", "test_model_refits",
+            "test_lightgbm_feature_importance", "validation_backtests_2013_2015", "validation_rank_ic",
+            "feature_screen"]
+
+
+def save_section(section, frame):
+    """Store one table in results/results.csv as long rows (section, name, metric, value), replacing that section."""
+    assert section in SECTIONS, section
+    long = (frame.rename_axis("name").reset_index().melt(id_vars="name", var_name="metric", value_name="value")
+            .assign(section=section)[["section", "name", "metric", "value"]])
+    long["value"] = [round(v, 6) if isinstance(v, float) else v for v in long.value]
+    RESULTS.mkdir(exist_ok=True)
+    old = pd.read_csv(RESULTS_CSV) if RESULTS_CSV.is_file() else long.iloc[:0]
+    out = pd.concat([old.loc[old.section.ne(section)], long], ignore_index=True)
+    out["_order"] = out.section.map(SECTIONS.index)
+    out.sort_values("_order", kind="stable").drop(columns="_order").to_csv(RESULTS_CSV, index=False)
 
 
 def log(msg):
@@ -144,30 +172,25 @@ def stage_dev(db):
     feats = [k[2:] for k in kept]
     stats.index = stats.index.str[2:]
     stats["description"] = [{**F.PRICE_CANDIDATES, **F.FUND_CANDIDATES}[c] for c in stats.index]
-    stats.round(4).to_csv(RESULTS / "feature_screen.csv")
+    stats["kept"] = stats.index.isin(feats)
+    save_section("feature_screen", stats)
     corr.index, corr.columns = corr.index.str[2:], corr.columns.str[2:]
     plot_corr(corr.loc[feats, feats], RESULTS / "feature_correlation_selected.png")
     log(f"kept {len(feats)} features: {feats}")
 
     mv, sv = validate(md, dev, feats, sectors, MODELS, STRATEGY_GRID)
-    mv.round(4).to_csv(RESULTS / "dev_model_validation.csv", index=False)
-    sv.round(4).to_csv(RESULTS / "dev_strategy_validation.csv", index=False)
+    ic = mv.pivot(index="model", columns="year", values="mean_rank_IC")
+    save_section("validation_rank_ic", ic.assign(mean=ic.mean(axis=1)))
+    sv["name"] = [m if pd.isna(r) else f"{m} | top {int(r)} | {int(n)} names | screen {'off' if pd.isna(x) else 'on'}"
+                  for m, r, n, x in zip(sv.model, sv.max_rank, sv.top_n, sv.min_mom_rank)]
+    save_section("validation_backtests_2013_2015",
+                 sv.set_index("name")[["final_value", "CAGR", "ann_vol", "sharpe_rf2", "max_drawdown", "excess_CAGR_vs_SP500TR"]])
     print(sv.round(4).to_string())
 
-    # Submitted strategy: momentum with its best validation-Sharpe setup. LightGBM and Ridge
-    # trade under the same rules for comparison; the median-momentum trend screen is part of
-    # those rules (it was in LightGBM's best setup and never binds for momentum's own top names).
     mom = sv.loc[sv.model.eq("momentum")].sort_values(["sharpe_rf2", "CAGR"], ascending=False).iloc[0]
-    bench = sv.loc[~sv.model.isin(MODELS)].iloc[0]
-    cfg = {"model": "momentum", "comparisons": COMPARISONS, "max_rank": int(mom.max_rank), "top_n": int(mom.top_n),
-           "min_mom_rank": 0.5, "features_for_models": feats, "fee_bps": FEE_BPS,
-           "signal_every_sessions": SIGNAL_EVERY, "cohorts": 6, "holding_days": 90,
-           "model_refit": "annual, first signal on/after Mar 31, expanding window from 2010",
-           "validation_2013_2015": {"CAGR": float(mom.CAGR), "sharpe_rf2": float(mom.sharpe_rf2),
-                                    "SP500TR_CAGR": float(bench.CAGR), "SP500TR_sharpe_rf2": float(bench.sharpe_rf2)},
-           "written_at": time.strftime("%Y-%m-%d %H:%M")}
-    (RESULTS / "chosen_config.json").write_text(json.dumps(cfg, indent=2))
-    log(f"chosen: {cfg}")
+    assert feats == FEATURES, f"feature screen changed: {feats}"
+    assert (int(mom.max_rank), int(mom.top_n)) == (FINAL["max_rank"], FINAL["top_n"]), "momentum's best setup changed"
+    log(f"kept features and final setup confirmed: {FINAL}")
 
 
 def plot_corr(corr, path):
@@ -187,12 +210,11 @@ def plot_corr(corr, path):
 
 # ------------------------------------------------------------------------------------ test
 def stage_test(db):
-    res_dir, out_dir = RESULTS, OUTPUTS
-    cfg = json.loads((res_dir / "chosen_config.json").read_text())
-    log(f"frozen config: {cfg}")
+    res_dir, out_dir, cfg = RESULTS, OUTPUTS, FINAL
+    log(f"final setup: {cfg}")
     md, panel = load_everything(db)
     sectors = sorted(panel.sector.unique())
-    feats = cfg["features_for_models"]
+    feats = FEATURES
     sig = signal_dates(md, TEST_START - pd.Timedelta(days=1), TEST_END)
     assert sig[0] == pd.Timestamp("2016-03-31")
 
@@ -217,8 +239,8 @@ def stage_test(db):
                         "predict_from": rows.date.min().date(), "predict_to": rows.date.max().date()})
         log(f"fit {fd.date()}: {len(train):,} rows, last label end {train.label_end.max().date()}")
     preds = {n: pd.concat(v) for n, v in preds.items()}
-    pd.DataFrame(fit_log).to_csv(res_dir / "test_refits.csv", index=False)
-    pd.concat(importances, axis=1).round(4).to_csv(res_dir / "test_lightgbm_feature_importance.csv")
+    save_section("test_model_refits", pd.DataFrame(fit_log).set_index("fit_date"))
+    save_section("test_lightgbm_feature_importance", pd.concat(importances, axis=1).rename(columns=str))
 
     kw = dict(max_rank=cfg["max_rank"], top_n=cfg["top_n"], min_mom_rank=cfg["min_mom_rank"])
     runs = {n: run_strategy(md, preds[n], sig, TEST_START, TEST_END, **kw) for n in names}
@@ -229,13 +251,13 @@ def stage_test(db):
     for n in names[1:]:
         table[f"comparison: {n}"] = performance(runs[n][0].daily.nav)
     table.loc["excess_CAGR_vs_SP500TR"] = [table.at["CAGR", c] - bp.CAGR for c in table.columns]
-    table.to_csv(res_dir / "test_performance.csv")
+    save_section("test_performance", table.T)
     print(table.to_string())
     comps = {n: runs[n][0].daily.nav for n in names[1:]}
 
     # Ranking quality of each score on the test signals with completed labels.
     pm = pd.DataFrame({n: M.prediction_metrics(p.loc[p.target.notna()], top_n=cfg["top_n"]) for n, p in preds.items()})
-    pm.to_csv(res_dir / "test_prediction_metrics.csv")
+    save_section("test_ranking_quality", pm.T)
     label = f"12-1 momentum, top {cfg['top_n']} every 2 weeks, 90-day lots (submitted)"
     plot_curves(res.daily.nav, bench.nav, res_dir / "test_cumulative_returns.png", comps, label)
 
@@ -245,8 +267,8 @@ def stage_test(db):
     res.open_lots.to_csv(out_dir / "test_open_lots.csv", index=False)
     pd.DataFrame(strat.log).to_csv(out_dir / "test_plans.csv", index=False)
     checks = accounting_checks(res, md, db, sig)
-    (res_dir / "test_accounting_checks.json").write_text(json.dumps(checks, indent=2, default=str))
-    diagnostics(res, md, res_dir, out_dir)
+    save_accounting_checks(checks)
+    diagnostics(res, {"momentum": res.daily.nav, "^SP500TR": bench.nav, **comps})
     log("done")
 
 
@@ -327,18 +349,43 @@ def accounting_checks(res, md, db, sig):
     return out
 
 
-def diagnostics(res, md, path, out_dir):
+def save_accounting_checks(checks):
+    """Flatten the accounting checks into results.csv: scalar checks, then the unquoted open lots by symbol."""
+    flat = {}
+    for k, v in checks.items():
+        if isinstance(v, dict):
+            flat.update({f"{k}.{kk}": vv for kk, vv in v.items()})
+        elif not isinstance(v, list):
+            flat[k] = v
+    stuck = pd.DataFrame(checks.get("open_lots_without_final_quote", []), columns=["symbol", "last_quote", "market_value"])
+    flat["open_lots_without_final_quote.count"] = len(stuck)
+    flat["open_lots_without_final_quote.value"] = float(stuck.market_value.sum())
+    flat["price_incidents"] = len(checks.get("incidents", []))
+    save_section("test_accounting_checks", pd.DataFrame({"result": pd.Series(flat, dtype=object)}))
+    by_sym = stuck.groupby("symbol").agg(lots=("market_value", "size"), market_value=("market_value", "sum"),
+                                         last_quote=("last_quote", "max")).sort_values("market_value", ascending=False)
+    by_sym["last_quote"] = pd.to_datetime(by_sym.last_quote).dt.date.astype(str)
+    save_section("test_unquoted_open_lots", by_sym)
+
+
+def diagnostics(res, navs):
     f = res.fills
     sells = f.loc[f.side.eq("SELL")].copy()
     sells["ret"] = sells.price / sells.merge(f.loc[f.side.eq("BUY"), ["lot_id", "price"]], on="lot_id",
                                              suffixes=("", "_b")).price_b.to_numpy() - 1
     top = sells.groupby("symbol").realized_pnl.sum().sort_values()
-    pd.concat([top.head(10), top.tail(10)]).to_csv(path / "test_pnl_by_symbol_extremes.csv")
-    yearly = res.daily.nav.resample("YE").last()
-    pd.DataFrame({"lot_hit_rate": [float((sells.ret > 0).mean())], "mean_lot_return": [float(sells.ret.mean())],
-                  "median_lot_return": [float(sells.ret.median())], "avg_names_held": [float(res.daily.n_names.mean())],
-                  "avg_cash_weight": [float((res.daily.cash / res.daily.nav).mean())]}).to_csv(path / "test_trade_stats.csv", index=False)
-    yearly.to_csv(out_dir / "test_year_end_nav.csv")
+    save_section("test_pnl_by_symbol", pd.concat([top.head(10), top.tail(10)]).to_frame("realized_pnl"))
+    save_section("test_trade_stats", pd.DataFrame({
+        "lot_hit_rate": [float((sells.ret > 0).mean())], "mean_lot_return": [float(sells.ret.mean())],
+        "median_lot_return": [float(sells.ret.median())], "avg_names_held": [float(res.daily.n_names.mean())],
+        "avg_cash_weight": [float((res.daily.cash / res.daily.nav).mean())]}, index=["momentum"]))
+    yearly = {}
+    for n, nav in navs.items():
+        ye = nav.resample("YE").last()
+        r = ye.pct_change()
+        r.iloc[0] = ye.iloc[0] / 1e6 - 1          # every portfolio starts from $1M
+        yearly[n] = r.set_axis(ye.index.year.astype(str))
+    save_section("test_year_by_year_return", pd.DataFrame(yearly).T)
 
 
 if __name__ == "__main__":
