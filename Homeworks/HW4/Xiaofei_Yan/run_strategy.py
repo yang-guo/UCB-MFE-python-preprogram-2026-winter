@@ -127,6 +127,41 @@ def performance(series, start, end):
                 Sharpe=(returns-daily_rf).mean()/std*np.sqrt(252) if std > 1e-12 else np.nan)
 
 
+def supplement_execution_quotes(prices):
+    """Fill absent BODY quotes after its verified BODI rename, not model inputs.
+
+    Keep every course observation. The small archived Yahoo snapshot and its
+    provenance are submitted so execution is reproducible without network access.
+    The overlap check detects scale mismatches; it is not proof of vendor accuracy.
+    """
+    supplemental = pd.read_csv(ROOT / "supporting_data/BODY_BODI_2024.csv", parse_dates=["date"])
+    if supplemental.duplicated(["date", "symbol"]).any():
+        raise ValueError("Duplicate supplementary quotes")
+    if not supplemental.symbol.eq("BODY").all() or not supplemental.provider_symbol.eq("BODI").all():
+        raise ValueError("Unexpected supplementary instrument")
+    if not (np.isfinite(supplemental.adj_close) & supplemental.adj_close.gt(0)).all():
+        raise ValueError("Invalid supplementary prices")
+    overlap = prices.merge(supplemental, on=["date", "symbol"], suffixes=("_course", "_external"))
+    relative_error = (overlap.adj_close_external / overlap.adj_close_course - 1).abs()
+    if len(overlap) < 10 or relative_error.max() > .003:
+        raise ValueError("Supplementary BODY price scale requires investigation")
+    existing = pd.MultiIndex.from_frame(prices[["date", "symbol"]])
+    keys = pd.MultiIndex.from_frame(supplemental[["date", "symbol"]])
+    added = supplemental.loc[~keys.isin(existing) & supplemental.date.ge("2024-03-04")].copy()
+    # Apply the same conservative screen to the combined execution history.
+    body = prices.loc[prices.symbol.eq("BODY"), ["date", "symbol", "adj_close"]].copy()
+    body["close"], body["volume"] = body.adj_close, 1
+    _, audit = screen_prices(pd.concat([body, added], ignore_index=True))
+    if not audit.empty:
+        raise ValueError("Supplementary BODY quotes trigger price-quality review")
+    combined = pd.concat([prices, added[["date", "symbol", "adj_close"]]], ignore_index=True)
+    evidence = {"symbol":"BODY", "provider_symbol":"BODI", "overlap_rows":len(overlap),
+                "maximum_relative_overlap_error":float(relative_error.max()),
+                "added_quotes":len(added), "course_quotes_replaced":0,
+                "used_for":"execution and valuation only; no model refit"}
+    return combined, set(zip(added.date, added.symbol)), evidence
+
+
 def save_charts(history, output, note="Database-only; no retrospective coverage exclusions"):
     """Plot returns, cash/NAV and per-date drawdown as in Lecture 8."""
     import matplotlib
@@ -165,15 +200,15 @@ def save_charts(history, output, note="Database-only; no retrospective coverage 
     plt.close(fig)
 
 
-def export_submission_results(output, run_root=None):
+def export_submission_results(output, run_root=None, strict=False):
     """Copy only the small report/evidence files into the submission folder."""
     run_root = output if run_root is None else run_root
-    destination = ROOT / "results"
-    destination.mkdir(exist_ok=True)
+    destination = ROOT / "results" / "strict_reference" if strict else ROOT / "results"
+    destination.mkdir(parents=True, exist_ok=True)
     for name in [
         "performance.csv", "account_summary.csv", "portfolio_diagnostics.csv",
         "daily_nav.csv", "trades.csv", "cumulative_returns.png", "cash_fraction.png",
-        "drawdown.png", "coverage_exclusions.json", "accounting_audit.json",
+        "drawdown.png", "accounting_audit.json", "open_positions.csv", "assumed_exits.csv",
     ]:
         source = output / name
         if source.is_file():
@@ -191,10 +226,12 @@ def export_submission_results(output, run_root=None):
     review = pd.read_csv(run_root / "security_type_review.csv")
     review.groupby(["common_stock_candidate", "reason"]).size().rename("Securities").reset_index().to_csv(
         destination / "security_type_summary.csv", index=False)
-    for name in ["run_status.json", "unresolved_backtest.txt"]:
+    for name in ["run_status.json", "unresolved_backtest.txt", "supplemental_quote_audit.json"]:
         path = run_root / name
         if path.is_file():
             shutil.copy2(path, destination / name)
+        elif name == "unresolved_backtest.txt":
+            (destination / name).unlink(missing_ok=True)
 
 
 
@@ -204,6 +241,8 @@ def main():
     parser.add_argument("--database", type=Path, default=DEFAULT_DATABASE)
     parser.add_argument("--output", type=Path, default=ROOT / "outputs" / "final")
     parser.add_argument("--batch-size", type=int, default=100)
+    parser.add_argument("--missing-price-policy", choices=["strict", "last_before_maturity"], default="strict",
+                        help="Strict stops on long gaps; last_before_maturity books disclosed hypothetical exits at maturity")
     parser.add_argument("--reuse-predictions", action="store_true", help="Reuse complete predictions with matching frozen model configuration")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
@@ -245,27 +284,57 @@ def main():
         audit = cache.execute("SELECT * FROM quality_audit").fetchdf()
     # Use all historically eligible scores. Missing future coverage never
     # removes a security or causes a reranking/restart of the experiment.
-    report_output = args.output
+    scenario = args.missing_price_policy == "last_before_maturity"
+    report_output = args.output / ("assumption_scenario" if scenario else "strict")
+    report_output.mkdir(exist_ok=True)
+    prices, supplemental_keys, supplement_evidence = supplement_execution_quotes(prices)
+    (args.output / "supplemental_quote_audit.json").write_text(json.dumps(supplement_evidence, indent=2))
     status = {"requested_start":str(START.date()), "requested_end":str(END.date()),
-              "retrospective_coverage_exclusions":False, "data_source":"course database only"}
+              "retrospective_coverage_exclusions":False,
+              "missing_price_policy":args.missing_price_policy,
+              "evaluation_type":"hypothetical stale-exit scenario" if scenario else "strict observed-quote evaluation",
+              "data_source":"course database plus sourced corporate actions and archived BODI quotes"}
+    actions = pd.read_csv(ROOT / "corporate_actions.csv")
+    mergers = pd.read_csv(ROOT / "stock_mergers.csv")
     try:
-        result = simulate(prices, benchmark, scores, START, END, quality_audit=audit)
-        status["status"] = "complete"
+        result = simulate(prices, benchmark, scores, START, END, quality_audit=audit,
+                          corporate_actions=actions, stock_mergers=mergers,
+                          missing_price_policy=args.missing_price_policy)
+        status["status"] = "complete_with_assumptions" if scenario else "complete"
+        assert result.history.index[-1] == END
         (args.output / "unresolved_backtest.txt").unlink(missing_ok=True)
     except UnreliableHeldPrice as error:
         result = error.partial_result
         if result is None:
             raise
         status.update(status="incomplete", failed_date=str(error.failed_date.date()), reason=str(error))
-        report_output = args.output / "partial"
+        report_output = report_output / "partial"
         report_output.mkdir(exist_ok=True)
         (args.output / "unresolved_backtest.txt").write_text(str(error), encoding="utf-8")
         print("Evaluation incomplete:",error,flush=True)
     status["last_evaluated_date"] = str(result.history.index[-1].date())
+    assumed = result.trades.loc[result.trades.side.eq("ASSUMED_STALE_EXIT")].copy()
+    entries = result.trades.loc[result.trades.side.eq("BUY")].set_index("lot_id").date
+    assumed["entry_date"] = assumed.lot_id.map(entries)
+    assumed["due_date"] = assumed.entry_date + pd.Timedelta(days=90)
+    if not assumed.empty:
+        assert (assumed.price_date <= assumed.due_date).all()
+        assert (assumed.due_date <= assumed.date).all()
+        assert (assumed.price_date < assumed.date).all()
+        calendar = pd.DatetimeIndex(benchmark.date).sort_values()
+        assert (calendar[calendar.searchsorted(pd.DatetimeIndex(assumed.due_date))] == pd.DatetimeIndex(assumed.date)).all()
+    status["assumed_exit_count"] = len(assumed)
+    status["assumed_exit_symbols"] = sorted(assumed.symbol.unique().tolist())
+    status["maximum_assumed_exit_quote_age_sessions"] = int(assumed.stale_sessions.max()) if len(assumed) else 0
+    assumed.to_csv(report_output / "assumed_exits.csv", index=False)
     (args.output / "run_status.json").write_text(json.dumps(status,indent=2),encoding="utf-8")
     normal = result.trades.side.isin(["BUY", "SELL"])
     result.trades["source"] = result.trades["source"].astype("string")
     result.trades.loc[normal, "source"] = "course prices table"
+    external_fills = normal & pd.Series(
+        [(date, symbol) in supplemental_keys for date, symbol in zip(result.trades.date, result.trades.symbol)],
+        index=result.trades.index)
+    result.trades.loc[external_fills, "source"] = "Yahoo BODI snapshot; see supporting_data/BODY_BODI_provenance.json"
     result.history.to_csv(report_output / "daily_nav.csv")
     result.trades.to_csv(report_output / "trades.csv", index=False)
     result.positions.to_csv(report_output / "open_positions.csv", index=False)
@@ -280,6 +349,24 @@ def main():
         "total_pnl": realized+unrealized, "total_fees": result.trades.fee.sum(),
     }, name="value")
     account_summary.rename_axis("metric").to_csv(report_output / "account_summary.csv")
+    changes = result.trades.groupby("date").cash_change.sum().reindex(result.history.index, fill_value=0)
+    assert np.allclose(result.history.cash, 1_000_000 + changes.cumsum())
+    assert np.allclose(result.history.nav, result.history.cash + result.history.holdings_value)
+    assert np.isclose(account_summary.total_pnl, final.nav - 1_000_000)
+    checks = ["daily cash reconciliation", "daily NAV identity", "realized plus unrealized PnL"]
+    if scenario:
+        checks += ["assumed exits explicitly separated from market fills",
+                   "assumed prices dated no later than maturity; cash booked on first session at/after maturity"]
+    if status["status"] == "incomplete":
+        assert result.history.index[-1] < pd.Timestamp(status["failed_date"])
+        assert not result.positions.empty
+        assert (result.trades.date <= result.history.index[-1]).all()
+        checks += ["failed session excluded", "unresolved positions preserved"]
+    accounting_audit = {"status":"passed", "evaluation_status":status["status"],
+                        "last_evaluated_date":status["last_evaluated_date"],
+                        "failed_date":status.get("failed_date"), "checks":checks,
+                        "retrospective_exclusions":False}
+    (report_output / "accounting_audit.json").write_text(json.dumps(accounting_audit, indent=2))
     sessions = result.history.iloc[1:]
     diagnostics_summary = pd.Series({
         "average_cash_fraction": (sessions.cash/sessions.nav).mean(),
@@ -296,8 +383,11 @@ def main():
     }).T
     comparison.index.name = "portfolio"
     comparison.to_csv(report_output / "performance.csv")
-    save_charts(result.history, report_output, note=("PARTIAL evaluation through " + status["last_evaluated_date"] if status["status"] == "incomplete" else "Database-only; no retrospective coverage exclusions"))
-    export_submission_results(report_output, run_root=args.output)
+    note = "ASSUMED maturity exits at stale quotes" if scenario else "Strict observed-quote evaluation"
+    if status["status"] == "incomplete":
+        note += "; PARTIAL through " + status["last_evaluated_date"]
+    save_charts(result.history, report_output, note=note)
+    export_submission_results(report_output, run_root=args.output, strict=not scenario)
     print(comparison.to_string(), flush=True)
 
 

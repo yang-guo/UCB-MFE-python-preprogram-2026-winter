@@ -48,13 +48,16 @@ class SimulationResult:
 def simulate(prices, benchmark, scores, start, end, quality_audit=None,
              initial_cash=1_000_000.0, top_n=10, cohort_fraction=1/3,
              fee_bps=5.0, holding_days=90, max_stale_sessions=5, corporate_actions=None,
-             stock_mergers=None):
+             stock_mergers=None, missing_price_policy="strict"):
     """Plan from yesterday's balance, sell mature lots, then fill planned buys.
 
     Prices have symbol/date/adj_close; benchmark has date/adj_close; scores
     have date/symbol/score, where date is the preceding close's signal date.
     The benchmark is invested at the first test close. Fractional adjusted-price
     units include total-return exposure; dividends are not added separately.
+    last_before_maturity is a disclosed scenario: carry last observed marks
+    through gaps, then book an ASSUMED_STALE_EXIT at maturity if no quote exists.
+    Such exits are hypothetical cash settlements, not observed market fills.
     """
     if initial_cash <= 0 or not np.isfinite(initial_cash):
         raise ValueError("initial_cash must be finite and positive")
@@ -62,6 +65,8 @@ def simulate(prices, benchmark, scores, start, end, quality_audit=None,
         raise ValueError("Invalid count, holding period, or stale-price limit")
     if not 0 < cohort_fraction <= 1 or not np.isfinite(fee_bps) or fee_bps < 0:
         raise ValueError("Invalid allocation fraction or fee")
+    if missing_price_policy not in {"strict", "last_before_maturity"}:
+        raise ValueError("Unknown missing-price policy")
     p, b, s = prices.copy(), benchmark.copy(), scores.copy()
     for frame in (p, b, s):
         frame["date"] = pd.to_datetime(frame.date)
@@ -150,7 +155,7 @@ def simulate(prices, benchmark, scores, start, end, quality_audit=None,
             """Return only completed sessions; never value the failed session."""
             partial = SimulationResult(
                 pd.DataFrame(history).set_index("date"),
-                pd.DataFrame(trades[:prior_trade_count], columns=["date", "signal_date", "lot_id", "symbol", "side", "units", "price", "fee", "cash_change", "realized_pnl", "source", "related_symbol", "received_units"]),
+                pd.DataFrame(trades[:prior_trade_count], columns=["date", "signal_date", "lot_id", "symbol", "side", "units", "price", "fee", "cash_change", "realized_pnl", "source", "related_symbol", "received_units", "price_date", "stale_sessions"]),
                 pd.DataFrame(prior_positions, columns=Position.__dataclass_fields__),
                 pd.DataFrame(diagnostics[:prior_diagnostic_count], columns=["date", "symbol", "event"]),
             )
@@ -203,23 +208,33 @@ def simulate(prices, benchmark, scores, start, end, quality_audit=None,
         stale = 0
         for symbol in held_symbols:
             age = session - last_seen[symbol]
-            if age > max_stale_sessions:
+            if age > max_stale_sessions and missing_price_policy == "strict":
                 stop(f"Held quote gap exceeds limit: {symbol} on {day.date()}")
             if age:
                 stale += 1
                 diagnostics.append(dict(date=day, symbol=symbol, event="stale_mark"))
 
         for lot_id, lot in list(positions.items()):
-            if day >= lot.due_date and lot.symbol in observed:
-                price = float(observed[lot.symbol])
+            has_quote = lot.symbol in observed
+            assumed_exit = not has_quote and missing_price_policy == "last_before_maturity"
+            if day >= lot.due_date and (has_quote or assumed_exit):
+                price = float(observed[lot.symbol]) if has_quote else marks[lot.symbol]
+                price_date = day if has_quote else calendar[last_seen[lot.symbol]]
+                if assumed_exit:
+                    assert price_date <= lot.due_date and price_date < day
                 notional = lot.units * price
                 fee = notional * rate
                 change = notional - fee
                 cash += change
                 day_fees += fee
                 trades.append(dict(date=day, signal_date=pd.NaT, lot_id=lot_id, symbol=lot.symbol,
-                                   side="SELL", units=lot.units, price=price, fee=fee,
-                                   cash_change=change, realized_pnl=lot.units * (price-lot.entry_price)-lot.entry_fee-fee))
+                                   side="SELL" if has_quote else "ASSUMED_STALE_EXIT",
+                                   units=lot.units, price=price, fee=fee,
+                                   cash_change=change, realized_pnl=lot.units * (price-lot.entry_price)-lot.entry_fee-fee,
+                                   price_date=price_date, stale_sessions=session-last_seen[lot.symbol],
+                                   source="assumed maturity exit at last available pre-maturity quote; not an observed fill" if assumed_exit else None))
+                if assumed_exit:
+                    diagnostics.append(dict(date=day, symbol=lot.symbol, event="assumed_stale_maturity_exit"))
                 del positions[lot_id]
 
         for symbol, budget in budgets.items():
@@ -238,7 +253,8 @@ def simulate(prices, benchmark, scores, start, end, quality_audit=None,
                                           day + pd.Timedelta(days=holding_days))
             trades.append(dict(date=day, signal_date=signal_date, lot_id=next_id, symbol=symbol,
                                side="BUY", units=units, price=price, fee=fee,
-                               cash_change=-(notional+fee), realized_pnl=0.0))
+                               cash_change=-(notional+fee), realized_pnl=0.0,
+                               price_date=day, stale_sessions=0))
             day_fees += fee
             next_id += 1
         day_fees += settle_cash_events(day, after_close)
@@ -250,7 +266,7 @@ def simulate(prices, benchmark, scores, start, end, quality_audit=None,
 
     return SimulationResult(
         pd.DataFrame(history).set_index("date"),
-        pd.DataFrame(trades, columns=["date", "signal_date", "lot_id", "symbol", "side", "units", "price", "fee", "cash_change", "realized_pnl", "source", "related_symbol", "received_units"]),
+        pd.DataFrame(trades, columns=["date", "signal_date", "lot_id", "symbol", "side", "units", "price", "fee", "cash_change", "realized_pnl", "source", "related_symbol", "received_units", "price_date", "stale_sessions"]),
         pd.DataFrame([asdict(lot) for lot in positions.values()], columns=Position.__dataclass_fields__),
         pd.DataFrame(diagnostics, columns=["date", "symbol", "event"]),
     )

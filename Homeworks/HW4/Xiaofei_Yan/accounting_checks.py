@@ -83,6 +83,25 @@ def run_checks():
     else:
         raise AssertionError("A six-session held-price gap should stop the backtest")
 
+    # Scenario exits use only information available before maturity. A much
+    # higher later quote must not affect the assumed exit or release cash early.
+    maturity = pd.Timestamp("2015-04-02")
+    gap_quotes = quotes.loc[quotes.date.le(pd.Timestamp(start)) | quotes.date.gt(maturity)].copy()
+    gap_quotes.loc[gap_quotes.date.gt(maturity), "adj_close"] = 500.0
+    hypothetical = simulate(gap_quotes, benchmark, scores, start, end,
+                            missing_price_policy="last_before_maturity")
+    assumed = hypothetical.trades.loc[hypothetical.trades.side.eq("ASSUMED_STALE_EXIT")]
+    assert len(assumed) == 1
+    assert assumed.iloc[0].date == maturity
+    assert assumed.iloc[0].price_date == pd.Timestamp(start)
+    assert assumed.iloc[0].price == 100.0
+    assert assumed.iloc[0].stale_sessions > 5
+    assert hypothetical.positions.empty
+    assert np.isclose(hypothetical.history.iloc[-1].nav, 1_000_000 - 2 * expected_fee)
+    before_maturity = hypothetical.history.loc[pd.Timestamp(start):maturity-pd.Timedelta(days=1)]
+    assert np.allclose(before_maturity.cash, 1_000_000 - 1_000_000/3)
+    assert (hypothetical.trades.loc[hypothetical.trades.side.eq("SELL")].empty)
+
     altered = quotes.copy()
     altered.loc[altered.date > pd.Timestamp(start), "adj_close"] = 200.0
     changed = simulate(altered, benchmark, scores, start, end)
@@ -106,6 +125,7 @@ def run_checks():
     evidence['cases'].append('after-close warrant redemption follows scheduled market sales; no exercise')
     evidence['cases'].append('automatic stock merger preserves cost, maturity and cash; successor sold on original due date')
     evidence['cases'].append('long gap preserves unresolved position and completed prefix; no retrospective deletion or failed-session NAV')
+    evidence['cases'].append('optional stale-exit scenario waits for maturity, uses pre-maturity quote, records assumed exit and fees; later quotes do not change it')
     folder = Path(__file__).parent / "outputs"
     folder.mkdir(exist_ok=True)
     (folder / "accounting_checks.json").write_text(json.dumps(evidence, indent=2), encoding="utf-8")

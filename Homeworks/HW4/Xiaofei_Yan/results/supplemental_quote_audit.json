@@ -1,0 +1,9 @@
+{
+  "symbol": "BODY",
+  "provider_symbol": "BODI",
+  "overlap_rows": 20,
+  "maximum_relative_overlap_error": 0.0024569837115613335,
+  "added_quotes": 85,
+  "course_quotes_replaced": 0,
+  "used_for": "execution and valuation only; no model refit"
+}

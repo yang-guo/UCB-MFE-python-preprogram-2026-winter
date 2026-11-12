@@ -2,9 +2,16 @@
   "requested_start": "2016-04-01",
   "requested_end": "2026-09-30",
   "retrospective_coverage_exclusions": false,
-  "data_source": "course database only",
-  "status": "incomplete",
-  "failed_date": "2019-10-10",
-  "reason": "Held quote gap exceeds limit: BID on 2019-10-10",
-  "last_evaluated_date": "2019-10-09"
+  "missing_price_policy": "last_before_maturity",
+  "evaluation_type": "hypothetical stale-exit scenario",
+  "data_source": "course database plus sourced corporate actions and archived BODI quotes",
+  "status": "complete_with_assumptions",
+  "last_evaluated_date": "2026-09-30",
+  "assumed_exit_count": 3,
+  "assumed_exit_symbols": [
+    "ASGN",
+    "PEGY",
+    "WOLF"
+  ],
+  "maximum_assumed_exit_quote_age_sessions": 46
 }

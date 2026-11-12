@@ -1,0 +1,13 @@
+{
+  "source_url": "https://query1.finance.yahoo.com/v8/finance/chart/BODI?period1=1709251200&period2=1722470400&interval=1d",
+  "official_rename_source": "https://www.sec.gov/Archives/edgar/data/1826889/000095017024019377/body-20240223.htm",
+  "provider": "Yahoo Finance chart endpoint",
+  "provider_symbol": "BODI",
+  "internal_instrument": "BODY",
+  "overlap_rows": 20,
+  "maximum_relative_overlap_error": 0.0024569837115613335,
+  "median_relative_overlap_error": 3.4961665340560444e-08,
+  "overlap_difference_note": "19 of 20 overlap dates match within rounding; 2024-03-04 is $8.16 vs course $8.14. Original course rows are retained. No rescaling.",
+  "price_rescaling": false,
+  "purpose": "Missing execution/held-price observations after ticker rename; not features or model selection."
+}

@@ -1,14 +1,14 @@
 {
   "status": "passed",
-  "evaluation_status": "incomplete",
-  "last_evaluated_date": "2019-10-09",
-  "failed_date": "2019-10-10",
+  "evaluation_status": "complete_with_assumptions",
+  "last_evaluated_date": "2026-09-30",
+  "failed_date": null,
   "checks": [
-    "partial cash reconciliation",
-    "partial NAV identity",
-    "partial total PnL",
-    "failed session excluded",
-    "unresolved BID position preserved"
+    "daily cash reconciliation",
+    "daily NAV identity",
+    "realized plus unrealized PnL",
+    "assumed exits explicitly separated from market fills",
+    "assumed prices dated no later than maturity; cash booked on first session at/after maturity"
   ],
   "retrospective_exclusions": false
 }

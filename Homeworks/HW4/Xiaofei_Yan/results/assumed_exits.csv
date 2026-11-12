@@ -1,0 +1,4 @@
+date,signal_date,lot_id,symbol,side,units,price,fee,cash_change,realized_pnl,source,related_symbol,received_units,price_date,stale_sessions,entry_date,due_date
+2024-12-02,,971,PEGY,ASSUMED_STALE_EXIT,30.09814301675877,3.4,0.05116684312848991,102.28251941385133,-1080.5636658132821,assumed maturity exit at last available pre-maturity quote; not an observed fill,,,2024-11-19,8.0,2024-09-03,2024-12-02
+2024-12-02,,980,WOLF,ASSUMED_STALE_EXIT,129.7755277385603,11.235,0.7290140270713624,1457.2990401156535,274.45285488852016,assumed maturity exit at last available pre-maturity quote; not an observed fill,,,2024-10-14,34.0,2024-09-03,2024-12-02
+2026-07-30,,1175,ASGN,ASSUMED_STALE_EXIT,645.5619694852611,19.5,6.294229202481296,12582.16417576011,-1097.6748391945687,assumed maturity exit at last available pre-maturity quote; not an observed fill,,,2026-05-22,46.0,2026-05-01,2026-07-30

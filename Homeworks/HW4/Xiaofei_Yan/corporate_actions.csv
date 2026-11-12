@@ -1,0 +1,2 @@
+date,symbol,cash_per_actual_share,adjusted_to_actual_factor,source,event_type,timing
+2019-10-03,BID,57.0,1.0,https://www.sec.gov/Archives/edgar/data/823094/000087666119001019/ruleprovisionnotice.htm,CASH_MERGER,before_open
