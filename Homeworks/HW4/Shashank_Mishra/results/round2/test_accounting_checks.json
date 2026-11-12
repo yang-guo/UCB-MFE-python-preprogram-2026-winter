@@ -1,0 +1,177 @@
+{
+  "cash_reconciles": true,
+  "min_cash": 0.0,
+  "nav_reconciles": true,
+  "nav_equals_cash_plus_holdings": true,
+  "buys_fill_next_session": true,
+  "all_signal_dates_on_grid": true,
+  "no_sale_before_maturity": true,
+  "sales_at_first_quote_on_or_after_maturity": true,
+  "sessions_late_distribution": {
+    "0.0": 6439,
+    "1.0": 1
+  },
+  "sampled_fill_prices_match_db": true,
+  "fills": {
+    "buys": 6598,
+    "sells": 6440,
+    "open_lots_at_end": 158
+  },
+  "fees_paid": 130573.17884569555,
+  "skipped_orders_no_entry_quote": 0,
+  "incidents": [
+    {
+      "date": "2017-11-08 00:00:00",
+      "symbol": "LVLT",
+      "lot_id": 893,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2017-11-08 00:00:00",
+      "symbol": "LVLT",
+      "lot_id": 972,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2018-02-02 00:00:00",
+      "symbol": "LVLT",
+      "lot_id": 893,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2018-02-02 00:00:00",
+      "symbol": "LVLT",
+      "lot_id": 972,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-02-22 00:00:00",
+      "symbol": "XLNX",
+      "lot_id": 3633,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-05-16 00:00:00",
+      "symbol": "XLNX",
+      "lot_id": 3633,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-02-13 00:00:00",
+      "symbol": "DISCA",
+      "lot_id": 4878,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-05-07 00:00:00",
+      "symbol": "DISCA",
+      "lot_id": 4878,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-05-14 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6270,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-14 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6295,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-14 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6311,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-14 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6336,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-08-07 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6270,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-07 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6295,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-07 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6311,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-07 00:00:00",
+      "symbol": "CUK",
+      "lot_id": 6336,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    }
+  ],
+  "open_lots_without_final_quote": [
+    {
+      "symbol": "LVLT",
+      "last_quote": "2017-10-31 00:00:00",
+      "market_value": 7904.253436911715
+    },
+    {
+      "symbol": "LVLT",
+      "last_quote": "2017-10-31 00:00:00",
+      "market_value": 7767.3475369264925
+    },
+    {
+      "symbol": "XLNX",
+      "last_quote": "2022-02-11 00:00:00",
+      "market_value": 13101.7307908695
+    },
+    {
+      "symbol": "DISCA",
+      "last_quote": "2024-02-05 00:00:00",
+      "market_value": 4410.299395906422
+    },
+    {
+      "symbol": "CUK",
+      "last_quote": "2026-05-06 00:00:00",
+      "market_value": 17122.95602301623
+    },
+    {
+      "symbol": "CUK",
+      "last_quote": "2026-05-06 00:00:00",
+      "market_value": 15097.80805654581
+    },
+    {
+      "symbol": "CUK",
+      "last_quote": "2026-05-06 00:00:00",
+      "market_value": 13460.93234704959
+    },
+    {
+      "symbol": "CUK",
+      "last_quote": "2026-05-06 00:00:00",
+      "market_value": 13159.892116206767
+    }
+  ],
+  "final_nav_if_unquoted_lots_written_to_zero": 2331212.482408786,
+  "worked_example": {
+    "symbol": "HCA",
+    "signal": "2016-03-31",
+    "entry": "2016-04-01",
+    "due": "2016-06-30",
+    "exit": "2016-06-30",
+    "entry_price": 74.49,
+    "units": 89.40806363279178,
+    "entry_cost_incl_fee": 6666.666666666666,
+    "exit_price": 72.43,
+    "exit_proceeds_after_fee": 6469.350222874185,
+    "realized_pnl": -197.31644379248058,
+    "check_pnl": -197.31644379248064
+  }
+}

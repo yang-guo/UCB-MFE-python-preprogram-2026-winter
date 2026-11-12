@@ -1,0 +1,2047 @@
+{
+  "cash_reconciles": true,
+  "min_cash": 0.0,
+  "nav_reconciles": true,
+  "nav_equals_cash_plus_holdings": true,
+  "buys_fill_next_session": true,
+  "all_signal_dates_on_grid": true,
+  "no_sale_before_maturity": true,
+  "sales_at_first_quote_on_or_after_maturity": true,
+  "sessions_late_distribution": {
+    "0.0": 12678,
+    "1.0": 1,
+    "3.0": 1
+  },
+  "sampled_fill_prices_match_db": true,
+  "fills": {
+    "buys": 13096,
+    "sells": 12680,
+    "open_lots_at_end": 416
+  },
+  "fees_paid": 159630.77147774026,
+  "skipped_orders_no_entry_quote": 4,
+  "incidents": [
+    {
+      "date": "2016-05-02 00:00:00",
+      "symbol": "HPY",
+      "lot_id": 3,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-05-02 00:00:00",
+      "symbol": "HPY",
+      "lot_id": 56,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-07-11 00:00:00",
+      "symbol": "TE",
+      "lot_id": 96,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-07-11 00:00:00",
+      "symbol": "TE",
+      "lot_id": 183,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-07-11 00:00:00",
+      "symbol": "TE",
+      "lot_id": 245,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-07-11 00:00:00",
+      "symbol": "TE",
+      "lot_id": 276,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2016-07-25 00:00:00",
+      "symbol": "HPY",
+      "lot_id": 3,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2016-07-25 00:00:00",
+      "symbol": "HPY",
+      "lot_id": 56,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2016-09-30 00:00:00",
+      "symbol": "TE",
+      "lot_id": 96,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2016-09-30 00:00:00",
+      "symbol": "TE",
+      "lot_id": 183,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2016-09-30 00:00:00",
+      "symbol": "TE",
+      "lot_id": 245,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2016-09-30 00:00:00",
+      "symbol": "TE",
+      "lot_id": 276,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2017-07-11 00:00:00",
+      "symbol": "ALJ",
+      "lot_id": 1549,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2017-10-02 00:00:00",
+      "symbol": "ALJ",
+      "lot_id": 1549,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6354,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6405,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6458,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6510,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6566,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-07-30 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6610,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6354,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6405,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6458,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6510,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6566,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-10-21 00:00:00",
+      "symbol": "HOME",
+      "lot_id": 6610,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6847,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6881,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6944,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6976,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 7015,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2021-12-09 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 7083,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6847,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6881,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6944,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 6976,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 7015,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-03-04 00:00:00",
+      "symbol": "MDP",
+      "lot_id": 7083,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7253,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7308,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7363,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7403,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7453,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-04-14 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7503,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-06-02 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7420,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-06-02 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7478,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-06-02 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7544,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-06-02 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7586,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7253,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7308,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7363,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7403,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7453,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-07-11 00:00:00",
+      "symbol": "HMHC",
+      "lot_id": 7503,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-08-10 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7833,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-08-10 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7897,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-08-10 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7935,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-08-25 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7420,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-08-25 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7478,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-08-25 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7544,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-08-25 00:00:00",
+      "symbol": "ANAT",
+      "lot_id": 7586,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-10-04 00:00:00",
+      "symbol": "GCP",
+      "lot_id": 7949,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-10-12 00:00:00",
+      "symbol": "GBT",
+      "lot_id": 8068,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-10-12 00:00:00",
+      "symbol": "GBT",
+      "lot_id": 8114,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-10-27 00:00:00",
+      "symbol": "CCXI",
+      "lot_id": 7920,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2022-11-01 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7833,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-11-01 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7897,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-11-01 00:00:00",
+      "symbol": "MTOR",
+      "lot_id": 7935,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2022-12-27 00:00:00",
+      "symbol": "GCP",
+      "lot_id": 7949,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-01-05 00:00:00",
+      "symbol": "GBT",
+      "lot_id": 8068,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-01-05 00:00:00",
+      "symbol": "GBT",
+      "lot_id": 8114,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-01-23 00:00:00",
+      "symbol": "CCXI",
+      "lot_id": 7920,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-03-17 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8545,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-03-17 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8583,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-03-17 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8629,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-04-05 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8468,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-04-05 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8510,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-04-05 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8559,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-04-05 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8615,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-04-05 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8665,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-05-23 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8813,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-05-23 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8864,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-05-23 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8918,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-06-09 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8545,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-09 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8583,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-09 00:00:00",
+      "symbol": "VVNT",
+      "lot_id": 8629,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-23 00:00:00",
+      "symbol": "CVT",
+      "lot_id": 9025,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-06-29 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8468,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-29 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8510,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-29 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8559,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-29 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8615,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-06-29 00:00:00",
+      "symbol": "SGFY",
+      "lot_id": 8665,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-07-18 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 8909,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-07-18 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 8961,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-07-18 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 9003,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-07-18 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 9051,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-08-16 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8813,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-08-16 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8864,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-08-16 00:00:00",
+      "symbol": "TA",
+      "lot_id": 8918,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-08-28 00:00:00",
+      "symbol": "KDNY",
+      "lot_id": 9240,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2023-09-15 00:00:00",
+      "symbol": "CVT",
+      "lot_id": 9025,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-10-09 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 8909,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-10-09 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 8961,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-10-09 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 9003,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-10-09 00:00:00",
+      "symbol": "ISEE",
+      "lot_id": 9051,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2023-11-17 00:00:00",
+      "symbol": "KDNY",
+      "lot_id": 9240,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-03-15 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9729,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-03-15 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9767,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-03-15 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9815,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-03-15 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9859,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-03-15 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9909,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9715,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9751,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9812,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9858,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9908,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "DWAC",
+      "lot_id": 9915,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "DWAC",
+      "lot_id": 9961,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-04-03 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9967,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-05-29 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10056,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-05-29 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10103,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-05-29 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10152,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-06-07 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9729,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-07 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9767,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-07 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9815,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-07 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9859,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-07 00:00:00",
+      "symbol": "ROVR",
+      "lot_id": 9909,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9715,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9751,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9812,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9858,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9908,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "DWAC",
+      "lot_id": 9915,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "DWAC",
+      "lot_id": 9961,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-06-26 00:00:00",
+      "symbol": "CBAY",
+      "lot_id": 9967,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-07-30 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10138,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-07-30 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10179,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-07-30 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10230,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-08-02 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10279,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-08-02 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10340,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-08-02 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10384,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-08-02 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10440,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-08-21 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10056,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-08-21 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10103,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-08-21 00:00:00",
+      "symbol": "ALPN",
+      "lot_id": 10152,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10334,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10361,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10414,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10485,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10532,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10596,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-09-26 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10639,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10399,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10448,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10497,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10547,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10598,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-17 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10650,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-10-21 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10138,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-21 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10179,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-21 00:00:00",
+      "symbol": "ETRN",
+      "lot_id": 10230,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-24 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10279,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-24 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10340,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-24 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10384,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-10-24 00:00:00",
+      "symbol": "HIBB",
+      "lot_id": 10440,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-11-08 00:00:00",
+      "symbol": "TELZ",
+      "lot_id": 10792,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10334,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10361,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10414,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10485,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10532,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10596,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2024-12-18 00:00:00",
+      "symbol": "GPS",
+      "lot_id": 10639,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10399,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10448,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10497,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10547,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10598,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-13 00:00:00",
+      "symbol": "RNA",
+      "lot_id": 10650,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-01-24 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10791,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2025-01-24 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10826,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2025-01-24 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10878,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2025-02-05 00:00:00",
+      "symbol": "TELZ",
+      "lot_id": 10792,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-04-17 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10791,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-04-17 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10826,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-04-17 00:00:00",
+      "symbol": "GATO",
+      "lot_id": 10878,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-09-19 00:00:00",
+      "symbol": "BSGM",
+      "lot_id": 11548,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2025-09-19 00:00:00",
+      "symbol": "BSGM",
+      "lot_id": 11598,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2025-12-11 00:00:00",
+      "symbol": "BSGM",
+      "lot_id": 11548,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2025-12-11 00:00:00",
+      "symbol": "BSGM",
+      "lot_id": 11598,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-01-06 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 11929,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-06 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 11981,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-06 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12015,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-06 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12055,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-06 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12111,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-16 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 11996,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-16 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 12136,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-16 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 12152,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-21 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 11908,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-21 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 11950,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-21 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 12000,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-23 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12034,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-23 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12069,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-23 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12113,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-23 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12161,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-01-23 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12208,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-03-31 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 11929,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-03-31 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 11981,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-03-31 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12015,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-03-31 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12055,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-03-31 00:00:00",
+      "symbol": "CIFRW",
+      "lot_id": 12111,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-13 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 11996,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-13 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 12136,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-13 00:00:00",
+      "symbol": "HOUS",
+      "lot_id": 12152,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-15 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 11908,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-15 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 11950,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-15 00:00:00",
+      "symbol": "MFH",
+      "lot_id": 12000,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-17 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12034,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-17 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12069,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-17 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12113,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-17 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12161,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-04-17 00:00:00",
+      "symbol": "COMM",
+      "lot_id": 12208,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-05-26 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12349,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-26 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12398,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-26 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12449,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-26 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12499,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-05-26 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12550,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-07-21 00:00:00",
+      "symbol": "VSCO",
+      "lot_id": 12840,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-08-18 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12349,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-18 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12398,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-18 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12449,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-18 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12499,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-08-18 00:00:00",
+      "symbol": "TERN",
+      "lot_id": 12550,
+      "issue": "frozen: no quote for >63 sessions; held at last mark, never sold"
+    },
+    {
+      "date": "2026-09-11 00:00:00",
+      "symbol": "APGE",
+      "lot_id": 12982,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    },
+    {
+      "date": "2026-09-11 00:00:00",
+      "symbol": "APGE",
+      "lot_id": 13031,
+      "issue": "no quote for >5 sessions; carried at last mark"
+    }
+  ],
+  "open_lots_without_final_quote": [
+    {
+      "symbol": "HPY",
+      "last_quote": "2016-04-22 00:00:00",
+      "market_value": 3558.8849605022115
+    },
+    {
+      "symbol": "HPY",
+      "last_quote": "2016-04-22 00:00:00",
+      "market_value": 3303.9072676798287
+    },
+    {
+      "symbol": "TE",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 3321.2947358698434
+    },
+    {
+      "symbol": "TE",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 3359.2479487782925
+    },
+    {
+      "symbol": "TE",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 3401.0899063674024
+    },
+    {
+      "symbol": "TE",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 3270.209251427848
+    },
+    {
+      "symbol": "ALJ",
+      "last_quote": "2017-06-30 00:00:00",
+      "market_value": 3931.3383631696634
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 9940.924209924586
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 7505.392967452889
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 7528.598708757125
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 8152.029127491003
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 1725.8417282424123
+    },
+    {
+      "symbol": "HOME",
+      "last_quote": "2021-07-22 00:00:00",
+      "market_value": 8664.685409979103
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 10804.053695863746
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 10128.837299853609
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 1756.9040720361324
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 9361.949851107
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 9407.738523731832
+    },
+    {
+      "symbol": "MDP",
+      "last_quote": "2021-12-01 00:00:00",
+      "market_value": 9785.335303743504
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 1795.8664242220161
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 8304.141474251965
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 8593.704543871454
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 8076.357872198685
+    },
+    {
+      "symbol": "ANAT",
+      "last_quote": "2022-05-24 00:00:00",
+      "market_value": 8048.118862904853
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 7982.315631167997
+    },
+    {
+      "symbol": "ANAT",
+      "last_quote": "2022-05-24 00:00:00",
+      "market_value": 8001.197419648782
+    },
+    {
+      "symbol": "HMHC",
+      "last_quote": "2022-04-06 00:00:00",
+      "market_value": 7749.9278664680505
+    },
+    {
+      "symbol": "ANAT",
+      "last_quote": "2022-05-24 00:00:00",
+      "market_value": 7778.579851961824
+    },
+    {
+      "symbol": "ANAT",
+      "last_quote": "2022-05-24 00:00:00",
+      "market_value": 6922.787964512667
+    },
+    {
+      "symbol": "MTOR",
+      "last_quote": "2022-08-02 00:00:00",
+      "market_value": 7254.803492088908
+    },
+    {
+      "symbol": "MTOR",
+      "last_quote": "2022-08-02 00:00:00",
+      "market_value": 5941.590755869715
+    },
+    {
+      "symbol": "CCXI",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 12010.425441983729
+    },
+    {
+      "symbol": "MTOR",
+      "last_quote": "2022-08-02 00:00:00",
+      "market_value": 5321.085190611223
+    },
+    {
+      "symbol": "GCP",
+      "last_quote": "2022-09-26 00:00:00",
+      "market_value": 5366.939948187441
+    },
+    {
+      "symbol": "GBT",
+      "last_quote": "2022-10-04 00:00:00",
+      "market_value": 7470.81271888956
+    },
+    {
+      "symbol": "GBT",
+      "last_quote": "2022-10-04 00:00:00",
+      "market_value": 7982.181537651056
+    },
+    {
+      "symbol": "SGFY",
+      "last_quote": "2023-03-28 00:00:00",
+      "market_value": 8344.699400660496
+    },
+    {
+      "symbol": "SGFY",
+      "last_quote": "2023-03-28 00:00:00",
+      "market_value": 7189.075725317336
+    },
+    {
+      "symbol": "VVNT",
+      "last_quote": "2023-03-09 00:00:00",
+      "market_value": 6833.218632519089
+    },
+    {
+      "symbol": "SGFY",
+      "last_quote": "2023-03-28 00:00:00",
+      "market_value": 7222.7900681926685
+    },
+    {
+      "symbol": "VVNT",
+      "last_quote": "2023-03-09 00:00:00",
+      "market_value": 6753.157463750612
+    },
+    {
+      "symbol": "SGFY",
+      "last_quote": "2023-03-28 00:00:00",
+      "market_value": 5419.757176335504
+    },
+    {
+      "symbol": "VVNT",
+      "last_quote": "2023-03-09 00:00:00",
+      "market_value": 5172.094347758769
+    },
+    {
+      "symbol": "SGFY",
+      "last_quote": "2023-03-28 00:00:00",
+      "market_value": 1442.2579292706835
+    },
+    {
+      "symbol": "TA",
+      "last_quote": "2023-05-15 00:00:00",
+      "market_value": 7407.891054116531
+    },
+    {
+      "symbol": "TA",
+      "last_quote": "2023-05-15 00:00:00",
+      "market_value": 6299.286999655367
+    },
+    {
+      "symbol": "ISEE",
+      "last_quote": "2023-07-10 00:00:00",
+      "market_value": 6686.193405502545
+    },
+    {
+      "symbol": "TA",
+      "last_quote": "2023-05-15 00:00:00",
+      "market_value": 6251.993587386452
+    },
+    {
+      "symbol": "ISEE",
+      "last_quote": "2023-07-10 00:00:00",
+      "market_value": 5274.167381480282
+    },
+    {
+      "symbol": "ISEE",
+      "last_quote": "2023-07-10 00:00:00",
+      "market_value": 1371.906641371452
+    },
+    {
+      "symbol": "CVT",
+      "last_quote": "2023-06-14 00:00:00",
+      "market_value": 1313.688989540562
+    },
+    {
+      "symbol": "ISEE",
+      "last_quote": "2023-07-10 00:00:00",
+      "market_value": 8362.259570258351
+    },
+    {
+      "symbol": "KDNY",
+      "last_quote": "2023-08-18 00:00:00",
+      "market_value": 6908.53359964624
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 2019.5360819217224
+    },
+    {
+      "symbol": "ROVR",
+      "last_quote": "2024-03-07 00:00:00",
+      "market_value": 1483.488850554957
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 12325.363229567996
+    },
+    {
+      "symbol": "ROVR",
+      "last_quote": "2024-03-07 00:00:00",
+      "market_value": 9262.112723859778
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 12059.105031152956
+    },
+    {
+      "symbol": "ROVR",
+      "last_quote": "2024-03-07 00:00:00",
+      "market_value": 8812.797184680068
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 9844.348390258476
+    },
+    {
+      "symbol": "ROVR",
+      "last_quote": "2024-03-07 00:00:00",
+      "market_value": 9761.883698624122
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 7591.320171419652
+    },
+    {
+      "symbol": "ROVR",
+      "last_quote": "2024-03-07 00:00:00",
+      "market_value": 7542.238359966508
+    },
+    {
+      "symbol": "DWAC",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 8342.223341016987
+    },
+    {
+      "symbol": "DWAC",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 12311.892128330797
+    },
+    {
+      "symbol": "CBAY",
+      "last_quote": "2024-03-25 00:00:00",
+      "market_value": 9918.419900683499
+    },
+    {
+      "symbol": "ALPN",
+      "last_quote": "2024-05-20 00:00:00",
+      "market_value": 1748.7040418652466
+    },
+    {
+      "symbol": "ALPN",
+      "last_quote": "2024-05-20 00:00:00",
+      "market_value": 10603.089292012428
+    },
+    {
+      "symbol": "ETRN",
+      "last_quote": "2024-07-22 00:00:00",
+      "market_value": 9652.243153343663
+    },
+    {
+      "symbol": "ALPN",
+      "last_quote": "2024-05-20 00:00:00",
+      "market_value": 10394.913364274234
+    },
+    {
+      "symbol": "ETRN",
+      "last_quote": "2024-07-22 00:00:00",
+      "market_value": 9562.490883704555
+    },
+    {
+      "symbol": "ETRN",
+      "last_quote": "2024-07-22 00:00:00",
+      "market_value": 9242.463352862611
+    },
+    {
+      "symbol": "HIBB",
+      "last_quote": "2024-07-25 00:00:00",
+      "market_value": 7338.907661530105
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 7577.3718487464475
+    },
+    {
+      "symbol": "HIBB",
+      "last_quote": "2024-07-25 00:00:00",
+      "market_value": 9306.974619694072
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 5867.615921282577
+    },
+    {
+      "symbol": "HIBB",
+      "last_quote": "2024-07-25 00:00:00",
+      "market_value": 6747.6408877709855
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 1712.1470476215152
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 1578.5148019996625
+    },
+    {
+      "symbol": "HIBB",
+      "last_quote": "2024-07-25 00:00:00",
+      "market_value": 1724.3486752717224
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 10546.160687993945
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 9532.259617618354
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 9207.567997596998
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 7759.050508053912
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 11272.285137863997
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 9288.0650546062
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 6918.241821767883
+    },
+    {
+      "symbol": "GPS",
+      "last_quote": "2024-09-18 00:00:00",
+      "market_value": 6765.143131145939
+    },
+    {
+      "symbol": "RNA",
+      "last_quote": "2026-09-30 00:00:00",
+      "market_value": 9455.903555752935
+    },
+    {
+      "symbol": "GATO",
+      "last_quote": "2025-01-15 00:00:00",
+      "market_value": 1367.127266713748
+    },
+    {
+      "symbol": "TELZ",
+      "last_quote": "2024-10-31 00:00:00",
+      "market_value": 1840.860098245619
+    },
+    {
+      "symbol": "GATO",
+      "last_quote": "2025-01-15 00:00:00",
+      "market_value": 11061.750346847904
+    },
+    {
+      "symbol": "GATO",
+      "last_quote": "2025-01-15 00:00:00",
+      "market_value": 9816.77350893235
+    },
+    {
+      "symbol": "BSGM",
+      "last_quote": "2025-09-11 00:00:00",
+      "market_value": 2004.9960277260964
+    },
+    {
+      "symbol": "BSGM",
+      "last_quote": "2025-09-11 00:00:00",
+      "market_value": 9991.571108011693
+    },
+    {
+      "symbol": "MFH",
+      "last_quote": "2026-01-12 00:00:00",
+      "market_value": 1222.4314677283467
+    },
+    {
+      "symbol": "CIFRW",
+      "last_quote": "2025-12-26 00:00:00",
+      "market_value": 1360.0167384969097
+    },
+    {
+      "symbol": "MFH",
+      "last_quote": "2026-01-12 00:00:00",
+      "market_value": 5567.987070524311
+    },
+    {
+      "symbol": "CIFRW",
+      "last_quote": "2025-12-26 00:00:00",
+      "market_value": 4589.393105626736
+    },
+    {
+      "symbol": "HOUS",
+      "last_quote": "2026-01-08 00:00:00",
+      "market_value": 20059.140266362585
+    },
+    {
+      "symbol": "MFH",
+      "last_quote": "2026-01-12 00:00:00",
+      "market_value": 6696.295095915778
+    },
+    {
+      "symbol": "CIFRW",
+      "last_quote": "2025-12-26 00:00:00",
+      "market_value": 12165.012267018212
+    },
+    {
+      "symbol": "COMM",
+      "last_quote": "2026-01-14 00:00:00",
+      "market_value": 13803.596432929948
+    },
+    {
+      "symbol": "CIFRW",
+      "last_quote": "2025-12-26 00:00:00",
+      "market_value": 7153.60793662571
+    },
+    {
+      "symbol": "COMM",
+      "last_quote": "2026-01-14 00:00:00",
+      "market_value": 9223.18229794059
+    },
+    {
+      "symbol": "CIFRW",
+      "last_quote": "2025-12-26 00:00:00",
+      "market_value": 11609.261043597839
+    },
+    {
+      "symbol": "COMM",
+      "last_quote": "2026-01-14 00:00:00",
+      "market_value": 12670.350796986537
+    },
+    {
+      "symbol": "HOUS",
+      "last_quote": "2026-01-08 00:00:00",
+      "market_value": 15649.101245441252
+    },
+    {
+      "symbol": "HOUS",
+      "last_quote": "2026-01-08 00:00:00",
+      "market_value": 13606.667160020612
+    },
+    {
+      "symbol": "COMM",
+      "last_quote": "2026-01-14 00:00:00",
+      "market_value": 11605.5904480551
+    },
+    {
+      "symbol": "COMM",
+      "last_quote": "2026-01-14 00:00:00",
+      "market_value": 12853.521753139954
+    },
+    {
+      "symbol": "TERN",
+      "last_quote": "2026-05-15 00:00:00",
+      "market_value": 15218.078028856009
+    },
+    {
+      "symbol": "TERN",
+      "last_quote": "2026-05-15 00:00:00",
+      "market_value": 11602.12350381834
+    },
+    {
+      "symbol": "TERN",
+      "last_quote": "2026-05-15 00:00:00",
+      "market_value": 12756.302687159487
+    },
+    {
+      "symbol": "TERN",
+      "last_quote": "2026-05-15 00:00:00",
+      "market_value": 10281.84063841765
+    },
+    {
+      "symbol": "TERN",
+      "last_quote": "2026-05-15 00:00:00",
+      "market_value": 13736.82765619546
+    },
+    {
+      "symbol": "VSCO",
+      "last_quote": "2026-07-13 00:00:00",
+      "market_value": 17155.239248568192
+    },
+    {
+      "symbol": "APGE",
+      "last_quote": "2026-09-02 00:00:00",
+      "market_value": 2925.6925638691637
+    },
+    {
+      "symbol": "APGE",
+      "last_quote": "2026-09-02 00:00:00",
+      "market_value": 11687.056806343535
+    }
+  ],
+  "final_nav_if_unquoted_lots_written_to_zero": 3905990.1495219776,
+  "worked_example": {
+    "symbol": "MXL",
+    "signal": "2016-03-31",
+    "entry": "2016-04-01",
+    "due": "2016-06-30",
+    "exit": "2016-06-30",
+    "entry_price": 18.62,
+    "units": 178.8401358755816,
+    "entry_cost_incl_fee": 3333.333333333333,
+    "exit_price": 17.98,
+    "exit_proceeds_after_fee": 3212.3300973999144,
+    "realized_pnl": -121.00323593341861,
+    "check_pnl": -121.00323593341864
+  }
+}
