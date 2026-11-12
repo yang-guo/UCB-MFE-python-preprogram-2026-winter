@@ -1,0 +1,11 @@
+bucket,scope,stock_weeks,names,mean_excess_90d,t_stat_dates
+big buyback (< -5%),all weeks,20679,434,0.0040789973,1.4476592174537932
+big buyback (< -5%),first week after filing,1863,409,0.0038451892,0.38927129376305414
+buyback (-5%..-1%),all weeks,40148,710,0.004745319,1.029589373358453
+buyback (-5%..-1%),first week after filing,3707,676,0.0041158623,0.3362444068597651
+flat (+/-1%),all weeks,56567,944,-0.0029557694,-1.0969287809302672
+flat (+/-1%),first week after filing,5052,886,-0.00411856,0.5437011344012169
+issuance (1%..10%),all weeks,41282,852,0.00092511537,0.19802360892435417
+issuance (1%..10%),first week after filing,3694,783,0.0014067909,0.5079829016363213
+big issuance (> 10%),all weeks,18963,458,-0.0065923044,-0.6665662805356835
+big issuance (> 10%),first week after filing,1720,427,-0.003965178,0.2218726757700414
