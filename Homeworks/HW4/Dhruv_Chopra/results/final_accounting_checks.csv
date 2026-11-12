@@ -1,0 +1,12 @@
+,passed
+cash_reconciles,True
+cash_never_negative,True
+final_nav_equals_cash_plus_open_lots,True
+pnl_reconciles,True
+fill_prices_match_close,True
+signal_is_previous_session,True
+no_exit_before_90_days,True
+exit_at_first_quote_on_or_after_maturity,True
+every_lot_closed_once_or_open,True
+no_dates_after_end,True
+daily_nav_recomputed_on_sample_dates,True
