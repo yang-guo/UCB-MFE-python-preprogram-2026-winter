@@ -1,0 +1,21 @@
+Paper market
+  [PASS] buys happen the session after the signal
+  [PASS] shares = slice / (1 + fee) / price
+  [PASS] A sells on Jan 7 for 598.80
+  [PASS] B has no Jan 7 price and sells Jan 8 for 449.10
+  [PASS] ending cash is 1047.90210
+  [PASS] Jan 3 NAV is shares x close with zero cash
+  [PASS] B is carried at $19 on Jan 7 while it has no price
+  [PASS] a stock silent for 3 sessions is closed at its last print
+
+Saved final run
+  [PASS] cash is never below zero
+  [PASS] NAV equals cash plus holdings on every day
+  [PASS] cash replayed from the fills file matches daily cash
+  [PASS] no lot is closed twice
+  [PASS] no ordinary sale before the 90 day date
+  [PASS] closed by the silence rule: 15 lots in 5 stocks
+  [PASS] every sell date is exactly 90 days after purchase
+  [PASS] every purchase comes after its signal
+  [PASS] nothing trades after Sep 30, 2026
+  [PASS] ordinary sales more than 7 days late: 0 of 2465
