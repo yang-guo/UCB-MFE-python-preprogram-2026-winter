@@ -1,0 +1,21 @@
+# Local source copies, generated audits and development checks.
+/data/
+/audit/
+/work/
+/00_pipeline_checks.ipynb
+__pycache__/
+.ipynb_checkpoints/
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+
+# Keep the full batch locally; submit only three samples and the summary.
+/reports/*
+!/reports/2026-10-29/
+/reports/2026-10-29/*
+!/reports/2026-10-29/AAPL_report.ipynb
+!/reports/2026-10-29/IBM_report.ipynb
+!/reports/2026-10-29/NKE_report.ipynb
+!/reports/2026-10-29/portfolio_summary.csv
