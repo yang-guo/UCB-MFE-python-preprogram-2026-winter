@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "evaluation_status": "incomplete",
+  "last_evaluated_date": "2019-10-09",
+  "failed_date": "2019-10-10",
+  "checks": [
+    "partial cash reconciliation",
+    "partial NAV identity",
+    "partial total PnL",
+    "failed session excluded",
+    "unresolved BID position preserved"
+  ],
+  "retrospective_exclusions": false
+}

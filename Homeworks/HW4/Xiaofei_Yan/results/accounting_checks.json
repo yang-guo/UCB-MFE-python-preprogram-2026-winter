@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "cases": [
+    "flat-price round-trip fees",
+    "daily cash reconciliation",
+    "NAV identity",
+    "realized PnL",
+    "signal before entry",
+    "weekend maturity",
+    "overlapping lots and open-position end NAV",
+    "missing entry",
+    "no orders",
+    "missing maturity quote waits for observed fill",
+    "five-session stale marks",
+    "six-session gap error",
+    "future-price change does not change first purchase",
+    "unresolved held-price transition",
+    "verified cash merger closes early at sourced payout with fees",
+    "after-close warrant redemption follows scheduled market sales; no exercise",
+    "automatic stock merger preserves cost, maturity and cash; successor sold on original due date",
+    "long gap preserves unresolved position and completed prefix; no retrospective deletion or failed-session NAV"
+  ],
+  "flat_price_expected_fee_per_side": 166.58337497917708,
+  "flat_price_expected_final_value": 999666.8332500417,
+  "flat_price_observed_final_value": 999666.8332500416
+}
