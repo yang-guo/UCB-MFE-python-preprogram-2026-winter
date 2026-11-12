@@ -1,0 +1,5 @@
+uv venv --python 3.12.9 --prompt HW1 .venv
+uv pip install --python .venv/Scripts/python.exe -r requirements.txt
+uv pip install --python .venv/Scripts/python.exe requests==2.24.0
+uv pip install --python .venv/Scripts/python.exe --upgrade requests
+Latest requests version: 2.34.2
