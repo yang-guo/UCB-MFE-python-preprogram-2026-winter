@@ -1,0 +1,8 @@
+Cash never negative: True (min -0.00)
+Buys: 2,439, sales: 2,383, skipped orders (no price): 1
+Final cash from the trade list: 541,888.38 vs book 541,888.38
+All sales on or after maturity (90 days): True
+Max delay after maturity: 2 calendar days
+Example lot REGN: bought 41.1063 units at 405.2500 on 2016-04-01 (cost 16,666.67 with fee), sold at 349.2300 on 2016-06-30 for 14,348.38. Return -13.91%; price check: 405.2500 and 349.2300
+Every buy is filled the session after its signal: True
+Days with a held price older than 5 sessions: 1300
