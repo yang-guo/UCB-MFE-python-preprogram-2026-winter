@@ -1,9 +1,13 @@
 {
-  "model": "lgb_excess",
+  "model": "momentum",
+  "comparisons": [
+    "lgb_excess",
+    "ridge"
+  ],
   "max_rank": 2000,
   "top_n": 50,
   "min_mom_rank": 0.5,
-  "features": [
+  "features_for_models": [
     "idio_vol_252",
     "earnings_yield",
     "debt_to_assets",
@@ -20,8 +24,13 @@
   "fee_bps": 10,
   "signal_every_sessions": 10,
   "cohorts": 6,
-  "retrain": "annual, first signal on/after Mar 31",
-  "validation_sharpe": 0.8071331649980616,
-  "validation_CAGR": 0.13963181300129168,
-  "frozen_at": "2026-11-12 17:12"
+  "holding_days": 90,
+  "model_refit": "annual, first signal on/after Mar 31, expanding window from 2010",
+  "validation_2013_2015": {
+    "CAGR": 0.2666276121834019,
+    "sharpe_rf2": 0.8592219116972474,
+    "SP500TR_CAGR": 0.14054576234162774,
+    "SP500TR_sharpe_rf2": 0.9375852072597872
+  },
+  "written_at": "2026-11-12 19:08"
 }

@@ -32,10 +32,9 @@ class RankLGBM:
     target="excess": winsorised 90-day return minus the date's mean
     """
 
-    def __init__(self, features, sectors=(), use_sector=False, target="rank", train_max_rank=None, **params):
+    def __init__(self, features, sectors=(), use_sector=False, target="rank", **params):
         self.features = list(features)
         self.use_sector = use_sector
-        self.train_max_rank = train_max_rank      # optionally fit only on the larger stocks it will trade
         self.target_col = {"rank": "target_rank", "excess": "target_excess"}[target]
         self.sector_dtype = pd.CategoricalDtype(sorted(sectors))
         self.params = {**BASE_PARAMS, **params}
@@ -47,8 +46,6 @@ class RankLGBM:
         return X
 
     def fit(self, frame):
-        if self.train_max_rank is not None:
-            frame = frame.loc[frame.universe_rank.le(self.train_max_rank)]
         self.model_ = lgb.LGBMRegressor(**self.params)
         y = frame[self.target_col] - (0.5 if self.target_col == "target_rank" else 0.0)
         self.model_.fit(self._X(frame), y,

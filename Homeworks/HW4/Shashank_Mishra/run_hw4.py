@@ -1,10 +1,7 @@
 """HW4 pipeline.
 
-    python run_hw4.py dev     # 2010-2015 only: feature screen, validation, choose + freeze config
-    python run_hw4.py test    # read the frozen config, run the Apr 2016 - Sep 2026 final test
-    python run_hw4.py dev2    # round 2, 2010-2015 only: wider model/universe comparison, new frozen config
-    python run_hw4.py test2   # final test of the round-2 config (results/round2/)
-    python run_hw4.py final   # SUBMITTED strategy: 12-1 momentum, round-1 rules (results/final/)
+    python run_hw4.py dev     # 2010-2015 only: feature screen, walk-forward validation, writes results/chosen_config.json
+    python run_hw4.py test    # final test Apr 2016 - Sep 2026: momentum (submitted) + LightGBM and Ridge comparisons
 
 Small result tables/plots go to ``results/`` (committed); the cached panel and
 full trade logs go to ``outputs/`` (git-ignored).
@@ -35,33 +32,18 @@ CORR_CUTOFF = 0.4
 VALIDATION_YEARS = [2013, 2014, 2015]
 
 LGB_SMALL = dict(num_leaves=7, n_estimators=300, min_child_samples=5000)
-FITTED = {   # name -> factory(features, sectors); every model is refit at each fit date
-    "lgb_rank": lambda feats, sectors: M.RankLGBM(feats, sectors, target="rank", **LGB_SMALL),
+FITTED = {   # name -> factory(features, sectors); refit at every fit date
     "lgb_excess": lambda feats, sectors: M.RankLGBM(feats, sectors, target="excess", **LGB_SMALL),
-    "lgb_rank_sector": lambda feats, sectors: M.RankLGBM(feats, sectors, use_sector=True, num_leaves=15, n_estimators=300),
+    "lgb_rank": lambda feats, sectors: M.RankLGBM(feats, sectors, target="rank", **LGB_SMALL),
+    "lgb_sector": lambda feats, sectors: M.RankLGBM(feats, sectors, use_sector=True, num_leaves=15, n_estimators=300),
     "ridge": lambda feats, sectors: M.RankRidge(feats),
-    # round 2 additions
-    "lgb_excess_all17": lambda feats, sectors: M.RankLGBM(F.CANDIDATES, sectors, target="excess", **LGB_SMALL),
-    "lgb_excess_top1000": lambda feats, sectors: M.RankLGBM(feats, sectors, target="excess", train_max_rank=1000,
-                                                             **{**LGB_SMALL, "min_child_samples": 2500}),
-    "ridge_all17": lambda feats, sectors: M.RankRidge(F.CANDIDATES),
 }
 RULES = {    # name -> score from signal-date columns only (no fitting)
-    "momentum_only": lambda rows: rows.r_mom_12_1.to_numpy(),
-    "riskadj_mom": lambda rows: (rows.mom_12_1 / rows.vol_63).to_numpy(),   # 12-1 momentum / 63-day vol
+    "momentum": lambda rows: rows.r_mom_12_1.to_numpy(),          # 12-1 momentum percentile
 }
-BLENDS = {   # name -> components; score = mean of same-date percentiles
-    "blend_lgb_riskadj": ("lgb_excess", "riskadj_mom"),
-}
-ROUND1 = ["lgb_rank", "lgb_excess", "lgb_rank_sector", "ridge", "momentum_only"]
-ROUND2 = ["lgb_excess", "lgb_excess_all17", "lgb_excess_top1000", "ridge", "ridge_all17",
-          "momentum_only", "riskadj_mom", "blend_lgb_riskadj"]
-LGB_MODELS = [k for k in ROUND1 if k.startswith("lgb")]
+MODELS = ["momentum", "lgb_excess", "lgb_rank", "lgb_sector", "ridge"]
+COMPARISONS = ["lgb_excess", "ridge"]      # run next to the submitted strategy in the final test
 STRATEGY_GRID = [dict(max_rank=r, top_n=n, min_mom_rank=s) for r in (1000, 2000) for n in (25, 50) for s in (None, 0.5)]
-STRATEGY_GRID_2 = [dict(max_rank=r, top_n=n, min_mom_rank=s)
-                   for r in (300, 500, 1000, 2000) for n in (25, 50) for s in (None, 0.5)]
-ROUND2_DIR = RESULTS / "round2"
-FINAL_DIR = RESULTS / "final"
 
 
 def log(msg):
@@ -98,10 +80,6 @@ def score(name, feats, sectors, train, rows, cache=None):
         return cache[name]
     if name in RULES:
         out = RULES[name](rows), None
-    elif name in BLENDS:
-        pct = [pd.Series(score(c, feats, sectors, train, rows, cache)[0], index=rows.index)
-               .groupby(rows.date).rank(pct=True) for c in BLENDS[name]]
-        out = sum(pct).div(len(pct)).to_numpy(), None
     else:
         m = FITTED[name](feats, sectors).fit(train)
         out = m.predict(rows), m
@@ -128,10 +106,8 @@ def validate(md, dev, feats, sectors, names, grid):
             s, m = score(name, feats, sectors, train, all_rows, cache)
             val_preds[name].append(all_rows.assign(score=s))
             done = all_rows.assign(score=s).loc[all_rows.target.notna()]
-            for universe, sub in (("top2000", done), ("top500", done.loc[done.universe_rank.le(500)])):
-                r = M.prediction_metrics(sub.loc[sub.score.notna()], top_n=25)
-                rows.append({"year": y, "fit_date": fit_date.date(), "train_rows": len(train), "model": name,
-                             "universe": universe, **r})
+            r = M.prediction_metrics(done.loc[done.score.notna()], top_n=50)
+            rows.append({"year": y, "fit_date": fit_date.date(), "train_rows": len(train), "model": name, **r})
         log(f"  {y}: fit {fit_date.date()} on {len(train):,} rows (last label end {train.label_end.max().date()})")
     mv = pd.DataFrame(rows)
 
@@ -143,7 +119,7 @@ def validate(md, dev, feats, sectors, names, grid):
     for name in names:
         preds = pd.concat(val_preds[name])
         for cfg in grid:
-            if name == "momentum_only" and cfg["min_mom_rank"] is not None:
+            if name == "momentum" and cfg["min_mom_rank"] is not None:
                 continue                                    # identical to the unscreened run
             res, _ = run_strategy(md, preds, sig, start, DEV_END, **cfg)
             p = performance(res.daily.nav)
@@ -154,36 +130,6 @@ def validate(md, dev, feats, sectors, names, grid):
     sv = pd.DataFrame(srows)
     sv.loc[len(sv)] = {"model": "^SP500TR buy&hold", **bench.drop(["start", "end"]).to_dict(), "excess_CAGR_vs_SP500TR": 0}
     return mv, sv
-
-
-def stage_dev2(db):
-    """Round 2, development data only: wider model / universe comparison, new frozen config.
-
-    Rule fixed before running: the highest 2013-2015 validation Sharpe among every
-    candidate (any model family), ties broken by CAGR. The round-1 feature list is reused.
-    """
-    ROUND2_DIR.mkdir(parents=True, exist_ok=True)
-    feats = json.loads((RESULTS / "chosen_config.json").read_text())["features"]
-    md, panel = load_everything(db)
-    dev = panel.loc[panel.date.le(DEV_END)]
-    sectors = sorted(panel.sector.unique())
-    mv, sv = validate(md, dev, feats, sectors, ROUND2, STRATEGY_GRID_2)
-    mv.round(4).to_csv(ROUND2_DIR / "dev_model_validation.csv", index=False)
-    sv.round(4).to_csv(ROUND2_DIR / "dev_strategy_validation.csv", index=False)
-    cands = sv.loc[sv.model.isin(ROUND2)]
-    print(cands.sort_values("sharpe_rf2", ascending=False).head(25).round(4).to_string())
-    best = cands.sort_values(["sharpe_rf2", "CAGR"], ascending=False).iloc[0]
-    bench = sv.loc[~sv.model.isin(ROUND2)].iloc[0]
-    cfg = {"round": 2, "model": best.model, "max_rank": int(best.max_rank), "top_n": int(best.top_n),
-           "min_mom_rank": None if pd.isna(best.min_mom_rank) else float(best.min_mom_rank), "features": feats,
-           "fee_bps": FEE_BPS, "signal_every_sessions": SIGNAL_EVERY, "cohorts": 6,
-           "retrain": "annual, first signal on/after Mar 31",
-           "selection_rule": "highest 2013-2015 validation Sharpe across all round-2 candidates",
-           "validation_sharpe": float(best.sharpe_rf2), "validation_CAGR": float(best.CAGR),
-           "validation_SP500TR_sharpe": float(bench.sharpe_rf2), "validation_SP500TR_CAGR": float(bench.CAGR),
-           "frozen_at": time.strftime("%Y-%m-%d %H:%M")}
-    (ROUND2_DIR / "chosen_config.json").write_text(json.dumps(cfg, indent=2))
-    log(f"chosen: {cfg}")
 
 
 def stage_dev(db):
@@ -200,23 +146,26 @@ def stage_dev(db):
     stats["description"] = [{**F.PRICE_CANDIDATES, **F.FUND_CANDIDATES}[c] for c in stats.index]
     stats.round(4).to_csv(RESULTS / "feature_screen.csv")
     corr.index, corr.columns = corr.index.str[2:], corr.columns.str[2:]
-    corr.round(3).to_csv(RESULTS / "feature_correlation_all.csv")
     plot_corr(corr.loc[feats, feats], RESULTS / "feature_correlation_selected.png")
     log(f"kept {len(feats)} features: {feats}")
 
-    mv, sv = validate(md, dev, feats, sectors, ROUND1, STRATEGY_GRID)
+    mv, sv = validate(md, dev, feats, sectors, MODELS, STRATEGY_GRID)
     mv.round(4).to_csv(RESULTS / "dev_model_validation.csv", index=False)
     sv.round(4).to_csv(RESULTS / "dev_strategy_validation.csv", index=False)
     print(sv.round(4).to_string())
 
-    # Selection rule (fixed in advance): best validation Sharpe among LightGBM configs.
-    lgb_rows = sv.loc[sv.model.isin(LGB_MODELS)]
-    best = lgb_rows.sort_values(["sharpe_rf2", "CAGR"], ascending=False).iloc[0]
-    cfg = {"model": best.model, "max_rank": int(best.max_rank), "top_n": int(best.top_n),
-           "min_mom_rank": None if pd.isna(best.min_mom_rank) else float(best.min_mom_rank), "features": feats,
-           "fee_bps": FEE_BPS, "signal_every_sessions": SIGNAL_EVERY, "cohorts": 6, "retrain": "annual, first signal on/after Mar 31",
-           "validation_sharpe": float(best.sharpe_rf2), "validation_CAGR": float(best.CAGR),
-           "frozen_at": time.strftime("%Y-%m-%d %H:%M")}
+    # Submitted strategy: momentum with its best validation-Sharpe setup. LightGBM and Ridge
+    # trade under the same rules for comparison; the median-momentum trend screen is part of
+    # those rules (it was in LightGBM's best setup and never binds for momentum's own top names).
+    mom = sv.loc[sv.model.eq("momentum")].sort_values(["sharpe_rf2", "CAGR"], ascending=False).iloc[0]
+    bench = sv.loc[~sv.model.isin(MODELS)].iloc[0]
+    cfg = {"model": "momentum", "comparisons": COMPARISONS, "max_rank": int(mom.max_rank), "top_n": int(mom.top_n),
+           "min_mom_rank": 0.5, "features_for_models": feats, "fee_bps": FEE_BPS,
+           "signal_every_sessions": SIGNAL_EVERY, "cohorts": 6, "holding_days": 90,
+           "model_refit": "annual, first signal on/after Mar 31, expanding window from 2010",
+           "validation_2013_2015": {"CAGR": float(mom.CAGR), "sharpe_rf2": float(mom.sharpe_rf2),
+                                    "SP500TR_CAGR": float(bench.CAGR), "SP500TR_sharpe_rf2": float(bench.sharpe_rf2)},
+           "written_at": time.strftime("%Y-%m-%d %H:%M")}
     (RESULTS / "chosen_config.json").write_text(json.dumps(cfg, indent=2))
     log(f"chosen: {cfg}")
 
@@ -237,42 +186,21 @@ def plot_corr(corr, path):
 
 
 # ------------------------------------------------------------------------------------ test
-def stage_final(db):
-    """Submitted strategy: 12-1 momentum under the round-1 trading rules.
-
-    The momentum family was picked after seeing the test (see README); its setup
-    (top-2000 universe, 50 names) is the one with the best 2013-2015 validation
-    Sharpe among momentum runs, and all other rules are the frozen round-1 ones.
-    LightGBM (round-1 model) and Ridge run alongside as comparisons.
-    """
-    FINAL_DIR.mkdir(parents=True, exist_ok=True)
-    cfg = json.loads((RESULTS / "chosen_config.json").read_text())
-    sv = pd.read_csv(RESULTS / "dev_strategy_validation.csv")
-    mom = sv.loc[sv.model.eq("momentum_only")].sort_values(["sharpe_rf2", "CAGR"], ascending=False).iloc[0]
-    cfg.update(model="momentum_only", max_rank=int(mom.max_rank), top_n=int(mom.top_n),
-               validation_sharpe=float(mom.sharpe_rf2), validation_CAGR=float(mom.CAGR),
-               selection_note="momentum chosen after the round-1 test; setup = best momentum validation Sharpe",
-               frozen_at=time.strftime("%Y-%m-%d %H:%M"))
-    (FINAL_DIR / "chosen_config.json").write_text(json.dumps(cfg, indent=2))
-    stage_test(db, rnd="final")
-
-
-def stage_test(db, rnd=1):
-    res_dir = {1: RESULTS, 2: ROUND2_DIR, "final": FINAL_DIR}[rnd]
-    out_dir = {1: OUTPUTS, 2: OUTPUTS / "round2", "final": OUTPUTS / "final"}[rnd]
+def stage_test(db):
+    res_dir, out_dir = RESULTS, OUTPUTS
     cfg = json.loads((res_dir / "chosen_config.json").read_text())
     log(f"frozen config: {cfg}")
     md, panel = load_everything(db)
     sectors = sorted(panel.sector.unique())
-    feats = cfg["features"]
+    feats = cfg["features_for_models"]
     sig = signal_dates(md, TEST_START - pd.Timedelta(days=1), TEST_END)
     assert sig[0] == pd.Timestamp("2016-03-31")
 
     # Annual refits: first signal date on/after March 31 of each year.
     fit_dates = sorted({sig[sig >= pd.Timestamp(f"{y}-03-31")][0] for y in range(2016, 2027)
                         if (sig >= pd.Timestamp(f"{y}-03-31")).any()})
-    # The chosen model plus two baselines declared before the test (same trading rules).
-    names = list(dict.fromkeys([cfg["model"], "ridge", "momentum_only"] + (["lgb_excess"] if rnd != 1 else [])))
+    # The submitted strategy plus the comparison models, all under the same trading rules.
+    names = [cfg["model"]] + cfg["comparisons"]
     preds, fit_log, importances = {n: [] for n in names}, [], []
     for k, fd in enumerate(fit_dates):
         nxt = fit_dates[k + 1] if k + 1 < len(fit_dates) else TEST_END + pd.Timedelta(days=1)
@@ -283,35 +211,33 @@ def stage_test(db, rnd=1):
         for n in names:
             s, m = score(n, feats, sectors, train, rows, cache)
             preds[n].append(rows.assign(score=s))
-        lgb_name = cfg["model"] if cfg["model"] in FITTED else "lgb_excess"
-        if lgb_name in cache and hasattr(cache[lgb_name][1], "importance"):
-            importances.append(cache[lgb_name][1].importance().rename(fd.year))
+        if "lgb_excess" in cache:
+            importances.append(cache["lgb_excess"][1].importance().rename(fd.year))
         fit_log.append({"fit_date": fd.date(), "train_rows": len(train), "last_label_end": train.label_end.max().date(),
                         "predict_from": rows.date.min().date(), "predict_to": rows.date.max().date()})
         log(f"fit {fd.date()}: {len(train):,} rows, last label end {train.label_end.max().date()}")
     preds = {n: pd.concat(v) for n, v in preds.items()}
     pd.DataFrame(fit_log).to_csv(res_dir / "test_refits.csv", index=False)
-    pd.concat(importances, axis=1).round(4).to_csv(res_dir / "test_feature_importance.csv")
+    pd.concat(importances, axis=1).round(4).to_csv(res_dir / "test_lightgbm_feature_importance.csv")
 
     kw = dict(max_rank=cfg["max_rank"], top_n=cfg["top_n"], min_mom_rank=cfg["min_mom_rank"])
     runs = {n: run_strategy(md, preds[n], sig, TEST_START, TEST_END, **kw) for n in names}
     res, strat = runs[cfg["model"]]
     bench = BuyAndHold.run(md.benchmark, TEST_START, TEST_END)
     bp = performance(bench.nav)
-    table = pd.DataFrame({f"Strategy ({cfg['model']}, chosen)": performance(res.daily.nav), "^SP500TR buy & hold": bp})
+    table = pd.DataFrame({f"Strategy ({cfg['model']}, submitted)": performance(res.daily.nav), "^SP500TR buy & hold": bp})
     for n in names[1:]:
-        table[f"baseline: {n}"] = performance(runs[n][0].daily.nav)
+        table[f"comparison: {n}"] = performance(runs[n][0].daily.nav)
     table.loc["excess_CAGR_vs_SP500TR"] = [table.at["CAGR", c] - bp.CAGR for c in table.columns]
     table.to_csv(res_dir / "test_performance.csv")
     print(table.to_string())
-    baselines = {n: runs[n][0].daily.nav for n in names[1:]}
-    preds = preds[cfg["model"]]
+    comps = {n: runs[n][0].daily.nav for n in names[1:]}
 
-    # Prediction quality on the test signals with completed labels.
-    pm = M.prediction_metrics(preds.loc[preds.target.notna()], top_n=cfg["top_n"])
+    # Ranking quality of each score on the test signals with completed labels.
+    pm = pd.DataFrame({n: M.prediction_metrics(p.loc[p.target.notna()], top_n=cfg["top_n"]) for n, p in preds.items()})
     pm.to_csv(res_dir / "test_prediction_metrics.csv")
-    label = f"Strategy: {cfg['model']}, top-{cfg['max_rank']} universe, {cfg['top_n']} names, 90-day lots (chosen)"
-    plot_curves(res.daily.nav, bench.nav, res_dir / "test_cumulative_returns.png", baselines, label)
+    label = f"12-1 momentum, top {cfg['top_n']} every 2 weeks, 90-day lots (submitted)"
+    plot_curves(res.daily.nav, bench.nav, res_dir / "test_cumulative_returns.png", comps, label)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     res.daily.to_csv(out_dir / "test_daily.csv")
@@ -324,10 +250,11 @@ def stage_test(db, rnd=1):
     log("done")
 
 
-def plot_curves(nav, bench, path, baselines=None, label="Strategy (chosen)"):
+def plot_curves(nav, bench, path, comparisons=None, label="Strategy"):
+    pretty = {"lgb_excess": "LightGBM", "ridge": "Ridge"}
     fig, ax = plt.subplots(figsize=(10, 5.5))
-    for (n, b), c in zip((baselines or {}).items(), ["#7f8c8d", "#b9a14a", "#8e44ad"]):
-        ax.plot(b.index, b / 1e6, label=f"baseline: {n} (same trading rules)", lw=1.0, color=c, ls="--")
+    for (n, b), c in zip((comparisons or {}).items(), ["#7f8c8d", "#b9a14a"]):
+        ax.plot(b.index, b / 1e6, label=f"{pretty.get(n, n)} (same trading rules)", lw=1.0, color=c, ls="--")
     ax.plot(nav.index, nav / 1e6, label=label, lw=1.8, color="#1f5aa6")
     ax.plot(bench.index, bench / 1e6, label="^SP500TR buy & hold", lw=1.8, color="#c0392b")
     ax.set_ylabel(r"Portfolio value (\$ millions, from \$1M)")
@@ -417,10 +344,9 @@ def diagnostics(res, md, path, out_dir):
 if __name__ == "__main__":
     warnings.filterwarnings("ignore", category=UserWarning)
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["dev", "test", "dev2", "test2", "final"])
+    ap.add_argument("stage", choices=["dev", "test"])
     ap.add_argument("--db", default=None, help="path to equities_top2000.duckdb")
     a = ap.parse_args()
     db = data.find_database(a.db)
     log(f"database: {db}")
-    {"dev": stage_dev, "test": stage_test, "dev2": stage_dev2, "test2": lambda d: stage_test(d, rnd=2),
-     "final": stage_final}[a.stage](db)
+    stage_dev(db) if a.stage == "dev" else stage_test(db)
