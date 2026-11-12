@@ -1,0 +1,8 @@
+,Strategy,^SP500TR,Difference
+final_value,2976783.4005,4402746.7763,-1425963.3758
+total_return,1.9768,3.4027,-1.4260
+CAGR,0.1095,0.1517,-0.0421
+max_drawdown,-0.3455,-0.3379,-0.0076
+annual_volatility,0.1873,0.1782,0.0091
+Sharpe,0.5444,0.7727,-0.2282
+beta_to_SP500TR,0.9556,,
