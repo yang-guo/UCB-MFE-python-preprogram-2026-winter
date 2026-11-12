@@ -1,0 +1,5 @@
+Every purchase is filled after its signal date. Passed.
+First day buys cost 76,948 including costs. One thirteenth of $1,000,000 is 76,923.
+Holding periods run from 90 to 92 calendar days over 13,765 closed positions.
+Final value 4,136,223. The backtester stops if cash ever goes negative and it never did.
+Training rows only used outcomes finished by each fit date. The code asserts this at every refit.
