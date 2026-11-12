@@ -26,11 +26,13 @@ order.
 ## Method
 
 The model is a histogram gradient-boosting regressor using the Lecture 7
-pipeline and a within-date rank target. It is fitted once using completed
-development-period outcomes. At each month-end, the strategy ranks eligible
-stocks and buys the top 20 at the next close. Each cohort receives the smaller
-of one-third of NAV or available cash, and every lot is held for 90 calendar
-days. Trading costs are 5 basis points per side.
+pipeline and a within-date rank target. Its inputs are 21- and 63-session
+momentum, 12-minus-1 momentum, 63-session volatility, 252-session drawdown,
+six filing-dated financial ratios, filing age, and sector. It is fitted once
+using completed development-period outcomes. At each month-end, the strategy
+ranks eligible stocks and buys the top 20 at the next close. Each cohort
+receives the smaller of one-third of NAV or available cash, and every lot is
+held for 90 calendar days. Trading costs are 5 basis points per side.
 
 The backtester follows the Lecture 8 separation between strategy decisions,
 order management, daily simulation, and analytics. It never invents a fill
