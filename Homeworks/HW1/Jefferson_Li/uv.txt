@@ -1,0 +1,30 @@
+# HW1 package-management record
+# Performed by Codex at Jefferson Li's request on 2026-10-20.
+# Starting directory: this personal submission folder.
+# uv was installed first using: HOMEBREW_NO_AUTO_UPDATE=1 /opt/homebrew/bin/brew install uv
+# Tool version: uv 0.12.9 (Homebrew 2026-09-01 aarch64-apple-darwin)
+
+uv venv --python 3.12.9 HW1
+source HW1/bin/activate
+python --version
+# Observed: Python 3.12.9
+
+uv pip install -r ../requirements.txt
+uv pip show requests
+# Observed requests version: 2.25.0
+
+uv pip install "requests==2.24.0"
+uv pip show requests
+# Observed requests version: 2.24.0
+# Inspected package metadata only at this stage, per the assignment's
+# warning about old dependencies on Python 3.12.
+
+uv pip install --upgrade requests
+uv pip show requests
+python -c "import requests; print(requests.__version__)"
+# Latest requests version installed from the configured package index on 2026-10-20: 2.34.2
+
+uv pip check
+# Observed: all installed packages are compatible.
+# Game of Life was not executed during this package-management exercise.
+# The local HW1/ environment is ignored by Git and is not submitted.
