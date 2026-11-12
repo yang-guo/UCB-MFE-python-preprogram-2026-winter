@@ -1,0 +1,19 @@
+,value
+buys,5489
+sells,5313
+buys filled at the session after their signal,True
+due date = entry + 90 calendar days,True
+no sale before maturity,True
+sales on first session on/after maturity,5313
+sales delayed (missing/suspect quote at maturity),0
+each lot sold at most once,True
+min cash,2.923674280452815e-08
+max |cash - cash rebuilt from fills| ($),2.3080701794242486e-09
+days where independent NAV rebuild differs by > $1,4
+max |NAV - independent rebuild| ($),73308.11025060713
+final NAV = cash + open lots at marks,True
+realised + unrealised PnL = NAV - initial,True
+total fees paid ($),127930.98331731501
+orders rejected (missing quote),1
+orders rejected (suspect quote),0
+average cash share of NAV (after first 13 weeks),0.02340676314938398
