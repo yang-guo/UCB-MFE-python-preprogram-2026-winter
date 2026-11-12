@@ -1,0 +1,10 @@
+# Tested with Python 3.13 (the versions below are the ones the submission was run with).
+pandas>=3.0
+numpy>=2.3
+matplotlib>=3.10
+papermill>=2.7
+scrapbook>=0.5
+tqdm>=4.67
+ipykernel>=7.0
+nbformat>=5.10
+nbconvert>=7.16
