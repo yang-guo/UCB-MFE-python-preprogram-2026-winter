@@ -1,0 +1,22 @@
+# 1. Install Python 3.12.9
+uv python install 3.12.9
+
+# 2. Create the HW1 virtual environment with Python 3.12.9
+uv venv --python 3.12.9 HW1
+
+# 3. Install the packages listed in the course requirements
+uv pip install --python HW1/bin/python -r ../requirements.txt
+
+# 4. Downgrade requests to version 2.24.0
+uv pip install --python HW1/bin/python "requests==2.24.0"
+
+# 5. Inspect the installed requests version
+uv pip show --python HW1/bin/python requests
+
+# 6. Upgrade requests to the latest version
+uv pip install --python HW1/bin/python --upgrade requests
+
+# 7. Check the latest installed requests version
+uv pip show --python HW1/bin/python requests
+
+# Latest requests version observed after upgrading: 2.34.2
