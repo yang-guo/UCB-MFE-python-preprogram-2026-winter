@@ -1,0 +1,13 @@
+check,value,note
+starts_at_capital,1000000.0,"March 31, 2016 mark is the starting cash"
+cash_minimum,0.0,Never negative
+nav_minus_cash_minus_holdings,4.656612873077393e-10,Largest absolute break in NAV = cash + holdings
+ending_cash_minus_fill_sum,8.498318493366241e-09,Ending cash equals capital plus every fill
+buys,3658,Each buy is signaled on an earlier session
+sales,3571,"Each sale matches a buy, and that lot is not still open"
+open_lots,87,Buys minus sales
+earliest_signal,2016-03-31,Before the first fill
+first_fill,2016-04-01,First test close
+shortest_hold_days,90,Due date is entry plus 90 calendar days
+longest_hold_days,90,Due date is entry plus 90 calendar days
+last_history_date,2026-09-30,No price after the sample end
