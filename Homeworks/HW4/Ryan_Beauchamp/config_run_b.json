@@ -1,0 +1,83 @@
+{
+  "status": "EXPLORATORY",
+  "status_note": "Run B: exploratory, run after seeing Run A (the frozen headline). Not pre-registered and never tested in development with this exact feature set. Same settings as Run A except the model columns.",
+  "chosen_on": "development data only: signals 2010-01-01 to 2015-12-31, data through 2016-03-31 (outputs/stage4_grid_results.csv, outputs/stage4_prediction_quality.csv)",
+  "target": {
+    "definition": "90-calendar-day gross return: entry at the next session's adjusted close after the signal, exit at the first quoted adjusted close on or after entry + 90 days (exit delay at most 5 sessions, else missing)",
+    "training_transform": "each signal date's cross-sectional percentile rank of the 90-day return, minus 0.5",
+    "source": "Lectures/modeling/course_data.py make_labels (imported, unmodified)"
+  },
+  "features": [
+    "fcf_yield",
+    "ebitda_yield",
+    "earnings_yield",
+    "rev_growth_ttm",
+    "eps_change_yield",
+    "op_margin_ttm"
+  ],
+  "eligibility": {
+    "universe": "dated quarterly membership for the quarter of the next-session entry, plus 63 complete trailing daily returns (course_data apply_membership/price_features)",
+    "positions_after_universe_exit": "kept to normal maturity; membership is not a sell signal"
+  },
+  "clean_flag": {
+    "max_abs_log_move_252": 1.6094379124341003,
+    "max_abs_log_move_252_note": "ln 5: exclude if any |daily log move| over the trailing 252 observed sessions exceeds ln 5",
+    "min_close": 1.0,
+    "market_cap_ceiling": null,
+    "applied_to": "training rows, scored rows and new purchases alike; held stocks are never altered (jumps are a diagnostic only)"
+  },
+  "model": {
+    "estimator": "Ridge inside course_data.make_pipeline (training-fitted 1/99% clipping, median imputation with indicators, scaling, sector one-hot)",
+    "alpha": 1000,
+    "train_start": "2010-01-01",
+    "retraining_rule": "annual",
+    "retraining_note": "refit at 2016-03-31, then at the first session of each calendar year; each fit uses only rows with label_end < fit date; scores apply from the fit date until the next fit",
+    "retraining_evidence": "2012-2015: rank IC once 0.0365 / annual 0.0341 / quarterly 0.0368; top-5% winsorized gap 0.69 / 0.88 / 0.75 pp; median grid CAGR 12.6% / 13.4% / 13.3%. Differences are small and inconsistent by year: weak evidence. Annual chosen because a single 2016 fit would never learn from 2016-2026 outcomes, and annual needs 11 fits instead of about 42."
+  },
+  "strategy": {
+    "type": "ScoreStrategy: buy the top N clean eligible scores on each decision date",
+    "top_n": 50,
+    "per_name_cap": 0.02,
+    "per_name_cap_note": "cap on the TOTAL position in a name (held lots at last marks + new order), as a fraction of NAV at the decision close",
+    "entry_every": 5,
+    "sessions_per_hold": 63,
+    "cohort_fraction_rule": "entry_every / sessions_per_hold = 5/63 of NAV per cohort, limited to cash at the decision close",
+    "selection_evidence": "Grid of 8 (N {20,50} x cap {2%,5%} x every {5,21}) per retraining rule. N=50 beat N=20 in all 12 pairs; every 5 beat every 21 in all 12 pairs (partly from higher average investment, 92% vs 85%); cap 2% vs 5% nearly identical at N=50, so the tighter cap is kept. Annual N=50/2%/5: CAGR 15.3%, Sharpe 1.03, max DD -10.6% vs ^SP500TR 14.9%, 1.00, -12.0% (2012-2015). Best-of-8 on four years: expect some selection optimism."
+  },
+  "backtest": {
+    "initial_cash": 1000000,
+    "fee_bps": 10,
+    "fee_note": "per side; entry fee inside the dollar budget: units = budget / (price * (1 + fee))",
+    "cash_yield": 0.0,
+    "holding_days": 90,
+    "exit_rule": "sell at the close of the first session on/after entry + 90 calendar days that has a quote",
+    "orders_funded_by": "cash at the signal close only; next-day sale proceeds do not fund next-day buys",
+    "missing_entry_quote": "reject the order, keep the cash",
+    "max_stale_sessions": 5,
+    "long_gap_policy": "hold",
+    "long_gap_policy_note": "CONFIRMED by the author (Wed). 'hold' = a held stock with no quote for more than 5 sessions stays in NAV at its last mark, is never sold without a quote, and is reported with a zero-recovery bound (NAV with those positions at 0). It still counts toward the 2% per-name cap at its last mark.",
+    "jump_flag": "record held stocks with |one-day log move| > ln 5; never alter prices",
+    "sharpe_rf": 0.02,
+    "metrics": "final value, CAGR (elapsed days / 365.25), max drawdown, Sharpe on daily returns (252 sessions)"
+  },
+  "dates": {
+    "first_signal": "2016-03-31",
+    "first_fill": "2016-04-01",
+    "end": "2026-09-30",
+    "convention": "initial-capital history row dated 2016-03-31; first fills and the benchmark purchase at the 2016-04-01 close; first model fitted only on outcomes ended before 2016-03-31; no order planned on the last session; open lots valued at the 2026-09-30 close"
+  },
+  "data": {
+    "panel": "panel_full",
+    "measures": "clean_measures_full/measures.parquet",
+    "extra_features_path": "garp_full/garp_features.parquet",
+    "database": "Lectures/modeling/data/equities_top2000.duckdb (read-only)",
+    "output_dir": "run_b"
+  },
+  "label": "exploratory, run after seeing Run A",
+  "based_on": {
+    "file": "frozen_config.json (Run A)",
+    "sha256": "3bee4e98950791b2889580d3d5bdf944ec08a3095b1ab62156287e4458d5b3d6"
+  },
+  "include_sector": false,
+  "features_note": "Only these 6 GARP columns (from data.extra_features_path, merged on date and symbol). The 13 baseline columns, sector, sue_q and garp_composite are NOT used."
+}
