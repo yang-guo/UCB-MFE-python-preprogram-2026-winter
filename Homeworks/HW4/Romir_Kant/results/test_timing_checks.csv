@@ -1,0 +1,13 @@
+,result
+buys,13724
+sells,13331
+buy fills on the session after its signal,True
+buy price = repaired adjusted close on fill day,True
+due date = entry + 90 calendar days,True
+sell price = repaired adjusted close on sell day,True
+no sale before due date,True
+sale is the first quoted session on/after due date,True
+no trades after test end,True
+every fit used only outcomes ended before the fit date,True
+cash never negative,True
+NAV = cash + holdings every day,True
