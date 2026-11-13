@@ -1,0 +1,38 @@
+[
+  {
+    "script": "analytics_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: 300 independent OLS/manual quantile/drawdown/Sharpe/log-CAGR cases; maximum annual-alpha error 1.4432899320127035e-14\nPASS: original derived-overflow correction, short samples, and malformed input cases\nPASS: benchmark comparison and plotted curve arrays\nPASS: every derived comparison field is finite or explicitly rejected\n",
+    "stderr": ""
+  },
+  {
+    "script": "engine_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: 15 separate 231-session independent ledger paths\nPASS: coverage rejection, explicit partial metadata, and lifecycle errors\nPASS: strict label maturity, future-filing exclusion, detached snapshots, no execution during preparation\nPASS: constant finite benchmark near float maximum normalizes correctly\nPASS: warning-as-error leaves engine unstarted and valid retry works\nPASS: genuinely nonrepresentable benchmark growth stops with FAILED state\n",
+    "stderr": ""
+  },
+  {
+    "script": "loader_notebook_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: both loader functions match lecture source verbatim\nPASS: real read-only AAPL/BHRB slice: 725 retained quotes, 275 invalid raw rows unchanged, exact lecture-output parity\nPASS: demo ranking/tie/completeness/membership/cash/schedule/warmup oracles\nPASS: notebook format/syntax and explicit database/date/coverage setup match instructions\nPASS: every Testing.ipynb code cell executed; discovered regression tests: 33\n",
+    "stderr": ""
+  },
+  {
+    "script": "mutation_checks.py",
+    "exit_code": 0,
+    "stdout": "baseline BASELINE PASS\nunreserved_cash_bypass DETECTED\nfuture_price_history DETECTED\nmature_label_boundary DETECTED\nalways_equal_optimizer DETECTED\nalpha_sign DETECTED\nstale_price_never_stops DETECTED\n",
+    "stderr": ""
+  },
+  {
+    "script": "oms_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: 200 independent Decimal-ledger paths with reservations/rejections/fees/maturity sales\nPASS: accepted/rejected fee bounds; 0% and 100% round trips reconcile\nPASS: six malformed/unrepresentable buys, overflow sale and valuation reject atomically\nPASS: full-budget large-capital buys respect accepted budgets and ledger\nPASS: 12000 additional full-budget cases from $1m to 1e300, 0\u201310000bps; strict budget and cash/ledger checks\n",
+    "stderr": ""
+  },
+  {
+    "script": "portfolio_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS 200 independent capped covariance-shrinkage scalar optimizer oracles; max error 2.220446049250313e-16\nPASS independent shadow/main cash, fees, 90-day lots, missing quotes, price-sensitive decisions, return-sensitive weights over 119 sessions\nPASS sensitive future-price and benchmark perturbation invariance\nPASS strict coordinated coverage and explicit partial shared coverage metadata/warnings\nPASS independent matured-label/date oracle for distinct180/365-day fitting windows and future-label invariance\nPASS finite-scale full-deployment arithmetic\nPASS derived shadow-return numeric validation precedes optimizer invocation\nPASS invalid extension preserves earlier published NAV/return/proposal/version state\n",
+    "stderr": ""
+  }
+]

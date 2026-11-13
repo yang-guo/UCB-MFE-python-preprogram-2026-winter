@@ -1,0 +1,79 @@
+# Local HW4 artifacts. Keep source, notebooks, requirements, documentation,
+# compact result tables/charts, and accounting/timing evidence in Git.
+
+# Environments and Python/tool/Jupyter caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.cache/
+cache/
+caches/
+cached_data/
+data_cache/
+.uv_cache/
+.uv-cache/
+.joblib_cache/
+.numba_cache/
+
+# Raw/downloaded data and database sidecars (distributed through bCourses)
+data/
+downloads/
+*.duckdb
+*.duckdb.*
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Binary data/model caches; regenerate them using the submitted code
+*.parquet
+*.feather
+*.arrow
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+
+# Bulk research exports are reproducible local artifacts. Keep the small
+# configuration, provenance, and summary diagnostics for review.
+/David_MartinsHuber/research_outputs/*
+!/David_MartinsHuber/research_outputs/README.md
+!/David_MartinsHuber/research_outputs/config.json
+!/David_MartinsHuber/research_outputs/volume_state_summary.csv
+!/David_MartinsHuber/research_outputs/ffd_state_summary.csv
+!/David_MartinsHuber/research_outputs/forward_90d_volume.csv
+!/David_MartinsHuber/research_outputs/forward_90d_ffd.csv
+
+# Local secrets, editor/OS files, logs, and temporary test artifacts
+.env
+.env.*
+!.env.example
+!.env.template
+.DS_Store
+._*
+.idea/
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/

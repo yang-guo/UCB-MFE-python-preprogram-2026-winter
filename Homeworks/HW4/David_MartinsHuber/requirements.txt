@@ -1,0 +1,13 @@
+# Prefer the repository's locked environment: uv sync --locked
+# Minimal standalone dependencies for Lectures 7 and 8:
+numpy>=2.3.5
+pandas>=2.2
+matplotlib>=3.5
+scikit-learn>=1.8,<2
+scipy>=1.9.3
+statsmodels>=0.14
+hmmlearn>=0.3
+duckdb>=1.4,<2
+ipykernel>=6
+nbformat>=5
+nbclient>=0.10

@@ -1,0 +1,18 @@
+# Course data is local-only; do not commit the source archive or database.
+data.db
+data.db.zip
+*.db-wal
+*.db-shm
+
+# Local working copy of the course database
+/data/
+
+# Full dated batch output is local; retain only three sample reports and the summary.
+/reports/????-??-??/*
+!/reports/????-??-??/AAPL_report.ipynb
+!/reports/????-??-??/IBM_report.ipynb
+!/reports/????-??-??/MRK_report.ipynb
+!/reports/????-??-??/portfolio_summary.csv
+
+# Local copy of the assignment text
+/hw2.md

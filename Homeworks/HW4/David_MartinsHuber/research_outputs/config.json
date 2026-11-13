@@ -1,0 +1,22 @@
+{
+  "database": "Homeworks/HW4/David_MartinsHuber/data/equities_top2000.duckdb",
+  "end": "2015-12-31",
+  "development_start": "2010-01-01",
+  "development_end": "2015-12-31",
+  "buffer_start": "2016-01-01",
+  "buffer_end": "2016-03-31",
+  "final_test_start": "2016-04-01",
+  "median_window": 90,
+  "bucket_multiple": 5.0,
+  "volume_min_train": 250,
+  "volume_refit_every": 13,
+  "ffd_min_train": 504,
+  "ffd_refit_every": 63,
+  "ffd_d_refit_every": 252,
+  "n_states": 3,
+  "n_init": 3,
+  "seed": 7,
+  "n_iter": 200,
+  "ffd_threshold": 1e-05,
+  "ffd_pvalue": 0.05
+}

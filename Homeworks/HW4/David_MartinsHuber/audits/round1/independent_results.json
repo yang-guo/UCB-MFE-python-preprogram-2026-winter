@@ -1,0 +1,32 @@
+[
+  {
+    "script": "analytics_checks.py",
+    "exit_code": 0,
+    "stdout": "250 independently calculated OLS/quantile/drawdown/Sharpe/CAGR cases passed; max alpha error 1.687538997430238e-14\nShort-sample, calendar-time, and malformed-input checks passed\nExtreme finite NAV derived returns: [inf, 0.0]\nExtreme finite NAV summary: {'final_value': 1e+300, 'total_return': inf, 'CAGR': inf, 'max_drawdown': 0.0, 'Sharpe': nan, 'annualized_volatility': nan, 'annualized_alpha': nan, 'beta': nan, 'VaR_95_daily': -inf, 'VaR_99_daily': -inf, 'daily_observations': 2.0}\n",
+    "stderr": ""
+  },
+  {
+    "script": "engine_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: 12 independent stochastic ledger cases, 189 sessions each; missing entries/marks, multiple lots, maturity, fees, NAV\nPASS: strict label-boundary and future filing exclusion\nLIFECYCLE prepare AttributeError 'Backtester' object has no attribute '_prepared'\nLIFECYCLE advance AttributeError 'Backtester' object has no attribute '_prepared'\nLIFECYCLE finish AttributeError 'Backtester' object has no attribute '_cursor'\nCOVERAGE requested_end 2021-06-22 00:00:00 actual_end 2020-06-22 00:00:00\n",
+    "stderr": ""
+  },
+  {
+    "script": "loader_notebook_checks.py",
+    "exit_code": 0,
+    "stdout": "Verbatim loader functions: PASS\nReal database small slice: PASS; 725 retained quotes; 275 raw invalid observations unchanged; exact lecture output parity\nDemo strategy hand-calculated ranking/tie/universe/cash/schedule/warmup: PASS (5 cases)\nAll notebook formats and Python cell syntax: PASS\n",
+    "stderr": ""
+  },
+  {
+    "script": "oms_checks.py",
+    "exit_code": 0,
+    "stdout": "PASS: 200 independent normal-range cash/reservation/fee sequences\nPASS: invalid quote rejection is atomic in four independent cases\nPASS: lot and maturity-sale provenance\nEDGE FINDING at oms.py:120-125: high_fee_cash= 0.0 ledger_cash= -33.33333333333334\nExpected: reject unsupported fees or insolvent sale before booking, not clip cash.\nEDGE FINDING at oms.py:101-125: units= inf fee= inf status= filled\nExpected: finite derived values or an atomic rejection.\n",
+    "stderr": ""
+  },
+  {
+    "script": "portfolio_checks.py",
+    "exit_code": 0,
+    "stdout": "200 analytic capped minimum-variance cases passed; maximum weight error 2.220446049250313e-16\nHand-calculated cash-constrained merge passed\nSensitive-strategy and sensitive-optimizer future price/calendar/membership perturbation passed\nIndependent checks passed\n",
+    "stderr": ""
+  }
+]
