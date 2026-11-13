@@ -53,11 +53,13 @@ class MarketDataChecks(unittest.TestCase):
     def setUpClass(cls):
         cls.data = MarketData.from_frames(*frames())
 
-    def test_non_usd_tickers_are_dropped(self):
+    def test_non_usd_restrictions_are_dated_and_history_is_preserved(self):
         self.assertEqual(self.data.non_usd_symbols, ("SMMT",))
-        self.assertEqual(set(self.data.prices.symbol), {"A", "B"})
-        self.assertEqual(set(self.data.fundamentals.symbol), {"A", "B"})
-        self.assertEqual(set(self.data.membership.symbol), {"A", "B"})
+        self.assertEqual(set(self.data.prices.symbol), {"A", "B", "SMMT"})
+        self.assertIn("SMMT", set(self.data.membership_at("2020-01-15", "2020-01-16").symbol))
+        self.assertNotIn("SMMT", set(self.data.membership_at("2020-01-16", "2020-01-17").symbol))
+        row = self.data.financials_at("2020-01-16", fields=["net_income"]).loc["SMMT"]
+        self.assertTrue(pd.isna(row.net_income))
 
     def test_no_backfill_before_first_filing(self):
         row = self.data.financials_at("2020-01-10", fields=["net_income"]).loc["A"]
@@ -98,7 +100,7 @@ class MarketDataChecks(unittest.TestCase):
         volume = self.data.volume_panel()
         self.assertEqual(volume.loc["2020-01-02", "A"], 1000)
         self.assertEqual(volume.loc["2020-06-30", "B"], 2000)
-        self.assertNotIn("SMMT", volume.columns)
+        self.assertIn("SMMT", volume.columns)  # Historical quotes/volume remain available.
 
     def test_view_stops_at_signal_close(self):
         view = self.data.view("2020-01-16", "2020-01-17", financial_fields=["net_income"])

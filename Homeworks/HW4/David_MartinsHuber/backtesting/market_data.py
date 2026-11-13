@@ -20,10 +20,10 @@ cap); rows before the first filing are left missing, never back-filled.
 
 Currency
 --------
-All remaining names are US-listed and prices are USD.  Tickers whose
-``reported_currency`` is present and not ``USD`` are removed at load time, so
-the surviving raw financial levels are treated as USD.  A missing
-``reported_currency`` is treated as USD for these US listings.
+Price history is never removed based on later reports. With currency filtering
+enabled, a known non-USD filing restricts new entries and financial features
+only from its availability date. Missing currency is unknown, not evidence of
+USD; it does not erase the last known reporting currency.
 """
 
 from dataclasses import dataclass, field
@@ -129,6 +129,7 @@ class MarketData:
     membership: pd.DataFrame
     calendar: pd.DatetimeIndex
     non_usd_symbols: tuple[str, ...] = ()
+    filter_non_usd: bool = True
     _cache: dict = field(default_factory=dict, compare=False, repr=False)
 
     def __post_init__(self):
@@ -154,16 +155,14 @@ class MarketData:
         membership = _as_datetime(membership.copy(), ["quarter_start", "selection_date"])
         universe = universe.copy()
 
-        dropped = tuple(non_usd_symbols)
-        if drop_non_usd and "reported_currency" in fundamentals:
-            mask = fundamentals.reported_currency.notna() & fundamentals.reported_currency.ne("USD")
-            dropped = tuple(sorted(set(dropped) | set(fundamentals.loc[mask, "symbol"])))
-        if dropped:
-            keep = ~prices.symbol.isin(dropped)
-            prices = prices.loc[keep].reset_index(drop=True)
-            fundamentals = fundamentals.loc[~fundamentals.symbol.isin(dropped)].reset_index(drop=True)
-            universe = universe.loc[~universe.symbol.isin(dropped)].reset_index(drop=True)
-            membership = membership.loc[~membership.symbol.isin(dropped)].reset_index(drop=True)
+        # Descriptive inventory only: never use a later report to delete a
+        # ticker's earlier prices, filings, or membership.
+        reported = set(non_usd_symbols)
+        if "reported_currency" in fundamentals:
+            currency = fundamentals.reported_currency.astype("string").str.strip().str.upper()
+            mask = (currency.notna() & currency.ne("") & currency.ne("USD")
+                    & fundamentals.filing_date.gt(fundamentals.fiscal_date))
+            reported.update(fundamentals.loc[mask, "symbol"])
 
         if calendar is None:
             calendar = pd.DatetimeIndex(benchmark.date.drop_duplicates().sort_values())
@@ -171,7 +170,50 @@ class MarketData:
             calendar = pd.DatetimeIndex(pd.to_datetime(calendar)).sort_values()
         return cls(prices.reset_index(drop=True), fundamentals.reset_index(drop=True),
                    universe.reset_index(drop=True), benchmark.reset_index(drop=True),
-                   membership.reset_index(drop=True), calendar, dropped)
+                   membership.reset_index(drop=True), calendar, tuple(sorted(reported)),
+                   filter_non_usd=bool(drop_non_usd))
+
+    def _currency_index(self):
+        """Known reporting-currency events; unknown updates do not erase facts."""
+        key = ("currency_index",)
+        if key not in self._cache:
+            index = {}
+            if "reported_currency" in self.fundamentals:
+                f = self.fundamentals.copy()
+                f["currency"] = f.reported_currency.astype("string").str.strip().str.upper()
+                f = f.loc[f.filing_date.gt(f.fiscal_date) & f.currency.notna() & f.currency.ne("")].copy()
+                f["available_date"] = f.filing_date + pd.Timedelta(days=1)
+                f = f.sort_values(["symbol", "available_date", "fiscal_date"])
+                f = f.loc[f.fiscal_date.eq(f.groupby("symbol").fiscal_date.cummax())]
+                f = f.drop_duplicates(["symbol", "available_date"], keep="last")
+                for symbol, group in f.groupby("symbol", sort=False):
+                    if symbol in self.non_usd_symbols:
+                        index[symbol] = (group.available_date.to_numpy(), group.currency.to_numpy())
+            self._cache[key] = index
+        return self._cache[key]
+
+    def non_usd_at(self, date):
+        """Names whose latest known currency is non-USD at this close."""
+        if not self.filter_non_usd:
+            return frozenset()
+        blocked = set()
+        point = np.datetime64(pd.Timestamp(date))
+        for symbol, (dates, currencies) in self._currency_index().items():
+            position = np.searchsorted(dates, point, side="right") - 1
+            if position >= 0 and currencies[position] != "USD":
+                blocked.add(symbol)
+        return frozenset(blocked)
+
+    def _currency_blocked_rows(self, rows):
+        blocked = np.zeros(len(rows), dtype=bool)
+        if self.filter_non_usd:
+            symbols = rows.symbol.to_numpy()
+            for symbol, (dates, currencies) in self._currency_index().items():
+                locations = np.flatnonzero(symbols == symbol)
+                positions = np.searchsorted(dates, rows.date.to_numpy()[locations], side="right") - 1
+                valid = positions >= 0
+                blocked[locations[valid]] = currencies[positions[valid]] != "USD"
+        return blocked
 
     # -------------------------------------------------------------- validate
     def _validate(self):
@@ -268,6 +310,11 @@ class MarketData:
             f["fcf_to_assets"] = f.free_cash_flow / assets
             f["accruals_to_assets"] = (f.net_income - f.operating_cash_flow) / assets
         f[list(FINANCIAL_RATIOS)] = f[list(FINANCIAL_RATIOS)].replace([np.inf, -np.inf], np.nan)
+        # Preserve the dated event but do not expose non-USD numeric statements
+        # as dollar features, even if a later USD report restores eligibility.
+        blocked = self._currency_blocked_rows(f.rename(columns={"available_date": "date"}))
+        numeric = f.select_dtypes(include=[np.number]).columns
+        f.loc[blocked, numeric] = np.nan
         f = f.sort_values(["symbol", "available_date", "fiscal_date"]).reset_index(drop=True)
         self._cache[key] = f
         return f
@@ -336,6 +383,8 @@ class MarketData:
             stale = panel.filing_age_days.gt(max_age_days)
             existing = [c for c in fields if c in panel.columns]
             panel.loc[stale, existing] = np.nan
+        blocked = self._currency_blocked_rows(panel)
+        panel.loc[blocked, list(fields)] = np.nan
         columns = list(dict.fromkeys([*AUDIT_COLUMNS, "date", "symbol", *fields]))
         columns = [c for c in columns if c in panel.columns]
         return panel[columns].sort_values(["date", "symbol"]).reset_index(drop=True)
@@ -413,14 +462,17 @@ class MarketData:
         future = out.available_date.notna() & out.available_date.gt(date)
         if future.any():
             raise ValueError("As-of lookup produced future financial data")
+        blocked = out.index.isin(self.non_usd_at(date))
+        out.loc[blocked, list(fields)] = np.nan
         return out
 
     def membership_at(self, signal_date, execution_date):
         """Execution-quarter members known at the signal close."""
         quarter = pd.Timestamp(execution_date).to_period("Q").start_time
-        return self.membership.loc[
+        members = self.membership.loc[
             self.membership.quarter_start.eq(quarter)
             & self.membership.selection_date.le(pd.Timestamp(signal_date))].copy()
+        return members.loc[~members.symbol.isin(self.non_usd_at(signal_date))].copy()
 
     def view(self, signal_date, execution_date, financial_fields=()):
         """Detached window for one decision; never contains future sessions."""
@@ -471,6 +523,7 @@ class MarketData:
         else:
             panel["is_universe_member"] = panel.membership_quarter.notna()
         panel["eligible"] = panel.eligible & panel.is_universe_member
+        panel["eligible"] &= ~self._currency_blocked_rows(panel)
         return panel
 
     def _make_labels(self, panel, prices, holding_days, max_exit_delay):
@@ -555,5 +608,7 @@ class MarketData:
             sessions=len(self.calendar),
             price_symbols=self.prices.symbol.nunique(),
             fundamental_symbols=self.fundamentals.symbol.nunique(),
-            non_usd_dropped=", ".join(self.non_usd_symbols) or "none",
+            non_usd_dropped="none (history preserved)",
+            non_usd_known_at_end=", ".join(sorted(self.non_usd_at(self.calendar[-1]))) or "none",
+            currency_filter="availability-aware" if self.filter_non_usd else "disabled",
         ))

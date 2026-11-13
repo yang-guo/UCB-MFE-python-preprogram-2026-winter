@@ -954,25 +954,16 @@ class DomainHardening(unittest.TestCase):
         self.assertEqual(engine.phase, Phase.COMPLETE)
         self.assertTrue(result.fills.empty)
 
-    def test_history_fees_include_delisting_exit(self):
-        class BuyA(Strategy):
-            def __init__(self):
-                super().__init__("buy_a")
-                self.sent = False
-
-            def propose_buys(self, ctx):
-                if self.sent:
-                    return {}
-                self.sent = True
-                return {"A": 100.0}
-
+    def test_missing_quotes_cannot_create_a_delisting_fill(self):
         dates, p, b, m = inputs(5)
-        prices = p.loc[~((p.date.ge(dates[2])) & p.symbol.eq("A"))]
-        result = Backtester(prices, b, m, BuyA(), initial_cash=1000, fee_bps=100,
-                            max_stale_sessions=0, delisting="last_price"
-                            ).run(dates[1], dates[-1])
-        self.assertTrue(result.diagnostics.event.eq("delisting_exit").any())
-        self.assertAlmostEqual(result.history.fees.sum(), result.fills.fee.sum())
+        prices = p.loc[p.date.lt(dates[2])]
+        engine = Backtester(prices, b, m, DailyBudget("gap"), initial_cash=1000,
+                            fee_bps=100, max_stale_sessions=0)
+        from backtesting import HeldPriceGapError
+        with self.assertRaises(HeldPriceGapError):
+            engine.run(dates[1], dates[-1])
+        self.assertTrue(all(f["trigger"] == "strategy" for f in engine.oms.fills))
+        self.assertTrue(all(f["side"] == "BUY" for f in engine.oms.fills))
 
     def test_terminal_phase_uses_signal_date(self):
         dates, p, b, m = inputs(4)

@@ -1,6 +1,7 @@
 """Pending orders, cash reservations, lots, and simulated fill accounting."""
 
 from dataclasses import asdict, dataclass
+import heapq
 
 import numpy as np
 import pandas as pd
@@ -51,17 +52,42 @@ class OMS:
         self.orders: dict[int, Order] = {}
         self.lots: dict[int, Lot] = {}
         self.fills: list[dict] = []
+        # Incremental state: reservations, aggregate units by symbol, and a
+        # maturity heap. These keep per-session work proportional to symbols
+        # and due lots instead of every open order and every open lot.
+        self._reserved = 0.0
+        self._pending_buys = 0
+        self._units: dict[str, float] = {}
+        self._maturity: list[tuple[pd.Timestamp, int]] = []
 
     @property
     def available_cash(self):
-        reserved = sum(o.budget for o in self.orders.values()
-                       if o.status == "pending" and o.side == "BUY")
-        available = self.cash - reserved
+        if self._pending_buys == 0:
+            return self.cash
+        available = self.cash - self._reserved
         # Reservation sums can round a few ulps above cash. Treat that dust as
         # zero; a larger deficit is a real accounting error.
         if available < 0 and -available <= 1e-12 * max(1.0, self.initial_cash):
             return 0.0
         return available
+
+    @property
+    def held_symbols(self):
+        """Symbols with a nonzero aggregate position."""
+        return tuple(symbol for symbol, units in self._units.items() if units > 0)
+
+    def due_lots(self, day):
+        """Lot IDs at or past maturity; stale heap entries are ignored."""
+        day = pd.Timestamp(day)
+        due = []
+        for due_date, lot_id in self._maturity:
+            if due_date > day:
+                break
+            if lot_id in self.lots:
+                due.append(lot_id)
+        while self._maturity and self._maturity[0][1] not in self.lots:
+            heapq.heappop(self._maturity)
+        return due
 
     def submit_buy(self, strategy_id, symbol, budget, signal_date, execution_date, *, model_version=0):
         signal_date, execution_date = pd.Timestamp(signal_date), pd.Timestamp(execution_date)
@@ -88,6 +114,8 @@ class OMS:
         order = Order(len(self.orders), strategy_id, symbol, "BUY", signal_date,
                       execution_date, float(budget), model_version=model_version)
         self.orders[order.order_id] = order
+        self._reserved += order.budget
+        self._pending_buys += 1
         return order.order_id
 
     def submit_maturity_sale(self, lot_id, execution_date):
@@ -108,32 +136,14 @@ class OMS:
         return order.order_id
 
     def forced_sale(self, lot_id, *, date, price):
-        """Book an early exit at the last observed mark.
+        """Reject legacy stale-mark liquidation; only observed maturity exits are allowed."""
+        raise ValueError("Forced stale-price exits are not supported; investigate the missing quote")
 
-        Used only when a held security stops quoting. The normal 90-day
-        maturity check is deliberately bypassed, and the trigger is fixed to
-        ``delisting`` so the fill cannot masquerade as a maturity sale.
-        """
-        if lot_id not in self.lots:
-            raise ValueError("Unknown lot")
-        lot = self.lots[lot_id]
-        date = pd.Timestamp(date)
-        if pd.isna(date) or date < lot.entry_date:
-            raise ValueError("Forced sale cannot precede entry")
-        if any(o.lot_id == lot_id and o.side == "SELL" and o.status == "pending"
-               for o in self.orders.values()):
-            raise ValueError("A pending sale already exists for this lot")
-        order = Order(len(self.orders), lot.strategy_id, lot.symbol, "SELL",
-                      lot.entry_date, date, lot_id=lot_id,
-                      trigger="delisting", model_version=lot.model_version)
-        self.orders[order.order_id] = order
-        try:
-            self.fill(order.order_id, symbol=lot.symbol, quote_date=order.execution_date,
-                      price=price, session=order.execution_date, allow_early=True)
-        except BaseException:
-            self.orders.pop(order.order_id, None)
-            raise
-        return order.order_id
+    def _release_buy(self, order):
+        """Release a reservation; no rounding dust survives the final order."""
+        self._pending_buys -= 1
+        self._reserved = (0.0 if self._pending_buys == 0
+                          else max(0.0, self._reserved - order.budget))
 
     def reject(self, order_id):
         if order_id not in self.orders:
@@ -141,9 +151,20 @@ class OMS:
         order = self.orders[order_id]
         if order.status != "pending":
             raise ValueError("Only pending orders can be rejected")
+        if order.side == "BUY":
+            self._release_buy(order)
         order.status = "rejected_missing_quote"
 
+    def discard(self, order_id):
+        """Remove an uncommitted order and release its reservation."""
+        order = self.orders.pop(order_id)
+        if order.side == "BUY" and order.status == "pending":
+            self._release_buy(order)
+        return order
+
     def fill(self, order_id, *, symbol, quote_date, price, session, allow_early=False):
+        if allow_early:
+            raise ValueError("Early or stale-price forced sales are not supported")
         if order_id not in self.orders:
             raise ValueError("Unknown order")
         order = self.orders[order_id]
@@ -191,7 +212,7 @@ class OMS:
             if order.lot_id not in self.lots:
                 raise ValueError("Unknown lot")
             lot = self.lots[order.lot_id]
-            if not allow_early and order.execution_date < lot.due_date:
+            if order.execution_date < lot.due_date:
                 raise ValueError("Premature sale")
             units, lot_id = lot.units, lot.lot_id
             with np.errstate(over="ignore", invalid="ignore", under="ignore"):
@@ -209,8 +230,16 @@ class OMS:
         # order, reservations, lots, cash, and ledger unchanged.
         if order.side == "BUY":
             self.lots[lot_id] = lot
+            self._release_buy(order)
+            self._units[symbol] = self._units.get(symbol, 0.0) + units
+            heapq.heappush(self._maturity, (lot.due_date, lot_id))
         else:
             del self.lots[lot_id]
+            remaining = self._units.get(symbol, 0.0) - units
+            if remaining <= 1e-12 * max(1.0, abs(units)):
+                self._units.pop(symbol, None)
+            else:
+                self._units[symbol] = remaining
         self.cash = 0.0 if next_cash == 0 else next_cash
         order.status = "filled"
         self.fills.append(dict(order_id=order_id, lot_id=lot_id,
@@ -222,16 +251,21 @@ class OMS:
 
     def snapshot(self, marks):
         holdings = {}
-        for lot in self.lots.values():
-            price = marks[lot.symbol]
-            if not np.isfinite(price) or price <= 0:
-                raise ValueError("Invalid valuation mark")
-            with np.errstate(over="ignore", invalid="ignore"):
-                value = holdings.get(lot.symbol, 0.0) + lot.units * price
-            if not np.isfinite(value):
-                raise ValueError("Holding valuation is not finite")
-            holdings[lot.symbol] = value
-        nav = self.cash + sum(holdings.values())
+        with np.errstate(over="ignore", invalid="ignore"):
+            for symbol, units in self._units.items():
+                if units <= 0:
+                    continue
+                try:
+                    price = marks[symbol]
+                except KeyError:
+                    raise ValueError(f"Missing valuation mark for {symbol}") from None
+                if not np.isfinite(price) or price <= 0:
+                    raise ValueError("Invalid valuation mark")
+                value = units * price
+                if not np.isfinite(value):
+                    raise ValueError("Holding valuation is not finite")
+                holdings[symbol] = value
+            nav = self.cash + sum(holdings.values())
         if not np.isfinite([nav, self.available_cash]).all():
             raise ValueError("Portfolio valuation is not finite")
         return Portfolio(self.cash, self.available_cash, nav, holdings)

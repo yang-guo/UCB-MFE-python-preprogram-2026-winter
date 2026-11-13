@@ -18,24 +18,35 @@ data = MarketData.load(
 print(data.coverage)
 ```
 
+**Research/development cutoff:** use `end="2015-12-31"` for research, model
+fitting, validation, and strategy selection. The 2016-01-01–2016-03-31 buffer
+is an embargo period and is excluded from research/fitting. The
+`2026-09-30` example above is for the separate frozen final-test evaluation
+only; do not use 2016+ rows to fit or research a model.
+
 `load` calls the verbatim `load_data` and `load_membership`, then adds the
 remaining numeric fundamental columns with a separate read-only query. It does
 not modify the loader or its assertions and warnings.
 
 ## Currency policy
 
-All remaining names are US-listed and prices are USD. Tickers whose
-`reported_currency` is present and not `USD` are removed at load time. In the
-current database this drops `GFL` (CAD) and `SMMT` (GBP). A missing
-`reported_currency` is treated as USD for these US listings.
+Prices and raw statement history are preserved. A known non-USD reporting
+currency blocks **new entries only from its availability date** (`filing_date +
+1 day`). Later filings cannot remove earlier observations or eligibility.
+Existing positions remain subject to normal 90-day maturity and observed-quote
+execution. An explicitly reported USD currency can restore new-entry eligibility.
 
-Consequences:
+Missing/empty currency is unknown, not proof of USD, and does not erase a
+previously known currency. Before any currency is known, eligibility is retained;
+research must treat currency comparability as an unresolved source limitation.
+Non-USD financial features are masked rather than converted or presented as USD.
+`non_usd_at(date)` exposes the dated restriction; `non_usd_symbols` is only a
+descriptive inventory, not an exclusion list. `drop_non_usd=False` disables this
+policy explicitly.
 
-- Raw financial levels are treated as USD after the filter.
-- `market_cap_usd` uses the raw USD `close`, not `adj_close`:
-  `shares_outstanding × close`.
-- The vendor `market_cap` column is sparse (~4% of rows), so the derived
-  `market_cap_usd` is the reliable field.
+`market_cap_usd` uses the USD raw close times reported shares outstanding, rather
+than adjusted close. The vendor market-cap field is sparse; shares are still
+filing-dated and subject to source limitations.
 
 ## Volume
 
@@ -156,10 +167,10 @@ point-in-time financial view. Passing explicit `prices`, `benchmark`, and
 
 - The source is a vendor snapshot; it cannot recover original historical
   vintages if values were later restated.
-- Missing `reported_currency` is assumed to be USD. This is reasonable for the
-  US-listed universe but is an assumption, not a vendor guarantee.
-- Financial levels are not converted with an FX time series; non-USD reporters
-  are removed instead.
+- Missing `reported_currency` remains unknown; retaining eligibility before a
+  currency is known does not guarantee statement comparability.
+- Financial levels are not converted with an FX time series; dated non-USD
+  features are masked and new entries are restricted.
 - `market_cap_usd` uses the filing's shares outstanding and the current raw
   close, so it moves with price between filings.
 - The engine cannot detect a strategy that reads future files independently.
@@ -172,5 +183,5 @@ point-in-time financial view. Passing explicit `prices`, `benchmark`, and
 ```
 
 The tests cover forward fill, no back-fill, restatements, late old periods,
-price-history preservation, non-USD removal, volume, market cap, engine
+price-history preservation, availability-aware currency restrictions, volume, market cap, engine
 delivery of declared columns, and the training-panel schema.

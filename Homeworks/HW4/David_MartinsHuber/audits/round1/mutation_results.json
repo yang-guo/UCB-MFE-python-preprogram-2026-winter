@@ -1,0 +1,44 @@
+[
+  {
+    "mutant": "baseline",
+    "detected": false,
+    "exit_code": 0,
+    "test_summary": "----------------------------------------------------------------------\nRan 20 tests in 1.770s\n\nOK\n"
+  },
+  {
+    "mutant": "unreserved_cash_bypass",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "======================================================================\nFAIL: test_reservation_quote_validation_and_duplicate_fill (test_backtesting.BacktestingChecks.test_reservation_quote_validation_and_duplicate_fill)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/unreserved_cash_bypass/tests/test_backtesting.py\", line 55, in test_reservation_quote_validation_and_duplicate_fill\n    with self.assertRaises(ValueError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 20 tests in 1.741s\n\nFAILED (failures=1)\n"
+  },
+  {
+    "mutant": "future_price_history",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "0000gn/T/hw4-mutation-audit-3l5po8ex/future_price_history/tests/test_portfolio.py\", line 63, in test_single_shadow_matches_standalone_account\n    shadow_initial_cash=100, fee_bps=10).run(dates[1], dates[-1])\n                                         ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/future_price_history/backtesting/portfolio.py\", line 235, in run\n    contexts[name] = shadow.prepare()\n                     ^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/future_price_history/backtesting/engine.py\", line 187, in prepare\n    proposals = dict(self.strategy.propose_buys(context))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/future_price_history/tests/test_portfolio.py\", line 21, in propose_buys\n    assert context.prices.index.max() <= context.signal_date\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n----------------------------------------------------------------------\nRan 20 tests in 0.798s\n\nFAILED (failures=7)\n"
+  },
+  {
+    "mutant": "mature_label_boundary",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "olioBacktester(p, b, m, specs).run(dates[1], dates[-1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/mature_label_boundary/backtesting/portfolio.py\", line 235, in run\n    contexts[name] = shadow.prepare()\n                     ^^^^^^^^^^^^^^^^\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/mature_label_boundary/backtesting/engine.py\", line 184, in prepare\n    self._refit(context)\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/mature_label_boundary/backtesting/engine.py\", line 139, in _refit\n    candidate.refit(FitData(rows[self._features].copy(), rows.target.copy(),\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/mature_label_boundary/tests/test_portfolio.py\", line 35, in refit\n    assert data.audit.label_end.max() < context.signal_date\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n----------------------------------------------------------------------\nRan 20 tests in 1.350s\n\nFAILED (failures=1)\n"
+  },
+  {
+    "mutant": "always_equal_optimizer",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "======================================================================\nFAIL: test_minimum_variance_solution_and_bad_weights (test_portfolio.PortfolioChecks.test_minimum_variance_solution_and_bad_weights)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/always_equal_optimizer/tests/test_portfolio.py\", line 153, in test_minimum_variance_solution_and_bad_weights\n    self.assertAlmostEqual(weights[\"a\"], .8, places=5)\nAssertionError: np.float64(0.5) != 0.8 within 5 places (np.float64(0.30000000000000004) difference)\n\n----------------------------------------------------------------------\nRan 20 tests in 1.729s\n\nFAILED (failures=1)\n"
+  },
+  {
+    "mutant": "alpha_sign",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "======================================================================\nFAIL: test_known_alpha_beta_and_benchmark_identity (test_analytics.AnalyticsChecks.test_known_alpha_beta_and_benchmark_identity)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/alpha_sign/tests/test_analytics.py\", line 26, in test_known_alpha_beta_and_benchmark_identity\n    self.assertAlmostEqual(report.loc[\"annualized_alpha\", \"Strategy\"], .0002 * 252)\nAssertionError: np.float64(3.7709897838595845) != 0.0504 within 7 places (np.float64(3.7205897838595847) difference)\n\n----------------------------------------------------------------------\nRan 20 tests in 1.798s\n\nFAILED (failures=1)\n"
+  },
+  {
+    "mutant": "stale_price_never_stops",
+    "detected": true,
+    "exit_code": 1,
+    "test_summary": "======================================================================\nFAIL: test_missing_entry_and_stale_holdings (test_backtesting.BacktestingChecks.test_missing_entry_and_stale_holdings)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/zv/3c51vz_j2jxbryd8d86f27hm0000gn/T/hw4-mutation-audit-3l5po8ex/stale_price_never_stops/tests/test_backtesting.py\", line 80, in test_missing_entry_and_stale_holdings\n    with self.assertRaises(HeldPriceGapError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: HeldPriceGapError not raised\n\n----------------------------------------------------------------------\nRan 20 tests in 1.910s\n\nFAILED (failures=1)\n"
+  }
+]

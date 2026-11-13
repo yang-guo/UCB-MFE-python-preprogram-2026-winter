@@ -9,15 +9,19 @@ from .analytics import BacktestAnalytics
 from .risk import (RiskManager, RiskPolicy, RiskContext, RiskAdjustment, RiskDecision,
                    SingleNameCap, DrawdownGate, VolatilityTarget)
 from .portfolio import (AllocationContext, EqualWeightOptimizer, MinimumVarianceOptimizer,
-                        EqualRiskContributionOptimizer, ERCOptimizer,
-                        PortfolioOptimizationError, PortfolioOptimizer, PortfolioStrategy,
-                        ShadowSpec, ShadowPortfolioBacktester, PortfolioBacktestResult)
+                        MaximumSharpeOptimizer, MaximumDiversificationOptimizer,
+                        EqualRiskContributionOptimizer, ERCOptimizer, MSPOptimizer, MDPOptimizer,
+                        ledoit_wolf_covariance, PortfolioOptimizationError, PortfolioOptimizer,
+                        PortfolioStrategy, ShadowSpec, ShadowPortfolioBacktester,
+                        PortfolioBacktestResult)
 
 __all__ = ["Backtester", "BacktestResult", "BacktestAnalytics", "DecisionContext", "FamaFrench5",
            "FactorResult", "FitData",
            "HeldPriceGapError", "MarketData", "MarketView", "OMS", "Phase", "Portfolio", "Strategy",
            "AllocationContext", "EqualWeightOptimizer", "MinimumVarianceOptimizer",
-           "EqualRiskContributionOptimizer", "ERCOptimizer", "PortfolioOptimizationError",
+           "MaximumSharpeOptimizer", "MaximumDiversificationOptimizer",
+           "EqualRiskContributionOptimizer", "ERCOptimizer", "MSPOptimizer", "MDPOptimizer",
+           "ledoit_wolf_covariance", "PortfolioOptimizationError",
            "PortfolioOptimizer", "PortfolioStrategy", "ShadowSpec",
            "ShadowPortfolioBacktester", "PortfolioBacktestResult",
            "RiskManager", "RiskPolicy", "RiskContext", "RiskAdjustment", "RiskDecision",

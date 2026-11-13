@@ -46,6 +46,73 @@ class BacktestResult:
         return BacktestAnalytics(self, annual_rf=annual_rf).summary()
 
 
+@dataclass(frozen=True)
+class MarketPanel:
+    """Validated, pre-pivoted market data shared by coordinated engines."""
+
+    benchmark: pd.Series
+    calendar: pd.DatetimeIndex
+    prices: pd.DataFrame
+    membership: pd.DataFrame
+    fundamentals: pd.DataFrame | None
+    volume: pd.DataFrame | None
+    first_valid: pd.Series
+    market_data: MarketData | None = None
+
+    @classmethod
+    def from_inputs(cls, prices=None, benchmark=None, membership=None,
+                    fundamentals=None, market_data=None):
+        if market_data is not None:
+            if not isinstance(market_data, MarketData):
+                raise TypeError("market_data must be a MarketData")
+            if any(frame is not None for frame in (prices, benchmark, membership)):
+                raise ValueError("Pass either market_data or explicit frames, not both")
+            prices, benchmark, membership = (market_data.prices, market_data.benchmark,
+                                             market_data.membership)
+            volume = market_data.volume_panel()
+        else:
+            volume = None
+        if prices is None or benchmark is None or membership is None:
+            raise ValueError("Provide prices, benchmark, membership, or market_data")
+
+        prices = _dates(prices[["date", "symbol", "adj_close"]], ["date"])
+        benchmark = _dates(benchmark[["date", "adj_close"]], ["date"])
+        for frame, keys in [(prices, ["date", "symbol"]), (benchmark, ["date"])]:
+            if frame[keys].isna().any().any() or frame.duplicated(keys).any():
+                raise ValueError("Quotes require unique, nonmissing keys")
+            if not (np.isfinite(frame.adj_close) & frame.adj_close.gt(0)).all():
+                raise ValueError("Omit missing quotes; observed prices must be finite and positive")
+        benchmark_series = benchmark.set_index("date").adj_close.sort_index()
+        calendar = benchmark_series.index
+        if not prices.date.isin(calendar).all():
+            raise ValueError("Stock quotes must use the benchmark calendar")
+        wide = (prices.pivot(index="date", columns="symbol", values="adj_close")
+                .reindex(calendar))
+        notna = wide.notna()
+        first_valid = notna.idxmax()
+        first_valid = first_valid.where(notna.any(), pd.NaT)
+
+        membership = _dates(membership[["symbol", "quarter_start", "selection_date"]],
+                            ["quarter_start", "selection_date"])
+        if (membership.isna().any().any()
+                or membership.duplicated(["symbol", "quarter_start"]).any()):
+            raise ValueError("Invalid membership keys or dates")
+        symbols = []
+        for value in membership.symbol:
+            if type(value) is np.str_:
+                symbols.append(str(value))
+            elif type(value) is str and value:
+                symbols.append(value)
+            else:
+                raise ValueError("Membership symbols must be exact nonempty strings")
+        membership = membership.assign(symbol=symbols)
+        fundamentals = (None if fundamentals is None else
+                        _dates(fundamentals, ["fiscal_date", "filing_date"]))
+        return cls(benchmark_series, calendar, wide, membership, fundamentals,
+                   None if volume is None else volume.reindex(calendar),
+                   first_valid, market_data)
+
+
 class Backtester:
     """One strategy, one fresh account, one run. Prices never reach strategy ahead of time.
 
@@ -55,7 +122,7 @@ class Backtester:
     """
 
     def __init__(self, prices=None, benchmark=None, membership=None, strategy=None, *,
-                 market_data=None, fundamentals=None,
+                 market_data=None, panel=None, fundamentals=None,
                  training_panel=None, feature_columns=(), initial_cash=1_000_000,
                  fee_bps=5, max_stale_sessions=5, risk_manager=None,
                  delisting="error"):
@@ -63,55 +130,31 @@ class Backtester:
             raise TypeError("strategy must implement Strategy")
         if not isinstance(max_stale_sessions, int) or max_stale_sessions < 0:
             raise ValueError("Invalid stale-price limit")
-        if delisting not in ("error", "last_price"):
-            raise ValueError("delisting must be 'error' or 'last_price'")
-        if market_data is not None:
-            if not isinstance(market_data, MarketData):
-                raise TypeError("market_data must be a MarketData")
-            if any(frame is not None for frame in (prices, benchmark, membership)):
-                raise ValueError("Pass either market_data or explicit frames, not both")
-            prices, benchmark, membership = (market_data.prices, market_data.benchmark,
-                                             market_data.membership)
-        if prices is None or benchmark is None or membership is None:
-            raise ValueError("Provide prices, benchmark, membership, or market_data")
-        prices = _dates(prices[["date", "symbol", "adj_close"]], ["date"])
-        benchmark = _dates(benchmark[["date", "adj_close"]], ["date"])
-        for frame, keys in [(prices, ["date", "symbol"]), (benchmark, ["date"])]:
-            if frame[keys].isna().any().any() or frame.duplicated(keys).any():
-                raise ValueError("Quotes require unique, nonmissing keys")
-            if not (np.isfinite(frame.adj_close) & frame.adj_close.gt(0)).all():
-                raise ValueError("Omit missing quotes; observed prices must be finite and positive")
-        self._benchmark = benchmark.set_index("date").adj_close.sort_index()
-        self._calendar = self._benchmark.index
-        if not prices.date.isin(self._calendar).all():
-            raise ValueError("Stock quotes must use the benchmark calendar")
-        self._prices = prices.pivot(index="date", columns="symbol", values="adj_close").reindex(self._calendar)
-        self._market_data = market_data
+        if delisting != "error":
+            raise ValueError("Only delisting='error' is supported: a stale mark is not an executable quote")
+        if panel is None:
+            panel = MarketPanel.from_inputs(
+                prices, benchmark, membership, fundamentals=fundamentals,
+                market_data=market_data)
+        else:
+            if not isinstance(panel, MarketPanel):
+                raise TypeError("panel must be a MarketPanel")
+            if (any(frame is not None for frame in (prices, benchmark, membership))
+                    or market_data is not None or fundamentals is not None):
+                raise ValueError("Pass either panel or data inputs, not both")
+        self._benchmark = panel.benchmark
+        self._calendar = panel.calendar
+        self._prices = panel.prices
+        self._membership = panel.membership
+        self._fundamentals = panel.fundamentals
+        self._volume = panel.volume
+        self._first_valid = panel.first_valid
+        self._market_data = panel.market_data
         self._required_financials = tuple(getattr(strategy, "required_financials", ()))
         if self._required_financials:
-            if market_data is None:
+            if self._market_data is None:
                 raise ValueError("Strategy requires financial columns; supply market_data")
-            market_data.validate_fields(self._required_financials)
-        self._volume = (None if market_data is None else
-                        market_data.volume_panel().reindex(self._calendar))
-        self._membership = _dates(membership[["symbol", "quarter_start", "selection_date"]],
-                                  ["quarter_start", "selection_date"])
-        if (self._membership.isna().any().any()
-                or self._membership.duplicated(["symbol", "quarter_start"]).any()):
-            raise ValueError("Invalid membership keys or dates")
-        # Exact strings are immutable, so a strategy cannot mutate a trusted
-        # membership cell in place through its planning copy.
-        symbols = []
-        for value in self._membership.symbol:
-            if type(value) is np.str_:
-                symbols.append(str(value))
-            elif type(value) is str and value:
-                symbols.append(value)
-            else:
-                raise ValueError("Membership symbols must be exact nonempty strings")
-        self._membership = self._membership.assign(symbol=symbols)
-        self._fundamentals = (None if fundamentals is None else
-                              _dates(fundamentals, ["fiscal_date", "filing_date"]))
+            self._market_data.validate_fields(self._required_financials)
         self._features = list(feature_columns)
         self._training = None
         if training_panel is not None:
@@ -151,20 +194,30 @@ class Backtester:
         members = self._membership.loc[
             self._membership.quarter_start.eq(execution_date.to_period("Q").start_time)
             & self._membership.selection_date.le(signal_date)].copy()
+        if self._market_data is not None:
+            members = self._market_data.membership_at(signal_date, execution_date)
         fundamentals = pd.DataFrame()
         if self._fundamentals is not None:
             f = self._fundamentals
             # Keep only trustworthy filing lags; data becomes usable the next day.
             fundamentals = f.loc[f.filing_date.gt(f.fiscal_date)
                                  & (f.filing_date + pd.Timedelta(days=1)).le(signal_date)].copy()
-        volume = (self._volume.loc[:signal_date].copy()
+        position = self._calendar.get_loc(signal_date)
+        # Copy-on-write makes a prefix slice a cheap read-only view; filtering
+        # by first-valid date preserves the old all-NaN column behavior without
+        # scanning and copying the full history every session.
+        prices = self._prices.iloc[:position + 1]
+        active = self._first_valid.le(signal_date)
+        if not active.all():
+            prices = prices.loc[:, active.to_numpy()]
+        volume = (self._volume.iloc[:position + 1]
                   if self._volume is not None else pd.DataFrame())
         financials = (self._market_data.financials_at(
                           signal_date, fields=self._required_financials)
                       if self._market_data is not None and self._required_financials
                       else pd.DataFrame())
         return DecisionContext(signal_date, execution_date,
-                               self._prices.loc[:signal_date].dropna(axis=1, how="all").copy(),
+                               prices,
                                members, fundamentals, self.oms.snapshot(marks), self.model_version,
                                volume, financials)
 
@@ -239,16 +292,26 @@ class Backtester:
         self._coverage = coverage
         self._history = [dict(date=previous, cash=self.oms.cash, holdings_value=0.0,
                               nav=self.oms.cash, fees=0.0, stale_marks=0, open_lots=0)]
+        self._history_cache = None
+        self._history_cache_len = 0
 
     def _require_started(self):
         if not self._started:
             raise ValueError("Call begin() first to initialize the backtest")
 
+    def _history_frame(self):
+        if self._history_cache_len != len(self._history):
+            self._history_cache = pd.DataFrame(self._history).set_index("date")
+            self._history_cache_len = len(self._history)
+        return self._history_cache
+
     @property
     def history_so_far(self):
         """Detached completed history only; pending orders never create returns."""
         self._require_started()
-        return pd.DataFrame(self._history).set_index("date").copy(deep=True)
+        # A shallow copy shares blocks under copy-on-write, so callers cannot
+        # mutate the engine's cache but do not pay for a full deep copy.
+        return self._history_frame().copy(deep=False)
 
     @property
     def next_session(self):
@@ -324,7 +387,7 @@ class Backtester:
             return context
         except BaseException:
             for order_id in [i for i in self.oms.orders if i >= orders_before]:
-                del self.oms.orders[order_id]
+                self.oms.discard(order_id)
             self._phase(Phase.FAILED, signal)
             raise
 
@@ -342,6 +405,10 @@ class Backtester:
         orders_before = len(self.oms.orders)
         order_status = {order_id: self.oms.orders[order_id].status for order_id in buy_ids}
         lots_before = dict(self.oms.lots)
+        units_before = dict(self.oms._units)
+        reserved_before = self.oms._reserved
+        pending_buys_before = self.oms._pending_buys
+        maturity_before = list(self.oms._maturity)
         fills_before, cash_before = len(self.oms.fills), self.oms.cash
         marks_before, last_seen_before = dict(self._marks), dict(self._last_seen)
         diagnostics_before = len(self._diagnostics)
@@ -352,32 +419,20 @@ class Backtester:
                 self._marks[symbol], self._last_seen[symbol] = float(price), position
             stale = 0
             first_fill = len(self.oms.fills)
-            for symbol in {lot.symbol for lot in self.oms.lots.values()}:
+            for symbol in self.oms.held_symbols:
                 if position - self._last_seen[symbol] > self.max_stale_sessions:
-                    if self.delisting == "last_price":
-                        # The security stopped quoting. Exit at the last known
-                        # mark instead of aborting the run; the diagnostic and
-                        # the fill trigger keep this distinguishable from a
-                        # normal maturity sale.
-                        for lot in [item for item in self.oms.lots.values()
-                                    if item.symbol == symbol]:
-                            self.oms.forced_sale(
-                                lot.lot_id, date=day, price=self._marks[symbol])
-                        self._diagnostics.append(
-                            dict(date=day, symbol=symbol, event="delisting_exit"))
-                        continue
                     raise HeldPriceGapError(f"{symbol}: unresolved held quote on {day.date()}")
                 if symbol not in quotes:
                     stale += 1
                     self._diagnostics.append(dict(date=day, symbol=symbol, event="stale_mark"))
-            for lot in list(self.oms.lots.values()):
-                if day >= lot.due_date:
-                    if lot.symbol in quotes:
-                        order_id = self.oms.submit_maturity_sale(lot.lot_id, day)
-                        self.oms.fill(order_id, symbol=lot.symbol, quote_date=day,
-                                      price=float(quotes[lot.symbol]), session=day)
-                    else:
-                        self._diagnostics.append(dict(date=day, symbol=lot.symbol, event="maturity_exit_delayed"))
+            for lot_id in self.oms.due_lots(day):
+                lot = self.oms.lots[lot_id]
+                if lot.symbol in quotes:
+                    order_id = self.oms.submit_maturity_sale(lot.lot_id, day)
+                    self.oms.fill(order_id, symbol=lot.symbol, quote_date=day,
+                                  price=float(quotes[lot.symbol]), session=day)
+                else:
+                    self._diagnostics.append(dict(date=day, symbol=lot.symbol, event="maturity_exit_delayed"))
             for order_id in buy_ids:
                 order = self.oms.orders[order_id]
                 if self._calendar[self._calendar.get_loc(order.signal_date) + 1] != day:
@@ -395,11 +450,15 @@ class Backtester:
                                 stale_marks=stale, open_lots=len(self.oms.lots)))
         except BaseException:
             for order_id in [i for i in self.oms.orders if i >= orders_before]:
-                del self.oms.orders[order_id]
+                self.oms.discard(order_id)
             for order_id, status in order_status.items():
                 if order_id in self.oms.orders:
                     self.oms.orders[order_id].status = status
             self.oms.lots = lots_before
+            self.oms._units = units_before
+            self.oms._reserved = reserved_before
+            self.oms._pending_buys = pending_buys_before
+            self.oms._maturity = maturity_before
             del self.oms.fills[fills_before:]
             self.oms.cash = cash_before
             self._marks = marks_before
@@ -416,7 +475,7 @@ class Backtester:
             raise ValueError("Finish requires all sessions to have completed successfully")
         signal = self._calendar[self._calendar.get_loc(self._days[-1]) - 1]
         try:
-            history = pd.DataFrame(self._history).set_index("date")
+            history = self._history_frame().copy(deep=True)
             history["benchmark_nav"] = self.oms.initial_cash
             with np.errstate(over="ignore", invalid="ignore", divide="ignore", under="ignore"):
                 benchmark_nav = (self._benchmark.loc[self._days] / self._benchmark.loc[self._days[0]]) * self.oms.initial_cash

@@ -14,6 +14,8 @@ For each execution session, the coordinator follows this sequence:
 
 `Backtester.begin`, `prepare`, `advance`, and `finish` expose the incremental lifecycle; `Backtester.run` uses these same methods for ordinary standalone runs. The coordinator never repeatedly runs a historical backtest inside another backtest.
 
+Coordinated engines share one validated, pre-pivoted `MarketPanel`, so each shadow does not re-pivot or re-copy the full price history. `ShadowPortfolioBacktester` defaults to `parallel=True` and prepares/advances independent shadows with a thread pool (`max_workers` defaults to the smaller of the shadow count and CPU count). Pass `parallel=False` or an explicit `max_workers` for single-threaded debugging. Contexts use copy-on-write prefix views and the OMS maintains incremental reservations, aggregate holdings, and a maturity queue.
+
 The earliest history row is initial capital before the first shadow execution. Optional `shadow_start` can precede the main period, giving the optimizer a genuine walk-forward warm-up record. Those warm-up trades are shadow-only: the main portfolio still starts with its configured cash and no inherited positions.
 
 ## Refitting and provenance
@@ -42,10 +44,39 @@ An optional main-account risk layer now reviews merged budgets before OMS submis
 
 ## Optimizers
 
-- `EqualWeightOptimizer`: fixed equal weights; default baseline.
-- `MinimumVarianceOptimizer`: long-only minimum sample variance using trailing shadow returns (default 63 observations), covariance shrinkage toward the diagonal (default 10%), and an optional maximum strategy weight. It uses equal weights until at least 20 completed returns exist, and when all series have effectively zero variance. Infeasible limits or solver failures stop the run. It recomputes weights at each signal cutoff; it does not predict expected returns.
+- `EqualWeightOptimizer` (EW): fixed equal weights; default baseline.
+- `MinimumVarianceOptimizer` (MVP): long-only minimum variance using trailing shadow returns (default 63 observations), Ledoit-Wolf covariance shrinkage, and an optional maximum strategy weight. Passing an explicit `shrinkage` keeps the older fixed diagonal estimator. It uses equal weights until at least 20 completed returns exist, and when all series have effectively zero variance. Infeasible limits or solver failures stop the run.
+- `MaximumSharpeOptimizer` (alias `MSPOptimizer`): long-only maximum Sharpe ratio. Expected returns are sample means; covariance is Ledoit-Wolf shrunk. `annual_rf` is converted to one period with `sessions_per_year` (default 252). A binding `max_weight` is a hard constraint; solver failure or an invalid solution raises `PortfolioOptimizationError`.
+- `MaximumDiversificationOptimizer` (alias `MDPOptimizer`): long-only maximum diversification ratio `(w' sigma) / sqrt(w' Sigma w)`, with Ledoit-Wolf covariance. It needs no expected-return forecast. Exact zero-variance strategies receive zero weight.
 - `EqualRiskContributionOptimizer` (alias `ERCOptimizer`): long-only equal-risk-contribution weights using trailing shadow returns. See the section below.
 - Custom optimizers implement `PortfolioOptimizer.weights(AllocationContext)` and may expose reproducibility settings through `settings()`. The return history includes fee effects and any permitted stale marks; sample size and allocation choices require research validation. A low-risk or cash-heavy shadow can dominate minimum variance; this is an algorithmic property, not evidence of predictive quality.
+
+### Covariance estimation
+
+`ledoit_wolf_covariance(returns)` implements the Ledoit-Wolf well-conditioned
+estimator,
+
+```text
+Sigma_LW = (1 - lambda) * Sigma_sample + lambda * mu * I,
+mu = trace(Sigma_sample) / N,
+```
+
+with the analytical shrinkage intensity `lambda` from the paper. MVP, MSP, and
+MDP use it by default. Passing `shrinkage=<float>` switches to the older fixed
+diagonal estimator; `covariance="sample"` disables shrinkage. The chosen method
+and intensity are recorded in `settings()` for each allocation.
+
+MSP uses historical mean returns, so its weights are a sample estimate rather
+than a forecast. MDP avoids expected returns entirely but still relies on the
+sample covariance. Both are long-only, fully invested, and never use leverage.
+
+```python
+from backtesting import MaximumSharpeOptimizer, MaximumDiversificationOptimizer
+
+msp = MaximumSharpeOptimizer(lookback=63, min_observations=20, annual_rf=0.02)
+mdp = MaximumDiversificationOptimizer(lookback=63, min_observations=20)
+runner = ShadowPortfolioBacktester(..., optimizer=mdp)
+```
 
 ### Equal risk contribution (ERC)
 

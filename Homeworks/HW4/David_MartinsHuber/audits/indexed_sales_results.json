@@ -1,0 +1,24 @@
+{
+  "scope": "synthetic submit-and-discard microbenchmark; not end-to-end speedup",
+  "repetitions": 100,
+  "measurements": [
+    {
+      "historical_orders": 0,
+      "original_seconds_per_check": 5.011279135942459e-06,
+      "indexed_seconds_per_check": 4.652910865843296e-06,
+      "check_speedup": 1.0770202310837116
+    },
+    {
+      "historical_orders": 10000,
+      "original_seconds_per_check": 0.0011152954096905886,
+      "indexed_seconds_per_check": 5.071349442005157e-06,
+      "check_speedup": 219.92083614920702
+    },
+    {
+      "historical_orders": 50000,
+      "original_seconds_per_check": 0.005328400109428913,
+      "indexed_seconds_per_check": 4.911141004413366e-06,
+      "check_speedup": 1084.9617440510422
+    }
+  ]
+}
