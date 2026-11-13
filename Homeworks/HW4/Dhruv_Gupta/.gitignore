@@ -1,7 +1,0 @@
-# Local reruns. The submission keeps the comparison chart and the small checks.
-results/*
-!results/accounting_check.csv
-!results/benchmark_comparison.csv
-!results/cumulative_returns.png
-!results/label_timing_check.csv
-!results/test_fit_audit.csv
