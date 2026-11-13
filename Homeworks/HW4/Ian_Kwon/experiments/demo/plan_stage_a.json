@@ -1,0 +1,57 @@
+[
+  {
+    "name": "A1_mom_raw",
+    "hypothesis": "12-1 month momentum ranks the next 90-day returns (fixed composite, nothing fitted).",
+    "overrides": {"features": ["mom_252_21"], "model": {"kind": "composite", "params": {"signs": [1]}}}
+  },
+  {
+    "name": "A2_mom_sector_relative",
+    "hypothesis": "Sector-relative momentum carries more stock-specific information than raw momentum because it removes common sector moves (compare A1; only the feature changes).",
+    "overrides": {"features": ["mom_252_21_sr"], "model": {"kind": "composite", "params": {"signs": [1]}}}
+  },
+  {
+    "name": "A3_ridge_price",
+    "hypothesis": "A fitted linear combination of price features (reversal, momentum, volatility, drawdown) ranks returns.",
+    "overrides": {"features": ["ret_21", "ret_63", "mom_252_21", "vol_63", "drawdown_252"],
+                  "model": {"kind": "ridge", "params": {"alpha": 10.0}}}
+  },
+  {
+    "name": "A4_ridge_price_fin",
+    "hypothesis": "Point-in-time fundamentals, size and liquidity add information beyond prices (compare A3; only features change).",
+    "overrides": {"features": ["ret_21", "ret_63", "mom_252_21", "vol_63", "drawdown_252",
+                               "net_margin", "operating_roa", "gross_profitability", "debt_to_assets", "cash_to_assets",
+                               "fcf_to_assets", "accruals_to_assets", "book_to_market", "filing_age_days",
+                               "log_mcap_proxy", "log_dollar_volume_63"],
+                  "model": {"kind": "ridge", "params": {"alpha": 10.0}}}
+  },
+  {
+    "name": "A5_ridge_all_sector_relative",
+    "hypothesis": "Adding sector-relative versions of momentum, volatility, profitability and value improves ranking (compare A4; only features change).",
+    "overrides": {"features": ["ret_21", "ret_63", "mom_252_21", "vol_63", "drawdown_252",
+                               "net_margin", "operating_roa", "gross_profitability", "debt_to_assets", "cash_to_assets",
+                               "fcf_to_assets", "accruals_to_assets", "book_to_market", "filing_age_days",
+                               "log_mcap_proxy", "log_dollar_volume_63",
+                               "ret_21_sr", "ret_63_sr", "mom_252_21_sr", "vol_63_sr", "operating_roa_sr",
+                               "gross_profitability_sr", "book_to_market_sr"],
+                  "model": {"kind": "ridge", "params": {"alpha": 10.0}}}
+  },
+  {
+    "name": "A6_hgb_all_sector_relative",
+    "hypothesis": "Gradient-boosted trees capture nonlinearities/interactions the linear model misses (compare A5; only the model changes).",
+    "overrides": {"features": ["ret_21", "ret_63", "mom_252_21", "vol_63", "drawdown_252",
+                               "net_margin", "operating_roa", "gross_profitability", "debt_to_assets", "cash_to_assets",
+                               "fcf_to_assets", "accruals_to_assets", "book_to_market", "filing_age_days",
+                               "log_mcap_proxy", "log_dollar_volume_63",
+                               "ret_21_sr", "ret_63_sr", "mom_252_21_sr", "vol_63_sr", "operating_roa_sr",
+                               "gross_profitability_sr", "book_to_market_sr"],
+                  "model": {"kind": "hgb", "params": {"max_iter": 150, "learning_rate": 0.05, "max_leaf_nodes": 15,
+                                                      "min_samples_leaf": 1000, "l2_regularization": 1.0}}}
+  },
+  {
+    "name": "A7_theory_composite",
+    "hypothesis": "A theory-signed equal-weight composite (quality, low accruals, value, low volatility, momentum, short-term reversal) generalizes at least as well as fitted models (compare A5).",
+    "overrides": {"features": ["gross_profitability", "operating_roa", "accruals_to_assets", "book_to_market", "vol_63",
+                               "mom_252_21", "ret_21"],
+                  "model": {"kind": "composite", "params": {"signs": [1, 1, -1, 1, -1, 1, -1]}}}
+  }
+]

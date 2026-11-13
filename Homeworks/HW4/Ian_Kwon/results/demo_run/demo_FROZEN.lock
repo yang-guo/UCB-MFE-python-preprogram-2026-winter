@@ -1,0 +1,19 @@
+{
+  "config_sha256": "c9c17242ae8513eb69c7313ee3ba42f2d5b3f6f675865e4d9b1b7756cad57485",
+  "frozen_at": "2026-11-13T05:02:43+00:00",
+  "source": "outputs\\experiments\\B2_inverse_vol-c9c17242\\config.json",
+  "rationale": "Stage A pre-registered rule selected A7 theory composite (best stable validation IC 0.051). Stage B rule: inverse-vol sizing improved dev Sharpe by 0.116 (>0.10) with a smaller max drawdown; top-50 and monthly did not qualify.",
+  "protocol_sha256": "fad32ad7b3a7f26c3945ecba9ba702d9df3a0b8e7a911b03d4f092ec3a09afa7",
+  "development_evidence": {
+    "experiment_id": "B2_inverse_vol-c9c17242",
+    "validation_mean_IC": 0.05096129493938446,
+    "validation_IC_by_year": {
+      "2012": 0.0323,
+      "2013": -0.0125,
+      "2014": 0.0644,
+      "2015": 0.1197
+    },
+    "dev_CAGR": 0.1522441672360848,
+    "dev_Sharpe": 1.1108180605463136
+  }
+}

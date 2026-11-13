@@ -1,0 +1,98 @@
+[
+  {
+    "name": "B1_top50",
+    "hypothesis": "Holding 50 instead of 30 names per cohort diversifies idiosyncratic risk without diluting the signal much (vs A7 base; only n changes).",
+    "overrides": {
+      "features": [
+        "gross_profitability",
+        "operating_roa",
+        "accruals_to_assets",
+        "book_to_market",
+        "vol_63",
+        "mom_252_21",
+        "ret_21"
+      ],
+      "model": {
+        "kind": "composite",
+        "params": {
+          "signs": [
+            1,
+            1,
+            -1,
+            1,
+            -1,
+            1,
+            -1
+          ]
+        }
+      },
+      "strategy": {
+        "n": 50
+      }
+    }
+  },
+  {
+    "name": "B2_inverse_vol",
+    "hypothesis": "Inverse-volatility sizing lowers portfolio risk for the same names (vs A7 base; only sizing changes).",
+    "overrides": {
+      "features": [
+        "gross_profitability",
+        "operating_roa",
+        "accruals_to_assets",
+        "book_to_market",
+        "vol_63",
+        "mom_252_21",
+        "ret_21"
+      ],
+      "model": {
+        "kind": "composite",
+        "params": {
+          "signs": [
+            1,
+            1,
+            -1,
+            1,
+            -1,
+            1,
+            -1
+          ]
+        }
+      },
+      "strategy": {
+        "sizer": "inverse_vol"
+      }
+    }
+  },
+  {
+    "name": "B3_monthly",
+    "hypothesis": "Monthly cohorts (3 overlapping) instead of weekly (13) trade less with similar exposure (vs A7 base; only schedule changes).",
+    "overrides": {
+      "features": [
+        "gross_profitability",
+        "operating_roa",
+        "accruals_to_assets",
+        "book_to_market",
+        "vol_63",
+        "mom_252_21",
+        "ret_21"
+      ],
+      "model": {
+        "kind": "composite",
+        "params": {
+          "signs": [
+            1,
+            1,
+            -1,
+            1,
+            -1,
+            1,
+            -1
+          ]
+        }
+      },
+      "strategy": {
+        "schedule": "monthly"
+      }
+    }
+  }
+]

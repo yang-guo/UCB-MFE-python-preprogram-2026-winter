@@ -1,0 +1,19 @@
+{
+  "config_sha256": "f06421a68f05a4f6fbe7bab9abaa57786485cb0b11f7147c25134eedc3902a93",
+  "frozen_at": "2026-11-13T06:14:34+00:00",
+  "source": "outputs\\experiments\\P1_top50__R1-f06421a6\\config.json",
+  "rationale": "Chosen by Ian on 2026-11-13 as the outcome of the pre-registered rules in experiments/research/PLAN.md (results/research/STUDY_SUMMARY.md): R1 core composite was the first stable candidate and no more complex candidate beat it beyond bootstrap noise; top 50 was the passing portfolio variant with the highest development CAGR. Development data only.",
+  "protocol_sha256": "fad32ad7b3a7f26c3945ecba9ba702d9df3a0b8e7a911b03d4f092ec3a09afa7",
+  "development_evidence": {
+    "experiment_id": "P1_top50__R1-f06421a6",
+    "validation_mean_IC": 0.05096129493938446,
+    "validation_IC_by_year": {
+      "2012": 0.0323,
+      "2013": -0.0125,
+      "2014": 0.0644,
+      "2015": 0.1197
+    },
+    "dev_CAGR": 0.153687183576257,
+    "dev_Sharpe": 1.0648106287816863
+  }
+}

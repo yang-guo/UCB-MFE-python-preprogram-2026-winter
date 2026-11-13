@@ -1,0 +1,17 @@
+[
+  {
+    "name": "P1_top50",
+    "hypothesis": "Holding 50 instead of 30 names per cohort diversifies stock-specific risk without diluting the signal much (vs the selected alpha's base; only n changes).",
+    "overrides": {"strategy": {"n": 50}}
+  },
+  {
+    "name": "P2_top100",
+    "hypothesis": "Holding 100 names per cohort trades more of the signal's edge for diversification; tests whether the edge is concentrated in the very top ranks (vs base; only n changes).",
+    "overrides": {"strategy": {"n": 100}}
+  },
+  {
+    "name": "P3_inverse_vol",
+    "hypothesis": "Weighting the same 30 names by inverse 63-day volatility lowers portfolio risk without giving up return (vs base; only the sizing rule changes).",
+    "overrides": {"strategy": {"sizer": "inverse_vol"}}
+  }
+]
