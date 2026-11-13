@@ -1,0 +1,41 @@
+{
+  "experiment_id": "B2_inverse_vol-c9c17242",
+  "mode": "final",
+  "config_sha256": "c9c17242ae8513eb69c7313ee3ba42f2d5b3f6f675865e4d9b1b7756cad57485",
+  "authorized_at": "2026-11-13T05:06:33+00:00",
+  "prior_final_runs": 1,
+  "reselection_acknowledged": false,
+  "test_window": "2016-04-01 .. 2026-09-30",
+  "final_value": 2507699.8229169836,
+  "benchmark_final_value": 4402746.776270891,
+  "excess_final_value": -1895046.953353907,
+  "beat_benchmark": false,
+  "CAGR": 0.09150940518288841,
+  "benchmark_CAGR": 0.1516195212753213,
+  "Sharpe": 0.56344373449118,
+  "benchmark_Sharpe": 0.772500797137751,
+  "max_drawdown": -0.3249294116194579,
+  "benchmark_max_drawdown": -0.3379046158626988,
+  "test_mean_rank_IC": 0.03589989603534879,
+  "audit_checks_passed": "17/17",
+  "integrity_events_in_test": {
+    "unclassified": 1861,
+    "bad_print": 585,
+    "split": 128,
+    "level_shift": 57
+  },
+  "integrity_events_touching_held_lots": {
+    "unclassified": 12,
+    "bad_print": 8,
+    "split": 4
+  },
+  "warnings": [
+    "171 lots frozen at last mark at the end",
+    "5 orders rejected for missing quotes"
+  ],
+  "data": {
+    "database": "equities_top2000.duckdb",
+    "sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+    "manifest_match": true
+  }
+}

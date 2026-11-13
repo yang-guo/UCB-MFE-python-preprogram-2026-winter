@@ -1,0 +1,20 @@
+check,passed,detail
+cash = initial + cumulative fill cash changes,True,max abs error 2.24e-08
+cash never negative,True,min cash 54211.835632
+nav = cash + holdings,True,
+holdings = units x last observed quote (independent re-mark),True,max abs error 1.40e-09
+units never negative,True,
+stale settlements use the last observed quote of a frozen lot,True,
+stale settlements happen at/after maturity,True,
+every buy fills on the session after its signal,True,violations 0
+buy price = that session's close,True,
+same-day buys <= cash at the signal close (no cash spent twice),True,
+fees = notional x fee rate,True,
+due date = entry + holding period,True,
+no sale before maturity,True,
+sell price = that session's close,True,
+sale = first quoted session on/after maturity,True,violations 0
+each sale closes exactly one whole bought lot,True,
+open matured lots have had no quote since maturity (except terminal lots),True,lots []
+realized + unrealized PnL = NAV - initial,True,error 1.86e-09
+no fills outside the run window,True,

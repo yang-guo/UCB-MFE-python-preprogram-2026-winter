@@ -1,0 +1,58 @@
+{
+  "name": "P1_top50__R1",
+  "hypothesis": "Holding 50 instead of 30 names per cohort diversifies stock-specific risk without diluting the signal much (vs the selected alpha's base; only n changes).",
+  "features": [
+    "gross_profitability",
+    "operating_roa",
+    "accruals_to_assets",
+    "book_to_market",
+    "vol_63",
+    "mom_252_21",
+    "ret_21"
+  ],
+  "model": {
+    "kind": "composite",
+    "params": {
+      "signs": [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ]
+    }
+  },
+  "target": "target_rank",
+  "train_start": "2010-01-01",
+  "train_window_years": null,
+  "refit": "quarterly",
+  "validation_years": [
+    2012,
+    2013,
+    2014,
+    2015
+  ],
+  "panel": {
+    "min_valid_returns_63": 57,
+    "min_dollar_volume": 1000000,
+    "max_unreliable_breaks_252": 1,
+    "holding_days": 90,
+    "start": "2009-01-01"
+  },
+  "strategy": {
+    "schedule": "weekly",
+    "n": 50,
+    "sizer": "equal",
+    "name_cap": 0.05,
+    "sector_cap": 0.3,
+    "fee_bps": 5.0,
+    "min_order": 100.0
+  },
+  "dev_backtest": {
+    "start": "2012-01-01"
+  },
+  "price_variant": "repaired",
+  "on_long_gap": "settle_at_maturity"
+}
