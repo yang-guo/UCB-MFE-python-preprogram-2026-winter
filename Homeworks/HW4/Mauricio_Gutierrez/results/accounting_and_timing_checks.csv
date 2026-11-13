@@ -1,0 +1,5 @@
+portfolio,cash_and_nav,fees_and_lots,maturities,budget,first decision is the first test session,every entry is the session after its signal,no trade or mark after the test end,every sale is on or after 90 calendar days,"every sale is the first session on or after maturity, unless waiting for a quote",open lots mature after the test end or await a quote,cash never negative,final value equals cash plus open positions
+"Strategy (largest 1,000)",PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+Sensitivity: largest 500,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+Sensitivity: largest 200,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
+"Sensitivity: all 2,000",PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS,PASS
