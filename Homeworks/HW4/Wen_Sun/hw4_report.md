@@ -50,7 +50,7 @@ The notebook tunes and compares:
 - Lasso
 - boosted trees
 
-Each model is tuned on the same folds. The final model is selected by validation mean daily IC.
+Each model is tuned on the same folds. The final model is selected by validation mean daily rmse.
 
 ## Trading strategy
 
