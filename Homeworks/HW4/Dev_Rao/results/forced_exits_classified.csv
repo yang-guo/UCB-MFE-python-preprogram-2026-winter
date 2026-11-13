@@ -1,0 +1,23 @@
+symbol,lots,cost,exit_value,pnl,likely_event_not_from_db
+AEL,2,59185.86,59469.61,283.75,cash+stock acquisition by Brookfield (2024)
+AHL,3,95004.14,95763.18,759.04,likely acquisition (unverified)
+CERN,3,50822.28,51052.58,230.31,cash acquisition by Oracle (2022)
+CHK,1,30588.08,34573.92,3985.84,merger with Southwestern -> Expand Energy (ticker change)
+DCP,1,24076.94,24080.82,3.88,bought in by Phillips 66 (2023)
+EA,2,67852.19,68945.38,1093.19,"take-private (2026, announced 2025)"
+FOE,1,2343.45,2367.82,24.36,cash acquisition by Prince (2022)
+HIBB,1,28668.91,28743.04,74.13,cash acquisition by JD Sports (2024)
+MEG,1,14505.21,14245.34,-259.86,2017 Media General -> Nexstar; ticker later reused
+MMP,1,26085.1,27146.37,1061.28,acquired by ONEOK (2023)
+MPLXP,1,32317.6,32253.02,-64.57,"preferred units, likely redeemed/converted (unverified)"
+PDCE,1,26547.87,25782.62,-765.25,acquired by Chevron (2023)
+PGTI,1,28519.61,28605.69,86.08,cash acquisition by MITER (2024)
+PSTH,1,24047.0,24300.6,253.6,"SPAC trust liquidated, cash returned (2022)"
+REVG,2,61571.63,74970.15,13398.52,likely merger/acquisition (unverified)
+SAFM,3,71797.88,72566.9,769.03,cash acquisition by Cargill/Continental Grain (2022)
+SC,3,69214.77,68675.08,-539.69,cash buy-in by Santander (2022)
+SEE,2,65776.58,65950.17,173.59,likely take-private (unverified)
+UFS,2,48588.48,48802.39,213.92,cash acquisition by Paper Excellence (2021)
+UNVR,2,52335.58,52504.5,168.92,cash take-private by Apollo (2023)
+VRTV,3,62222.93,62240.24,17.3,cash take-private by CD&R (2023)
+WSTC,1,15808.97,15875.33,66.37,likely take-private (unverified)
