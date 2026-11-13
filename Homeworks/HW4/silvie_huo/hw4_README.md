@@ -45,7 +45,7 @@
     - Improve dollar cost averaging with less targets, i.e. instead of rebalancing over ~2000 tickers, choose 20~30 tickers. 
     - The 20 ~ 30 tickers will be selected based on newly-engineered factors, starting from price / volume factors. The 20 ~ 30 tickers will also be filtered using a covariance matrix gate to check correlation to market.
     - Expecting the strategy to reduce volativity further (thereby improving Sharpe ratio), and reduce transaction costs.
-    
+
 # HW4 submission checklist
 - Your code: a notebook, Python files, or both, with instructions to run it. 
 
@@ -57,11 +57,11 @@
 
 - The performance comparison and cumulative-return chart
 
-**See outputs/hw4/**
+**See hw4_outputs/hw4/**
 
 - Evidence that you checked the backtest's accounting and timing
 
-**See outputs/hw4/ (e.g. check_signal_timing proves orders ignore post-signal prices, and fit_audit.csv shows last_label_end < fit_date for every fit.)**
+**See hw4_outputs/hw4/ (e.g. check_signal_timing proves orders ignore post-signal prices, and fit_audit.csv shows last_label_end < fit_date for every fit.)**
 
 - Your findings, including unsuccessful ideas or changes you would try next
 
