@@ -1,0 +1,60 @@
+{
+  "test_start": "2016-04-01",
+  "test_end": "2026-09-30",
+  "train_start": "2010-01-01",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "filing_age_days"
+  ],
+  "alpha": 100.0,
+  "fit_dates": [
+    "2016-04-01",
+    "2017-01-01",
+    "2018-01-01",
+    "2019-01-01",
+    "2020-01-01",
+    "2021-01-01",
+    "2022-01-01",
+    "2023-01-01",
+    "2024-01-01",
+    "2025-01-01",
+    "2026-01-01"
+  ],
+  "training_target_clip_quantiles": [
+    0.01,
+    0.99
+  ],
+  "candidate_volatility_quantile": 0.8,
+  "suspect_ratio": [
+    0.2,
+    5.0
+  ],
+  "schedule": "cash",
+  "min_cash_weight": 0.05,
+  "min_sessions_between": 21,
+  "primary": "Strategy (largest 1,000)",
+  "variants_max_universe_rank": {
+    "Strategy (largest 1,000)": 1000,
+    "Sensitivity: largest 500": 500,
+    "Sensitivity: largest 200": 200,
+    "Sensitivity: all 2,000": 2000
+  },
+  "config": {
+    "initial_cash": 1000000,
+    "top_n": 30,
+    "budget_fraction": 0.3333333333333333,
+    "holding_days": 90,
+    "stock_limit": 0.3,
+    "sector_limit": 0.5,
+    "fee_rate": 0.001,
+    "risk_free_rate": 0.02
+  }
+}
