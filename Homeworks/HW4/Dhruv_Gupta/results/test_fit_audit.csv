@@ -1,0 +1,2 @@
+fit_boundary,train_rows,train_dates,train_signal_min,train_signal_max,train_label_end_max,y_clip_low,y_clip_high,fit_seconds,retrain_rule
+2016-04-01,141435,72,2010-01-04,2015-12-01,2016-03-01,-0.45454545454545453,0.654765378789198,11.9,static
