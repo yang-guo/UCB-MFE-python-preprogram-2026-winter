@@ -1,0 +1,6 @@
+,strategy,random_25_mean,random_25_min,random_25_max,benchmark
+final_value,2599315.9935,2669159.6331,2065101.9113,3526815.7562,4402746.7763
+CAGR,0.0952,0.0971,0.0715,0.1275,0.1516
+sharpe,0.5143,0.4604,0.3448,0.5868,0.7725
+max_drawdown,-0.3782,-0.4284,-0.4587,-0.38,-0.3379
+strategy_CAGR_percentile_vs_random,0.45,,,,

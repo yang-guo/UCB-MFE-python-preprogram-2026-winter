@@ -1,0 +1,202 @@
+{
+  "frozen_at_utc": "2026-11-13T19:44:39+00:00",
+  "selected_in_validation": {
+    "selected": "composite",
+    "best_ridge": "ridge_a1000_resid",
+    "best_hgb": "hgb_it200_lf31_ms2000_demean",
+    "rule": "max mean fold IC with IC>0 in all folds; within 0.002 prefer simpler"
+  },
+  "model": {
+    "kind": "composite",
+    "target": "none",
+    "themes": {
+      "value": {
+        "r_ey": 1,
+        "r_bm": 1,
+        "r_sp": 1,
+        "r_fcfy": 1
+      },
+      "quality": {
+        "r_gp_a": 1,
+        "r_roe": 1,
+        "r_roa": 1,
+        "r_accruals_a": -1
+      },
+      "investment": {
+        "r_asset_growth": -1,
+        "r_share_iss": -1
+      },
+      "momentum": {
+        "r_mom_12_1": 1,
+        "r_sector_mom_126": 1,
+        "r_ni_chg_a": 1
+      },
+      "low_risk": {
+        "r_ivol_63": -1,
+        "r_max_ret_21": -1
+      }
+    },
+    "name": "composite"
+  },
+  "features": {
+    "numeric": [
+      "r_mom_21",
+      "r_mom_63",
+      "r_mom_126",
+      "r_mom_12_1",
+      "r_rev_5",
+      "r_vol_21",
+      "r_vol_63",
+      "r_vol_252",
+      "r_beta_252",
+      "r_ivol_63",
+      "r_dd_252",
+      "r_px_ma200",
+      "r_ma50_ma200",
+      "r_max_ret_21",
+      "r_skew_63",
+      "r_log_dv_63",
+      "r_amihud_63",
+      "r_log_mcap",
+      "r_turnover_63",
+      "r_ey",
+      "r_bm",
+      "r_sp",
+      "r_fcfy",
+      "r_roa",
+      "r_roe",
+      "r_gp_a",
+      "r_op_margin",
+      "r_accruals_a",
+      "r_debt_a",
+      "r_cash_a",
+      "r_rev_yoy",
+      "r_ni_chg_a",
+      "r_asset_growth",
+      "r_share_iss",
+      "r_filing_age_days",
+      "r_ey_srel",
+      "r_bm_srel",
+      "r_sp_srel",
+      "r_mom_12_1_srel",
+      "r_roa_srel",
+      "r_sector_mom_126",
+      "mkt_mom_63",
+      "mkt_vol_21"
+    ],
+    "categorical": [
+      "sector"
+    ],
+    "raw_before_ranking": [
+      "mom_21",
+      "mom_63",
+      "mom_126",
+      "mom_12_1",
+      "rev_5",
+      "vol_21",
+      "vol_63",
+      "vol_252",
+      "beta_252",
+      "ivol_63",
+      "dd_252",
+      "px_ma200",
+      "ma50_ma200",
+      "max_ret_21",
+      "skew_63",
+      "log_dv_63",
+      "amihud_63",
+      "log_mcap",
+      "turnover_63",
+      "ey",
+      "bm",
+      "sp",
+      "fcfy",
+      "roa",
+      "roe",
+      "gp_a",
+      "op_margin",
+      "accruals_a",
+      "debt_a",
+      "cash_a",
+      "rev_yoy",
+      "ni_chg_a",
+      "asset_growth",
+      "share_iss",
+      "filing_age_days"
+    ],
+    "sector_relative": [
+      "ey_srel",
+      "bm_srel",
+      "sp_srel",
+      "mom_12_1_srel",
+      "roa_srel",
+      "sector_mom_126"
+    ],
+    "regime": [
+      "mkt_mom_63",
+      "mkt_vol_21"
+    ],
+    "normalisation": "same-date percentile rank among eligible stocks; NaN kept"
+  },
+  "training": {
+    "train_start": "2010-01-01",
+    "purge": "label_end < fit_date",
+    "refit_rule": "none: the selected composite has no fitted parameters (scores are same-date ranks with fixed literature signs), so there is nothing to retrain; the quarterly expanding-window refit code path (label_end < fit date) is kept for fitted models",
+    "sample_every": 1,
+    "preprocessing": "fitted inside sklearn Pipeline on training rows only"
+  },
+  "signals": {
+    "cadence_of_features": "last market session of each week (+2016-03-31)",
+    "entry": "next market session close",
+    "holding_days": 90
+  },
+  "eligibility": {
+    "dated_universe_member": true,
+    "min_history_sessions": 252,
+    "min_median_dollar_volume_63d": 5000000.0,
+    "raw_price_screen": "none (close is split-adjusted to today's basis)"
+  },
+  "strategy": {
+    "top_n": 25,
+    "cadence": "monthly",
+    "cohort_fraction": 0.3333333333333333,
+    "universe": "all",
+    "liquid_top": 1000,
+    "name_cap": 0.05,
+    "sector_cap": 0.3,
+    "weighting": "equal within cohort; capped names pass budget to next rank",
+    "cohort_budget": "min(cash + value of lots due next session, NAV * cohort_fraction)"
+  },
+  "backtest": {
+    "initial_capital": 1000000.0,
+    "fee_bps_per_side": 10.0,
+    "fee_sensitivities_bps": [
+      0,
+      25
+    ],
+    "cash_interest": 0.0,
+    "max_stale_sessions": 5,
+    "missing_price_policy": "carry last close <= 5 sessions (flagged); longer gap => exit at last observed close (base) / 0% recovery (worst case)",
+    "first_signal": "2016-03-31",
+    "first_entry": "2016-04-01",
+    "end": "2026-09-30",
+    "annual_rf_for_sharpe": 0.02
+  },
+  "database": {
+    "file": "equities_top2000.duckdb",
+    "sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+    "manifest_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+    "matches_manifest": true,
+    "snapshot_sha256": "5beb018fca34e8dad84456c96d1607bf08a3c0c1f3adb712d1d5666678f03f3d",
+    "variant": "homework"
+  },
+  "versions": {
+    "python": "3.13.15",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.16.3",
+    "duckdb": "1.5.6",
+    "matplotlib": "3.10.7"
+  }
+}
