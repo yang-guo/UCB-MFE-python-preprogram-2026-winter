@@ -1,0 +1,23 @@
+strategy,check,result
+Ridge prediction,all_buy_signals_precede_fills,True
+Ridge prediction,all_sells_on_scheduled_maturity_session,True
+Ridge prediction,no_negative_cash,True
+Ridge prediction,cash_rebuilds_from_fill_ledger,True
+Ridge prediction,daily_cash_matches_fill_ledger,True
+Ridge prediction,no_borrowing_or_short_lots,True
+Ridge prediction,all_nav_equals_cash_plus_marked_holdings,True
+Ridge prediction,test_end_within_cutoff,True
+Ridge prediction,buy_count,348
+Ridge prediction,sell_count,338
+Ridge prediction,open_lots_at_end,10
+63-session momentum,all_buy_signals_precede_fills,True
+63-session momentum,all_sells_on_scheduled_maturity_session,True
+63-session momentum,no_negative_cash,True
+63-session momentum,cash_rebuilds_from_fill_ledger,True
+63-session momentum,daily_cash_matches_fill_ledger,True
+63-session momentum,no_borrowing_or_short_lots,True
+63-session momentum,all_nav_equals_cash_plus_marked_holdings,True
+63-session momentum,test_end_within_cutoff,True
+63-session momentum,buy_count,330
+63-session momentum,sell_count,315
+63-session momentum,open_lots_at_end,15
