@@ -1,0 +1,18 @@
+{
+  "config_sha256": "3bee4e98950791b2889580d3d5bdf944ec08a3095b1ab62156287e4458d5b3d6",
+  "checks": {
+    "cash rebuilt from fills == history cash": true,
+    "NAV == cash + holdings every day": true,
+    "cash never negative": true,
+    "every buy: signal date < fill date": true,
+    "every sale on/after its due date": true,
+    "each lot sold at most once, same units": true,
+    "open lots = bought - sold": true,
+    "final holdings == open lots at last mark": true,
+    "history starts 2016-03-31 with initial capital, no fills": true,
+    "first fills on 2016-04-01": true,
+    "no fill after the end date": true,
+    "no order planned on the last session": true,
+    "every refit used outcomes ended before its fit date": true
+  }
+}

@@ -1,0 +1,25 @@
+test_backtester.py run 2026-11-12 18:47:45
+command: .venv/Scripts/python -B Homeworks/HW4/Ryan_Beauchamp/test_backtester.py
+
+PASS  test_constant_price_round_trip
+PASS  test_monday_entry_sunday_maturity_sells_monday
+PASS  test_two_lots_same_ticker_different_maturities
+PASS  test_missing_entry_quote_rejects_and_keeps_cash
+PASS  test_missing_quote_on_due_date_sells_next_quote
+PASS  test_insufficient_cash_raises
+PASS  test_no_orders_nav_flat
+PASS  test_lot_open_at_end_kept_at_last_mark
+PASS  test_price_gap_longer_than_limit_raises
+PASS  test_cash_rebuilt_and_nav_identity_on_random_market
+PASS  test_timing_signal_before_fill_and_sale_after_due
+PASS  test_future_prices_do_not_change_past_decisions
+PASS  test_strategy_editing_its_window_cannot_change_quotes
+PASS  test_metrics_on_tiny_series
+PASS  test_benchmark_invests_at_first_fill_close
+PASS  test_per_name_cap_limits_total_position
+PASS  test_long_gap_hold_policy_keeps_last_mark
+PASS  test_long_gap_hold_series_ends_lot_stays_at_last_mark
+PASS  test_jump_flag_records_but_does_not_alter
+
+19/19 tests passed
+exit code: 0
