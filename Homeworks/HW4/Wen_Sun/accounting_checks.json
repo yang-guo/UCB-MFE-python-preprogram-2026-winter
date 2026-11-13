@@ -1,0 +1,11 @@
+{
+  "final_nav_matches_cash_plus_open_marks": true,
+  "no_negative_cash": true,
+  "cash_reconstruction_max_abs_error": 3.14321368932724e-09,
+  "cash_reconstruction_passed": true,
+  "first_buy_due_date_is_90_calendar_days": true,
+  "first_buy_signal_precedes_fill": true,
+  "first_buy_fill_price_matches_quote": true,
+  "first_sell_pnl_matches_hand_calc": true,
+  "all_sells_on_or_after_due_date": true
+}
