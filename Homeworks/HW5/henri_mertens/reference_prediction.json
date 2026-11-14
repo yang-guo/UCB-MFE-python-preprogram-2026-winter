@@ -1,0 +1,12 @@
+{
+  "hw4_commit": "fca22b5cc90d70c0df6f707aaba30eed7185ceba",
+  "model_sha256": "eeda5faa3f14cc59c718c0471475172dcd245b79c57355df1365eb3b245e5f23",
+  "source_function": "Homeworks/HW4/henri_mertens/research.py::predict_candidate",
+  "source_data": "HW4 outputs/development_panel.pkl",
+  "symbol": "A",
+  "date": "2010-01-29",
+  "input_file": "example_request.json",
+  "expected_prediction": 0.04004279524087906,
+  "holding_period_calendar_days": 90,
+  "recorded_before_api_implementation": true
+}

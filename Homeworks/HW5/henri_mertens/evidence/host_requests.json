@@ -1,0 +1,117 @@
+{
+  "transport": "Real localhost HTTP to Uvicorn",
+  "results": [
+    {
+      "request": "valid",
+      "status": 200,
+      "body": {
+        "prediction": 0.04004279524087906,
+        "model_version": "hw4-fca22b5-xgboost-eeda5faa3f14"
+      }
+    },
+    {
+      "request": "invalid",
+      "status": 422,
+      "body": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_21"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_63"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_252_21"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "volatility_63"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "drawdown_252"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "net_margin"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "operating_roa"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "debt_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "cash_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "fcf_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "accruals_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "filing_age_days"
+            ],
+            "msg": "Field required"
+          }
+        ]
+      }
+    }
+  ]
+}
