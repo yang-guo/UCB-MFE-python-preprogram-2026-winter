@@ -1,0 +1,14 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+# not needed to serve requests
+tests/
+proof/
+freeze_artifact.py
+*.md

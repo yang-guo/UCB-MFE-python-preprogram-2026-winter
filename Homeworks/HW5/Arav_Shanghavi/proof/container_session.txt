@@ -1,0 +1,68 @@
+# Container session recorded 2026-11-14 23:25 IST, Docker 29.8.0 (Docker Desktop, WSL 2).
+# Commands were run from the submission folder in Git Bash. In PowerShell, use curl.exe.
+
+$ docker images mfe-hw5:local --format 'image {{.ID}}  {{.Size}}'
+image 5171b0d8ff6f  735MB
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+8054a05f8735c47f55ccff45ac06962e75237ba9c30f6a32ab2b7ad25347eca5
+
+$ docker inspect --format 'running image {{.Image}}' mfe-hw5
+running image sha256:5171b0d8ff6fee17f68a18381656316095c970dd4a0bf047fae8b06e60fa3dbc
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sat, 14 Nov 2026 17:55:40 GMT
+server: uvicorn
+content-length: 73
+content-type: application/json
+
+{"prediction":0.8302236756491833,"model_version":"blend20-sep25-2026-v1"}
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @rejected_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Sat, 14 Nov 2026 17:55:40 GMT
+server: uvicorn
+content-length: 209
+content-type: application/json
+
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","drawdown_252"],"msg":"Input should be less than or equal to 0","type":"less_than_equal"}]}
+
+
+$ .venv/Scripts/python time_http.py
+real HTTP to http://127.0.0.1:8000, 15 warm-up + 40 timed, one keep-alive connection: median 2.32 ms, p95 2.80 ms
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker ps -a --filter name=mfe-hw5 --format '{{.Names}}'
+
+# fresh container from the same image
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+abe017c743f76387699da1e7df7dd2a276ba80ebaf7da0aecaa793617d1ad1cb
+
+$ docker inspect --format 'running image {{.Image}}' mfe-hw5
+running image sha256:5171b0d8ff6fee17f68a18381656316095c970dd4a0bf047fae8b06e60fa3dbc
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sat, 14 Nov 2026 17:55:45 GMT
+server: uvicorn
+content-length: 73
+content-type: application/json
+
+{"prediction":0.8302236756491833,"model_version":"blend20-sep25-2026-v1"}
+
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:41342 - "GET /docs HTTP/1.1" 200 OK
+INFO:     172.17.0.1:41352 - "POST /predict HTTP/1.1" 200 OK
+
+$ docker stop mfe-hw5
+mfe-hw5
+

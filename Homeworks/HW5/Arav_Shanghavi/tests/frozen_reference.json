@@ -1,0 +1,15 @@
+{
+  "symbol": "INCY",
+  "signal_date": "2026-09-25",
+  "model_version": "blend20-sep25-2026-v1",
+  "inputs": {
+    "momentum_252_21": 0.5223384030418252,
+    "trend_6m": 0.342835464990245,
+    "volatility_63": 0.30995025858218705,
+    "drawdown_252": -0.046486569691372326,
+    "operating_roa": 0.08864845584972882,
+    "net_margin": 0.34981562556188955
+  },
+  "hw4_score": 0.8302236756491833,
+  "source": "HW4 signal_model.fixed_rule_score(percentile_view(...), 'blend'), recorded by freeze_artifact.py before the API existed"
+}
