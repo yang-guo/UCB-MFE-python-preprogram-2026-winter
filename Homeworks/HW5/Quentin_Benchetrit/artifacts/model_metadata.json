@@ -1,0 +1,48 @@
+{
+  "model_version": "hw4-signed-ridge-2026-06-30",
+  "model": "ReturnModel(ridge(alpha=1000, positive=True), signed features, target='alpha')",
+  "fit_date": "2026-06-30",
+  "training_rows": 1451538,
+  "training_signals": [
+    "2010-01-07",
+    "2026-03-26"
+  ],
+  "last_training_outcome": "2026-06-25",
+  "features": [
+    "mom_12_1",
+    "mom_6_1",
+    "high_252",
+    "ret_21",
+    "vol_63",
+    "vol_252",
+    "idio_vol",
+    "beta",
+    "max_ret_21",
+    "roa",
+    "roe",
+    "gross_profitability",
+    "operating_margin",
+    "asset_turnover",
+    "accruals",
+    "revenue_acceleration",
+    "income_change",
+    "margin_change",
+    "asset_growth",
+    "share_growth",
+    "earnings_yield",
+    "book_to_price",
+    "sales_to_price",
+    "cash_flow_yield",
+    "fcf_yield",
+    "ebitda_to_ev"
+  ],
+  "input_units": "percentile rank among the eligible stocks on the signal date, in (0, 1]",
+  "prediction": "90-calendar-day return minus shrunk beta times the S&P 500 TR return",
+  "versions": {
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3"
+  },
+  "check": "matches the 24624 HW4 forecasts of this fit, largest gap 0.0e+00"
+}

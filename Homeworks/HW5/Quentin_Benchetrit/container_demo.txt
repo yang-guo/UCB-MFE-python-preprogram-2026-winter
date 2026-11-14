@@ -1,0 +1,49 @@
+$ docker image ls mfe-hw5:local --format '{{.Repository}}:{{.Tag}} {{.ID}} {{.Size}}'
+mfe-hw5:local e6f7a375773f 753MB
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+1d194ba67542db43c89f9b3ede832343b945a424dbc0d1196a782355ca9a351e
+
+$ docker logs mfe-hw5 2>&1 | grep -E 'startup|Uvicorn running'
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sat, 14 Nov 2026 15:55:01 GMT
+server: uvicorn
+content-length: 80
+content-type: application/json
+
+{"prediction":0.01313428208231926,"model_version":"hw4-signed-ridge-2026-06-30"}
+
+$ sed 's/"beta": [^,]*/"beta": 1.5/' example_request.json | curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @-
+HTTP/1.1 422 Unprocessable Entity
+date: Sat, 14 Nov 2026 15:55:01 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"detail":[{"loc":["body","beta"],"msg":"Input should be less than or equal to 1"}]}
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+a289adbc48ba2cccc4f8a0ce7027f33b405b4c9d5d5b7ce9201850151976c6e9
+
+$ docker ps --filter name=mfe-hw5 --format '{{.Image}} {{.Status}} {{.Ports}}'
+mfe-hw5:local Up 1 second 127.0.0.1:8000->8000/tcp
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sat, 14 Nov 2026 15:55:03 GMT
+server: uvicorn
+content-length: 80
+content-type: application/json
+
+{"prediction":0.01313428208231926,"model_version":"hw4-signed-ridge-2026-06-30"}
+
+$ docker stop mfe-hw5
+mfe-hw5
