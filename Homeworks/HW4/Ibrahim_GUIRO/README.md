@@ -11,12 +11,19 @@ From the repository root, with `equities_top2000.duckdb` in `Lectures/modeling/d
 
 ```bash
 uv sync --locked
+.venv/bin/python Homeworks/HW4/Ibrahim_GUIRO/validation_model.py
 .venv/bin/python Homeworks/HW4/Ibrahim_GUIRO/backtest_riskadj_momentum.py
 ```
 
-The script runs the development period and the final test in a few seconds,
-prints the metrics and accounting checks, and saves the metrics, chart, daily
-NAV, fills, open positions and data incidents to `results_riskadj_momentum/`.
+Each script runs in a few seconds.
+
+- `validation_model.py` builds the 90-day return targets, fits and evaluates the
+  forecasting model, and reproduces the validation grid. Results go to
+  `results_validation/`.
+- `backtest_riskadj_momentum.py` runs the backtest on the development period and
+  the final test, prints the metrics and accounting checks, and saves the
+  metrics, chart, daily NAV, fills, open positions and data incidents to
+  `results_riskadj_momentum/`.
 
 ## Strategy
 
@@ -29,9 +36,25 @@ score = (P[t-21] / P[t-252] - 1) / std(daily returns, last 63 sessions)
 
 Winners of the past year tend to keep outperforming for a few months; skipping
 the last month avoids short-term reversal, and dividing by volatility favours
-steady trends over erratic ones. The model is this single-factor ranking (the
-expected 90-day return is assumed monotone in the score). It has no fitted
-parameters, so there is nothing to overfit or retrain.
+steady trends over erratic ones.
+
+**Model.** The 90-day return (from the entry close to the first close on or after
+entry + 90 calendar days) is predicted by a linear regression on the score's
+percentile within the entry date:
+
+```
+forecast_90d = a + b × score_percentile
+```
+
+I chose a one-feature linear model because 90-day stock returns are very noisy:
+a flexible model would mostly fit noise, while this one has two parameters, is
+easy to audit, and its slope tells directly whether the signal works. Training
+targets are clipped at their 1st/99th percentiles, and a fit only uses targets
+whose exit date is on or before the signal date. The final model is fitted once
+on development targets completed by 2016-03-31 and kept fixed during the test:
+`forecast_90d = 0.0243 + 0.0192 × score_percentile` (34,024 rows). Because the
+slope is positive, ranking by forecast is identical to ranking by score, so the
+backtester simply buys the top 30 scores.
 
 **Universe.** Dated members of the entry quarter with `universe_rank <= 500`,
 at least 240 quotes in the last 252 sessions, and no daily move above 50% in the
@@ -59,17 +82,41 @@ the largest stocks was the only signal positive in all six years. Plain
 momentum, low volatility, 52-week high and combined scores were weaker or
 unstable.
 
-Average 90-day excess return over the S&P 500 TR, development period:
+Average 90-day excess return of the top-N over the S&P 500 TR, development
+period (`results_validation/development_grid.csv`):
 
 | Universe \ Names | 10 | 20 | 30 | 50 |
 |---|---:|---:|---:|---:|
-| Top 300 | +0.7% | +0.7% | +0.7% | +0.6% |
-| Top 400 | +1.1% | +1.0% | +0.9% | +0.7% |
-| Top 500 | +1.1% | +1.3% | +0.9% | +1.0% |
-| Top 750 | +0.8% | +0.7% | +1.2% | +1.3% |
+| Top 300 | +0.70% | +0.72% | +0.57% | +0.50% |
+| Top 400 | +1.12% | +0.95% | +0.98% | +0.70% |
+| Top 500 | +1.06% | +1.31% | +1.44% | +1.01% |
+| Top 750 | +0.79% | +0.61% | +1.17% | +1.32% |
 
-I picked top 500 / 30 names, a central point of this stable region rather than
-the best cell.
+Every cell is positive. I picked top 500 / 30 names in an earlier exploratory
+version of this grid (without the instrument filter), where it was a central
+point rather than the best cell. With the final filters it is the highest cell,
+so the development result for this exact choice may be slightly optimistic.
+
+**Model evaluation.** In validation (2013–2015), the model was refitted every
+month on targets completed before the signal (expanding window). In the test,
+the fixed final model was used:
+
+| | Validation 2013–2015 | Test 2016–2026 |
+|---|---:|---:|
+| Months | 33 | 124 |
+| Mean monthly rank IC (forecast vs. realized) | 0.042 | 0.018 |
+| Months with positive IC | 55% | 60% |
+| Top-30 forecast, average 90-day return | 4.9% | 4.3% |
+| Top-30 realized, average 90-day return | 4.7% | 4.8% |
+| Top-30 minus S&P 500 TR, per 90 days | +0.97% | +0.95% |
+| RMSE, model vs. constant forecast | 0.1223 vs. 0.1224 | 0.1631 vs. 0.1632 |
+
+The slope stayed positive in every validation refit (0.011 to 0.018). The model
+barely beats a constant forecast on RMSE: individual 90-day returns are mostly
+noise. Its value is in the ranking: the rank IC is small but mostly positive,
+and the top 30 beat the index by about 1% per 90 days in both periods. The IC
+t-statistics (0.9 and 0.7, after adjusting for overlapping targets) are not
+significant.
 
 ## Performance
 
