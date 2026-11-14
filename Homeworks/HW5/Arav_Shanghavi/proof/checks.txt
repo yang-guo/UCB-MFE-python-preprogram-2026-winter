@@ -1,0 +1,66 @@
+# Saved 2026-11-14 23:27 IST on Windows 11 (AMD Ryzen 7 6800HS, 15.2 GB RAM), Python 3.12.9 venv.
+# Run from the submission folder. Its absolute path is shortened to '...'.
+
+$ python -m ruff check .
+All checks passed!
+
+$ python -m ruff format --check .
+6 files already formatted
+
+$ python -m pytest -v -s
+============================= test session starts =============================
+platform win32 -- Python 3.12.9, pytest-9.2.0, pluggy-1.7.0 -- ...\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: ...
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 36 items
+
+tests/test_app.py::test_predict_valid_input PASSED
+tests/test_app.py::test_whole_reference_day_matches_hw4 PASSED
+tests/test_app.py::test_contract_accepts_every_real_row PASSED
+tests/test_app.py::test_blank_ratio_counts_as_middle[operating_roa] PASSED
+tests/test_app.py::test_blank_ratio_counts_as_middle[net_margin] PASSED
+tests/test_app.py::test_whole_numbers_and_shuffled_keys_are_fine PASSED
+tests/test_app.py::test_predict_invalid_input[missing momentum_252_21] PASSED
+tests/test_app.py::test_predict_invalid_input[missing trend_6m] PASSED
+tests/test_app.py::test_predict_invalid_input[missing volatility_63] PASSED
+tests/test_app.py::test_predict_invalid_input[missing drawdown_252] PASSED
+tests/test_app.py::test_predict_invalid_input[missing operating_roa] PASSED
+tests/test_app.py::test_predict_invalid_input[missing net_margin] PASSED
+tests/test_app.py::test_predict_invalid_input[seventh field] PASSED
+tests/test_app.py::test_predict_invalid_input[number as text] PASSED
+tests/test_app.py::test_predict_invalid_input[boolean] PASSED
+tests/test_app.py::test_predict_invalid_input[null price factor] PASSED
+tests/test_app.py::test_predict_invalid_input[list in a field] PASSED
+tests/test_app.py::test_predict_invalid_input[NaN token] PASSED
+tests/test_app.py::test_predict_invalid_input[Infinity token] PASSED
+tests/test_app.py::test_predict_invalid_input[-Infinity token] PASSED
+tests/test_app.py::test_predict_invalid_input[return of -100%] PASSED
+tests/test_app.py::test_predict_invalid_input[12-1 momentum above 50x] PASSED
+tests/test_app.py::test_predict_invalid_input[6m return above 25x] PASSED
+tests/test_app.py::test_predict_invalid_input[negative volatility] PASSED
+tests/test_app.py::test_predict_invalid_input[volatility above 10] PASSED
+tests/test_app.py::test_predict_invalid_input[price above its high] PASSED
+tests/test_app.py::test_predict_invalid_input[drawdown below -100%] PASSED
+tests/test_app.py::test_predict_invalid_input[ratio past sanity cap] PASSED
+tests/test_app.py::test_predict_invalid_input[bare list of six] PASSED
+tests/test_app.py::test_predict_invalid_input[bare list of five] PASSED
+tests/test_app.py::test_predict_invalid_input[empty object] PASSED
+tests/test_app.py::test_predict_invalid_input[empty body] PASSED
+tests/test_app.py::test_counter_does_see_valid_requests PASSED
+tests/test_app.py::test_predict_model_failure PASSED
+tests/test_app.py::test_infinite_score_is_an_error PASSED
+tests/test_app.py::test_predict_performance 
+[latency] in-process TestClient, 15 warm-up + 40 timed requests: median 2.55 ms, p95 2.93 ms | Windows-11-10.0.26300-SP0, AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD, 16 logical CPUs, Python 3.12.9
+PASSED
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  ...\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 36 passed, 1 warning in 8.02s ========================
+
