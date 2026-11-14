@@ -9,4 +9,4 @@
 4. Accounting and timing checks
    I reconciled cash against the trade ledger and checked that daily NAV equaled cash plus the marked value of holdings. The tests cover pre-entry feature timing, exits after maturity, overlapping lots, and missing quotes. 
 5. Findings and next steps
-   I would consider to use some new features to rank the stock, also non-linear nodels. And before I tried some other features, but it performed worse than current model. 
+   I would consider to use some new features to rank the stocks, also non-linear models. And before I tried some other features, but it performed worse than current model. 
