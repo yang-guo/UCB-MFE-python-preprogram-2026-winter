@@ -1,0 +1,11 @@
+,count
+membership rows flagged (all quarters),740
+distinct flagged symbols,50
+flagged rows in a top-10 rank,173
+flagged rows in test-period quarters,144
+zero/missing adjusted-price rows quarantined,275
+off-calendar price rows quarantined,28
+price repair: frozen_adj_close (rows),36173
+price repair: one_day_spike (rows),253
+price repair: unadjusted_split (rows),110
+price repair: zero_volume_quote (rows),352403
