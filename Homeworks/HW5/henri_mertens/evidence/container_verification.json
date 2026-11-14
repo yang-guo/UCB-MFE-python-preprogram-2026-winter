@@ -1,0 +1,238 @@
+{
+  "verified_at_utc": "2026-11-14T13:30:57.711842+00:00",
+  "docker_version": {
+    "Client": {
+      "Version": "29.9.3",
+      "ApiVersion": "1.56",
+      "DefaultAPIVersion": "1.56",
+      "GitCommit": "5457199",
+      "GoVersion": "go1.26.10",
+      "Os": "windows",
+      "Arch": "amd64",
+      "BuildTime": "Tue Nov  3 21:46:10 2026",
+      "Context": "desktop-linux"
+    },
+    "Server": {
+      "Platform": {
+        "Name": "Docker Desktop 4.99.0 (245822)"
+      },
+      "Version": "29.9.3",
+      "ApiVersion": "1.56",
+      "MinAPIVersion": "1.40",
+      "Os": "linux",
+      "Arch": "amd64",
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "29.9.3",
+          "Details": {
+            "ApiVersion": "1.56",
+            "Arch": "amd64",
+            "BuildTime": "Tue Nov  3 21:41:42 2026",
+            "Experimental": "false",
+            "GitCommit": "70efc0e",
+            "GoVersion": "go1.26.10",
+            "KernelVersion": "6.18.58.1-microsoft-standard-WSL2",
+            "MinAPIVersion": "1.40",
+            "Module": "github.com/moby/moby/v2",
+            "ModuleVersion": "v2.0.0+unknown",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.4.2",
+          "Details": {
+            "GitCommit": "b7a25261e029d68978bbf290df0a62fc819b3c51"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.5.2",
+          "Details": {
+            "GitCommit": "v1.5.2-0-g29dd3dc2"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "GitCommit": "70efc0e",
+      "GoVersion": "go1.26.10",
+      "KernelVersion": "6.18.58.1-microsoft-standard-WSL2",
+      "BuildTime": "2026-11-03T21:41:42.000000000+00:00"
+    }
+  },
+  "image": {
+    "Id": "sha256:27af6284113881745b57e2ac0d0962686c02ea44467e37ef4b4f2cdc94d72f7d",
+    "RepoTags": [
+      "mfe-hw5:local"
+    ],
+    "Architecture": "amd64",
+    "Os": "linux"
+  },
+  "build_command": "docker build -t mfe-hw5:local .",
+  "build_succeeded": true,
+  "first_start": {
+    "container_id": "f26ab8f4975ed7dcbb83f5ad7361037d2106fbb66f80fbd496a40c616ab90071",
+    "image_id": "sha256:27af6284113881745b57e2ac0d0962686c02ea44467e37ef4b4f2cdc94d72f7d",
+    "valid_request": {
+      "request": {
+        "momentum_21": -0.07608129233976035,
+        "momentum_63": 0.10674157303370801,
+        "momentum_252_21": 0.6331914893617023,
+        "volatility_63": 0.24737600379140018,
+        "drawdown_252": -0.10454545454545461,
+        "net_margin": 0.021422450728363324,
+        "operating_roa": 0.009327377824487651,
+        "debt_to_assets": 0.38163426169206516,
+        "cash_to_assets": 0.32566999474513925,
+        "fcf_to_assets": 0.024040987913820283,
+        "accruals_to_assets": -0.02469784550709406,
+        "filing_age_days": 38.0
+      },
+      "status_code": 200,
+      "response": {
+        "prediction": 0.04004279524087906,
+        "model_version": "hw4-fca22b5-xgboost-eeda5faa3f14"
+      }
+    },
+    "invalid_request": {
+      "request": {},
+      "status_code": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_21"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_63"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "momentum_252_21"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "volatility_63"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "drawdown_252"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "net_margin"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "operating_roa"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "debt_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "cash_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "fcf_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "accruals_to_assets"
+            ],
+            "msg": "Field required"
+          },
+          {
+            "type": "missing",
+            "loc": [
+              "body",
+              "filing_age_days"
+            ],
+            "msg": "Field required"
+          }
+        ]
+      }
+    }
+  },
+  "fresh_start": {
+    "container_id": "86d2f868b2793c55c5a32108ce401365719ac8f394ce9d4049ccfd0b03cd0be9",
+    "image_id": "sha256:27af6284113881745b57e2ac0d0962686c02ea44467e37ef4b4f2cdc94d72f7d",
+    "valid_request": {
+      "request": {
+        "momentum_21": -0.07608129233976035,
+        "momentum_63": 0.10674157303370801,
+        "momentum_252_21": 0.6331914893617023,
+        "volatility_63": 0.24737600379140018,
+        "drawdown_252": -0.10454545454545461,
+        "net_margin": 0.021422450728363324,
+        "operating_roa": 0.009327377824487651,
+        "debt_to_assets": 0.38163426169206516,
+        "cash_to_assets": 0.32566999474513925,
+        "fcf_to_assets": 0.024040987913820283,
+        "accruals_to_assets": -0.02469784550709406,
+        "filing_age_days": 38.0
+      },
+      "status_code": 200,
+      "response": {
+        "prediction": 0.04004279524087906,
+        "model_version": "hw4-fca22b5-xgboost-eeda5faa3f14"
+      }
+    }
+  },
+  "same_image_after_restart": true,
+  "prediction_unchanged": true,
+  "server_log": "INFO:     172.17.0.1:46782 - \"GET /openapi.json HTTP/1.1\" 200 OK\nINFO:     172.17.0.1:46782 - \"POST /predict HTTP/1.1\" 200 OK",
+  "all_checks_passed": true
+}

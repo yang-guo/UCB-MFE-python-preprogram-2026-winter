@@ -1,0 +1,12 @@
+{
+  "method": "In-process FastAPI TestClient, sequential requests",
+  "warmup_requests": 5,
+  "measured_requests": 30,
+  "median_ms": 11.558949999653123,
+  "p95_ms": 13.70071500045924,
+  "python": "3.12.9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "model_version": "hw4-fca22b5-xgboost-eeda5faa3f14",
+  "timing_budget": "Reported without a hardware-independent pass/fail cutoff"
+}
