@@ -1,0 +1,28 @@
+HW1 package-management exercise
+Name: inmeng Pan
+Python: 3.12.9
+
+Run from Homeworks/HW1/inmeng_Pan/ in a course repository checkout.
+The shared requirements file is one directory above this folder.
+
+uv venv --python 3.12.9 HW1
+uv pip install --python HW1/bin/python -r ../requirements.txt
+uv pip install --python HW1/bin/python requests==2.24.0
+uv pip show --python HW1/bin/python requests
+uv pip install --python HW1/bin/python --upgrade requests
+uv pip show --python HW1/bin/python requests
+HW1/bin/python -c "import requests; print(requests.__version__)"
+HW1/bin/python game_of_life.py
+
+Observed versions during the exercise:
+Initial requirements installation: requests 2.25.0
+After downgrade: requests 2.24.0
+After upgrade: requests 2.34.2
+Latest version resolved from PyPI on 2026-11-08: 2.34.2
+
+The commands above were executed locally using the uv executable at
+/tmp/hw3-uv/uv. Both supplied Game of Life assertions passed under Python 3.12.9.
+
+Do not import the old requests installation on Python 3.12: its dependencies
+are incompatible. Inspect it with uv pip show, then upgrade before importing.
+Do not submit the local HW1 virtual environment.
