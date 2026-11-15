@@ -1,0 +1,11 @@
+{
+  "hw4_commit": "ff8f868",
+  "symbol": "A",
+  "signal_date": "2016-03-31",
+  "entry_date": "2016-04-01",
+  "input": {
+    "score_rank": 0.42116630669546434
+  },
+  "expected_prediction": 0.032419466139285105,
+  "training_rows": 34024
+}
