@@ -1,0 +1,31 @@
+# Apple M4 (10 cores, 16 GB), macOS 26.3, Python 3.12.0
+
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+4 files already formatted
+
+$ make test
+python -m pytest -q
+...........                                                              [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  .venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+11 passed, 1 warning in 2.51s
+
+$ python -m pytest -q -s -k performance
+
+200 requests via TestClient: median 5.55 ms, p95 23.11 ms
+.
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  .venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 10 deselected, 1 warning in 2.66s
+

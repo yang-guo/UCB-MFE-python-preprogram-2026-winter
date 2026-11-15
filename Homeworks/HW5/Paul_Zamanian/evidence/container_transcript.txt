@@ -1,0 +1,51 @@
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+f91ceb4e3757fd7130c9970f2f7cc4c93151654c34ec007592d684ad2a2cded4
+
+$ cat example_request.json; echo
+{
+  "ret_1m": 0.35272914521112253,
+  "ret_12_1": 0.1549738219895288,
+  "vol_3m": -0.19824922760041197,
+  "dist_high_1y": 0.44519131334022755,
+  "size": 0.49897013388259526,
+  "gross_profitability": 0.388259526261586,
+  "roa": 0.4711637487126673,
+  "debt_to_assets": -0.082389289392379
+}
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json; echo
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 17:58:34 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.014140782632866819,"model_version":"hw4-v2-boosting-fit-2026-01-02"}
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{"ret_1m": "0.35"}'; echo
+HTTP/1.1 422 Unprocessable Entity
+date: Sun, 15 Nov 2026 17:58:34 GMT
+server: uvicorn
+content-length: 583
+content-type: application/json
+
+{"detail":[{"loc":["body","ret_1m"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","ret_12_1"],"msg":"Field required","type":"missing"},{"loc":["body","vol_3m"],"msg":"Field required","type":"missing"},{"loc":["body","dist_high_1y"],"msg":"Field required","type":"missing"},{"loc":["body","size"],"msg":"Field required","type":"missing"},{"loc":["body","gross_profitability"],"msg":"Field required","type":"missing"},{"loc":["body","roa"],"msg":"Field required","type":"missing"},{"loc":["body","debt_to_assets"],"msg":"Field required","type":"missing"}]}
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+c273a36e170842a3aee26fa4d92b63f6e268821460b51bd3c9a9fe8c4ce2ab7c
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json; echo
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 17:58:35 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.014140782632866819,"model_version":"hw4-v2-boosting-fit-2026-01-02"}
+
+$ docker stop mfe-hw5
+mfe-hw5
+
