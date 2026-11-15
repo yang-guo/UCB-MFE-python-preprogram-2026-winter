@@ -113,7 +113,7 @@ def main():
             rows.loc[~has_missing].iloc[
                 :: max(1, (~has_missing).sum() // (REFERENCE_SYMBOLS - 2))
             ],
-            rows.loc[has_missing].head(2),  # include stocks with missing fundamentals
+            rows.loc[has_missing].head(2),  # missing values; head() below kept 1 (ACI)
         ]
     ).head(REFERENCE_SYMBOLS)
     reference = []
@@ -176,8 +176,9 @@ def main():
         json.dumps(reference, indent=2) + "\n"
     )
 
-    example = {"features": reference[0]["features"]}
-    (HERE / "example_request.json").write_text(json.dumps(example["features"], indent=2) + "\n")
+    # The first reference stock doubles as the committed example request.
+    example = reference[0]["features"]
+    (HERE / "example_request.json").write_text(json.dumps(example, indent=2) + "\n")
     print(
         f"saved {model_version}: {len(train):,} training rows, importance diff {max_diff:.2e}"
     )

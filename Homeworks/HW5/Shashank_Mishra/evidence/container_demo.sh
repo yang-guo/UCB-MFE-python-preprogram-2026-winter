@@ -2,6 +2,8 @@
 # Reproduce evidence/container_transcript.txt (run from the submission folder after `make build`):
 #   bash evidence/container_demo.sh 2>&1 | tee evidence/container_transcript.txt
 set -u
+# Python with httpx (the HW5 venv): .venv/bin/python on macOS/Linux, .venv/Scripts/python.exe on Windows.
+PY="${PYTHON:-$([ -x .venv/bin/python ] && echo .venv/bin/python || echo .venv/Scripts/python.exe)}"
 run() { echo; echo "\$ $*"; "$@"; echo; }
 wait_ready() { until curl -sf http://127.0.0.1:8000/health >/dev/null; do sleep 0.5; done; }
 
@@ -17,7 +19,7 @@ run curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json
 echo "## 3. Invalid request: NaN -> 422 (not a crash)"
 run curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary "$(sed 's/0.4098442993470618/NaN/' example_request.json)"
 echo "## 4. Real localhost HTTP latency against the container"
-run .venv/Scripts/python.exe measure_latency.py -n 200
+run "$PY" measure_latency.py -n 200
 echo "## 5. Server log (model loaded once at startup)"
 echo "$ docker logs mfe-hw5 | head -8   (then one access-log line per request)"; docker logs mfe-hw5 2>&1 | head -8; echo "... $(docker logs mfe-hw5 2>&1 | grep -c "POST /predict") POST /predict lines in total"
 echo "## 6. Stop the container, then start a NEW container from the same image"

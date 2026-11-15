@@ -1,4 +1,4 @@
-# Checks run 2026-11-15 17:54 UTC in .venv (CPython 3.12.9, Windows 11). make is not installed on this machine, so these are the Makefile's commands run directly.
+# Checks run 2026-11-15 18:06 UTC in .venv (CPython 3.12.9, Windows 11). make is not installed on this machine, so these are the Makefile's commands run directly.
 
 $ python -m ruff check .
 All checks passed!
@@ -9,46 +9,47 @@ $ python -m ruff format --check .
 $ python -m pytest -v
 ============================= test session starts =============================
 testpaths: tests
-collecting ... collected 37 items
+collecting ... collected 38 items
 
 tests/test_app.py::test_predict_valid_input PASSED                       [  2%]
 tests/test_app.py::test_api_reproduces_hw4_reference_predictions[A] PASSED [  5%]
-tests/test_app.py::test_api_reproduces_hw4_reference_predictions[CCC] PASSED [  8%]
+tests/test_app.py::test_api_reproduces_hw4_reference_predictions[CCC] PASSED [  7%]
 tests/test_app.py::test_api_reproduces_hw4_reference_predictions[FBRT] PASSED [ 10%]
 tests/test_app.py::test_api_reproduces_hw4_reference_predictions[KN] PASSED [ 13%]
-tests/test_app.py::test_api_reproduces_hw4_reference_predictions[OSBC] PASSED [ 16%]
+tests/test_app.py::test_api_reproduces_hw4_reference_predictions[OSBC] PASSED [ 15%]
 tests/test_app.py::test_api_reproduces_hw4_reference_predictions[SSNC] PASSED [ 18%]
 tests/test_app.py::test_api_reproduces_hw4_reference_predictions[ZM] PASSED [ 21%]
-tests/test_app.py::test_api_reproduces_hw4_reference_predictions[ACI] PASSED [ 24%]
-tests/test_app.py::test_reference_cases_cover_missing_values PASSED      [ 27%]
-tests/test_app.py::test_prediction_does_not_depend_on_other_rows PASSED  [ 29%]
-tests/test_app.py::test_health_reports_loaded_version PASSED             [ 32%]
-tests/test_app.py::test_feature_order_matches_artifact PASSED            [ 35%]
-tests/test_app.py::test_model_loaded_once_per_process PASSED             [ 37%]
-tests/test_app.py::test_startup_refuses_mismatched_library_version PASSED [ 40%]
-tests/test_app.py::test_predict_invalid_input[missing_field] PASSED      [ 43%]
-tests/test_app.py::test_predict_invalid_input[eleven_features] PASSED    [ 45%]
-tests/test_app.py::test_predict_invalid_input[thirteen_features_extra_field] PASSED [ 48%]
-tests/test_app.py::test_predict_invalid_input[empty_object] PASSED       [ 51%]
-tests/test_app.py::test_predict_invalid_input[list_instead_of_object] PASSED [ 54%]
-tests/test_app.py::test_predict_invalid_input[numeric_string] PASSED     [ 56%]
-tests/test_app.py::test_predict_invalid_input[boolean] PASSED            [ 59%]
-tests/test_app.py::test_predict_invalid_input[null_for_never_missing_rev_1m] PASSED [ 62%]
-tests/test_app.py::test_predict_invalid_input[zero_is_not_a_percentile] PASSED [ 64%]
-tests/test_app.py::test_predict_invalid_input[above_one] PASSED          [ 67%]
-tests/test_app.py::test_predict_invalid_input[negative] PASSED           [ 70%]
-tests/test_app.py::test_predict_invalid_input[raw_return_instead_of_percentile] PASSED [ 72%]
-tests/test_app.py::test_predict_invalid_input[nested_object] PASSED      [ 75%]
+tests/test_app.py::test_api_reproduces_hw4_reference_predictions[ACI] PASSED [ 23%]
+tests/test_app.py::test_reference_cases_cover_missing_values PASSED      [ 26%]
+tests/test_app.py::test_all_nullable_features_null_matches_direct_call PASSED [ 28%]
+tests/test_app.py::test_prediction_does_not_depend_on_other_rows PASSED  [ 31%]
+tests/test_app.py::test_health_reports_loaded_version PASSED             [ 34%]
+tests/test_app.py::test_feature_order_matches_artifact PASSED            [ 36%]
+tests/test_app.py::test_model_loaded_once_per_process PASSED             [ 39%]
+tests/test_app.py::test_startup_refuses_mismatched_library_version PASSED [ 42%]
+tests/test_app.py::test_predict_invalid_input[missing_field] PASSED      [ 44%]
+tests/test_app.py::test_predict_invalid_input[eleven_features] PASSED    [ 47%]
+tests/test_app.py::test_predict_invalid_input[thirteen_features_extra_field] PASSED [ 50%]
+tests/test_app.py::test_predict_invalid_input[empty_object] PASSED       [ 52%]
+tests/test_app.py::test_predict_invalid_input[list_instead_of_object] PASSED [ 55%]
+tests/test_app.py::test_predict_invalid_input[numeric_string] PASSED     [ 57%]
+tests/test_app.py::test_predict_invalid_input[boolean] PASSED            [ 60%]
+tests/test_app.py::test_predict_invalid_input[null_for_never_missing_rev_1m] PASSED [ 63%]
+tests/test_app.py::test_predict_invalid_input[zero_is_not_a_percentile] PASSED [ 65%]
+tests/test_app.py::test_predict_invalid_input[above_one] PASSED          [ 68%]
+tests/test_app.py::test_predict_invalid_input[negative] PASSED           [ 71%]
+tests/test_app.py::test_predict_invalid_input[raw_return_instead_of_percentile] PASSED [ 73%]
+tests/test_app.py::test_predict_invalid_input[nested_object] PASSED      [ 76%]
 tests/test_app.py::test_non_finite_input_rejected[NaN] PASSED            [ 78%]
 tests/test_app.py::test_non_finite_input_rejected[Infinity] PASSED       [ 81%]
-tests/test_app.py::test_non_finite_input_rejected[-Infinity] PASSED      [ 83%]
+tests/test_app.py::test_non_finite_input_rejected[-Infinity] PASSED      [ 84%]
 tests/test_app.py::test_malformed_json_rejected PASSED                   [ 86%]
 tests/test_app.py::test_explicit_null_is_valid_for_nullable_feature PASSED [ 89%]
-tests/test_app.py::test_integer_one_is_a_valid_percentile PASSED         [ 91%]
+tests/test_app.py::test_integer_one_is_a_valid_percentile PASSED         [ 92%]
 tests/test_app.py::test_predict_model_failure PASSED                     [ 94%]
 tests/test_app.py::test_non_finite_model_output_is_an_error PASSED       [ 97%]
 tests/test_app.py::test_predict_performance 
-[latency] in-process TestClient, 200 sequential requests after 10 warm-up: median 2.51 ms, p95 3.78 ms, max 4.56 ms | Intel64 Family 6 Model 186 Stepping 3, GenuineIntel, Windows 11, Python 3.12.9
+[latency] in-process TestClient, 200 sequential requests after 10 warm-up: median 2.41 ms, p95 4.59 ms, max 8.33 ms | Intel64 Family 6 Model 186 Stepping 3, GenuineIntel, Windows 11, Python 3.12.9
 PASSED                       [100%]
 
-============================= 37 passed in 5.10s ==============================
+============================= 38 passed in 4.97s ==============================

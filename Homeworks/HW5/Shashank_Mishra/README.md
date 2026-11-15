@@ -10,7 +10,7 @@ You send it one stock's 12 HW4 feature percentiles. It returns that stock's **pr
 |---|---|
 | `model_version` | `hw4-lgb_excess-fit-2026-04-09` |
 | HW4 code | `run_hw4.FITTED["lgb_excess"]` = `hw4.model.RankLGBM(target="excess", num_leaves=7, n_estimators=300, min_child_samples=5000)` |
-| Fit date / training rows | 2026-04-09, 1,586,680 stock-weeks from 2010-01-04, all with labels ended by 2026-04-08 (`hw4.model.training_rows`) |
+| Fit date / training rows | 2026-04-09, 1,586,680 stock-weeks from 2010-01-04. Every row's 90-day label had ended before the fit date; the last one ended 2026-04-06 (`hw4.model.training_rows`) |
 | HW4 used it for | the 2026-04-09 → 2026-09-30 signals of the final test |
 | Same model as HW4? | Yes. Its feature importances match the 2026 column of HW4's `test_lightgbm_feature_importance` in `results/results.csv` to 4e-7, which is the rounding used in that file. |
 | Artifact | [`artifacts/model.joblib`](artifacts/model.joblib), 256 KB, committed. Metadata in [`artifacts/model_metadata.json`](artifacts/model_metadata.json) (SHA-256, versions, parameters, training ranges). |
@@ -92,9 +92,9 @@ It imports HW4's own functions: `run_hw4.signal_dates`, the refit schedule, `run
 
 ## 3. Tests and latency
 
-[`tests/test_app.py`](tests/test_app.py) has **37 tests, all passing**, and ruff check/format is clean. The full output is in [`evidence/checks.txt`](evidence/checks.txt).
+[`tests/test_app.py`](tests/test_app.py) has **38 tests, all passing**, and ruff check/format is clean. The full output is in [`evidence/checks.txt`](evidence/checks.txt).
 
-1. **Valid prediction (real saved model).** The test asserts a 200, the exact response schema, a finite float, and the model version. It then checks the API against a **direct call** of the loaded estimator on the same DataFrame, and against **the value HW4's code produced**. The second check is parametrized over 8 real stocks, including 2 with missing fundamentals.
+1. **Valid prediction (real saved model).** The test asserts a 200, the exact response schema, a finite float, and the model version. It then checks the API against a **direct call** of the loaded estimator on the same DataFrame, and against **the value HW4's code produced**. The second check is parametrized over 8 real stocks. One of them, ACI, has a missing `accruals` value, so the null → NaN path is checked against HW4 too. A further test sets all 11 nullable features to `null` and checks the API against the direct estimator call.
    * **Where the reference values came from.** `export_hw4_model.py` called HW4's `RankLGBM.predict` on the 2026-04-09 panel rows before any API code was involved. It ran in Python 3.13, and the tests run in Python 3.12, so they also prove the artifact survives that move.
    * **Tolerance.** Absolute 1e-12. LightGBM sums the same leaf values in float64, so anything larger would mean a different model, not rounding. The values matched exactly.
    * **Other checks:** a row scores the same alone or in a batch, the feature order matches the artifact, the artifact is loaded exactly once per process, `/health` reports the loaded model, and startup is refused on a library-version mismatch.
@@ -102,14 +102,16 @@ It imports HW4's own functions: `run_hw4.signal_dates`, the refit schedule, `run
 3. **Inference failure → 500.** The test sends **valid** input with the loaded model's `predict` monkeypatched to raise. It asserts a 500 with the generic body, that the exception text is *not* in the response, and that the server log *does* contain it under the response's `X-Request-ID`. A second test makes the model return NaN, which must give a 500, not a 200.
 4. **Performance.** 10 warm-up requests, then 200 sequential requests timed with `time.perf_counter`, reporting the median and p95.
 
-**Latency.** Measured on a 13th Gen Intel Core i7-1355U laptop (10 cores, 16 GB RAM) with Windows 11, Python 3.12.9, and Docker Desktop 29.7.2. Each measurement is one stock per request:
+**Latency.** Measured on a 13th Gen Intel Core i7-1355U laptop (10 cores, 16 GB RAM) with Windows 11, Python 3.12.9, and Docker Engine 29.7.2. Each measurement is one stock per request:
 
 | Measurement | Requests | Median | p95 | Max |
 |---|---|---|---|---|
-| In-process `TestClient` (no network; `pytest`) | 200 after 10 warm-up | 2.51 ms | 3.78 ms | 4.56 ms |
-| **Real localhost HTTP to the Docker container** (`measure_latency.py`, one keep-alive httpx connection) | 200 after 10 warm-up | 3.01 ms | 4.37 ms | 5.04 ms |
+| In-process `TestClient` (no network; `pytest`) | 200 after 10 warm-up | 2.41 ms | 4.59 ms | 8.33 ms |
+| **Real localhost HTTP to the Docker container** (`measure_latency.py`, one keep-alive httpx connection) | 200 after 10 warm-up | 2.99 ms | 4.04 ms | 5.66 ms |
 
 The test asserts **p95 < 50 ms**. That is more than 10× my measured p95, which leaves room for a slower laptop or CI runner. It still catches gross regressions such as refitting per request (seconds). Reloading the 256 KB artifact takes only ~2 ms, too little for a latency budget to notice, so a separate test counts artifact loads and asserts exactly one per server process. I set LightGBM's prediction threads to 1 at load. This changes only how `predict` runs, not the trees or the predictions. With one row per request, extra threads only add start-up cost and oversubscribe the CPU under concurrent requests.
+
+**Concurrency check (manual).** FastAPI runs `def` endpoints in a thread pool, so several requests can call the same loaded model at once. I ran local uvicorn and sent 800 requests from 64 parallel threads, cycling through the 8 reference stocks. All 800 returned 200 with exactly the HW4 reference prediction (maximum difference 0.0).
 
 ## 4. Container and request evidence
 
@@ -131,19 +133,12 @@ The test asserts **p95 < 50 ms**. That is more than 10× my measured p95, which 
 
 ## 5. What would need attention before a real deployment
 
-* **Feature parity is the biggest risk.** The service trusts the caller's percentiles. In production the same versioned code that built the HW4 panel would have to compute them: the same eligible universe, filing-date + 1 lags, and staleness rule. Ideally the service would receive the raw cross-section and rank it itself. A skew between training and serving features would give confident, wrong predictions with no error.
-* **Model staleness and retraining.** HW4 refit every spring. A real system needs a scheduled retrain, a model registry with versioned artifacts and checksums (the SHA-256 is already in the metadata), a staged rollout, and a rollback path. The artifact should be pulled from that registry rather than copied into the image.
-* **Monitoring.** Track input drift (for example, the share of nulls per feature against the training shares in the metadata), the prediction distribution, and realized rank IC once the 90-day labels mature. Also track the latency p95/p99 and the 4xx/5xx rates. The Anthropic postmortem from class is a reminder that quality regressions can be silent while every request still returns 200.
-* **Batch endpoint.** HW4 scores ~2,000 stocks per signal date, so a production API would take a batch, rather than 2,000 round trips.
-* **Security and operations.**
-  * Add authentication and rate limits.
-  * Use TLS behind a gateway.
-  * Pin the base image by digest and scan it.
-  * Write structured JSON logs.
-  * Run more uvicorn workers and set CPU/memory limits.
-  * Separate liveness and readiness probes.
-  * Keep only trusted artifacts. Pickle files are code, so ONNX or LightGBM's text model format would be a safer exchange format.
-* **Investment caveats from HW4 still apply.** This model's test rank IC was only 0.018, and it lost to momentum and the index. Serving it reliably says nothing about whether it should drive trades.
+* **Feature parity (the biggest risk).** The service trusts the caller's percentiles. In production they must come from the same versioned code that built the HW4 panel. Otherwise training/serving skew gives confident, wrong predictions with no error.
+* **Retraining and versioning.** HW4 refit every spring. A real system needs a scheduled retrain, a model registry with checksums (the SHA-256 is already in the metadata), a staged rollout, and a rollback.
+* **Monitoring.** Track input drift (for example, null shares against the training shares in the metadata), the prediction distribution, realized rank IC as labels mature, latency, and 4xx/5xx rates. As the Anthropic postmortem from class showed, quality can degrade silently while every request still returns 200.
+* **Batch endpoint.** HW4 scores ~2,000 stocks per date, so production would take a batch instead of 2,000 round trips.
+* **Security and operations.** Add authentication, rate limits, and TLS. Pin the base image by digest. Add structured logs, worker and resource limits, and readiness probes. Prefer a non-pickle model format, such as LightGBM's text format.
+* **The model itself.** Its HW4 test rank IC was only 0.018, and it lost to momentum and the index. Serving it reliably says nothing about whether it should drive trades.
 
 ## 6. Files
 
@@ -153,7 +148,7 @@ The test asserts **p95 < 50 ms**. That is more than 10× my measured p95, which 
 | [`model_service.py`](model_service.py) | Model logic with no HTTP: loading and version checks, the training-representation DataFrame, and `predict_one` |
 | [`artifacts/`](artifacts/) | `model.joblib` (the fitted HW4 model), `model_metadata.json`, and `reference_predictions.json` (HW4 inputs and outputs) |
 | [`export_hw4_model.py`](export_hw4_model.py) | The one-time export from HW4 (run in the HW4 environment) |
-| [`tests/test_app.py`](tests/test_app.py) | The 37 tests |
+| [`tests/test_app.py`](tests/test_app.py) | The 38 tests |
 | [`measure_latency.py`](measure_latency.py) | Real-HTTP latency measurement |
 | [`example_request.json`](example_request.json) | A valid HW4 input (stock A, 2026-04-09) |
 | [`evidence/`](evidence/) | The container transcript and its script, the invalid request, and the test/lint output |

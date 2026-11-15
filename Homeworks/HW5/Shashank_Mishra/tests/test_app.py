@@ -87,7 +87,7 @@ def test_predict_valid_input(client, valid_input_data):
 
 @pytest.mark.parametrize("case", REFERENCE, ids=[c["symbol"] for c in REFERENCE])
 def test_api_reproduces_hw4_reference_predictions(client, case):
-    # Includes stocks with missing (null) fundamentals, which LightGBM saw as NaN in HW4.
+    # Includes ACI, whose accruals is null (NaN in HW4), so the missing-value path is checked.
     response = client.post("/predict", json=case["features"])
     assert response.status_code == 200
     assert response.json()["prediction"] == pytest.approx(case["hw4_prediction"], abs=TOLERANCE)
@@ -95,6 +95,17 @@ def test_api_reproduces_hw4_reference_predictions(client, case):
 
 def test_reference_cases_cover_missing_values():
     assert any(None in c["features"].values() for c in REFERENCE)
+
+
+def test_all_nullable_features_null_matches_direct_call(client):
+    payload = {f: None for f in model_service.FEATURES} | {"rev_1m": 0.5}
+    response = client.post("/predict", json=payload)
+    assert response.status_code == 200
+    bundle = app.state.model
+    frame = model_service.to_frame(bundle, payload)
+    assert frame.isna().sum().sum() == 11  # null really becomes NaN, not 0 or a default
+    direct = bundle.estimator.predict(frame)[0]
+    assert response.json()["prediction"] == pytest.approx(direct, abs=TOLERANCE)
 
 
 def test_prediction_does_not_depend_on_other_rows(client):
