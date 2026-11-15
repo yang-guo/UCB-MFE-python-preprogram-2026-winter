@@ -1,0 +1,100 @@
+# HW5 container demo, 2026-11-15 17:51:59 UTC
+
+$ docker image ls mfe-hw5:local
+IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
+mfe-hw5:local   94ed3f26d691        759MB          176MB        
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+dc7d98395b0183d39063f8bb7f5fcfafe1c2acc966b7e0523a228aeefdc822cc
+
+
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-lgb_excess-fit-2026-04-09"}
+## 1. Valid request (example_request.json = stock A on 2026-04-09; HW4 prediction 0.004700122008907656)
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 17:52:01 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+x-request-id: af4f894c3cf6
+
+{"prediction":0.004700122008907656,"model_version":"hw4-lgb_excess-fit-2026-04-09"}
+## 2. Invalid request: numeric string, out-of-range value, extra field -> 422
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @evidence/invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Sun, 15 Nov 2026 17:52:01 GMT
+server: uvicorn
+content-length: 290
+content-type: application/json
+
+{"detail":[{"loc":["body","mom_12_1"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","rev_1m"],"msg":"Input should be less than or equal to 1","type":"less_than_equal"},{"loc":["body","log_mcap"],"msg":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+## 3. Invalid request: NaN -> 422 (not a crash)
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary {
+  "idio_vol_252": 0.2415902140672783,
+  "earnings_yield": 0.560376372190277,
+  "debt_to_assets": 0.47127016129032256,
+  "sales_to_price": 0.2955020920502092,
+  "gross_profitability": 0.6787022501308215,
+  "earnings_change": 0.36021220159151196,
+  "mom_12_1": 0.37109174782162996,
+  "volume_trend": 0.3524590163934426,
+  "accruals": 0.795490298898794,
+  "asset_growth": 0.55401809473124,
+  "rev_1m": NaN,
+  "beta_252": 0.5851172273190621
+}
+HTTP/1.1 422 Unprocessable Entity
+date: Sun, 15 Nov 2026 17:52:01 GMT
+server: uvicorn
+content-length: 101
+content-type: application/json
+
+{"detail":[{"loc":["body","rev_1m"],"msg":"Input should be a finite number","type":"finite_number"}]}
+## 4. Real localhost HTTP latency against the container
+
+$ .venv/Scripts/python.exe measure_latency.py -n 200
+real HTTP http://127.0.0.1:8000/predict: 200 sequential requests after 10 warm-up, median 3.01 ms, p95 4.37 ms, max 5.04 ms | client: Intel64 Family 6 Model 186 Stepping 3, GenuineIntel, Windows 11
+
+## 5. Server log (model loaded once at startup)
+$ docker logs mfe-hw5 | head -8   (then one access-log line per request)
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     loaded model_version=hw4-lgb_excess-fit-2026-04-09
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:54150 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:54154 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:54166 - "POST /predict HTTP/1.1" 200 OK
+... 213 POST /predict lines in total
+## 6. Stop the container, then start a NEW container from the same image
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+
+$ docker ps -a --filter name=mfe-hw5 --format {{.Names}} {{.Status}}
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+e0f574df6f60ba3df3083f346417f44f125284f28fc376e57f535bce7673692a
+
+## 7. Same request after restart: same prediction and model version
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 17:52:07 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+x-request-id: fc89a8664a43
+
+{"prediction":0.004700122008907656,"model_version":"hw4-lgb_excess-fit-2026-04-09"}
+
+$ docker stop mfe-hw5
+mfe-hw5
+
