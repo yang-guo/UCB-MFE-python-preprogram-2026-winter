@@ -1,0 +1,12 @@
+$ python -m pytest -q -s
+.............................
+Latency over 200 in-process TestClient requests (arm64, Darwin, Python 3.12.9): median 2.00 ms, p95 2.20 ms, max 2.56 ms
+.
+
+30 passed, 1 warning in 1.11s
+
+$ python -m ruff check .
+All checks passed!
+
+$ python -m ruff format --check .
+6 files already formatted

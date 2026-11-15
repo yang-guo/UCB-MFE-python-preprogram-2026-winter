@@ -1,0 +1,24 @@
+# uvicorn running directly on the host (not the container)
+$ python -m uvicorn app:app --host 127.0.0.1 --port 8000 &
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 22:31:24 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+x-request-id: 1b8d335066b9
+
+{"prediction":0.5320347392488041,"model_version":"hw4-ridge-fit-2026-04-01"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d '{"mom_1m": "high", "sector": "Crypto"}' | head -c 420
+HTTP/1.1 422 Unprocessable Entity
+date: Sun, 15 Nov 2026 22:31:24 GMT
+server: uvicorn
+content-length: 2177
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","mom_1m"],"msg":"Input should be a valid number"},{"type":"missing","loc":["body","mom_3m"],"msg":"Field required"},{"type":"missing","loc":["body","mom_6m_1m"],"msg":"Field required"},{"type":"missing","loc":["body","mom_12_1"], ...
+
+$ python measure_latency.py
+200 sequential HTTP requests to http://127.0.0.1:8000 from arm64 Darwin: median 1.78 ms, p95 1.92 ms, max 2.27 ms

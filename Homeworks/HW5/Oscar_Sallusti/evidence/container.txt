@@ -1,0 +1,106 @@
+# Container evidence, recorded 2026-11-15 22:42 UTC on an Apple M2 (8 GB), Docker 29.9.3.
+# The container is started with -d here (make run uses the same command in the foreground).
+# curl has -s added to hide its progress meter; python is the submission's .venv.
+
+$ docker image ls mfe-hw5:local --format '{{.Repository}}:{{.Tag}}  id={{.ID}}  size={{.Size}}'
+mfe-hw5:local  id=81b78799c79e  size=753MB
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+57735d4ac1eacce50a0b0403c26b69619d45d28364f9534114c40b41a343e406
+
+
+## 1. Valid request
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 22:42:41 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+x-request-id: 713f38a83da8
+
+{"prediction":0.5320347392488041,"model_version":"hw4-ridge-fit-2026-04-01"}
+
+## 2. Rejected invalid request (a raw value instead of a percentile rank, and an unknown sector)
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d "$(sed -e 's/"filing_age_days": [0-9.]*/"filing_age_days": 45/' -e 's/Technology/Crypto/' example_request.json)"
+HTTP/1.1 422 Unprocessable Entity
+date: Sun, 15 Nov 2026 22:42:41 GMT
+server: uvicorn
+content-length: 396
+content-type: application/json
+
+{"detail":[{"type":"less_than_equal","loc":["body","filing_age_days"],"msg":"Input should be less than or equal to 1"},{"type":"literal_error","loc":["body","sector"],"msg":"Input should be 'Basic Materials', 'Communication Services', 'Consumer Cyclical', 'Consumer Defensive', 'Energy', 'Financial Services', 'Healthcare', 'Industrials', 'Real Estate', 'Technology', 'Utilities' or 'Unknown'"}]}
+
+## 3. What is inside the container, and latency over real HTTP
+
+$ docker exec mfe-hw5 sh -c 'whoami; python --version; pip list 2>/dev/null | grep -i -E "^(scikit-learn|numpy|pandas|scipy|joblib|fastapi|pydantic|uvicorn) "; ls /app /app/artifacts'
+appuser
+Python 3.12.16
+fastapi           0.162.0
+joblib            1.5.3
+numpy             2.3.5
+pandas            2.3.3
+pydantic          2.14.2
+scikit-learn      1.8.0
+scipy             1.16.3
+uvicorn           0.54.0
+/app:
+app.py
+artifacts
+model_service.py
+requirements.txt
+
+/app/artifacts:
+model.joblib
+model_metadata.json
+
+
+$ python measure_latency.py
+200 sequential HTTP requests to http://127.0.0.1:8000 from arm64 Darwin: median 2.61 ms, p95 3.94 ms, max 15.30 ms
+
+
+## 4. Stop, confirm it is down, restart the same image, request again
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+
+$ curl -sS -m 3 http://127.0.0.1:8000/health; echo "curl exit code: $?"
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+curl exit code: 7
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+30e077f04ece8f92434ae64556f56113a17669fd337dff44e8cf5ed857a3ae16
+
+
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-ridge-fit-2026-04-01"}
+
+$ curl -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Sun, 15 Nov 2026 22:42:44 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+x-request-id: 8495fc2b7c60
+
+{"prediction":0.5320347392488041,"model_version":"hw4-ridge-fit-2026-04-01"}
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     model_loaded version=hw4-ridge-fit-2026-04-01
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:64312 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64324 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64332 - "POST /predict HTTP/1.1" 200 OK
+
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+

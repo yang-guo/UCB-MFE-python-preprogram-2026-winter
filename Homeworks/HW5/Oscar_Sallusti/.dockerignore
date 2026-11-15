@@ -1,0 +1,15 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+# Not needed to serve predictions
+tests/
+evidence/
+export_model.py
+measure_latency.py
+README.md
