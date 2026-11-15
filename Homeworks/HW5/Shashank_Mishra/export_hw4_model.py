@@ -107,6 +107,11 @@ def main():
     rows = panel.loc[panel.date.eq(fit_date) & panel.eligible].copy()
     rows["hw4_prediction"] = wrapper.predict(rows)
     rows = rows.sort_values("symbol")
+    # The whole cross-section of that date, for the full-day test (blank cell = missing).
+    day = rows[["symbol", *columns, "hw4_prediction"]].rename(
+        columns=dict(zip(columns, R.FEATURES))
+    )
+    day.to_csv(HERE / "tests" / f"reference_day_{fit_date.date()}.csv", index=False)
     has_missing = rows[columns].isna().any(axis=1)
     picks = pd.concat(
         [

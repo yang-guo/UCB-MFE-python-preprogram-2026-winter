@@ -88,17 +88,18 @@ uv venv --python 3.12 .venv; .venv\Scripts\Activate.ps1; uv pip install -r requi
 python export_hw4_model.py --db ../../../equities_top2000.duckdb   # ~15 s with HW4's cached panel
 ```
 
-It imports HW4's own functions: `run_hw4.signal_dates`, the refit schedule, `run_hw4.FITTED`, and `hw4.model.training_rows`. With these it re-runs the last refit exactly as `stage_test` did, checks the feature importances against HW4's `results.csv`, and records the reference predictions. It then writes `artifacts/` and `example_request.json`. It expects HW4 in `../../HW4/Shashank_Mishra` (my HW4 PR branch); otherwise, pass `--hw4-dir`.
+It imports HW4's own functions: `run_hw4.signal_dates`, the refit schedule, `run_hw4.FITTED`, and `hw4.model.training_rows`. With these it re-runs the last refit exactly as `stage_test` did, checks the feature importances against HW4's `results.csv`, and records the reference predictions. It then writes `artifacts/`, `example_request.json`, and `tests/reference_day_2026-04-09.csv`. Re-running it reproduces `model.joblib` byte for byte (same SHA-256). It expects HW4 in `../../HW4/Shashank_Mishra` (my HW4 PR branch); otherwise, pass `--hw4-dir`.
 
 ## 3. Tests and latency
 
-[`tests/test_app.py`](tests/test_app.py) has **38 tests, all passing**, and ruff check/format is clean. The full output is in [`evidence/checks.txt`](evidence/checks.txt).
+[`tests/test_app.py`](tests/test_app.py) has **41 tests, all passing**, and ruff check/format is clean. The full output is in [`evidence/checks.txt`](evidence/checks.txt).
 
 1. **Valid prediction (real saved model).** The test asserts a 200, the exact response schema, a finite float, and the model version. It then checks the API against a **direct call** of the loaded estimator on the same DataFrame, and against **the value HW4's code produced**. The second check is parametrized over 8 real stocks. One of them, ACI, has a missing `accruals` value, so the null → NaN path is checked against HW4 too. A further test sets all 11 nullable features to `null` and checks the API against the direct estimator call.
+   * **The whole HW4 cross-section.** All **1,991 eligible stocks on 2026-04-09** (`tests/reference_day_2026-04-09.csv`, with HW4's prediction for each) go through the API. Every one returns 200 and matches HW4 exactly, including the 133 stocks with real missing-value patterns. This also proves that my (0, 1] bounds and null rules accept every real HW4 input.
    * **Where the reference values came from.** `export_hw4_model.py` called HW4's `RankLGBM.predict` on the 2026-04-09 panel rows before any API code was involved. It ran in Python 3.13, and the tests run in Python 3.12, so they also prove the artifact survives that move.
    * **Tolerance.** Absolute 1e-12. LightGBM sums the same leaf values in float64, so anything larger would mean a different model, not rounding. The values matched exactly.
-   * **Other checks:** a row scores the same alone or in a batch, the feature order matches the artifact, the artifact is loaded exactly once per process, `/health` reports the loaded model, and startup is refused on a library-version mismatch.
-2. **Input validation → 422.** This covers 13 bad payloads: missing key, 11 or 13 features, extra key, empty object, list, numeric string, boolean, `null` for `rev_1m`, 0, 1.5, negative, raw return `35.0`, and nested object. It also covers NaN, Infinity, −Infinity, and malformed JSON. In each case the model's `predict` is replaced with a function that **fails the test if it is called**, which shows that invalid input never reaches inference. Two positive edge cases check that `null` for a nullable feature and the integer `1` are accepted.
+   * **Other checks:** the order of keys in the request does not change the prediction, a row scores the same alone or in a batch, the feature order matches the artifact, the artifact is loaded exactly once per process, `/health` reports the loaded model, and startup is refused on a library-version mismatch.
+2. **Input validation → 422.** This covers 13 bad payloads: missing key, 11 or 13 features, extra key, empty object, list, numeric string, boolean, `null` for `rev_1m`, 0, 1.5, negative, raw return `35.0`, and nested object. It also covers NaN, Infinity, −Infinity, and malformed JSON. In each case the model's `predict` is replaced with a function that **fails the test if it is called**, which shows that invalid input never reaches inference. A companion test counts calls on that same patched method: a valid request calls it once, an invalid one zero times. So the guard is on the object the API really calls, and the other tests are not passing vacuously. Two positive edge cases check that `null` for a nullable feature and the integer `1` are accepted.
 3. **Inference failure → 500.** The test sends **valid** input with the loaded model's `predict` monkeypatched to raise. It asserts a 500 with the generic body, that the exception text is *not* in the response, and that the server log *does* contain it under the response's `X-Request-ID`. A second test makes the model return NaN, which must give a 500, not a 200.
 4. **Performance.** 10 warm-up requests, then 200 sequential requests timed with `time.perf_counter`, reporting the median and p95.
 
@@ -106,7 +107,7 @@ It imports HW4's own functions: `run_hw4.signal_dates`, the refit schedule, `run
 
 | Measurement | Requests | Median | p95 | Max |
 |---|---|---|---|---|
-| In-process `TestClient` (no network; `pytest`) | 200 after 10 warm-up | 2.41 ms | 4.59 ms | 8.33 ms |
+| In-process `TestClient` (no network; `pytest`) | 200 after 10 warm-up | 2.52 ms | 3.06 ms | 4.07 ms |
 | **Real localhost HTTP to the Docker container** (`measure_latency.py`, one keep-alive httpx connection) | 200 after 10 warm-up | 2.99 ms | 4.04 ms | 5.66 ms |
 
 The test asserts **p95 < 50 ms**. That is more than 10× my measured p95, which leaves room for a slower laptop or CI runner. It still catches gross regressions such as refitting per request (seconds). Reloading the 256 KB artifact takes only ~2 ms, too little for a latency budget to notice, so a separate test counts artifact loads and asserts exactly one per server process. I set LightGBM's prediction threads to 1 at load. This changes only how `predict` runs, not the trees or the predictions. With one row per request, extra threads only add start-up cost and oversubscribe the CPU under concurrent requests.
@@ -148,7 +149,7 @@ The test asserts **p95 < 50 ms**. That is more than 10× my measured p95, which 
 | [`model_service.py`](model_service.py) | Model logic with no HTTP: loading and version checks, the training-representation DataFrame, and `predict_one` |
 | [`artifacts/`](artifacts/) | `model.joblib` (the fitted HW4 model), `model_metadata.json`, and `reference_predictions.json` (HW4 inputs and outputs) |
 | [`export_hw4_model.py`](export_hw4_model.py) | The one-time export from HW4 (run in the HW4 environment) |
-| [`tests/test_app.py`](tests/test_app.py) | The 38 tests |
+| [`tests/test_app.py`](tests/test_app.py), [`tests/reference_day_2026-04-09.csv`](tests/reference_day_2026-04-09.csv) | The 41 tests; the full 2026-04-09 HW4 cross-section with HW4's predictions |
 | [`measure_latency.py`](measure_latency.py) | Real-HTTP latency measurement |
 | [`example_request.json`](example_request.json) | A valid HW4 input (stock A, 2026-04-09) |
 | [`evidence/`](evidence/) | The container transcript and its script, the invalid request, and the test/lint output |

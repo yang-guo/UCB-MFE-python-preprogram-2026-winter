@@ -97,6 +97,31 @@ def test_reference_cases_cover_missing_values():
     assert any(None in c["features"].values() for c in REFERENCE)
 
 
+def test_whole_reference_day_matches_hw4(client):
+    """Every eligible stock on 2026-04-09 (1,991 rows, written by export_hw4_model.py from
+    HW4's RankLGBM.predict) goes through the API. This proves two things: the contract
+    accepts every real HW4 row (no 422), and the API reproduces HW4 for all of them,
+    including the real missing-value patterns."""
+    day = pd.read_csv(ROOT / "tests" / "reference_day_2026-04-09.csv")
+    assert len(day) == 1991
+    assert day[list(model_service.FEATURES)].isna().any(axis=1).sum() > 100
+    worst = 0.0
+    for record in day.to_dict("records"):
+        payload = {f: None if pd.isna(record[f]) else record[f] for f in model_service.FEATURES}
+        response = client.post("/predict", json=payload)
+        assert response.status_code == 200, (record["symbol"], response.text)
+        worst = max(worst, abs(response.json()["prediction"] - record["hw4_prediction"]))
+    assert worst < TOLERANCE
+
+
+def test_field_order_in_request_does_not_matter(client, valid_input_data):
+    reversed_payload = dict(reversed(list(valid_input_data.items())))
+    assert list(reversed_payload) != list(valid_input_data)
+    a = client.post("/predict", json=valid_input_data).json()["prediction"]
+    b = client.post("/predict", json=reversed_payload).json()["prediction"]
+    assert a == b
+
+
 def test_all_nullable_features_null_matches_direct_call(client):
     payload = {f: None for f in model_service.FEATURES} | {"rev_1m": 0.5}
     response = client.post("/predict", json=payload)
@@ -194,6 +219,24 @@ INVALID_PAYLOADS = {
 def test_predict_invalid_input(client, model_must_not_run, payload):
     model_must_not_run()
     assert client.post("/predict", json=payload).status_code == 422
+
+
+def test_patched_predict_is_the_one_the_api_calls(client, valid_input_data, monkeypatch):
+    # The invalid-input tests patch app.state.model.estimator.predict. Show that this
+    # is the method the API really calls, so "never reached the model" is not vacuous:
+    # a valid request calls it once, an invalid one does not call it at all.
+    estimator, calls = app.state.model.estimator, []
+    real_predict = estimator.predict
+
+    def counting_predict(*args, **kwargs):
+        calls.append(1)
+        return real_predict(*args, **kwargs)
+
+    monkeypatch.setattr(estimator, "predict", counting_predict)
+    assert client.post("/predict", json=valid_input_data).status_code == 200
+    assert len(calls) == 1
+    assert client.post("/predict", json=_with(mom_12_1="0.5")).status_code == 422
+    assert len(calls) == 1
 
 
 @pytest.mark.parametrize("value", ["NaN", "Infinity", "-Infinity"])
