@@ -186,7 +186,7 @@ sequential requests after 10 warm-up requests, timed with `time.perf_counter`):
 |---|---|---|
 | In-process `TestClient` (the test; no network) | 2.0 ms | 2.6 ms |
 | Real localhost HTTP, uvicorn on the host (`measure_latency.py`) | 1.8 ms | 2.0 ms |
-| Real localhost HTTP, Docker container | _pending, see below_ | |
+| Real localhost HTTP, Docker container (`measure_latency.py`) | 2.6 ms | 3.9 ms |
 
 The test asserts p95 < 250 ms. That is a regression guard rather than a target:
 about 100× the measured value, loose enough for a slow shared CI runner, tight
@@ -215,13 +215,25 @@ curl -i http://127.0.0.1:8000/predict \
 
 ### Evidence
 
-> **Not done yet: container evidence.** Docker was not installed on the machine
-> where this was written, so the image has not been built or run. The transcripts
-> for the valid request, the rejected request and the request after a restart
-> still have to be recorded in `evidence/container.txt`.
+`evidence/container.txt` is the terminal transcript of the image running under
+Docker 29.9.3 on an Apple M2. It shows:
 
-`evidence/local_uvicorn.txt` shows the same three requests against uvicorn
-running directly on the host.
+1. **Valid request:** `200`, `{"prediction":0.5320347392488041,"model_version":"hw4-ridge-fit-2026-04-01"}`.
+   This is the same number as HW4's own `predict()` gave on macOS
+   (`tests/reference_prediction.json`).
+2. **Invalid request** (a raw `filing_age_days` of 45 and sector `Crypto`):
+   `422`, naming both fields.
+3. **Inside the container:** runs as `appuser`, with scikit-learn 1.8.0, numpy
+   2.3.5, pandas 2.3.3, scipy 1.16.3 and joblib 1.5.3, matching training. Python
+   is 3.12.16 against 3.12.9 in training: the same minor version, a later patch
+   release of `python:3.12-slim`.
+4. **Restart:** `docker stop`, a refused connection, `docker run` of the same
+   image, then `/health` and the valid request again return the same model
+   version and prediction. The model is baked into the image, so nothing is lost
+   between runs. The container log shows the model loaded once at start-up.
+
+`evidence/local_uvicorn.txt` shows the same requests against uvicorn running
+directly on the host, and `evidence/tests_and_lint.txt` the test and lint output.
 
 ## Before a real deployment
 
