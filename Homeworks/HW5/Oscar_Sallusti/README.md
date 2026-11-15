@@ -39,8 +39,9 @@ A FastAPI service that loads my fitted HW4 model once at start-up and answers
 One stock on one signal date. The body is a JSON object with exactly these 27
 fields, in the training column order. No other fields are accepted.
 
-**Units.** Each numeric feature is the stock's **percentile rank among that
-date's eligible stocks**, exactly as HW4 `rank_features` computes it
+**Types and units.** Fields 1-26 are JSON numbers (floats; `null` where the
+table allows it) and field 27 is a string. Each numeric feature is the stock's
+**percentile rank among that date's eligible stocks**, exactly as HW4 `rank_features` computes it
 (`rank(pct=True)`): the lowest of *n* stocks gets 1/*n* and the highest gets 1.
 The allowed range is therefore **0 < x ≤ 1**. The service does not rank raw
 values itself, because a rank needs the whole cross-section.
