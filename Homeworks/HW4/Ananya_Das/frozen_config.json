@@ -1,0 +1,30 @@
+{
+  "frozen_on": "2026-11-16",
+  "ridge_alpha": 10000000.0,
+  "features": [
+    "mom_21",
+    "mom_252_21",
+    "vol_63",
+    "drawdown_252",
+    "operating_roa",
+    "accruals_to_assets",
+    "debt_to_assets",
+    "log_cap"
+  ],
+  "train_start": "2010-01-01",
+  "training_dates": "month-end sessions",
+  "target": "90-day return minus the date's median, capped at the date's 1st/99th percentiles",
+  "target_winsor": 0.01,
+  "max_daily_move": 4.0,
+  "refit": "first signal date, then the first session of each January",
+  "top_n": 20,
+  "cohort_fraction": 0.3333333333333333,
+  "ramp_months": 3,
+  "name_cap": 0.05,
+  "sector_cap": 0.25,
+  "min_price": 5.0,
+  "liquidity_window": 63,
+  "liquidity_min_quotes": 60,
+  "fee_bps": 10,
+  "max_stale_sessions": 5
+}
