@@ -1,0 +1,12 @@
+{
+  "source": "HW4 model.FactorScore on AAPL at signal date 2026-08-31",
+  "hw4_commit": "7934f43",
+  "input": {
+    "rank_operating_roa": 0.9777215189873417,
+    "rank_fcf_to_assets": 0.9634888438133874,
+    "rank_drawdown_252": 0.7702632937532267,
+    "rank_momentum_252_21": 0.711925658234383,
+    "rank_volatility_63": 0.32759493670886075
+  },
+  "expected_prediction": 0.8191608756158957
+}
