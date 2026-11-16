@@ -1,0 +1,16 @@
+........................................................................ [ 79%]
+...............
+--- /predict latency report ---
+requests: 100 (after 5 warm-up)
+median: 17.195 ms | p95: 22.348 ms (budget 300 ms)
+method: in-process TestClient, includes validation, JSON, model.predict; excludes network and uvicorn
+platform: Windows-11-10.0.26200-SP0 | processor: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel | cpus: 8
+python 3.12.9 | sklearn 1.8.0 | numpy 2.3.5
+....                                                      [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  .venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+91 passed, 1 warning in 14.29s
