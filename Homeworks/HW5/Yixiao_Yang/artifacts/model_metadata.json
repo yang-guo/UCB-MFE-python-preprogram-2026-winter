@@ -1,0 +1,74 @@
+{
+  "model_version": "hw4-yixiao-ridge-2016q2-v1",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days"
+  ],
+  "model": "Ridge",
+  "alpha": 1000.0,
+  "fit_date": "2016-03-31",
+  "entry_quarter": "2016Q2",
+  "training_rows": 141407,
+  "scored_rows_verified": 5979,
+  "first_training_signal": "2009-12-31",
+  "last_training_signal": "2015-11-30",
+  "last_training_label_end": "2016-02-29",
+  "target": "Gross adjusted-price return fraction from the next market session's entry close to the first market session at or after entry + 90 calendar days.",
+  "preprocessing": [
+    "Training-only 1st/99th percentile clipping",
+    "Training median imputation with learned missing indicators; keep empty features",
+    "Training StandardScaler"
+  ],
+  "missing_indicator_features": [
+    "momentum_252_21",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets"
+  ],
+  "hw4_source_commit": "80c17f2fd6217926c18f7548d5d03dc4cfbf2c53",
+  "hw4_source_url": "https://github.com/yang-guo/UCB-MFE-python-preprogram-2026-winter/blob/80c17f2fd6217926c18f7548d5d03dc4cfbf2c53/Homeworks/HW4/Yixiao_Yang",
+  "hw4_source_sha256": {
+    "hw4.py": "290feeccf6a8dd2f31b8acd7d630e18c0952685ec7a6b278e79c423c7eb60f31",
+    "data.py": "981712f7c771c6cd395734a634879d959c36c6cdb59690eaf01b55d4bcf3f3cb",
+    "backtester.py": "4b23b947c217e7014c7e4cffcf6e07ac692e1674383d220841ddacb4ef852dcc"
+  },
+  "model_components_sha256": "a1b469a05ef9d34e442bbda8a71df6df1cd2d69216d80dc1ff1395ab2a61fa5d",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "frozen_predictions_sha256": "fdb6fc0c8a176b72b00d8125e4350f98a32c1afd77f53b96929c96f70295ac82",
+  "hw4_training_python": "3.12.14",
+  "hw4_training_packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8",
+    "duckdb": "1.5.6"
+  },
+  "export_python": "3.12.14",
+  "serialization_packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "joblib": "1.5.3"
+  },
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-10,
+  "maximum_absolute_difference_from_hw4": 0.0,
+  "export_method": "Recreated the original 2016Q2 HW4 fit using its unchanged source, official database, selected alpha and training cutoff; checked every quarterly forecast against the previously saved HW4 CSV.",
+  "artifact_sha256": "b0011872418e857c65e07c3f8cfcb5b4711695c93f24b0e3dea58626fb544952",
+  "artifact_bytes": 3310
+}
