@@ -265,6 +265,9 @@ restart.
 ## Request Evidence
 ![Container Requests](request_evidence.png)
 
+## Acknowledgments
+- Used AI assistant to help debug FastAPI validation logic. All generated code was reviewed, tested locally, and executed successfully in the Docker container.
+
 ## Notes
 
 Before a real deployment, the service should add:
