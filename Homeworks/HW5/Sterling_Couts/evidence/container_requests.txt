@@ -1,0 +1,70 @@
+Image: mfe-hw5:local
+Image ID: sha256:e892f146a9ee2230da87b9bda82a2e609a530dab53cb1aa18c4a190bcd40c869
+
+$ docker build -t mfe-hw5:local .
+
+$ docker run -d --name mfe-hw5-sterling-check -p 127.0.0.1:8875:8000 sha256:e892f146a9ee2230da87b9bda82a2e609a530dab53cb1aa18c4a190bcd40c869
+
+Target: http://127.0.0.1:8875; docker-before-restart
+POST /predict
+Content-Type: application/json
+{
+  "rank_momentum_21": 0.5096887844979449,
+  "rank_momentum_63": 0.5854374633000587,
+  "rank_momentum_252_21": 0.8021139166177335,
+  "rank_volatility_63": 0.1743981209630064,
+  "rank_drawdown_252": 0.8743394010569583,
+  "rank_momentum_126_21": 0.7251908396946565,
+  "rank_operating_roa": 0.3633156966490299,
+  "rank_fcf_to_assets": 0.0170789163722025
+}
+HTTP 200
+{"prediction":0.03153401217040266,"model_version":"hw4-fixed-ridge-2012-84e526d28792-v1"}
+Rejected request:
+{
+  "rank_momentum_63": 0.5854374633000587,
+  "rank_momentum_252_21": 0.8021139166177335,
+  "rank_volatility_63": 0.1743981209630064,
+  "rank_drawdown_252": 0.8743394010569583,
+  "rank_momentum_126_21": 0.7251908396946565,
+  "rank_operating_roa": 0.3633156966490299,
+  "rank_fcf_to_assets": 0.0170789163722025
+}
+HTTP 422
+{"detail":[{"loc":["body","rank_momentum_21"],"msg":"Field required","type":"missing"}]}
+Prediction matches the pre-existing HW4 reference within absolute 1e-12.
+
+$ docker stop mfe-hw5-sterling-check
+mfe-hw5-sterling-check
+
+$ docker start mfe-hw5-sterling-check
+mfe-hw5-sterling-check
+
+Target: http://127.0.0.1:8875; docker-after-restart
+POST /predict
+Content-Type: application/json
+{
+  "rank_momentum_21": 0.5096887844979449,
+  "rank_momentum_63": 0.5854374633000587,
+  "rank_momentum_252_21": 0.8021139166177335,
+  "rank_volatility_63": 0.1743981209630064,
+  "rank_drawdown_252": 0.8743394010569583,
+  "rank_momentum_126_21": 0.7251908396946565,
+  "rank_operating_roa": 0.3633156966490299,
+  "rank_fcf_to_assets": 0.0170789163722025
+}
+HTTP 200
+{"prediction":0.03153401217040266,"model_version":"hw4-fixed-ridge-2012-84e526d28792-v1"}
+Rejected request:
+{
+  "rank_momentum_63": 0.5854374633000587,
+  "rank_momentum_252_21": 0.8021139166177335,
+  "rank_volatility_63": 0.1743981209630064,
+  "rank_drawdown_252": 0.8743394010569583,
+  "rank_momentum_126_21": 0.7251908396946565,
+  "rank_operating_roa": 0.3633156966490299,
+  "rank_fcf_to_assets": 0.0170789163722025
+}
+HTTP 422
+{"detail":[{"loc":["body","rank_momentum_21"],"msg":"Field required","type":"missing"}]}
+Prediction matches the pre-existing HW4 reference within absolute 1e-12.

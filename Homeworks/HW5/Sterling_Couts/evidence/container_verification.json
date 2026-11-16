@@ -1,0 +1,22 @@
+{
+  "verified_at_utc": "2026-11-16T18:30:35.451192+00:00",
+  "image": "mfe-hw5:local",
+  "image_id": "sha256:e892f146a9ee2230da87b9bda82a2e609a530dab53cb1aa18c4a190bcd40c869",
+  "image_after_restart": "sha256:e892f146a9ee2230da87b9bda82a2e609a530dab53cb1aa18c4a190bcd40c869",
+  "artifact_sha256_inside_container": "84e526d287926f77a4ef478a9923a39e49638ba112adb7ca43d6fa0ccfa1693a",
+  "valid_status": 200,
+  "invalid_status": 422,
+  "after_restart_status": 200,
+  "known_result_absolute_tolerance": 1e-12,
+  "host_port": 8875,
+  "application_files": [
+    "app.py",
+    "artifacts/fixed_anchor_2012.joblib",
+    "artifacts/model_metadata.json",
+    "hw4/__init__.py",
+    "hw4/preprocessing.py",
+    "requirements.txt",
+    "schemas.py",
+    "serving.py"
+  ]
+}

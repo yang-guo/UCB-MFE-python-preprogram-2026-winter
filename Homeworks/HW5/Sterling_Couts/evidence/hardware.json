@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-11-16T18:14:40.0994530Z",
+  "processors": [
+    {
+      "Name": "13th Gen Intel(R) Core(TM) i5-1335U",
+      "NumberOfCores": 10,
+      "NumberOfLogicalProcessors": 12
+    }
+  ],
+  "total_ram_bytes": 16837148672,
+  "os": "Microsoft Windows 11 Pro",
+  "workload": "Sequential local requests; one client; ordinary desktop workload; downloads may run concurrently"
+}
