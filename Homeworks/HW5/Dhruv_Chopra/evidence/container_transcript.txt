@@ -1,0 +1,92 @@
+# 2026-11-16 18:19:40 UTC, Docker 29.9.3
+
+$ docker image ls mfe-hw5:local
+IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
+mfe-hw5:local   1b3a3a70a5b1        735MB          169MB        
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+eac166887869483f541fa02cfcac165e312a7e266e47046e9d44e10c1e821138
+
+## 1. Valid request (AAPL, 2026-09-28 ranks from HW4)
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 18:19:48 GMT
+server: uvicorn
+content-length: 82
+content-type: application/json
+x-request-id: 5ae32dbce0c2
+
+{"prediction":0.532340808776408,"model_version":"hw4-v1-ridge-a10-fit-2026-07-01"}
+## 2. Invalid request: numeric string -> 422
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary {
+  "mom_5": "0.5",
+  "mom_21": 0.9439300298690796,
+  "mom_63": 0.9002057909965515,
+  "mom_126": 0.8086866736412048,
+  "mom_252_21": 0.5983263850212097,
+  "vol_63": 0.2906378507614136,
+  "max_ret_21": 0.5375514626502991,
+  "drawdown_252": 0.9776623249053955,
+  "log_dollar_vol_63": 0.9984567761421204,
+  "gross_profitability": 0.8878600597381592,
+  "operating_roa": 0.9768518805503845,
+  "roe": 0.9706840515136719,
+  "net_margin": 0.8625792860984802,
+  "debt_to_assets": 0.4197530746459961,
+  "cash_to_assets": 0.645061731338501,
+  "fcf_to_assets": 0.9638988971710205,
+  "accruals_to_assets": 0.4564208388328552,
+  "revenue_growth_yoy": 0.662784218788147,
+  "asset_growth_yoy": 0.7170417904853821,
+  "filing_age_days": 0.6844135522842407
+}
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 18:19:48 GMT
+server: uvicorn
+content-length: 110
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","mom_5"],"msg":"Input should be a valid number","input":"0.5"}]}
+## 3. Invalid request: only 2 of 20 features -> 422
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data {"mom_5": 0.5, "mom_21": 0.5}
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 18:19:48 GMT
+server: uvicorn
+content-length: 1943
+content-type: application/json
+
+{"detail":[{"type":"missing","loc":["body","mom_63"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","mom_126"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","mom_252_21"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","vol_63"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","max_ret_21"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","drawdown_252"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","log_dollar_vol_63"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","gross_profitability"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","operating_roa"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","roe"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","net_margin"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","debt_to_assets"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","cash_to_assets"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","fcf_to_assets"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","accruals_to_assets"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","revenue_growth_yoy"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","asset_growth_yoy"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}},{"type":"missing","loc":["body","filing_age_days"],"msg":"Field required","input":{"mom_5":0.5,"mom_21":0.5}}]}
+## 4. Stop the container, start a new one from the same image, request again
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+6a6a25d5081ea278241d3764b70bfb16914ec1367db553dce1584996ec076738
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 18:19:53 GMT
+server: uvicorn
+content-length: 82
+content-type: application/json
+x-request-id: fa09f2c72da7
+
+{"prediction":0.532340808776408,"model_version":"hw4-v1-ridge-a10-fit-2026-07-01"}
+## Container log after restart (model loaded once at startup)
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     loaded model_version=hw4-v1-ridge-a10-fit-2026-07-01
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:63322 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63326 - "POST /predict HTTP/1.1" 200 OK
+
