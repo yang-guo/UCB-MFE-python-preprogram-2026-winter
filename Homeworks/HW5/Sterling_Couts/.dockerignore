@@ -1,0 +1,16 @@
+# Allow only image inputs: no databases, credentials, tests, or evidence.
+**
+!Dockerfile
+!.dockerignore
+!requirements.txt
+!app.py
+!schemas.py
+!serving.py
+!hw4/
+hw4/**
+!hw4/__init__.py
+!hw4/preprocessing.py
+!artifacts/
+artifacts/**
+!artifacts/fixed_anchor_2012.joblib
+!artifacts/model_metadata.json
