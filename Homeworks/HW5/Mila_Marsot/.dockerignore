@@ -1,0 +1,12 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+.DS_Store
+evidence/
+export_hw4_model.py
