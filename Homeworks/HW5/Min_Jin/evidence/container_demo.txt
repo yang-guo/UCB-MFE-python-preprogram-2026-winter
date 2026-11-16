@@ -1,0 +1,88 @@
+# Milestone 5: requests to the running container, run by hand on 2026-11-15 (PST)
+# Apple M1, macOS, Docker 28.4.0. Two terminals, from Homeworks/HW5/Min_Jin.
+
+## Terminal 1: build and start the container
+
+$ make build && make run
+...
+ => => naming to docker.io/library/mfe-hw5:local
+docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Loaded hw4-factor-score-v1 from factor_score.joblib
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+## Terminal 2: valid request -> 200
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 04:53:15 GMT
+server: uvicorn
+content-length: 71
+content-type: application/json
+
+{"prediction":0.8191608756158957,"model_version":"hw4-factor-score-v1"}
+
+## Terminal 2: invalid request (numeric string, raw value > 1, missing field) -> 422
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{"rank_operating_roa": 0.97, "rank_fcf_to_assets": "0.96", "rank_drawdown_252": 0.77, "rank_momentum_252_21": 1.5}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 04:53:15 GMT
+server: uvicorn
+content-length: 300
+content-type: application/json
+
+{"detail":[{"loc":["body","rank_fcf_to_assets"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","rank_momentum_252_21"],"msg":"Input should be less than or equal to 1","type":"less_than_equal"},{"loc":["body","rank_volatility_63"],"msg":"Field required","type":"missing"}]}
+
+## Terminal 2: non-finite value -> 422
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{"rank_operating_roa": NaN, "rank_fcf_to_assets": 0.96, "rank_drawdown_252": 0.77, "rank_momentum_252_21": 0.71, "rank_volatility_63": 0.33}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 04:53:15 GMT
+server: uvicorn
+content-length: 113
+content-type: application/json
+
+{"detail":[{"loc":["body","rank_operating_roa"],"msg":"Input should be a finite number","type":"finite_number"}]}
+
+## Terminal 2: real localhost HTTP latency
+
+$ .venv/bin/python measure_latency.py
+Real HTTP to http://127.0.0.1:8000/predict, 200 requests after 5 warm-up, client on arm64 Darwin: median 2.18 ms, p95 3.76 ms
+
+## Terminal 1: stop the container (Ctrl+C) and start the same image again
+
+INFO:     172.17.0.1:64270 - "POST /predict HTTP/1.1" 200 OK
+^CINFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+
+$ make run
+docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Loaded hw4-factor-score-v1 from factor_score.joblib
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+## Terminal 2: after the restart, the model is still available
+
+$ curl -i http://127.0.0.1:8000/health
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 04:53:41 GMT
+server: uvicorn
+content-length: 53
+content-type: application/json
+
+{"status":"ok","model_version":"hw4-factor-score-v1"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 04:53:41 GMT
+server: uvicorn
+content-length: 71
+content-type: application/json
+
+{"prediction":0.8191608756158957,"model_version":"hw4-factor-score-v1"}

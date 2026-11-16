@@ -1,0 +1,43 @@
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+6 files already formatted
+
+$ python -m pytest -v
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.2.0, pluggy-1.7.0 -- ./.venv/bin/python
+rootdir: .
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 18 items
+
+tests/test_app.py::test_predict_valid_input PASSED                       [  5%]
+tests/test_app.py::test_predict_feature_order_does_not_matter PASSED     [ 11%]
+tests/test_app.py::test_predict_accepts_rank_bounds PASSED               [ 16%]
+tests/test_app.py::test_predict_invalid_input[missing field (only 4 features)] PASSED [ 22%]
+tests/test_app.py::test_predict_invalid_input[empty body] PASSED         [ 27%]
+tests/test_app.py::test_predict_invalid_input[extra field (6 features)] PASSED [ 33%]
+tests/test_app.py::test_predict_invalid_input[misspelled field] PASSED   [ 38%]
+tests/test_app.py::test_predict_invalid_input[numeric string] PASSED     [ 44%]
+tests/test_app.py::test_predict_invalid_input[boolean] PASSED            [ 50%]
+tests/test_app.py::test_predict_invalid_input[null] PASSED               [ 55%]
+tests/test_app.py::test_predict_invalid_input[list instead of number] PASSED [ 61%]
+tests/test_app.py::test_predict_invalid_input[below 0] PASSED            [ 66%]
+tests/test_app.py::test_predict_invalid_input[above 1 (raw value, not a rank)] PASSED [ 72%]
+tests/test_app.py::test_predict_invalid_input[feature list instead of named fields] PASSED [ 77%]
+tests/test_app.py::test_valid_request_reaches_model_once PASSED          [ 83%]
+tests/test_app.py::test_predict_model_failure PASSED                     [ 88%]
+tests/test_app.py::test_predict_non_finite_model_output_is_500 PASSED    [ 94%]
+tests/test_app.py::test_predict_performance 
+Latency (in-process TestClient, 50 requests after 5 warm-up, arm64 Darwin, Python 3.12.9): median 1.08 ms, p95 1.23 ms
+PASSED                       [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  ./.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 18 passed, 1 warning in 2.76s =========================
