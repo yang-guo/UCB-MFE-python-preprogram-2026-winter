@@ -1,0 +1,72 @@
+# HW5 container demo  2026-11-16 17:21:35 UTC  host: Darwin arm64, Docker 29.5.2
+
+$ docker image ls mfe-hw5:local --format '{{.Repository}}:{{.Tag}} {{.ID}} {{.Size}}'
+mfe-hw5:local e925395004da 740MB
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+3b75c070f7186974b25860e8494b78b82d901ad95fc2dbaa07f462a6049ec390
+
+## 1. Valid request (example_request.json = HW4 top pick UPBD on 2026-09-25; HW4 recorded score 0.05188995)
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 17:21:36 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 7379c4fd44df
+
+{"prediction":0.05188994925314643,"model_version":"hw4-ridge-rank-2026-07-02"}
+## 2. Invalid request: numeric string + out-of-range rank + extra field -> 422, model never called
+$ jq -c '.mom_5 = "0.1" | .vol_63 = 3.2 | .surprise = 1' example_request.json > /tmp/hw5_invalid.json
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @/tmp/hw5_invalid.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 17:21:36 GMT
+server: uvicorn
+content-length: 289
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","mom_5"],"msg":"Input should be a valid number"},{"type":"less_than_equal","loc":["body","vol_63"],"msg":"Input should be less than or equal to 0.5"},{"type":"extra_forbidden","loc":["body","surprise"],"msg":"Extra inputs are not permitted"}]}
+## 3. Invalid request: NaN feature -> 422
+$ sed 's/-0.3989417850971222/NaN/' example_request.json > /tmp/hw5_nan.json
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @/tmp/hw5_nan.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 17:21:36 GMT
+server: uvicorn
+content-length: 100
+content-type: application/json
+
+{"detail":[{"type":"finite_number","loc":["body","mom_5"],"msg":"Input should be a finite number"}]}
+## 4. Stop the container, start the same image again, repeat the valid request
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker ps --filter name=mfe-hw5 --format '{{.Names}}' | grep -c mfe-hw5 || true
+0
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+124e6f441849c07559421b00319a0a1208eb1b324f7f0439dface32db705ed05
+
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-ridge-rank-2026-07-02"}
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 17:21:38 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 10a6bcc5e2c6
+
+{"prediction":0.05188994925314643,"model_version":"hw4-ridge-rank-2026-07-02"}
+## 5. Server log (startup shows the artifact loaded once)
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     loaded model hw4-ridge-rank-2026-07-02
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:35958 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:35964 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:35970 - "POST /predict HTTP/1.1" 200 OK
+

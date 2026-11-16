@@ -1,0 +1,1 @@
+real HTTP http://127.0.0.1:8000/predict, 200 requests after 10 warm-up, client arm64 Darwin: median 3.10 ms, p95 3.43 ms, max 25.55 ms
