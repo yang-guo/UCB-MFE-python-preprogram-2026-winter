@@ -1,0 +1,36 @@
+Local Uvicorn smoke test on macOS
+
+$ python -m uvicorn app:app --host 127.0.0.1 --port 8015
+Uvicorn PID 46192
+$ curl -sS -i http://127.0.0.1:8015/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 13 Nov 2026 15:04:52 GMT
+server: uvicorn
+content-length: 70
+content-type: application/json
+
+{"prediction":0.13136749485372498,"model_version":"hw4-rf-2016-04-01"}
+
+$ curl -sS -i http://127.0.0.1:8015/predict -H 'Content-Type: application/json' --data '{"momentum_21":"0.10","momentum_63":-0.5442116104449177,"momentum_126":-0.45062814332876056,"momentum_252":-0.12481174951581664,"volatility_21":0.05401565819160599,"volatility_63":0.05300661412534183,"ma_ratio_50":-0.30723530490840045,"ma_ratio_200":-0.46213915093970026}'
+HTTP/1.1 422 Unprocessable Entity
+date: Fri, 13 Nov 2026 15:04:52 GMT
+server: uvicorn
+content-length: 102
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+Uvicorn stopped.
+
+$ python -m uvicorn app:app --host 127.0.0.1 --port 8015
+Uvicorn PID 46195
+$ curl -sS -i http://127.0.0.1:8015/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 13 Nov 2026 15:04:53 GMT
+server: uvicorn
+content-length: 70
+content-type: application/json
+
+{"prediction":0.13136749485372498,"model_version":"hw4-rf-2016-04-01"}
+
+Uvicorn stopped.
