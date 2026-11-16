@@ -1,0 +1,67 @@
+{
+  "configuration": {
+    "selection": "Sterling: 'Okay, let's proceed with the fixed model.' Interpreted as report22 F00_fixed with ordinary filing timing.",
+    "selected_candidate": "fitting_policy/F00_fixed",
+    "model": "Ridge",
+    "alpha": 1000.0,
+    "features": [
+      "rank_momentum_21",
+      "rank_momentum_63",
+      "rank_momentum_252_21",
+      "rank_volatility_63",
+      "rank_drawdown_252",
+      "rank_momentum_126_21",
+      "rank_operating_roa",
+      "rank_fcf_to_assets"
+    ],
+    "fitted_asof": "2012-12-31",
+    "training_start": "2010-01-01",
+    "actual_first_training_signal": "2010-01-29",
+    "actual_last_training_signal": "2012-08-31",
+    "actual_last_training_label": "2012-12-03",
+    "training_rows": 51633,
+    "update_policy": "Retain the exact pre-2013 coefficients and preprocessing. Refresh inputs and forecasts monthly; no full-development refit, annual replacement or averaging.",
+    "preprocessing": "Training median with missing indicators, training standardization; no clipping of rank inputs; training targets clipped at training1st/99th percentiles only.",
+    "training_target_bounds": [
+      -0.4031988570693822,
+      0.5961605695578936
+    ],
+    "financial_policy": "Valid quarterly filing+1 calendar day; no extra delay; fiscal age over550 days makes ratios missing. No future backfill.",
+    "trading_rules": {
+      "initial_cash": 1000000.0,
+      "holding_days": 90,
+      "top_n": 20,
+      "cohort_fraction": 1.0,
+      "name_cap": 0.05,
+      "fee_bps": 5.0,
+      "max_stale_sessions": 5,
+      "annual_rf": 0.02
+    },
+    "sector_entry_cap": 0.2,
+    "entry_policy": "Monthly top20, next-session close; use prior-close cash/exposures. Maturity proceeds await next monthly entry.",
+    "holding_policy": "Each lot90 calendar days; first market session on/after maturity. Open lots valued at endpoint.",
+    "cap_scope": "5% recorded-symbol and20% supplied-sector limits at entry; market drift allowed. Static sectors and incomplete issuer mapping remain limitations.",
+    "intended_evaluation_start": "2016-04-01",
+    "intended_evaluation_end": "2026-09-30",
+    "benchmark": "Supplied ^SP500TR; $1m from first evaluation close to the same endpoint.",
+    "evaluated_in_this_preparation": "2013\u20132015 saved-forecast reproduction only; no post-2015 prediction or backtest.",
+    "evaluation_accounting": "Reuse previously documented price/event accounting without overwriting archives; any newly encountered data gap must be investigated, never given an invented exit.",
+    "historical_context": "Earlier different models were evaluated over the final period; preserve that history. This selected model has not received a new final-period account in this preparation.",
+    "source_sha256": {
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Lectures\\modeling\\data\\equities_top2000.duckdb": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\artifacts\\model.joblib": "871a7aafff5ee56e029698b1b7179ded24e18347615051f6ddb9845f179cce4d",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\hw4\\modeling.py": "0746d2d47e3059b1de2267593b548edce564be01101dd1e494e3043c4d75adbf",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\hw4\\preprocessing.py": "4c20ea09e951b8ebac8d6e753ca300eb647d39e3d25a64813c683c4a429ef82c",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\hw4\\engine.py": "6147afb93465eab28f3ba3464795b402d221d02627398dacd51919d92f25d4fc",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\hw4\\data.py": "e577e2e8fdabb19c35366a7dab99c27309cc3e39294473225e276ff5668bbed8",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\cap_sensitivity_engine.py": "3cc5ff3dbc1f011c34aa922a868fd5f377126aedcaeebe84f361ee11f75f15ee",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\cap_sensitivity_allocation.py": "d1fd7e5c9cc45c40245b25dc72a708f91be14d73e01bcbb2307690f04929f12b",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\development_revision.py": "bfbc2bfdc097545aff1699c9c9ce13ff9a053574d862d7c4691090c45140277e",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\data_review\\development_price_repairs.json": "4e9c3af47410b257285e71aee97d3dc205a98f3bcbc7886f40d6c26453ff9d09",
+      "C:\\Users\\scouts.admin\\Documents\\UCB-MFE-python-preprogram-2026-winter\\Homeworks\\HW4\\Sterling_Couts\\outputs\\sector_caps\\continuous_2013_2015\\shared_forecasts.csv": "4279918b29b2a51ba35237819e5ee841ec488f574e871a96356478bbecb79ff8"
+    },
+    "archived_forecasts_sha256": "a00c0efa0bf99b058e4feadfafa9c65177e79a6f99ce6c3902ee2ce3c67bef80"
+  },
+  "sha256": "f314354b06528ff14b8f2128f04d651d0805449bc7049d759f95d62f2dceb62d",
+  "selected_at_utc": "2026-11-15T22:03:07.119816+00:00"
+}

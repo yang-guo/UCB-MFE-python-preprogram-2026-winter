@@ -1,0 +1,57 @@
+{
+  "policy_sha256": "f314354b06528ff14b8f2128f04d651d0805449bc7049d759f95d62f2dceb62d",
+  "model_sha256": "84e526d287926f77a4ef478a9923a39e49638ba112adb7ca43d6fa0ccfa1693a",
+  "predictions_sha256": "a103743d960d6ae78bb091bbaaa8f8d431258c5860da138611bf9e66ee603079",
+  "source_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "files": {
+    "run_fixed_anchor_final.py": "7d07919c5bd6146eef1bc09b7bd6aa7d1bbeede854b94d90bb5ba4ab5ac85530",
+    "fixed_anchor_inputs.py": "e9cba3b00a42eeaad5b3c20ddba638891a69af0c162814dd7bc481aafef069d2",
+    "rank_event_accounting.py": "47b6df728480859cbe565048511f683c8cb67d674b72b34de7c507d1acabf5d1",
+    "rank_final_inputs.py": "4a99833b484ded057c2e7acdbd698b14a5e973295e18ed9551f73c11de1da913",
+    "rank_accounting_prices.py": "a58453a9ec68d83da261d24ac61eac3ac00aa9fc92be8164471df23c5624be0d",
+    "run_rank_final.py": "8216dcdc69f983c227bfa4b11ab88e5ae4e0455fb356eb1e54bb404f559bf131",
+    "verify_rank_final.py": "32a0d8099198df4763adf80090427f3c47807881c7dd0bc1baff53db56720595",
+    "research_events/events.json": "63bc95dcc1a7084901cd12778fad106b9dd57dcfaa48ca60faa87a1cb908dbf7",
+    "research_events/rank_model_events.json": "c06377540007033e143ba7b4dfd814f5cf2b6e8392310eca1165f58f64779169",
+    "research_events/supplemental_quotes.csv": "8957863313fb1d7792580b985d380b4919b3a83ad8236082d6f54d65c33d9ab0",
+    "research_events/fixed_anchor_events.json": "5ad8661e97833bca2d9cbf65e4d8ebe179365ca5741c9f8f786d35016bf2b98b",
+    "research_events/fixed_anchor_price_repairs.json": "2fc6d97df36fa95cfecb02da2f32befc209169693d7d22995f41c736eb0c11f9",
+    "research_events/fixed_anchor_supplemental_quotes.csv": "03a1056c2a2137a76ef349c0650c40a4947b8e5e17d4e750e4cd02edcfd71b6f",
+    "research_events/fixed_anchor_CVSA_evidence.json": "7f4e7f06ad08431330e5c93a82b45880c46009a01373253d60f11ff52fa798df",
+    "research_events/fixed_anchor_CVNA_evidence.json": "99101ab3f1a4df1e9f13685db306b944927613a552287c9aecbac8e647052260",
+    "research_events/price_unit_evidence/COKE.json": "c3718629115d84317c98c1402bae8cd71469d3639eaa7f94bfd20945a40b4311",
+    "research_events/price_unit_evidence/TPL.json": "cd37049c309ba2357671e7b34f9e69df3c23afc3e3d4dacf1587d6cd8510c02f",
+    "research_events/price_unit_evidence/BKNG.json": "1b7e654276f98e71c51ef4f24be32f32e809fa10dbaad007c698bc0d2300d559",
+    "research_events/price_unit_evidence/REZI.json": "87083eea5880d90e7988f47d1237af59c97ff33fc507c4121b9e68c77c11fd49"
+  },
+  "sector_proxies": [
+    {
+      "symbol": "AG",
+      "sector": "Basic Materials",
+      "origin": "GATO",
+      "policy": "Inherited-holding sector proxy only; successor is not added to entry universe."
+    }
+  ],
+  "quote_supplements": [
+    {
+      "file": "supplemental_quotes.csv",
+      "symbol": "AG",
+      "rows": 81,
+      "first": "2025-01-02",
+      "last": "2025-04-30"
+    },
+    {
+      "file": "supplemental_quotes.csv",
+      "symbol": "RNA",
+      "rows": 59,
+      "first": "2024-10-10",
+      "last": "2025-01-03"
+    }
+  ],
+  "additional_sector_proxy": "CVSA inherits ATGE sector for inherited holdings only",
+  "additional_quote_scope": "CVSA: February 23 through April 2, 2026; original maturity retained",
+  "settlement_sessions": 2,
+  "new_fits": 0,
+  "model_or_trading_rule_changes": 0,
+  "evaluation_scope": "Retrospective evaluation of the selected fixed strategy; not a pristine independent holdout."
+}

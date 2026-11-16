@@ -1,0 +1,20 @@
+[
+  {
+    "case_id":"CBIO_2018Q1_wrong_issuer_financials",
+    "symbol":"CBIO", "fiscal_date":"2018-03-31",
+    "price_issuer_cik":1124105,
+    "financial_issuer_cik":1253689,
+    "financial_issuer_at_date":"GlycoMimetics, Inc.",
+    "historical_financial_ticker":"GLYC",
+    "expected_filing_date":"2018-05-03",
+    "expected_operating_income":-11876548,
+    "expected_total_assets":247420814,
+    "action":"Quarantine this ticker-date financial join; use an independently verified Catalyst statement only after price/security identity resolution. Do not relabel all CBIO history.",
+    "evidence":[
+      "https://www.sec.gov/Archives/edgar/data/1253689/000155837018003836/glyc-20180331x10q.htm",
+      "https://www.sec.gov/Archives/edgar/data/1253689/000155837018003836/R2.htm",
+      "https://www.sec.gov/Archives/edgar/data/1253689/000155837018003836/R4.htm",
+      "https://www.sec.gov/Archives/edgar/data/1253689/000110465925060714/tm2518203d1_ex99-1.htm"
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "scope": "Additional verified accounting events encountered by the frozen monthly rank model. No forecast, fit, selection rule or raw database changes.",
+  "researched_on": "2026-11-15",
+  "settlement_policy": "Same previously declared two supplied-session cash receivable convention; replacement exposures preserve original lot maturity.",
+  "events": [
+    {
+      "id": "LLTC_20170310", "kind": "cash_stock_merger", "old": "LLTC", "new": "ADI",
+      "date": "2017-03-10", "basis_date": "2017-03-10", "cash_per_share": 46.0, "share_ratio": 0.2321,
+      "source": "https://www.sec.gov/Archives/edgar/data/791907/000119312517078946/d340243d8k.htm",
+      "note": "Completed March 10; SEC filing explicitly states suspension after that day's close and $46 plus 0.2321 ADI shares per actual LLTC share. Course raw/adjusted LLTC close both 65; ADI raw 82.20 and adjusted 69.53."
+    },
+    {
+      "id": "TASR_20170406", "kind": "rename", "old": "TASR", "new": "AXON",
+      "date": "2017-04-06", "basis_date": "2017-04-05", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://www.miaxglobal.com/alerts/2017/04/06/miax-corporate-action-alert-taser-international-inc-tasr-will-change-its-name-and",
+      "ticker_chain_evidence": "https://investor.axon.com/2021-01-25-Axon-Enterprise-To-Change-Nasdaq-Symbol-to-AXON",
+      "note": "Actual 2017 successor ticker was AAXN; it became AXON January 26, 2021. Course stores that continuing historical series as AXON and has no AAXN. Use course label for accounting only. Both raw/adjusted histories equal 21.90 on April 5, 2017."
+    },
+    {
+      "id": "MXIM_20210826", "kind": "stock_merger", "old": "MXIM", "new": "ADI",
+      "date": "2021-08-26", "basis_date": "2021-08-25", "cash_per_share": 0.0, "share_ratio": 0.63,
+      "source": "https://www.sec.gov/Archives/edgar/data/6281/000000628121000294/adi-20211030.htm",
+      "note": "Acquisition completed August 26; 0.6300 ADI shares per Maxim share. Fractional exposure retained under the existing adjusted-unit convention."
+    },
+    {
+      "id": "BRKS_20211201", "kind": "rename", "old": "BRKS", "new": "AZTA",
+      "date": "2021-12-01", "basis_date": "2021-11-30", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/933974/000155837021016418/brks-20211201x8k.htm",
+      "note": "Corporate name/ticker change effective at December 1 open. Raw common-date price is 113.10; adjusted scales differ slightly, so convert using the existing common-date adjusted-unit rule."
+    },
+    {
+      "id": "MCFE_20220301", "kind": "cash_merger", "old": "MCFE",
+      "date": "2022-03-01", "basis_date": "2022-02-28", "cash_per_share": 26.0,
+      "source": "https://www.mcafee.com/en-us/newsroom/press-releases/press-release.html?csrc=vanity&news_id=246b0dad-b4ee-442b-bd1a-22be31392038",
+      "note": "Issuer confirms completion March 1 and $26 per share. Last course raw and adjusted closes both 25.99."
+    },
+    {
+      "id": "CDEV_20220902", "kind": "rename", "old": "CDEV", "new": "PR",
+      "date": "2022-09-02", "basis_date": "2022-09-01", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://www.miaxglobal.com/alert/2022/09/01/miax-exchange-group-options-markets-centennial-resource-development-inc-1",
+      "context_evidence": "https://www.sec.gov/Archives/edgar/data/1658566/000165856622000123/cdev-20220930.htm",
+      "note": "Centennial's continuing shares changed name/ticker following its Colgate combination. September 2 first PR trading date. Both raw prices 7.62 at September 1; adjusted scales differ (7.62 versus 7.09)."
+    },
+    {
+      "id": "SOVO_20240312", "kind": "cash_merger", "old": "SOVO",
+      "date": "2024-03-12", "basis_date": "2024-03-11", "cash_per_share": 23.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/1856608/000110465924033282/tm248409d1_8k.htm",
+      "note": "SEC states $23 cash conversion effective March 12 at 8:05am. Use prior session basis; vendor March 12 row does not establish continued trading."
+    },
+    {
+      "id": "HIBB_20240725", "kind": "cash_merger", "old": "HIBB",
+      "date": "2024-07-25", "basis_date": "2024-07-24", "cash_per_share": 87.5,
+      "source": "https://www.sec.gov/Archives/edgar/data/1017480/000114036124034113/ef20032973_form8k.htm",
+      "note": "Completed July 25 for $87.50 cash per share. Prior-session basis avoids relying on vendor completion-day trading."
+    },
+    {
+      "id": "CSWI_20250609", "kind": "rename", "old": "CSWI", "new": "CSW",
+      "date": "2025-06-09", "basis_date": "2025-06-06", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://cswindustrials.gcs-web.com/news-releases/news-release-details/csw-industrials-announces-commencement-trading-new-york-stock",
+      "note": "Issuer announces commencement of NYSE trading as CSW June 9, 2025. Both common-date raw/adjusted prices are 305.10 on June 6."
+    },
+    {
+      "id": "EA_20260804", "kind": "cash_merger", "old": "EA",
+      "date": "2026-08-04", "basis_date": "2026-08-04", "cash_per_share": 210.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/712515/000114036126031157/ef20079099_8k.htm",
+      "timing_evidence": "https://www.sec.gov/Archives/edgar/data/712515/000162828026051829/ea-20260630.htm",
+      "note": "Completed August 4; $210 cash per share. Announced expected closing at end of trading. Final course raw and adjusted closes both 209.70."
+    }
+  ]
+}

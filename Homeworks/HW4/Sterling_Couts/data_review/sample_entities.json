@@ -1,0 +1,8 @@
+[
+  {"cik":320193,"symbols":["AAPL"],"purpose":"52/53-week fiscal calendar and missing currency control","tag_overrides":{"operating_cash_flow":"NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"},"tag_note":"Apple's reviewed filings use this tag for their operating cash-flow statement; do not substitute continuing-operations cash flow for total cash flow across other issuers.","evidence":"https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"},
+  {"cik":1162194,"symbols":["FLDM","LAB"],"purpose":"Confirmed common-security aliases and cash-flow definitions","evidence":"https://www.sec.gov/Archives/edgar/data/1162194/000119312522096290/d314141d8k.htm"},
+  {"cik":1124105,"symbols":["GYRE"],"purpose":"Historical Catalyst filings; CBIO is a reused ticker, not a timeless mapping","evidence":"https://www.sec.gov/Archives/edgar/data/1124105/000156459019006879/cbio-10k_20181231.htm"},
+  {"cik":1599298,"symbols":["SMMT"],"purpose":"Historical GBP/IFRS reporting; do not substitute the later US issuer automatically","evidence":"https://www.sec.gov/Archives/edgar/data/1599298/000119312515177388/d917125d20f.htm"},
+  {"cik":1666138,"symbols":["ATKR"],"purpose":"Pre-IPO comparatives, zero/negative filing lags and fiscal-week conventions","evidence":"https://www.sec.gov/Archives/edgar/data/1666138/000119312516607115/d137452ds1a.htm"},
+  {"cik":1675149,"symbols":["AA"],"purpose":"Carve-out financial history must not be confused with predecessor Alcoa Inc.","evidence":"https://www.sec.gov/Archives/edgar/data/1675149/000119312516708643/d185703dex991.htm"}
+]

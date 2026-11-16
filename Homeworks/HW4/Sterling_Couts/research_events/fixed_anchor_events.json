@@ -1,0 +1,26 @@
+{
+  "scope": "Verified accounting additions for the selected fixed model; no universe expansion, fit, trading-rule change or raw database mutation.",
+  "events": [
+    {
+      "id": "LPI_20230109", "kind": "rename", "old": "LPI", "new": "VTLE",
+      "date": "2023-01-09", "basis_date": "2023-01-06", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/1528129/000152812923000010/lpi-20230108.htm",
+      "timing_evidence": "https://infomemo.theocc.com/infomemos?number=51736",
+      "note": "Issuer filing and OCC confirm January 9 name/ticker change. The course supplies the successor history. January 6 raw/adjusted closes agree at approximately 48.09. Original lot maturity is preserved."
+    },
+    {
+      "id": "ATGE_20260224", "kind": "rename", "old": "ATGE", "new": "CVSA",
+      "date": "2026-02-24", "basis_date": "2026-02-23", "cash_per_share": 0.0, "share_ratio": 1.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/730464/000110465926011611/atge-20260205x8k.htm",
+      "issuer_source": "https://www.covista.com/news-insights/press-releases/adtalem-global-education-becomes-covista",
+      "note": "Name/ticker change; company stock trades as CVSA from February 24. Course ATGE raw/adjusted last close is 98.54; saved Yahoo successor common-date quote is 98.54000091552734. Supplemental observations end at the original lot's April 2 maturity. CVSA is not added to the purchase universe; sector inherits ATGE for this holding only."
+    }
+    ,{
+      "id": "SLNO_20260518", "kind": "cash_merger", "old": "SLNO",
+      "date": "2026-05-18", "basis_date": "2026-05-15", "cash_per_share": 53.0,
+      "source": "https://www.sec.gov/Archives/edgar/data/914475/000119312526228013/d94926d8k.htm",
+      "timing_evidence": "https://www.nasdaqtrader.com/TraderNews.aspx?id=ECA2026-322",
+      "note": "Neurocrine completed the cash acquisition on May 18 for $53 per share. Nasdaq confirms the stock stayed halted on closing day. Use the May 15 basis; do not treat the vendor's repeated May 18 value as a market fill. Existing two-session cash-receivable convention applies."
+    }
+  ]
+}

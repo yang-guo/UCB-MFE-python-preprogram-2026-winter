@@ -1,0 +1,11 @@
+experiment,change,total_return,max_drawdown,Sharpe,evidence,variant
+One momentum input,Original simple linear baseline,0.3595935802740713,-0.3014417532533004,0.5119141974835374,results/predictor_foundations/experiments.csv,F0_original
+Price ranks,"Multiple price/risk ranks, quarterly updates",0.4437191371318401,-0.2300374428690752,0.670250707633068,results/signal_research/experiments.csv,S12_price_ranks
++ profitability,Add operating ROA and cash-flow/assets to price ranks,0.5326612888864362,-0.1683921127994786,0.8871607708756327,results/signal_research/experiments.csv,S13_quality_ranks
+Fixed eight-rank Ridge,Include six-month momentum; fixed pre-2013 fit,0.6285473406454776,-0.1578464312375398,1.0627126174448376,results/rank_model_stability/experiments.csv,V00_fixed_replay
+Full available cash,Increase monthly deployment budget; no sector cap,0.7903938787772127,-0.1827171014079871,1.1155410701824493,results/rank_model_stability/experiments.csv,W04_budget_full
++ 20% sector limit,Keep 5% stock cap; limit sector entry exposure,0.8368253628117603,-0.1498226206099744,1.2765851237361885,results/rank_model_stability/experiments.csv,W10_full_sector20
+Fresh reinvestment signals,Extra next-session entries with newly computed forecasts,0.8796089943374152,-0.1761120537402944,1.2099069252341526,results/refreshed_signals/experiments.csv,Q01_fresh
+Annual replacement,Same monthly allocation; replace the fitted model yearly,0.6308295739146361,-0.1657991096510657,0.9910317325504764,results/fitting_policy/experiments.csv,F01_annual
+50/50 forecast average,Same monthly allocation; average original and annual fit,0.832993489880981,-0.1552421513180921,1.2699982359615358,results/fitting_policy/experiments.csv,F02_half_blend
+Selected fixed monthly model,Retain original fit and 5%/20% monthly allocation,0.8368253628117603,-0.1498226206099744,1.2765851237361885,results/fitting_policy/experiments.csv,F00_fixed

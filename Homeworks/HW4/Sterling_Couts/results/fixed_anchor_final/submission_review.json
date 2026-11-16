@@ -1,0 +1,19 @@
+{
+  "full_suite_passed": 170,
+  "isolated_submission_suite_passed": 170,
+  "isolated_suite_seconds": 19.79,
+  "report_code_cells": 4,
+  "report_errors": 0,
+  "chart_visually_reviewed": true,
+  "raw_database_and_archived_models_unchanged": true,
+  "proposed_files": 156,
+  "proposed_bytes": 2603338,
+  "no_ignored_files_in_manifest": true,
+  "no_databases_or_cache_files_in_manifest": true,
+  "staged": false,
+  "committed": false,
+  "pushed": false,
+  "submitted": false,
+  "scope": "Submission-summary focus verified; earlier working documents retained locally. Vendor limitations remain disclosed.",
+  "isolated_copy_payload_files": 153
+}

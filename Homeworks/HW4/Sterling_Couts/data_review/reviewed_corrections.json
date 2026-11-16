@@ -1,0 +1,30 @@
+[
+  {
+    "symbol":"AAPL", "fiscal_date":"2012-09-29",
+    "expected_vendor":{"operating_income":10030000000,"filing_date":"2012-10-31"},
+    "expected_reference":{"operating_income":10944000000,"filing_date":"2012-10-31"},
+    "reason":"Original-vintage annual operating income 55,241m less then-available nine-month income 44,297m gives Q4 income 10,944m. The vendor's 10,030m is not substituted into this filing vintage. Cause of vendor difference is not established.",
+    "evidence":["https://www.sec.gov/Archives/edgar/data/320193/000119312512444068/d411355d10k.htm","https://www.sec.gov/Archives/edgar/data/320193/000119312512314552/0001193125-12-314552-index.htm"]
+  },
+  {
+    "symbol":"AAPL", "fiscal_date":"2015-09-26",
+    "expected_vendor":{"total_assets":290345000000,"filing_date":"2015-10-28"},
+    "expected_reference":{"total_assets":290479000000,"filing_date":"2015-10-28"},
+    "reason":"Use assets disclosed in the original 2015 10-K, not the vendor's different latest historical amount. This is a vintage correction; it does not establish that every later restated amount is erroneous.",
+    "evidence":["https://www.sec.gov/Archives/edgar/data/320193/000119312515356351/d17062d10k.htm"]
+  },
+  {
+    "symbol":"LAB", "fiscal_date":"2013-12-31",
+    "expected_vendor":{"operating_income":-3941000,"filing_date":"2014-03-12"},
+    "expected_reference":{"operating_income":-4644000,"filing_date":"2014-03-12"},
+    "reason":"Historical Fluidigm operating loss: full year -18,653k less nine months -14,009k equals Q4 -4,644k. Independent later issuer comparative table corroborates the arithmetic; only the original filed facts establish availability.",
+    "evidence":["https://data.sec.gov/api/xbrl/companyfacts/CIK0001162194.json","https://www.sec.gov/Archives/edgar/data/1162194/000116219415000011/exhibit991-q4andfullyear20.htm"]
+  },
+  {
+    "symbol":"LAB", "fiscal_date":"2014-03-31",
+    "expected_vendor":{"filing_date":"2014-09-15","operating_income":-16579000,"total_assets":424723000},
+    "expected_reference":{"filing_date":"2014-05-12","operating_income":-16579000,"total_assets":424723000},
+    "reason":"Original Fluidigm Q1 filing and SEC facts support May 12, not the vendor's September 15 date. The separate reference becomes usable May 13 under the course convention.",
+    "evidence":["https://www.sec.gov/Archives/edgar/data/1162194/000116219414000016/q12014form10-q.htm"]
+  }
+]

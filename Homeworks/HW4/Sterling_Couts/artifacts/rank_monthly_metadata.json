@@ -1,0 +1,66 @@
+{
+  "fit_date": "2016-03-31",
+  "training_rows": 121181,
+  "first_training_signal": "2010-01-29",
+  "last_training_signal": "2015-11-30",
+  "last_training_label": "2016-02-29",
+  "candidate_predictions": 224129,
+  "unknown_future_targets_retained": 4850,
+  "first_prediction": "2016-03-31",
+  "last_prediction": "2026-08-31",
+  "alpha": 1000.0,
+  "features": [
+    "rank_momentum_21",
+    "rank_momentum_63",
+    "rank_momentum_252_21",
+    "rank_volatility_63",
+    "rank_drawdown_252",
+    "rank_momentum_126_21",
+    "rank_operating_roa",
+    "rank_fcf_to_assets"
+  ],
+  "refits": 0,
+  "policy_sha256": "6ddd563c5b1ed91ecac311afd1426477804faf7d6902250eb8f59a088889af00",
+  "artifact_sha256": "8307ee85958e3afefa1d6ab0eab302049c26b7331511ed7089cf327503f7099a",
+  "predictions_sha256": "6b554656743570675cb8cf2171e74f73a90481bc8a7df6e2f06a5384a9344c87",
+  "sklearn_version": "1.8.0",
+  "reload_predictions_exact": true,
+  "development_account_replay": true,
+  "development_feature_parity": true,
+  "rebases": [
+    {
+      "symbol": "FBC",
+      "anchor": "2015-12-31",
+      "factor": 1.0,
+      "future_quotes_unchanged": true,
+      "reviewed_returns_preserved": true
+    },
+    {
+      "symbol": "LCI",
+      "anchor": "2015-12-31",
+      "factor": 16.0,
+      "future_quotes_unchanged": true,
+      "reviewed_returns_preserved": true
+    },
+    {
+      "symbol": "LVLT",
+      "anchor": "2015-12-31",
+      "factor": 1.0,
+      "future_quotes_unchanged": true,
+      "reviewed_returns_preserved": true
+    }
+  ],
+  "coefficients": [
+    -0.0021886768780671113,
+    0.000407460974957089,
+    0.005501409906151129,
+    -0.00024010041852339087,
+    0.002404361115917686,
+    -0.004898757619488957,
+    0.0032541787055478345,
+    0.002307427390309666,
+    -0.001145987020531399,
+    0.0007813344115644546
+  ],
+  "intercept": 0.03383996947908294
+}

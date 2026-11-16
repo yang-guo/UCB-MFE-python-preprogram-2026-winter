@@ -1,0 +1,29 @@
+[
+  {
+    "symbol": "SPKE",
+    "seam": "2017-06-19",
+    "divisor": 2.0,
+    "source": "https://www.sec.gov/Archives/edgar/data/1606268/000160626817000065/prstocksplit1.htm",
+    "completion_source": "https://www.sec.gov/Archives/edgar/data/1606268/000160626817000086/a071917form8-k2qdividends.htm",
+    "prior_date": "2017-06-16",
+    "prior_raw_close": 46.8,
+    "seam_raw_close": 23.0,
+    "note": "Issuer confirms two-for-one split distributed June 16. Course June 16 and next-session June 19 adjusted closes equal unadjusted closes, omitting the split. Divide the earlier accounting segment by two; multiply the later feature segment by two. Returns agree under either unit convention. Do not add shares a second time or infer dividends absent from the supplied series.",
+    "original_seam_return": -0.5085470085470085,
+    "normalized_seam_return": -0.017094017094017033
+  },
+  {
+    "symbol": "CVNA",
+    "seam": "2026-05-04",
+    "divisor": 5.0,
+    "source": "https://infomemo.theocc.com/infomemos?number=58924",
+    "actual_split_trading_date": "2026-05-08",
+    "prior_date": "2026-05-01",
+    "prior_raw_close": 382.6,
+    "seam_raw_close": 75.31,
+    "quote_evidence": "research_events/fixed_anchor_CVNA_evidence.json",
+    "note": "The vendor unit seam precedes the actual split date. Seven earlier independent observations match source/5; nine later observations match source within rounding (0.006%). Normalize units at the observed splice, without inventing a May 4 corporate action or double-counting split shares.",
+    "original_seam_return": -0.8031625718766335,
+    "normalized_seam_return": -0.0158128593831679
+  }
+]

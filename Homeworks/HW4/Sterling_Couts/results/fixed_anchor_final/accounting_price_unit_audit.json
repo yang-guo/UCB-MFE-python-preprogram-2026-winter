@@ -1,0 +1,56 @@
+[
+  {
+    "symbol": "COKE",
+    "seam": "2025-05-23",
+    "divisor": 10.0,
+    "actual_split_trading_date": "2025-05-27",
+    "source": "https://investor.cokeconsolidated.com/news-releases/news-release-details/coca-cola-consolidateds-10-1-stock-split-finalized-shares-trade",
+    "provider_url": "https://query1.finance.yahoo.com/v8/finance/chart/COKE?period1=1747267200&period2=1748908800&interval=1d&events=div%2Csplits",
+    "checked_source_rows": 12,
+    "maximum_raw_relative_error": 4.369413597760108e-05,
+    "source_seam_return": -0.8988179501698754,
+    "normalized_seam_return": 0.011820498301245763,
+    "scope": "Derived accounting prices only; frozen predictions unchanged; residual dividend-vintage differences retained."
+  },
+  {
+    "symbol": "TPL",
+    "seam": "2025-11-21",
+    "divisor": 3.0,
+    "actual_split_trading_date": "2025-12-23",
+    "source": "https://www.texaspacific.com/investors/sec-filings/all-sec-filings/content/0001811074-26-000018/tpl-20251231.htm",
+    "provider_url": "https://query1.finance.yahoo.com/v8/finance/chart/TPL?period1=1762992000&period2=1764633600&interval=1d&events=div%2Csplits",
+    "checked_source_rows": 12,
+    "maximum_raw_relative_error": 1.1619816412844486e-05,
+    "source_seam_return": -0.6624337905744941,
+    "normalized_seam_return": 0.012698628276517798,
+    "scope": "Derived accounting prices only; frozen predictions unchanged; residual dividend-vintage differences retained."
+  },
+  {
+    "symbol": "BKNG",
+    "seam": "2026-03-26",
+    "divisor": 25.0,
+    "actual_split_trading_date": "2026-04-06",
+    "source": "https://infomemo.theocc.com/infomemos?number=58460",
+    "provider_url": "https://query1.finance.yahoo.com/v8/finance/chart/BKNG?period1=1773792000&period2=1775520000&interval=1d&events=div%2Csplits",
+    "checked_source_rows": 13,
+    "maximum_raw_relative_error": 2.710576808939713e-05,
+    "source_seam_return": -0.9602265353076515,
+    "normalized_seam_return": -0.005663382691286523,
+    "scope": "Derived accounting prices only; frozen predictions unchanged; residual dividend-vintage differences retained."
+  },
+  {
+    "symbol": "REZI",
+    "seam": "2026-07-29",
+    "divisor": 1.437,
+    "actual_split_trading_date": "2026-08-04",
+    "relative_tolerance": 0.0006,
+    "source": "https://investor.resideo.com/news/news-details/2026/Resideo-Technologies-Completes-Spin-Off-of-ADI-Global-Distribution/default.aspx",
+    "note": "Distribution adjustment, not a legal 1.437-for-1 stock split. Issuer confirms ADIG spin-off completed August 3 (one ADIG share per two REZI). Provider encodes total-return adjustment as 1437:1000 on August 4. Seven pre-seam prices match this factor; later prices differ at most 0.051%. Preserve course adjusted-unit exposure, with no separate ADIG payout or shares added.",
+    "provider_url": "https://query1.finance.yahoo.com/v8/finance/chart/REZI?period1=1784332800&period2=1786665600&interval=1d&events=div%2Csplits",
+    "checked_source_rows": 19,
+    "maximum_raw_relative_error": 0.0005055046178917832,
+    "source_seam_return": -0.3230559345156889,
+    "normalized_seam_return": -0.02723137789904506,
+    "scope": "Derived accounting prices only; frozen predictions unchanged; residual dividend-vintage differences retained."
+  }
+]

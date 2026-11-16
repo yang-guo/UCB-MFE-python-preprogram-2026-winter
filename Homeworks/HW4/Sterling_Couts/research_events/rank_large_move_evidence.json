@@ -1,0 +1,2401 @@
+{
+  "retrieved_at_utc": "2026-11-15T17:33:50.989398+00:00",
+  "observations": [
+    {
+      "symbol": "AAOI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAOI?period1=1518393600&period2=1520121600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-02-21 00:00:00",
+          "close": 34.54999923706055,
+          "adj_close": 34.54999923706055,
+          "symbol": "AAOI"
+        },
+        {
+          "date": "2018-02-22 00:00:00",
+          "close": 27.510000228881836,
+          "adj_close": 27.510000228881836,
+          "symbol": "AAOI"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "AAOI",
+          "date": "2018-02-22 00:00:00",
+          "source_return": -0.2037626397615813,
+          "provider_return": -0.20376263860021038,
+          "difference": -1.1613709161029107e-09,
+          "prior_weight": 0.0012887565947609,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAOI?period1=1518393600&period2=1520121600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "AAON",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAON?period1=1583193600&period2=1584921600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-12 00:00:00",
+          "close": 27.51333236694336,
+          "adj_close": 26.576709747314453,
+          "symbol": "AAON"
+        },
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 34.733333587646484,
+          "adj_close": 33.55091857910156,
+          "symbol": "AAON"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "AAON",
+          "date": "2020-03-13 00:00:00",
+          "source_return": 0.2624859181374388,
+          "provider_return": 0.2624180682295274,
+          "difference": 6.784990791142143e-05,
+          "prior_weight": 0.0432766708918308,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAON?period1=1583193600&period2=1584921600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "ARRY",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/ARRY?period1=1690675200&period2=1692403200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2023-08-08 00:00:00",
+          "close": 17.8799991607666,
+          "adj_close": 17.8799991607666,
+          "symbol": "ARRY"
+        },
+        {
+          "date": "2023-08-09 00:00:00",
+          "close": 22.18000030517578,
+          "adj_close": 22.18000030517578,
+          "symbol": "ARRY"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "ARRY",
+          "date": "2023-08-09 00:00:00",
+          "source_return": 0.2404921700223714,
+          "provider_return": 0.2404922453153413,
+          "difference": -7.529296991437562e-08,
+          "prior_weight": 0.0142779428564766,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/ARRY?period1=1690675200&period2=1692403200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "BIIB",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/BIIB?period1=1603584000&period2=1605744000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-11-03 00:00:00",
+          "close": 247.00999450683594,
+          "adj_close": 247.00999450683594,
+          "symbol": "BIIB"
+        },
+        {
+          "date": "2020-11-04 00:00:00",
+          "close": 355.6300048828125,
+          "adj_close": 355.6300048828125,
+          "symbol": "BIIB"
+        },
+        {
+          "date": "2020-11-06 00:00:00",
+          "close": 328.8999938964844,
+          "adj_close": 328.8999938964844,
+          "symbol": "BIIB"
+        },
+        {
+          "date": "2020-11-09 00:00:00",
+          "close": 236.25999450683594,
+          "adj_close": 236.25999450683594,
+          "symbol": "BIIB"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "BIIB",
+          "date": "2020-11-04 00:00:00",
+          "source_return": 0.4397393311958895,
+          "provider_return": 0.4397393335959552,
+          "difference": -2.4000657017353433e-09,
+          "prior_weight": 0.0193426134606274,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/BIIB?period1=1603584000&period2=1605744000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "BIIB",
+          "date": "2020-11-09 00:00:00",
+          "source_return": -0.2816661620249223,
+          "provider_return": -0.2816661632982739,
+          "difference": 1.2733515908358584e-09,
+          "prior_weight": 0.0248413948956167,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/BIIB?period1=1603584000&period2=1605744000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "BRBR",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/BRBR?period1=1753488000&period2=1755216000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-08-04 00:00:00",
+          "close": 53.63999938964844,
+          "adj_close": 53.63999938964844,
+          "symbol": "BRBR"
+        },
+        {
+          "date": "2025-08-05 00:00:00",
+          "close": 36.18000030517578,
+          "adj_close": 36.18000030517578,
+          "symbol": "BRBR"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "BRBR",
+          "date": "2025-08-05 00:00:00",
+          "source_return": -0.325503355704698,
+          "provider_return": -0.3255033423404946,
+          "difference": -1.3364203410581865e-08,
+          "prior_weight": 0.0302727452881375,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/BRBR?period1=1753488000&period2=1755216000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "CDE",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CDE?period1=1485734400&period2=1747526400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2017-02-08 00:00:00",
+          "close": 12.020000457763672,
+          "adj_close": 12.00651741027832,
+          "symbol": "CDE"
+        },
+        {
+          "date": "2017-02-09 00:00:00",
+          "close": 9.390000343322754,
+          "adj_close": 9.379467964172363,
+          "symbol": "CDE"
+        },
+        {
+          "date": "2025-05-07 00:00:00",
+          "close": 5.730000019073486,
+          "adj_close": 5.723572731018066,
+          "symbol": "CDE"
+        },
+        {
+          "date": "2025-05-08 00:00:00",
+          "close": 6.96999979019165,
+          "adj_close": 6.962181568145752,
+          "symbol": "CDE"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "CDE",
+          "date": "2017-02-09 00:00:00",
+          "source_return": -0.2188019520012556,
+          "provider_return": -0.21880195200125563,
+          "difference": 2.7755575615628914e-17,
+          "prior_weight": 0.0441009873585011,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CDE?period1=1485734400&period2=1747526400&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "CDE",
+          "date": "2025-05-08 00:00:00",
+          "source_return": 0.216404839308711,
+          "provider_return": 0.21640483930871102,
+          "difference": -2.7755575615628914e-17,
+          "prior_weight": 0.0019371479582198,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CDE?period1=1485734400&period2=1747526400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "CDNA",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CDNA?period1=1751846400&period2=1753574400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-07-16 00:00:00",
+          "close": 19.200000762939453,
+          "adj_close": 19.200000762939453,
+          "symbol": "CDNA"
+        },
+        {
+          "date": "2025-07-17 00:00:00",
+          "close": 11.8100004196167,
+          "adj_close": 11.8100004196167,
+          "symbol": "CDNA"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "CDNA",
+          "date": "2025-07-17 00:00:00",
+          "source_return": -0.3848958333333333,
+          "provider_return": -0.3848958359203404,
+          "difference": 2.5870070530231715e-09,
+          "prior_weight": 0.0275231158845061,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CDNA?period1=1751846400&period2=1753574400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "CMPO",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CMPO?period1=1753747200&period2=1755475200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "CMPO",
+          "date": "2025-08-08 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "CORT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CORT?period1=1598140800&period2=1599868800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-09-01 00:00:00",
+          "close": 12.539999961853027,
+          "adj_close": 12.539999961853027,
+          "symbol": "CORT"
+        },
+        {
+          "date": "2020-09-02 00:00:00",
+          "close": 19.8700008392334,
+          "adj_close": 19.8700008392334,
+          "symbol": "CORT"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "CORT",
+          "date": "2020-09-02 00:00:00",
+          "source_return": 0.5845295853269536,
+          "provider_return": 0.5845295773268266,
+          "difference": 8.00012700530317e-09,
+          "prior_weight": 0.0199295984750872,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CORT?period1=1598140800&period2=1599868800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "CVI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/CVI?period1=1583193600&period2=1584921600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-12 00:00:00",
+          "close": 15.239999771118164,
+          "adj_close": 9.489057540893555,
+          "symbol": "CVI"
+        },
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 20.799999237060547,
+          "adj_close": 12.950942039489746,
+          "symbol": "CVI"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "CVI",
+          "date": "2020-03-13 00:00:00",
+          "source_return": 0.3637566137566139,
+          "provider_return": 0.36482911855861677,
+          "difference": -0.0010725048020028827,
+          "prior_weight": 0.0164971274091885,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/CVI?period1=1583193600&period2=1584921600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "ELF",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/ELF?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 11.710000038146973,
+          "adj_close": 11.710000038146973,
+          "symbol": "ELF"
+        },
+        {
+          "date": "2020-03-16 00:00:00",
+          "close": 9.220000267028809,
+          "adj_close": 9.220000267028809,
+          "symbol": "ELF"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "ELF",
+          "date": "2020-03-16 00:00:00",
+          "source_return": -0.2126387702818104,
+          "provider_return": -0.2126387500432655,
+          "difference": -2.0238544923278923e-08,
+          "prior_weight": 0.0042210514898828,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/ELF?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "EMKR",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/EMKR?period1=1643587200&period2=1645315200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "EMKR",
+          "date": "2022-02-10 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "ENPH",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/ENPH?period1=1634428800&period2=1683331200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2021-10-26 00:00:00",
+          "close": 173.4600067138672,
+          "adj_close": 173.4600067138672,
+          "symbol": "ENPH"
+        },
+        {
+          "date": "2021-10-27 00:00:00",
+          "close": 216.22000122070312,
+          "adj_close": 216.22000122070312,
+          "symbol": "ENPH"
+        },
+        {
+          "date": "2023-04-25 00:00:00",
+          "close": 220.60000610351562,
+          "adj_close": 220.60000610351562,
+          "symbol": "ENPH"
+        },
+        {
+          "date": "2023-04-26 00:00:00",
+          "close": 163.8300018310547,
+          "adj_close": 163.8300018310547,
+          "symbol": "ENPH"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "ENPH",
+          "date": "2021-10-27 00:00:00",
+          "source_return": 0.2465121196495743,
+          "provider_return": 0.24651212297812908,
+          "difference": -3.3285547651473735e-09,
+          "prior_weight": 0.0041399256123438,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/ENPH?period1=1634428800&period2=1683331200&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "ENPH",
+          "date": "2023-04-26 00:00:00",
+          "source_return": -0.2573436194738816,
+          "provider_return": -0.2573436205882146,
+          "difference": 1.1143329592400164e-09,
+          "prior_weight": 0.00940384839781,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/ENPH?period1=1634428800&period2=1683331200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "ENVA",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/ENVA?period1=1788566400&period2=1790294400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-09-14 00:00:00",
+          "close": 226.72000122070312,
+          "adj_close": 226.72000122070312,
+          "symbol": "ENVA"
+        },
+        {
+          "date": "2026-09-15 00:00:00",
+          "close": 173.61000061035156,
+          "adj_close": 173.61000061035156,
+          "symbol": "ENVA"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "ENVA",
+          "date": "2026-09-15 00:00:00",
+          "source_return": -0.2342537050105857,
+          "provider_return": -0.23425370644141374,
+          "difference": 1.4308280393837691e-09,
+          "prior_weight": 0.0286395378937337,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/ENVA?period1=1788566400&period2=1790294400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "EXPI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/EXPI?period1=1627171200&period2=1628899200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "EXPI",
+          "date": "2021-08-04 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "FICO",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/FICO?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 303.54998779296875,
+          "adj_close": 303.54998779296875,
+          "symbol": "FICO"
+        },
+        {
+          "date": "2020-03-16 00:00:00",
+          "close": 240.67999267578125,
+          "adj_close": 240.67999267578125,
+          "symbol": "FICO"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "FICO",
+          "date": "2020-03-16 00:00:00",
+          "source_return": -0.2071157886524671,
+          "provider_return": -0.20711578865246716,
+          "difference": 5.551115123125783e-17,
+          "prior_weight": 0.0352769894383033,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/FICO?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "FTNT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/FTNT?period1=1753660800&period2=1755388800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-08-06 00:00:00",
+          "close": 96.58000183105469,
+          "adj_close": 96.58000183105469,
+          "symbol": "FTNT"
+        },
+        {
+          "date": "2025-08-07 00:00:00",
+          "close": 75.30000305175781,
+          "adj_close": 75.30000305175781,
+          "symbol": "FTNT"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "FTNT",
+          "date": "2025-08-07 00:00:00",
+          "source_return": -0.2203354731828536,
+          "provider_return": -0.2203354563662312,
+          "difference": -1.6816622400162018e-08,
+          "prior_weight": 0.0187784837788048,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/FTNT?period1=1753660800&period2=1755388800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "FWRD",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/FWRD?period1=1690848000&period2=1692576000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2023-08-10 00:00:00",
+          "close": 104.0199966430664,
+          "adj_close": 103.27078247070312,
+          "symbol": "FWRD"
+        },
+        {
+          "date": "2023-08-11 00:00:00",
+          "close": 77.6500015258789,
+          "adj_close": 77.09072875976562,
+          "symbol": "FWRD"
+        }
+      ],
+      "corporate_actions": {
+        "dividends": {
+          "1692192600": {
+            "amount": 0.24,
+            "date": 1692192600
+          }
+        }
+      },
+      "checks": [
+        {
+          "symbol": "FWRD",
+          "date": "2023-08-11 00:00:00",
+          "source_return": -0.2535102159388012,
+          "provider_return": -0.25350881521948876,
+          "difference": -1.4007193124276895e-06,
+          "prior_weight": 0.0273577355756395,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/FWRD?period1=1690848000&period2=1692576000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "GES",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/GES?period1=1471219200&period2=1472947200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "GES",
+          "date": "2016-08-25 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "GRUB",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/GRUB?period1=1492387200&period2=1533340800&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "GRUB",
+          "date": "2017-04-27 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "GRUB",
+          "date": "2018-02-08 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "GRUB",
+          "date": "2018-07-25 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "HALO",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HALO?period1=1746230400&period2=1786924800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-05-12 00:00:00",
+          "close": 66.58000183105469,
+          "adj_close": 66.58000183105469,
+          "symbol": "HALO"
+        },
+        {
+          "date": "2025-05-13 00:00:00",
+          "close": 50.22999954223633,
+          "adj_close": 50.22999954223633,
+          "symbol": "HALO"
+        },
+        {
+          "date": "2026-08-06 00:00:00",
+          "close": 85.76000213623047,
+          "adj_close": 85.76000213623047,
+          "symbol": "HALO"
+        },
+        {
+          "date": "2026-08-07 00:00:00",
+          "close": 103.12000274658203,
+          "adj_close": 103.12000274658203,
+          "symbol": "HALO"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "HALO",
+          "date": "2025-05-13 00:00:00",
+          "source_return": -0.2455692400120156,
+          "provider_return": -0.24556926763544007,
+          "difference": 2.7623424464495727e-08,
+          "prior_weight": 0.0035715839192412,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/HALO?period1=1746230400&period2=1786924800&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "HALO",
+          "date": "2026-08-07 00:00:00",
+          "source_return": 0.2024253731343284,
+          "provider_return": 0.2024253752090055,
+          "difference": -2.074677096786104e-09,
+          "prior_weight": 0.012915954181235,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/HALO?period1=1746230400&period2=1786924800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "HCA",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HCA?period1=1649721600&period2=1651449600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2022-04-21 00:00:00",
+          "close": 269.44000244140625,
+          "adj_close": 259.439453125,
+          "symbol": "HCA"
+        },
+        {
+          "date": "2022-04-22 00:00:00",
+          "close": 210.63999938964844,
+          "adj_close": 202.8218994140625,
+          "symbol": "HCA"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "HCA",
+          "date": "2022-04-22 00:00:00",
+          "source_return": -0.218234981392876,
+          "provider_return": -0.21823031550894734,
+          "difference": -4.6658839286672915e-06,
+          "prior_weight": 0.0117560733152876,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/HCA?period1=1649721600&period2=1651449600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "HLNE",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HLNE?period1=1583625600&period2=1585353600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-17 00:00:00",
+          "close": 51.529998779296875,
+          "adj_close": 45.63706970214844,
+          "symbol": "HLNE"
+        },
+        {
+          "date": "2020-03-18 00:00:00",
+          "close": 41.209999084472656,
+          "adj_close": 36.497257232666016,
+          "symbol": "HLNE"
+        }
+      ],
+      "corporate_actions": {
+        "dividends": {
+          "1584106200": {
+            "amount": 0.275,
+            "date": 1584106200
+          }
+        }
+      },
+      "checks": [
+        {
+          "symbol": "HLNE",
+          "date": "2020-03-18 00:00:00",
+          "source_return": -0.2002532179784765,
+          "provider_return": -0.20027167671223534,
+          "difference": 1.8458733758830448e-05,
+          "prior_weight": 0.0477946472961442,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/HLNE?period1=1583625600&period2=1585353600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "HSII",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/HSII?period1=1550275200&period2=1552003200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "HSII",
+          "date": "2019-02-26 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "IMAB",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/IMAB?period1=1626566400&period2=1628294400&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "IMAB",
+          "date": "2021-07-28 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "IPGP",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/IPGP?period1=1532131200&period2=1533859200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-07-30 00:00:00",
+          "close": 224.3000030517578,
+          "adj_close": 224.3000030517578,
+          "symbol": "IPGP"
+        },
+        {
+          "date": "2018-07-31 00:00:00",
+          "close": 164.0399932861328,
+          "adj_close": 164.0399932861328,
+          "symbol": "IPGP"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "IPGP",
+          "date": "2018-07-31 00:00:00",
+          "source_return": -0.268658088247997,
+          "provider_return": -0.26865808714108597,
+          "difference": -1.1069110072980948e-09,
+          "prior_weight": 0.0153167880724815,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/IPGP?period1=1532131200&period2=1533859200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "IRBT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/IRBT?period1=1555200000&period2=1612656000&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "IRBT",
+          "date": "2019-04-24 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "IRBT",
+          "date": "2021-01-27 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "IRBT",
+          "date": "2021-01-28 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "JWN",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/JWN?period1=1636848000&period2=1638576000&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "JWN",
+          "date": "2021-11-24 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "KSS",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/KSS?period1=1642118400&period2=1643846400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2022-01-21 00:00:00",
+          "close": 46.84000015258789,
+          "adj_close": 34.43073654174805,
+          "symbol": "KSS"
+        },
+        {
+          "date": "2022-01-24 00:00:00",
+          "close": 63.709999084472656,
+          "adj_close": 46.831390380859375,
+          "symbol": "KSS"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "KSS",
+          "date": "2022-01-24 00:00:00",
+          "source_return": 0.3601683767429624,
+          "provider_return": 0.36016231671591625,
+          "difference": 6.060027046173033e-06,
+          "prior_weight": 0.000414833166624,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/KSS?period1=1642118400&period2=1643846400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "LNTH",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/LNTH?period1=1569110400&period2=1747440000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2019-10-01 00:00:00",
+          "close": 24.030000686645508,
+          "adj_close": 24.030000686645508,
+          "symbol": "LNTH"
+        },
+        {
+          "date": "2019-10-02 00:00:00",
+          "close": 19.040000915527344,
+          "adj_close": 19.040000915527344,
+          "symbol": "LNTH"
+        },
+        {
+          "date": "2023-02-22 00:00:00",
+          "close": 58.25,
+          "adj_close": 58.25,
+          "symbol": "LNTH"
+        },
+        {
+          "date": "2023-02-23 00:00:00",
+          "close": 69.98999786376953,
+          "adj_close": 69.98999786376953,
+          "symbol": "LNTH"
+        },
+        {
+          "date": "2025-05-06 00:00:00",
+          "close": 104.83999633789062,
+          "adj_close": 104.83999633789062,
+          "symbol": "LNTH"
+        },
+        {
+          "date": "2025-05-07 00:00:00",
+          "close": 80.48999786376953,
+          "adj_close": 80.48999786376953,
+          "symbol": "LNTH"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "LNTH",
+          "date": "2019-10-02 00:00:00",
+          "source_return": -0.207657086655968,
+          "provider_return": -0.20765707983900805,
+          "difference": -6.816959940980638e-09,
+          "prior_weight": 0.0243785283538187,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/LNTH?period1=1569110400&period2=1747440000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "LNTH",
+          "date": "2023-02-23 00:00:00",
+          "source_return": 0.2015450300429184,
+          "provider_return": 0.2015450277041979,
+          "difference": 2.338720495043134e-09,
+          "prior_weight": 0.0508663419973277,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/LNTH?period1=1569110400&period2=1747440000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "LNTH",
+          "date": "2025-05-07 00:00:00",
+          "source_return": -0.2322586798931706,
+          "provider_return": -0.23225867345171458,
+          "difference": -6.441456007477697e-09,
+          "prior_weight": 0.0233092089091934,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/LNTH?period1=1569110400&period2=1747440000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MANH",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MANH?period1=1583712000&period2=1585440000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-18 00:00:00",
+          "close": 37.439998626708984,
+          "adj_close": 37.439998626708984,
+          "symbol": "MANH"
+        },
+        {
+          "date": "2020-03-19 00:00:00",
+          "close": 45.369998931884766,
+          "adj_close": 45.369998931884766,
+          "symbol": "MANH"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MANH",
+          "date": "2020-03-19 00:00:00",
+          "source_return": 0.2118055612127554,
+          "provider_return": 0.2118055714756002,
+          "difference": -1.0262844796216086e-08,
+          "prior_weight": 0.0056417013674542,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MANH?period1=1583712000&period2=1585440000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MD",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MD?period1=1761264000&period2=1762992000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-10-31 00:00:00",
+          "close": 16.969999313354492,
+          "adj_close": 16.969999313354492,
+          "symbol": "MD"
+        },
+        {
+          "date": "2025-11-03 00:00:00",
+          "close": 21.079999923706055,
+          "adj_close": 21.079999923706055,
+          "symbol": "MD"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MD",
+          "date": "2025-11-03 00:00:00",
+          "source_return": 0.2421921037124337,
+          "provider_return": 0.24219214947859236,
+          "difference": -4.576615866835887e-08,
+          "prior_weight": 0.0054551089808633,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MD?period1=1761264000&period2=1762992000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MDXG",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MDXG?period1=1518220800&period2=1519948800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-02-16 00:00:00",
+          "close": 14.470000267028809,
+          "adj_close": 14.470000267028809,
+          "symbol": "MDXG"
+        },
+        {
+          "date": "2018-02-20 00:00:00",
+          "close": 8.75,
+          "adj_close": 8.75,
+          "symbol": "MDXG"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MDXG",
+          "date": "2018-02-20 00:00:00",
+          "source_return": -0.3953006219765032,
+          "provider_return": -0.3953006331356014,
+          "difference": 1.1159098201041218e-08,
+          "prior_weight": 0.0426442797535257,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MDXG?period1=1518220800&period2=1519948800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MEDP",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MEDP?period1=1550275200&period2=1552003200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2019-02-25 00:00:00",
+          "close": 70.58000183105469,
+          "adj_close": 70.58000183105469,
+          "symbol": "MEDP"
+        },
+        {
+          "date": "2019-02-26 00:00:00",
+          "close": 55.09000015258789,
+          "adj_close": 55.09000015258789,
+          "symbol": "MEDP"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MEDP",
+          "date": "2019-02-26 00:00:00",
+          "source_return": -0.2194672932993114,
+          "provider_return": -0.219467289269059,
+          "difference": -4.030252381825861e-09,
+          "prior_weight": 0.025681764068449,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MEDP?period1=1550275200&period2=1552003200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MXL",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MXL?period1=1469836800&period2=1471564800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2016-08-08 00:00:00",
+          "close": 21.899999618530273,
+          "adj_close": 21.899999618530273,
+          "symbol": "MXL"
+        },
+        {
+          "date": "2016-08-09 00:00:00",
+          "close": 17.299999237060547,
+          "adj_close": 17.299999237060547,
+          "symbol": "MXL"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MXL",
+          "date": "2016-08-09 00:00:00",
+          "source_return": -0.2100456621004565,
+          "provider_return": -0.21004568317789019,
+          "difference": 2.107743368728876e-08,
+          "prior_weight": 0.0074447720156275,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MXL?period1=1469836800&period2=1471564800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "MYGN",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MYGN?period1=1469923200&period2=1471651200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2016-08-09 00:00:00",
+          "close": 29.459999084472656,
+          "adj_close": 29.459999084472656,
+          "symbol": "MYGN"
+        },
+        {
+          "date": "2016-08-10 00:00:00",
+          "close": 19.700000762939453,
+          "adj_close": 19.700000762939453,
+          "symbol": "MYGN"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "MYGN",
+          "date": "2016-08-10 00:00:00",
+          "source_return": -0.3312966734555329,
+          "provider_return": -0.33129662677679306,
+          "difference": -4.667873981789583e-08,
+          "prior_weight": 0.0061039776191783,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/MYGN?period1=1469923200&period2=1471651200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "NRC",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/NRC?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 46.0,
+          "adj_close": 39.64715576171875,
+          "symbol": "NRC"
+        },
+        {
+          "date": "2020-03-16 00:00:00",
+          "close": 36.5,
+          "adj_close": 31.459148406982422,
+          "symbol": "NRC"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "NRC",
+          "date": "2020-03-16 00:00:00",
+          "source_return": -0.2063829787234041,
+          "provider_return": -0.20652193574607558,
+          "difference": 0.00013895702267147092,
+          "prior_weight": 0.0205448179071515,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/NRC?period1=1583452800&period2=1585180800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "NSP",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/NSP?period1=1563494400&period2=1565222400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2019-07-26 00:00:00",
+          "close": 144.6300048828125,
+          "adj_close": 114.61302185058594,
+          "symbol": "NSP"
+        },
+        {
+          "date": "2019-07-29 00:00:00",
+          "close": 108.88999938964844,
+          "adj_close": 86.29059600830078,
+          "symbol": "NSP"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "NSP",
+          "date": "2019-07-29 00:00:00",
+          "source_return": -0.2470661868252229,
+          "provider_return": -0.24711350756642114,
+          "difference": 4.7320741198231264e-05,
+          "prior_weight": 0.0217213873837207,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/NSP?period1=1563494400&period2=1565222400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "NSSC",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/NSSC?period1=1737676800&period2=1739404800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-01-31 00:00:00",
+          "close": 36.70000076293945,
+          "adj_close": 35.65303039550781,
+          "symbol": "NSSC"
+        },
+        {
+          "date": "2025-02-03 00:00:00",
+          "close": 26.93000030517578,
+          "adj_close": 26.1617431640625,
+          "symbol": "NSSC"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "NSSC",
+          "date": "2025-02-03 00:00:00",
+          "source_return": -0.2662125340599456,
+          "provider_return": -0.26621263679850304,
+          "difference": 1.0273855743925253e-07,
+          "prior_weight": 0.0012811927895979,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/NSSC?period1=1737676800&period2=1739404800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "NVR",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/NVR?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 2922.280029296875,
+          "adj_close": 2922.280029296875,
+          "symbol": "NVR"
+        },
+        {
+          "date": "2020-03-16 00:00:00",
+          "close": 2321.780029296875,
+          "adj_close": 2321.780029296875,
+          "symbol": "NVR"
+        },
+        {
+          "date": "2020-03-23 00:00:00",
+          "close": 2175.0,
+          "adj_close": 2175.0,
+          "symbol": "NVR"
+        },
+        {
+          "date": "2020-03-24 00:00:00",
+          "close": 2633.489990234375,
+          "adj_close": 2633.489990234375,
+          "symbol": "NVR"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "NVR",
+          "date": "2020-03-16 00:00:00",
+          "source_return": -0.2054902336531748,
+          "provider_return": -0.2054902315930638,
+          "difference": -2.0601109984585975e-09,
+          "prior_weight": 0.0045907870029402,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/NVR?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "NVR",
+          "date": "2020-03-24 00:00:00",
+          "source_return": 0.2107999954022987,
+          "provider_return": 0.21079999551005746,
+          "difference": -1.0775874637047878e-10,
+          "prior_weight": 0.0041252034312792,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/NVR?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "OLLI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/OLLI?period1=1566172800&period2=1567900800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2019-08-28 00:00:00",
+          "close": 77.7699966430664,
+          "adj_close": 77.7699966430664,
+          "symbol": "OLLI"
+        },
+        {
+          "date": "2019-08-29 00:00:00",
+          "close": 56.36000061035156,
+          "adj_close": 56.36000061035156,
+          "symbol": "OLLI"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "OLLI",
+          "date": "2019-08-29 00:00:00",
+          "source_return": -0.275298917653295,
+          "provider_return": -0.27529891933746986,
+          "difference": 1.68417485513217e-09,
+          "prior_weight": 0.0105427453558094,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/OLLI?period1=1566172800&period2=1567900800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "PGNY",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/PGNY?period1=1761609600&period2=1763337600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-11-06 00:00:00",
+          "close": 18.010000228881836,
+          "adj_close": 18.010000228881836,
+          "symbol": "PGNY"
+        },
+        {
+          "date": "2025-11-07 00:00:00",
+          "close": 22.3700008392334,
+          "adj_close": 22.3700008392334,
+          "symbol": "PGNY"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "PGNY",
+          "date": "2025-11-07 00:00:00",
+          "source_return": 0.2420877290394225,
+          "provider_return": 0.24208775985241937,
+          "difference": -3.0812996876239396e-08,
+          "prior_weight": 0.0394055849744255,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PGNY?period1=1761609600&period2=1763337600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "PGY",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/PGY?period1=1769731200&period2=1771459200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-02-06 00:00:00",
+          "close": 18.639999389648438,
+          "adj_close": 18.639999389648438,
+          "symbol": "PGY"
+        },
+        {
+          "date": "2026-02-09 00:00:00",
+          "close": 14.1899995803833,
+          "adj_close": 14.1899995803833,
+          "symbol": "PGY"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "PGY",
+          "date": "2026-02-09 00:00:00",
+          "source_return": -0.2387339055793992,
+          "provider_return": -0.23873390316398857,
+          "difference": -2.4154106215146243e-09,
+          "prior_weight": 0.0032216576914312,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PGY?period1=1769731200&period2=1771459200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "PLNT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLNT?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-13 00:00:00",
+          "close": 53.97999954223633,
+          "adj_close": 53.97999954223633,
+          "symbol": "PLNT"
+        },
+        {
+          "date": "2020-03-16 00:00:00",
+          "close": 38.79999923706055,
+          "adj_close": 38.79999923706055,
+          "symbol": "PLNT"
+        },
+        {
+          "date": "2020-03-17 00:00:00",
+          "close": 35.38999938964844,
+          "adj_close": 35.38999938964844,
+          "symbol": "PLNT"
+        },
+        {
+          "date": "2020-03-18 00:00:00",
+          "close": 27.540000915527344,
+          "adj_close": 27.540000915527344,
+          "symbol": "PLNT"
+        },
+        {
+          "date": "2020-03-23 00:00:00",
+          "close": 37.470001220703125,
+          "adj_close": 37.470001220703125,
+          "symbol": "PLNT"
+        },
+        {
+          "date": "2020-03-24 00:00:00",
+          "close": 46.22999954223633,
+          "adj_close": 46.22999954223633,
+          "symbol": "PLNT"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "PLNT",
+          "date": "2020-03-16 00:00:00",
+          "source_return": -0.2812152834383105,
+          "provider_return": -0.28121527295120263,
+          "difference": -1.0487107848788924e-08,
+          "prior_weight": 0.0156869866677173,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLNT?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "PLNT",
+          "date": "2020-03-18 00:00:00",
+          "source_return": -0.221814021526251,
+          "provider_return": -0.221814032481086,
+          "difference": 1.095483501134531e-08,
+          "prior_weight": 0.01125376065598,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLNT?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "PLNT",
+          "date": "2020-03-24 00:00:00",
+          "source_return": 0.2337869966963703,
+          "provider_return": 0.23378697721240216,
+          "difference": 1.948396813333808e-08,
+          "prior_weight": 0.0131465301961135,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLNT?period1=1583452800&period2=1585872000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1784937600&period2=1786665600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-08-03 00:00:00",
+          "close": 125.6500015258789,
+          "adj_close": 125.6500015258789,
+          "symbol": "PLTR"
+        },
+        {
+          "date": "2026-08-04 00:00:00",
+          "close": 162.66000366210938,
+          "adj_close": 162.66000366210938,
+          "symbol": "PLTR"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "PLTR",
+          "date": "2026-08-04 00:00:00",
+          "source_return": 0.2945483485873457,
+          "provider_return": 0.2945483620118212,
+          "difference": -1.3424475531209623e-08,
+          "prior_weight": 0.0321222964995331,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1784937600&period2=1786665600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "PRDO",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/PRDO?period1=1745280000&period2=1747008000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-05-01 00:00:00",
+          "close": 25.170000076293945,
+          "adj_close": 24.46999740600586,
+          "symbol": "PRDO"
+        },
+        {
+          "date": "2025-05-02 00:00:00",
+          "close": 30.829999923706055,
+          "adj_close": 29.97258949279785,
+          "symbol": "PRDO"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "PRDO",
+          "date": "2025-05-02 00:00:00",
+          "source_return": 0.2248708780293999,
+          "provider_return": 0.22487097139787382,
+          "difference": -9.336847392460434e-08,
+          "prior_weight": 0.0146845744449944,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/PRDO?period1=1745280000&period2=1747008000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "RDDT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/RDDT?period1=1784592000&period2=1786320000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-07-30 00:00:00",
+          "close": 178.0399932861328,
+          "adj_close": 178.0399932861328,
+          "symbol": "RDDT"
+        },
+        {
+          "date": "2026-07-31 00:00:00",
+          "close": 140.6699981689453,
+          "adj_close": 140.6699981689453,
+          "symbol": "RDDT"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "RDDT",
+          "date": "2026-07-31 00:00:00",
+          "source_return": -0.2098966524376545,
+          "provider_return": -0.20989663292746363,
+          "difference": -1.951019087953476e-08,
+          "prior_weight": 0.0367088312546165,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/RDDT?period1=1784592000&period2=1786320000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "REGI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/REGI?period1=1555977600&period2=1557705600&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "REGI",
+          "date": "2019-05-03 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "REZI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/REZI?period1=1784419200&period2=1786147200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-07-28 00:00:00",
+          "close": 25.5045223236084,
+          "adj_close": 25.5045223236084,
+          "symbol": "REZI"
+        },
+        {
+          "date": "2026-07-29 00:00:00",
+          "close": 24.822547912597656,
+          "adj_close": 24.822547912597656,
+          "symbol": "REZI"
+        }
+      ],
+      "corporate_actions": {
+        "splits": {
+          "1785850200": {
+            "date": 1785850200,
+            "numerator": 1437.0,
+            "denominator": 1000.0,
+            "splitRatio": "1437:1000"
+          }
+        }
+      },
+      "checks": [
+        {
+          "symbol": "REZI",
+          "date": "2026-07-29 00:00:00",
+          "source_return": -0.3230559345156889,
+          "provider_return": -0.026739352431606522,
+          "difference": -0.2963165820840824,
+          "prior_weight": 0.0174603017817235,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/REZI?period1=1784419200&period2=1786147200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "RH",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/RH?period1=1527897600&period2=1529625600&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-06-11 00:00:00",
+          "close": 118.7300033569336,
+          "adj_close": 118.7300033569336,
+          "symbol": "RH"
+        },
+        {
+          "date": "2018-06-12 00:00:00",
+          "close": 155.0,
+          "adj_close": 155.0,
+          "symbol": "RH"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "RH",
+          "date": "2018-06-12 00:00:00",
+          "source_return": 0.3054830287206265,
+          "provider_return": 0.30548299180982297,
+          "difference": 3.691080352474785e-08,
+          "prior_weight": 0.0135129280043826,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/RH?period1=1527897600&period2=1529625600&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "RMAX",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/RMAX?period1=1508803200&period2=1510531200&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 400: Bad Request",
+      "checks": [
+        {
+          "symbol": "RMAX",
+          "date": "2017-11-03 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "RMBS",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/RMBS?period1=1776470400&period2=1778198400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-04-27 00:00:00",
+          "close": 141.30999755859375,
+          "adj_close": 141.30999755859375,
+          "symbol": "RMBS"
+        },
+        {
+          "date": "2026-04-28 00:00:00",
+          "close": 111.2699966430664,
+          "adj_close": 111.2699966430664,
+          "symbol": "RMBS"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "RMBS",
+          "date": "2026-04-28 00:00:00",
+          "source_return": -0.2125822659401316,
+          "provider_return": -0.21258227609176306,
+          "difference": 1.0151631452126608e-08,
+          "prior_weight": 0.0021887528360271,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/RMBS?period1=1776470400&period2=1778198400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "SAM",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SAM?period1=1626134400&period2=1627862400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2021-07-22 00:00:00",
+          "close": 947.5399780273438,
+          "adj_close": 947.5399780273438,
+          "symbol": "SAM"
+        },
+        {
+          "date": "2021-07-23 00:00:00",
+          "close": 701.0,
+          "adj_close": 701.0,
+          "symbol": "SAM"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "SAM",
+          "date": "2021-07-23 00:00:00",
+          "source_return": -0.2601895262724207,
+          "provider_return": -0.2601895262937699,
+          "difference": 2.134920018548314e-11,
+          "prior_weight": 0.01934662274522,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/SAM?period1=1626134400&period2=1627862400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "SAVE",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SAVE?period1=1563148800&period2=1564876800&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "SAVE",
+          "date": "2019-07-25 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "SFM",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SFM?period1=1760918400&period2=1762646400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-10-29 00:00:00",
+          "close": 104.55000305175781,
+          "adj_close": 104.55000305175781,
+          "symbol": "SFM"
+        },
+        {
+          "date": "2025-10-30 00:00:00",
+          "close": 77.25,
+          "adj_close": 77.25,
+          "symbol": "SFM"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "SFM",
+          "date": "2025-10-30 00:00:00",
+          "source_return": -0.2611190817790531,
+          "provider_return": -0.26111910334658583,
+          "difference": 2.156753275972534e-08,
+          "prior_weight": 0.019934172161719,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/SFM?period1=1760918400&period2=1762646400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "SGH",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SGH?period1=1537833600&period2=1539561600&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "SGH",
+          "date": "2018-10-05 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "SHLS",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SHLS?period1=1682726400&period2=1684454400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2023-05-08 00:00:00",
+          "close": 19.719999313354492,
+          "adj_close": 19.719999313354492,
+          "symbol": "SHLS"
+        },
+        {
+          "date": "2023-05-09 00:00:00",
+          "close": 24.110000610351562,
+          "adj_close": 24.110000610351562,
+          "symbol": "SHLS"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "SHLS",
+          "date": "2023-05-09 00:00:00",
+          "source_return": 0.2226167455688004,
+          "provider_return": 0.2226167063821416,
+          "difference": 3.918665880675576e-08,
+          "prior_weight": 0.0013402930140747,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/SHLS?period1=1682726400&period2=1684454400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "SMG",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/SMG?period1=1729987200&period2=1731715200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2024-11-05 00:00:00",
+          "close": 93.47000122070312,
+          "adj_close": 85.84638214111328,
+          "symbol": "SMG"
+        },
+        {
+          "date": "2024-11-06 00:00:00",
+          "close": 74.29000091552734,
+          "adj_close": 68.23074340820312,
+          "symbol": "SMG"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "SMG",
+          "date": "2024-11-06 00:00:00",
+          "source_return": -0.205158644506799,
+          "provider_return": -0.2051995470694825,
+          "difference": 4.0902562683520216e-05,
+          "prior_weight": 0.0343520315737775,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/SMG?period1=1729987200&period2=1731715200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "STGW",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/STGW?period1=1525046400&period2=1526774400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-05-09 00:00:00",
+          "close": 6.849999904632568,
+          "adj_close": 6.849999904632568,
+          "symbol": "STGW"
+        },
+        {
+          "date": "2018-05-10 00:00:00",
+          "close": 4.849999904632568,
+          "adj_close": 4.849999904632568,
+          "symbol": "STGW"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "STGW",
+          "date": "2018-05-10 00:00:00",
+          "source_return": -0.291970802919708,
+          "provider_return": -0.29197080698459943,
+          "difference": 4.064891423460892e-09,
+          "prior_weight": 0.0028310747688552,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/STGW?period1=1525046400&period2=1526774400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "STRL",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/STRL?period1=1777075200&period2=1778803200&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2026-05-04 00:00:00",
+          "close": 529.489990234375,
+          "adj_close": 529.489990234375,
+          "symbol": "STRL"
+        },
+        {
+          "date": "2026-05-05 00:00:00",
+          "close": 806.0,
+          "adj_close": 806.0,
+          "symbol": "STRL"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "STRL",
+          "date": "2026-05-05 00:00:00",
+          "source_return": 0.5222194942302971,
+          "provider_return": 0.5222195223052843,
+          "difference": -2.807498722390278e-08,
+          "prior_weight": 0.0197577423031508,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/STRL?period1=1777075200&period2=1778803200&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "TTD",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/TTD?period1=1518480000&period2=1526860800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2018-02-22 00:00:00",
+          "close": 4.840000152587891,
+          "adj_close": 4.840000152587891,
+          "symbol": "TTD"
+        },
+        {
+          "date": "2018-02-23 00:00:00",
+          "close": 5.99399995803833,
+          "adj_close": 5.99399995803833,
+          "symbol": "TTD"
+        },
+        {
+          "date": "2018-05-10 00:00:00",
+          "close": 5.2729997634887695,
+          "adj_close": 5.2729997634887695,
+          "symbol": "TTD"
+        },
+        {
+          "date": "2018-05-11 00:00:00",
+          "close": 7.560999870300293,
+          "adj_close": 7.560999870300293,
+          "symbol": "TTD"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "TTD",
+          "date": "2018-02-23 00:00:00",
+          "source_return": 0.2376033057851241,
+          "provider_return": 0.23842970435308963,
+          "difference": -0.0008263985679655417,
+          "prior_weight": 0.0042128265839164,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/TTD?period1=1518480000&period2=1526860800&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "TTD",
+          "date": "2018-05-11 00:00:00",
+          "source_return": 0.4345351043643264,
+          "provider_return": 0.4339086306534776,
+          "difference": 0.000626473710848785,
+          "prior_weight": 0.0327517290761382,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/TTD?period1=1518480000&period2=1526860800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "UI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/UI?period1=1572307200&period2=1756684800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2019-11-07 00:00:00",
+          "close": 129.99000549316406,
+          "adj_close": 122.0000228881836,
+          "symbol": "UI"
+        },
+        {
+          "date": "2019-11-08 00:00:00",
+          "close": 176.74000549316406,
+          "adj_close": 165.87648010253906,
+          "symbol": "UI"
+        },
+        {
+          "date": "2020-11-05 00:00:00",
+          "close": 197.8000030517578,
+          "adj_close": 187.0509490966797,
+          "symbol": "UI"
+        },
+        {
+          "date": "2020-11-06 00:00:00",
+          "close": 245.22000122070312,
+          "adj_close": 231.89395141601562,
+          "symbol": "UI"
+        },
+        {
+          "date": "2025-08-21 00:00:00",
+          "close": 390.57000732421875,
+          "adj_close": 387.8396911621094,
+          "symbol": "UI"
+        },
+        {
+          "date": "2025-08-22 00:00:00",
+          "close": 510.2300109863281,
+          "adj_close": 506.6632080078125,
+          "symbol": "UI"
+        }
+      ],
+      "corporate_actions": {
+        "dividends": {
+          "1573828200": {
+            "amount": 0.3,
+            "date": 1573828200
+          },
+          "1581690600": {
+            "amount": 0.3,
+            "date": 1581690600
+          },
+          "1589549400": {
+            "amount": 0.3,
+            "date": 1589549400
+          },
+          "1598621400": {
+            "amount": 0.4,
+            "date": 1598621400
+          },
+          "1605277800": {
+            "amount": 0.4,
+            "date": 1605277800
+          },
+          "1613140200": {
+            "amount": 0.4,
+            "date": 1613140200
+          },
+          "1620999000": {
+            "amount": 0.4,
+            "date": 1620999000
+          },
+          "1630675800": {
+            "amount": 0.6,
+            "date": 1630675800
+          },
+          "1636727400": {
+            "amount": 0.6,
+            "date": 1636727400
+          },
+          "1644589800": {
+            "amount": 0.6,
+            "date": 1644589800
+          },
+          "1652448600": {
+            "amount": 0.6,
+            "date": 1652448600
+          },
+          "1662125400": {
+            "amount": 0.6,
+            "date": 1662125400
+          },
+          "1668090600": {
+            "amount": 0.6,
+            "date": 1668090600
+          },
+          "1676039400": {
+            "amount": 0.6,
+            "date": 1676039400
+          },
+          "1683898200": {
+            "amount": 0.6,
+            "date": 1683898200
+          },
+          "1693575000": {
+            "amount": 0.6,
+            "date": 1693575000
+          },
+          "1699626600": {
+            "amount": 0.6,
+            "date": 1699626600
+          },
+          "1708093800": {
+            "amount": 0.6,
+            "date": 1708093800
+          },
+          "1715952600": {
+            "amount": 0.6,
+            "date": 1715952600
+          },
+          "1725370200": {
+            "amount": 0.6,
+            "date": 1725370200
+          },
+          "1731940200": {
+            "amount": 0.6,
+            "date": 1731940200
+          },
+          "1739889000": {
+            "amount": 0.6,
+            "date": 1739889000
+          },
+          "1747661400": {
+            "amount": 0.6,
+            "date": 1747661400
+          }
+        }
+      },
+      "checks": [
+        {
+          "symbol": "UI",
+          "date": "2019-11-08 00:00:00",
+          "source_return": 0.3596015226370779,
+          "provider_return": 0.35964302444901564,
+          "difference": -4.150181193773861e-05,
+          "prior_weight": 0.047968420120586,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/UI?period1=1572307200&period2=1756684800&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "UI",
+          "date": "2020-11-06 00:00:00",
+          "source_return": 0.2397253037506603,
+          "provider_return": 0.23973683392623824,
+          "difference": -1.1530175577922908e-05,
+          "prior_weight": 0.0341379252219,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/UI?period1=1572307200&period2=1756684800&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "UI",
+          "date": "2025-08-22 00:00:00",
+          "source_return": 0.3063746858813272,
+          "provider_return": 0.30637276058482943,
+          "difference": 1.925296497784501e-06,
+          "prior_weight": 0.0265179048720999,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/UI?period1=1572307200&period2=1756684800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "VRT",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/VRT?period1=1737072000&period2=1738800000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2025-01-24 00:00:00",
+          "close": 146.32000732421875,
+          "adj_close": 146.0108184814453,
+          "symbol": "VRT"
+        },
+        {
+          "date": "2025-01-27 00:00:00",
+          "close": 102.5999984741211,
+          "adj_close": 102.38320922851562,
+          "symbol": "VRT"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "VRT",
+          "date": "2025-01-27 00:00:00",
+          "source_return": -0.2987971569163478,
+          "provider_return": -0.2987971008358793,
+          "difference": -5.6080468491259694e-08,
+          "prior_weight": 0.0256379381328639,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/VRT?period1=1737072000&period2=1738800000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "VRTX",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/VRTX?period1=1601856000&period2=1603584000&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-10-14 00:00:00",
+          "close": 271.4599914550781,
+          "adj_close": 271.4599914550781,
+          "symbol": "VRTX"
+        },
+        {
+          "date": "2020-10-15 00:00:00",
+          "close": 215.27999877929688,
+          "adj_close": 215.27999877929688,
+          "symbol": "VRTX"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "VRTX",
+          "date": "2020-10-15 00:00:00",
+          "source_return": -0.2069549615508533,
+          "provider_return": -0.20695496369334432,
+          "difference": 2.1424910179312917e-09,
+          "prior_weight": 0.0268437223436203,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/VRTX?period1=1601856000&period2=1603584000&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "VVI",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/VVI?period1=1583452800&period2=1585958400&interval=1d&events=div%2Csplits",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found",
+      "checks": [
+        {
+          "symbol": "VVI",
+          "date": "2020-03-16 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "VVI",
+          "date": "2020-03-18 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "VVI",
+          "date": "2020-03-24 00:00:00",
+          "status": "failed"
+        },
+        {
+          "symbol": "VVI",
+          "date": "2020-03-25 00:00:00",
+          "status": "failed"
+        }
+      ]
+    },
+    {
+      "symbol": "WING",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/WING?period1=1583625600&period2=1731110400&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2020-03-17 00:00:00",
+          "close": 63.130001068115234,
+          "adj_close": 56.76428985595703,
+          "symbol": "WING"
+        },
+        {
+          "date": "2020-03-18 00:00:00",
+          "close": 49.720001220703125,
+          "adj_close": 44.70649719238281,
+          "symbol": "WING"
+        },
+        {
+          "date": "2024-10-29 00:00:00",
+          "close": 368.94000244140625,
+          "adj_close": 363.8338317871094,
+          "symbol": "WING"
+        },
+        {
+          "date": "2024-10-30 00:00:00",
+          "close": 289.989990234375,
+          "adj_close": 285.97650146484375,
+          "symbol": "WING"
+        }
+      ],
+      "corporate_actions": {
+        "dividends": {
+          "1592400600": {
+            "amount": 0.11,
+            "date": 1592400600
+          },
+          "1598535000": {
+            "amount": 0.14,
+            "date": 1598535000
+          },
+          "1605796200": {
+            "amount": 5.14,
+            "date": 1605796200
+          },
+          "1614868200": {
+            "amount": 0.14,
+            "date": 1614868200
+          },
+          "1620912600": {
+            "amount": 0.14,
+            "date": 1620912600
+          },
+          "1628775000": {
+            "amount": 0.17,
+            "date": 1628775000
+          },
+          "1637245800": {
+            "amount": 0.17,
+            "date": 1637245800
+          },
+          "1646922600": {
+            "amount": 0.17,
+            "date": 1646922600
+          },
+          "1648042200": {
+            "amount": 4.0,
+            "date": 1648042200
+          },
+          "1652967000": {
+            "amount": 0.17,
+            "date": 1652967000
+          },
+          "1660224600": {
+            "amount": 0.19,
+            "date": 1660224600
+          },
+          "1668004200": {
+            "amount": 0.19,
+            "date": 1668004200
+          },
+          "1678372200": {
+            "amount": 0.19,
+            "date": 1678372200
+          },
+          "1684416600": {
+            "amount": 0.19,
+            "date": 1684416600
+          },
+          "1692279000": {
+            "amount": 0.22,
+            "date": 1692279000
+          },
+          "1700145000": {
+            "amount": 0.22,
+            "date": 1700145000
+          },
+          "1709821800": {
+            "amount": 0.22,
+            "date": 1709821800
+          },
+          "1715866200": {
+            "amount": 0.22,
+            "date": 1715866200
+          },
+          "1723815000": {
+            "amount": 0.27,
+            "date": 1723815000
+          }
+        }
+      },
+      "checks": [
+        {
+          "symbol": "WING",
+          "date": "2020-03-18 00:00:00",
+          "source_return": -0.2124739402362753,
+          "provider_return": -0.21241862963795777,
+          "difference": -5.531059831753726e-05,
+          "prior_weight": 0.0048541399441097,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/WING?period1=1583625600&period2=1731110400&interval=1d&events=div%2Csplits"
+        },
+        {
+          "symbol": "WING",
+          "date": "2024-10-30 00:00:00",
+          "source_return": -0.2140028211805555,
+          "provider_return": -0.2139914530208461,
+          "difference": -1.1368159709396197e-05,
+          "prior_weight": 0.0199704856163326,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/WING?period1=1583625600&period2=1731110400&interval=1d&events=div%2Csplits"
+        }
+      ]
+    },
+    {
+      "symbol": "WSM",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/WSM?period1=1731196800&period2=1732924800&interval=1d&events=div%2Csplits",
+      "status": "checked",
+      "nearby_prices": [
+        {
+          "date": "2024-11-19 00:00:00",
+          "close": 137.24000549316406,
+          "adj_close": 133.3754425048828,
+          "symbol": "WSM"
+        },
+        {
+          "date": "2024-11-20 00:00:00",
+          "close": 175.0399932861328,
+          "adj_close": 170.1110076904297,
+          "symbol": "WSM"
+        }
+      ],
+      "corporate_actions": {},
+      "checks": [
+        {
+          "symbol": "WSM",
+          "date": "2024-11-20 00:00:00",
+          "source_return": 0.2754299038181287,
+          "provider_return": 0.2754297530012093,
+          "difference": 1.5081691939755615e-07,
+          "prior_weight": 0.0303785106425938,
+          "status": "checked",
+          "source": "https://query1.finance.yahoo.com/v8/finance/chart/WSM?period1=1731196800&period2=1732924800&interval=1d&events=div%2Csplits"
+        }
+      ]
+    }
+  ]
+}
