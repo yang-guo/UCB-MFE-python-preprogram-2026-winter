@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.log
+.env
+.env.*
+*.duckdb
+*.db
+.setup-temp/
+tmp/
+
+# Personal learning material: keep local, outside the submission.
+output/
+build_report.py
+report-requirements.txt
+teaching_map.json
