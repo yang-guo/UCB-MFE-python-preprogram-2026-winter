@@ -1,0 +1,64 @@
+# 2026-11-16 15:10 UTC, Darwin arm64, Docker 29.7.2
+
+$ docker build -q -t mfe-hw5:local .
+sha256:34cf801b72dc43cdcd9f515abf38d89b49a9f51ee77798bbc337f5becfcf82df
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+c40045d930c48d883b2e0df3252eaa76206027b28803995454d292f0d585c893
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 15:11:16 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+
+{"prediction":0.5275775790214539,"model_version":"hw4-ridge-fit-2026-07-01"}
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @evidence/invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 15:11:16 GMT
+server: uvicorn
+content-length: 99
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","r_mom_21"],"msg":"Input should be a valid number"}]}
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+
+# Restart the same image
+$ docker image inspect --format {{.Id}} mfe-hw5:local
+sha256:34cf801b72dc43cdcd9f515abf38d89b49a9f51ee77798bbc337f5becfcf82df
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+ab5c1f7599efe4371ba0738cc8605481c858ad5a64ada7b4dc00e9f6bc6d4921
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 15:11:17 GMT
+server: uvicorn
+content-length: 76
+content-type: application/json
+
+{"prediction":0.5275775790214539,"model_version":"hw4-ridge-fit-2026-07-01"}
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Loaded model hw4-ridge-fit-2026-07-01
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:57884 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57886 - "POST /predict HTTP/1.1" 200 OK
+
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+

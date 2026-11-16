@@ -1,0 +1,13 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+tests/
+evidence/
+export_model.py
+README.md
