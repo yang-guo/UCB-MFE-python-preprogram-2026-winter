@@ -1,0 +1,76 @@
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+6 files already formatted
+
+$ make test
+python -m pytest -q
+.......................................                                  [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/philipszkudlarski/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Philip_Szkudlarski/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+39 passed, 1 warning in 1.02s
+
+$ python -m pytest -q -s -k performance  # latency report
+/Users/philipszkudlarski/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Philip_Szkudlarski/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+
+Latency (in-process TestClient, 200 requests after 10 warm-up, arm64 Darwin Python 3.12.9): median 0.80 ms, p95 0.89 ms, max 14.41 ms
+.
+1 passed, 38 deselected in 0.67s
+
+$ python -m pytest -v -p no:warnings
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.2.0, pluggy-1.7.0 -- /Users/philipszkudlarski/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Philip_Szkudlarski/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/philipszkudlarski/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Philip_Szkudlarski
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 39 items
+
+tests/test_app.py::test_predict_valid_input PASSED                       [  2%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[0] PASSED         [  5%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[1] PASSED         [  7%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[5] PASSED         [ 10%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[25] PASSED        [ 12%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[60] PASSED        [ 15%]
+tests/test_app.py::test_api_matches_hw4_reference_rows[-1] PASSED        [ 17%]
+tests/test_app.py::test_pipeline_reproduces_every_hw4_candidate PASSED   [ 20%]
+tests/test_app.py::test_row_alone_equals_row_in_batch PASSED             [ 23%]
+tests/test_app.py::test_no_signal_is_not_a_candidate PASSED              [ 25%]
+tests/test_app.py::test_expected_return_is_hw4_signal_average PASSED     [ 28%]
+tests/test_app.py::test_expected_return_single_signal_equals_its_mu_hat PASSED [ 30%]
+tests/test_app.py::test_health_reports_loaded_version PASSED             [ 33%]
+tests/test_app.py::test_predict_invalid_input[missing field] PASSED      [ 35%]
+tests/test_app.py::test_predict_invalid_input[empty object] PASSED       [ 38%]
+tests/test_app.py::test_predict_invalid_input[extra field] PASSED        [ 41%]
+tests/test_app.py::test_predict_invalid_input[five features] PASSED      [ 43%]
+tests/test_app.py::test_predict_invalid_input[list, wrong count (3)] PASSED [ 46%]
+tests/test_app.py::test_predict_invalid_input[list, right count (4)] PASSED [ 48%]
+tests/test_app.py::test_predict_invalid_input[numeric string] PASSED     [ 51%]
+tests/test_app.py::test_predict_invalid_input[boolean] PASSED            [ 53%]
+tests/test_app.py::test_predict_invalid_input[object as number] PASSED   [ 56%]
+tests/test_app.py::test_predict_invalid_input[below flag threshold (pairs)] PASSED [ 58%]
+tests/test_app.py::test_predict_invalid_input[negative z (sign not allowed)] PASSED [ 61%]
+tests/test_app.py::test_predict_invalid_input[percent instead of fraction] PASSED [ 64%]
+tests/test_app.py::test_predict_invalid_input[not in momentum top 10%] PASSED [ 66%]
+tests/test_app.py::test_predict_invalid_input[fcf score zero] PASSED     [ 69%]
+tests/test_app.py::test_predict_invalid_input[fcf score above 1] PASSED  [ 71%]
+tests/test_app.py::test_predict_invalid_input[revenue gap below offset] PASSED [ 74%]
+tests/test_app.py::test_predict_invalid_input[revenue gap absurd] PASSED [ 76%]
+tests/test_app.py::test_predict_invalid_input[pairs z absurd] PASSED     [ 79%]
+tests/test_app.py::test_predict_invalid_input[null body] PASSED          [ 82%]
+tests/test_app.py::test_non_finite_values_rejected[NaN] PASSED           [ 84%]
+tests/test_app.py::test_non_finite_values_rejected[Infinity] PASSED      [ 87%]
+tests/test_app.py::test_non_finite_values_rejected[-Infinity] PASSED     [ 89%]
+tests/test_app.py::test_malformed_json_rejected PASSED                   [ 92%]
+tests/test_app.py::test_predict_model_failure PASSED                     [ 94%]
+tests/test_app.py::test_non_finite_model_output_is_an_error PASSED       [ 97%]
+tests/test_app.py::test_predict_performance PASSED                       [100%]
+
+============================== 39 passed in 0.73s ==============================
