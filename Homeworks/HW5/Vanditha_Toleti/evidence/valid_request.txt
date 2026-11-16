@@ -1,0 +1,11 @@
+$ curl -i -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d @example_request.json
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   543  100    81  100   462   1190   6792 --:--:-- --:--:-- --:--:--  8104
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 23:00:06 GMT
+server: uvicorn
+content-length: 81
+content-type: application/json
+
+{"prediction":0.03676691569431617,"model_version":"hw4_random_forest_2025-12-31"}
