@@ -1,0 +1,16 @@
+$ docker stop hw5-stock-container
+hw5-stock-container
+$ docker start hw5-stock-container
+hw5-stock-container
+$ sleep 3
+$ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS         PORTS                      NAMES
+f67c3d1b5bab   hw5-stock-api   "uvicorn app:app --h…"   14 minutes ago   Up 3 seconds   127.0.0.1:8000->8000/tcp   hw5-stock-container
+$ curl -sS -i -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 23:13:19 GMT
+server: uvicorn
+content-length: 82
+content-type: application/json
+
+{"prediction":0.036766915694316164,"model_version":"hw4_random_forest_2025-12-31"}

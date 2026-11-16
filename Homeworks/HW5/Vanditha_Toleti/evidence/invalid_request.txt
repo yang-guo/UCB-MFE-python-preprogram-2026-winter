@@ -1,0 +1,8 @@
+$ curl -sS -i -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d '{"momentum_21": "invalid"}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 23:13:07 GMT
+server: uvicorn
+content-length: 1302
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","momentum_21"],"msg":"Input should be a valid number","input":"invalid"},{"type":"missing","loc":["body","momentum_63"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","momentum_252_21"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","volatility_63"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","drawdown_252"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","net_margin"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","operating_roa"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","debt_to_assets"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","cash_to_assets"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","fcf_to_assets"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","accruals_to_assets"],"msg":"Field required","input":{"momentum_21":"invalid"}},{"type":"missing","loc":["body","filing_age_days"],"msg":"Field required","input":{"momentum_21":"invalid"}}]}
