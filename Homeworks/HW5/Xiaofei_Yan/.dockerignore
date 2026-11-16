@@ -1,0 +1,9 @@
+# Only these files may enter the build context. Local environments, databases,
+# credentials, notebooks, tests, and generated outputs stay on the host.
+*
+!Dockerfile
+!requirements.txt
+!app.py
+!hw4_pipeline.py
+!model.joblib
+!model_reference.json
