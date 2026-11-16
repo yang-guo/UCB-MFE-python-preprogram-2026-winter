@@ -2,6 +2,8 @@
 
 A FastAPI `POST /predict` service for the **HW4 v1 model**, which is the model behind my submitted HW4 strategy. It is tested with pytest, packaged with Docker, and checked with real requests to the running container.
 
+**Where HW4 is:** HW4 isn't merged into `main` yet. Its code and results are on the [`hw_4_Dhruv_Chopra`](https://github.com/yang-guo/UCB-MFE-python-preprogram-2026-winter/tree/hw_4_Dhruv_Chopra/Homeworks/HW4/Dhruv_Chopra) branch (commit `81713cf`). That is where the `Homeworks/HW4/Dhruv_Chopra/...` paths below point.
+
 ## What is served
 
 | | |
