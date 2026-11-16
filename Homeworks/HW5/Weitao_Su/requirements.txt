@@ -1,0 +1,15 @@
+# API and homework tools.
+fastapi==0.129.2
+uvicorn==0.41.0
+pydantic==2.12.5
+httpx==0.28.1
+pytest==9.0.3
+ruff==0.15.10
+
+# Exact model-stack versions from the HW4 branch's uv.lock.
+numpy==2.3.5
+pandas==2.3.3
+scikit-learn==1.8.0
+scipy==1.16.3
+joblib==1.5.3
+threadpoolctl==3.6.0

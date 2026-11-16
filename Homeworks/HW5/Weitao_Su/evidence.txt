@@ -1,0 +1,63 @@
+Local checks: Apple M3 Max, 36 GiB RAM, macOS arm64, Python 3.12.12.
+Latency uses in-process TestClient, five warm-up calls, and 50 measured requests.
+
+$ .venv/bin/python -B -m pytest -q -s -p no:cacheprovider
+...............................................................................................
+TestClient latency: n=50, warmup=5, median=1.018 ms, p95=1.279 ms; Python 3.12.12, Darwin arm64
+.
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/starlette/testclient.py:45
+  /Users/weitao/Desktop/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Weitao_Su/.venv/lib/python3.12/site-packages/starlette/testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+96 passed, 1 warning in 1.60s
+
+$ .venv/bin/python -m ruff check --no-cache . && .venv/bin/python -m ruff format --check --no-cache .
+All checks passed!
+5 files already formatted
+
+$ docker build -q -t mfe-hw5:local .
+sha256:d5e36e110c491d11cf60f46f28c3ecae1bd9d170b5575e0bca12ac0e69355141
+
+$ docker run -d --name mfe-hw5-weitao-check -p 127.0.0.1:8000:8000 mfe-hw5:local
+b3596c8ea949c89f67e76a6ecc541b3d2e41e165b196cb482ca3c3dfc57c087e
+
+$ curl --silent --show-error --fail-with-body --max-time 20 -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 15:39:16 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.027291997451919032,"model_version":"hw4-ridge-alpha1000-1c2a664-v1"}
+
+$ curl --silent --show-error --max-time 20 -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 15:39:17 GMT
+server: uvicorn
+content-length: 535
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_63"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_252_21"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_63"],"msg":"Field required","type":"missing"},{"loc":["body","drawdown_252"],"msg":"Field required","type":"missing"},{"loc":["body","relative_momentum_63"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_acceleration"],"msg":"Field required","type":"missing"}]}
+
+$ docker stop mfe-hw5-weitao-check && docker start mfe-hw5-weitao-check
+mfe-hw5-weitao-check
+mfe-hw5-weitao-check
+
+
+$ curl --silent --retry 10 --retry-delay 1 --retry-connrefused --fail-with-body --max-time 20 -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 15:39:39 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.027291997451919032,"model_version":"hw4-ridge-alpha1000-1c2a664-v1"}
+
+$ docker inspect --format 'container={{.Id}} image={{.Image}} running={{.State.Running}}' mfe-hw5-weitao-check
+container=b3596c8ea949c89f67e76a6ecc541b3d2e41e165b196cb482ca3c3dfc57c087e image=sha256:d5e36e110c491d11cf60f46f28c3ecae1bd9d170b5575e0bca12ac0e69355141 running=true
+
+
+$ docker rm -f mfe-hw5-weitao-check
+mfe-hw5-weitao-check
