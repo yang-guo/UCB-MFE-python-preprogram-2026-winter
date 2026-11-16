@@ -1,0 +1,14 @@
+{
+  "accounts": 5,
+  "planned_accounts": 5,
+  "complete": 5,
+  "clean_complete": 5,
+  "source_and_archived_models_unchanged": true,
+  "archived_annual_forecasts_reproduced": true,
+  "baseline_nav_reproduced": true,
+  "first_year_identical": true,
+  "identical_candidates": true,
+  "component_fits": 3,
+  "tested_blend_weight": 0.5,
+  "post2015_runs": 0
+}

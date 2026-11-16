@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "last_valued_date": "2026-09-30",
+  "protocol_sha256": "5415a9a7c523839cf2b877630b40743b656a509af7185119e4aa221ce54db675",
+  "local_output": "outputs\\fixed_anchor_final\\runs\\5415a9a7c523839cf2b877630b40743b656a509af7185119e4aa221ce54db675",
+  "policy_sha256": "f314354b06528ff14b8f2128f04d651d0805449bc7049d759f95d62f2dceb62d",
+  "incident_rows": 0,
+  "fills": 4617,
+  "event_lots": 8,
+  "verified": true
+}

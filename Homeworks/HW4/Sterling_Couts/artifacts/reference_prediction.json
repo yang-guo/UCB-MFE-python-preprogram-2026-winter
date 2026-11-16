@@ -1,0 +1,13 @@
+{
+  "symbol": "A",
+  "signal_date": "2016-03-31",
+  "features": {
+    "momentum_252_21": -0.06371774618220105
+  },
+  "feature_order": [
+    "momentum_252_21"
+  ],
+  "prediction": 0.03342715083284447,
+  "model_version": "hw4-d7cef95c7199",
+  "units": "inputs and output are fractional returns, not percentages"
+}

@@ -1,0 +1,21 @@
+{
+  "RNA_source": "https://www.quiverquant.com/stock/RNA/historical-prices/",
+  "RNA_public_table_data": "https://www.quiverquant.com/stock/RNA/historical-prices/data/",
+  "RNA_identity_reference": "https://classic.nasdaqtrader.com/TraderNews.aspx?id=ECA2026-89",
+  "RNA_rows": 59,
+  "RNA_overlap_rows": 27,
+  "RNA_overlap_max_raw_relative_difference": 0.002629272567922891,
+  "RNA_limitation": "Course and external quotes differ in overlap. Retain original observations and fill only absent 2024-window marks/fills; disclose boundary/provider differences. No scaling invented to force agreement.",
+  "AG_source": "https://query1.finance.yahoo.com/v8/finance/chart/AG?period1=1735689600&period2=1746057600&interval=1d&events=div%2Csplits",
+  "AG_check_source": "https://www.quiverquant.com/stock/AG/historical-prices/",
+  "AG_rows": 81,
+  "AG_max_cross_provider_raw_relative_difference": 4.367973971408645e-08,
+  "raw_sha256": {
+    "RNA_quiver.json": "8974ac8870a49e666daeec711c503fb3b84f80132405b1a18c074fadacb09b60",
+    "AG_chart.json": "ce9d2ec9117c444699d58688860f925b9dfe77e0b938f5893a2d73fd46555117",
+    "AG_quiver.json": "0bec24f7b635c14ab1ab34562c982b2d968655143d55ca10cbeb5b9a957057dc"
+  },
+  "normalized_sha256": "8957863313fb1d7792580b985d380b4919b3a83ad8236082d6f54d65c33d9ab0",
+  "no_prices_after_test_end": true,
+  "no_predictor_or_training_changes": true
+}

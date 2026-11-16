@@ -1,0 +1,21 @@
+{
+  "review_date": "2026-11-15",
+  "scope": "Context for three unique large moves in the ranking experiment. Sources explain contemporaneous news and historical identity; they do not independently verify exact adjusted prices. No price, cash-flow, target or trading-rule changes are made.",
+  "events": [
+    {
+      "symbol": "EIGR", "date": "2015-04-27", "historical_issuer": "Celladon", "status": "news_context_only",
+      "finding": "Celladon reported that CUPID 2 failed its primary and secondary endpoints on April 26. The exchange notice establishes the later Celladon-to-Eiger name/symbol transition. Adverse news provides context for the decline, not exact adjusted-price verification. Later identity evidence is explanatory only, not a predictive input.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1305253/000119312515148989/d915788d8k.htm", "https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2016-63"]
+    },
+    {
+      "symbol": "FOLD", "date": "2015-10-02", "historical_issuer": "Amicus Therapeutics", "status": "news_context_only",
+      "finding": "Amicus announced an FDA update on October 2; its subsequent quarterly filing describes additional data and integration work for the migalastat US regulatory pathway. This provides economic context, not proof of the exact daily loss. Retain the observed loss and flag quote verification as incomplete.",
+      "sources": ["https://www.globenewswire.com/news-release/2015/10/02/773128/15991/en/Amicus-Therapeutics-to-Host-FDA-Update-Conference-Call-Today.html", "https://www.sec.gov/Archives/edgar/data/1178879/000110465915075551/a15-17924_110q.htm"]
+    },
+    {
+      "symbol": "ICPT", "date": "2014-01-09", "historical_issuer": "Intercept Pharmaceuticals", "status": "news_context_only",
+      "finding": "The issuer announced that FLINT stopped early for efficacy after a planned interim analysis. This provides economic context for a large gain; exact adjusted-price verification remains separate. The gain is neither erased nor certified merely because it has a news explanation.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1270073/000114420414001530/v365107_ex99-1.htm"]
+    }
+  ]
+}

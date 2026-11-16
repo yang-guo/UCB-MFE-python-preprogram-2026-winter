@@ -1,0 +1,128 @@
+[
+  {
+    "cik": 320193,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+    "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+    "bytes": 3859564,
+    "status": "cached",
+    "entity_name": "Apple Inc."
+  },
+  {
+    "cik": 320193,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+    "sha256": "d7c4a3c888fe60da97ceef8f9b80da4c205e82440c1bc3ba9dcc7316a482a6b1",
+    "bytes": 163926,
+    "status": "cached",
+    "entity_name": "Apple Inc."
+  },
+  {
+    "cik": 1162194,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001162194.json",
+    "sha256": "abc00fdea2212da6bf562cb2073bbeadbc8560ff137b57a279fcb1dd6b2fdd23",
+    "bytes": 3072834,
+    "status": "cached",
+    "entity_name": "STANDARD BIOTOOLS INC."
+  },
+  {
+    "cik": 1162194,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001162194.json",
+    "sha256": "9516e14c2610d5af6449ae660d7e54226f79f86acc56bf70f867c6eff0e12a63",
+    "bytes": 164296,
+    "status": "cached",
+    "entity_name": "STANDARD BIOTOOLS INC."
+  },
+  {
+    "cik": 1124105,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001124105.json",
+    "sha256": "3492d13b8e047d8d27d42f96a325d733c01d315746a988ab4c543538155f4d02",
+    "bytes": 2271247,
+    "status": "cached",
+    "entity_name": "Gyre Therapeutics, Inc."
+  },
+  {
+    "cik": 1124105,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001124105.json",
+    "sha256": "995b0c06597c6493970e0ea563222747abc505c0fcb25326852c0dd0ab44d126",
+    "bytes": 161003,
+    "status": "cached",
+    "entity_name": "GYRE THERAPEUTICS, INC."
+  },
+  {
+    "cik": 1599298,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001599298.json",
+    "sha256": "2518bff62a0938dc0999e0f7a5d10d00e7de9e8380227c13e0076709c046f79e",
+    "bytes": 1623533,
+    "status": "cached",
+    "entity_name": "Summit Therapeutics Inc."
+  },
+  {
+    "cik": 1599298,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001599298.json",
+    "sha256": "8c6cb9dd1223540a2aa00d8a4de7884082c57049d984feb79807917bc1f3e746",
+    "bytes": 94166,
+    "status": "cached",
+    "entity_name": "Summit Therapeutics Inc."
+  },
+  {
+    "cik": 1666138,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001666138.json",
+    "sha256": "0ddc4004eb0a8996128dd4a7c63c60db0f1adca5efee6bf30490cfe14af336f7",
+    "bytes": 2300336,
+    "status": "cached",
+    "entity_name": "Atkore Inc."
+  },
+  {
+    "cik": 1666138,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001666138.json",
+    "sha256": "b58f1506986251e70bb74ce321329ee0cdc828930b8efc67995992401e346dca",
+    "bytes": 155661,
+    "status": "cached",
+    "entity_name": "Atkore Inc."
+  },
+  {
+    "cik": 1675149,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001675149.json",
+    "sha256": "2831d6ba7adbcbf6c1a3fc1b6d554c7f4de086c00f85953a34dbb620a2739933",
+    "bytes": 2633245,
+    "status": "cached",
+    "entity_name": "ALCOA CORP"
+  },
+  {
+    "cik": 1675149,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001675149.json",
+    "sha256": "a031c48c1b256f3ddb39acfa9278e1e3751f93b89c032044f1be30ea75e61fa8",
+    "bytes": 136777,
+    "status": "cached",
+    "entity_name": "Alcoa Corp"
+  },
+  {
+    "cik": 1253689,
+    "kind": "facts",
+    "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001253689.json",
+    "sha256": "032f3f623e1a2ab09ae67650d447fcb7498357e6cb85e8c83db58f626ab79730",
+    "bytes": 1437813,
+    "status": "cached",
+    "entity_name": "Crescent Biopharma, Inc."
+  },
+  {
+    "cik": 1253689,
+    "kind": "submissions",
+    "url": "https://data.sec.gov/submissions/CIK0001253689.json",
+    "sha256": "79d8232bec2d297dd74567e3ce018d02ab5bc208290c803e4cfa209e5aeaa76a",
+    "bytes": 110926,
+    "status": "cached",
+    "entity_name": "CRESCENT BIOPHARMA, INC."
+  }
+]

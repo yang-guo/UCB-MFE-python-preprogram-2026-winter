@@ -1,0 +1,38 @@
+[
+  {
+    "security_id":"CIK1162194-common-reviewed",
+    "issuer_id":"CIK1162194",
+    "tables":["prices","fundamentals"],
+    "scope_start":"2011-02-10",
+    "scope_end":"2022-04-05",
+    "source_priority":["FLDM","LAB"],
+    "evidence":[
+      "https://www.sec.gov/Archives/edgar/data/1162194/000116219416000182/fye2015form10-k.htm",
+      "https://www.sec.gov/Archives/edgar/data/1162194/000119312522096290/d314141d8k.htm"
+    ],
+    "note":"Scope is the reviewed pre-rename common-stock interval. LAB backfilled history is the same economic security; this is an identity correction, not an investment signal. Other periods remain unverified."
+  },
+  {
+    "security_id":"CIK1124105-common-2018-reviewed",
+    "issuer_id":"CIK1124105",
+    "tables":["prices"],
+    "scope_start":"2018-01-01",
+    "scope_end":"2018-12-31",
+    "source_priority":["CBIO","GYRE"],
+    "evidence":[
+      "https://www.sec.gov/Archives/edgar/data/1124105/000156459019006879/cbio-10k_20181231.htm",
+      "https://www.sec.gov/Archives/edgar/data/1124105/000114036123050292/ny20009756x10_8k.htm"
+    ],
+    "note":"PRICE TABLE ONLY. Review scope is 2018, not a claimed listing start/end. Historical Catalyst CBIO and backfilled GYRE prices are linked only here. The CBIO 2018-Q1 financial record instead matches GlycoMimetics CIK1253689; never transfer a price identity into the financial table automatically."
+  },
+  {
+    "security_id":"CIK1124105-common-2018-reviewed",
+    "issuer_id":"CIK1124105",
+    "tables":["fundamentals"],
+    "scope_start":"2018-01-01",
+    "scope_end":"2018-12-31",
+    "source_priority":["GYRE"],
+    "evidence":["https://www.sec.gov/Archives/edgar/data/1124105/000156459019006879/cbio-10k_20181231.htm"],
+    "note":"All four sampled GYRE 2018 quarterly ROA records match historical Catalyst SEC facts. This rule deliberately excludes CBIO financials."
+  }
+]

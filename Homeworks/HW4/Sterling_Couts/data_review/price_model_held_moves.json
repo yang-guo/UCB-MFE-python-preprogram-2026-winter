@@ -1,0 +1,37 @@
+{
+  "review_date": "2026-11-15",
+  "scope": "Retrospective context for six unique held-price events in the linear/nonlinear comparison. No outside facts enter features, labels, prices, cash flows or trading decisions. News context does not independently verify exact adjusted quotes. All affected account returns remain provisional.",
+  "events": [
+    {
+      "symbol": "ZIOP", "date": "2013-03-26", "historical_issuer": "Ziopharm Oncology", "status": "news_context_only",
+      "finding": "The issuer announced that PICASSO 3 failed its progression-free-survival endpoint and stopped palifosfamide development in metastatic soft-tissue sarcoma. This supplies context for a large loss, not independent verification of the adjusted-price ratio.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1107421/000119312513125422/d510555dex991.htm"]
+    },
+    {
+      "symbol": "CATX", "date": "2014-03-19", "historical_issuer": null, "status": "unresolved",
+      "finding": "A bounded search did not establish sufficiently verified historical identity, event context and comparable adjusted quotes for this account move. Preserve the gain and the unresolved flag; do not assume that its size alone proves an error or a genuine return.",
+      "sources": []
+    },
+    {
+      "symbol": "RGLS", "date": "2014-10-22", "historical_issuer": "Regulus Therapeutics", "status": "news_context_only",
+      "finding": "The earlier development review identified the issuer's RG-101 proof-of-concept announcement. That context remains separate from exact adjusted-quote verification.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1505512/000119312514378143/d809477d8k.htm"],
+      "prior_review": "data_review/development_held_moves.json"
+    },
+    {
+      "symbol": "NLTX", "date": "2015-07-09", "historical_issuer": "Aquinox Pharmaceuticals (AQXP)", "status": "news_context_only",
+      "finding": "Aquinox reported that FLAGSHIP did not demonstrate efficacy in COPD. A later issuer filing establishes the Aquinox-to-Neoleukin name and symbol transition. Later identity evidence is explanatory only; it is not available to a 2015 predictor. Exact adjusted quotes remain unverified.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1404644/000119312515248558/d30947dex991.htm", "https://www.sec.gov/Archives/edgar/data/1404644/000119312519290613/d821050dex991.htm"]
+    },
+    {
+      "symbol": "NLTX", "date": "2015-08-07", "historical_issuer": "Aquinox Pharmaceuticals (AQXP)", "status": "news_context_only",
+      "finding": "The August 6 issuer announcement described positive secondary-endpoint results from LEADERSHIP. The earlier primary endpoint had not reached statistical significance. This provides context for the following session's gain, not proof of the recorded adjusted-price ratio or its causal attribution.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1404644/000119312515281025/d97759dex991.htm", "https://www.sec.gov/Archives/edgar/data/1404644/000119312519290613/d821050dex991.htm"]
+    },
+    {
+      "symbol": "VSTM", "date": "2015-09-28", "historical_issuer": "Verastem", "status": "news_context_only",
+      "finding": "The issuer's subsequent quarterly filing records the September 28 decision to stop COMMAND enrollment for insufficient efficacy following an interim review. It supplies historical context, not an exact quote check or an input known before the event.",
+      "sources": ["https://www.sec.gov/Archives/edgar/data/1526119/000110465915076901/a15-18075_110q.htm"]
+    }
+  ]
+}
