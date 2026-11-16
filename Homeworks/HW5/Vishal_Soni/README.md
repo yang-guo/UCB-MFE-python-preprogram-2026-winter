@@ -58,7 +58,7 @@ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data
 # Stop the container, run `make run` again, and repeat the valid request.
 ```
 
-**Not yet verified:** Docker/Podman and a running container engine were unavailable on the development machine. The image has not been built or run, and the assignment's required container request and restart evidence remains outstanding. The local transcript is not a substitute for container evidence. The Dockerfile uses `python:3.12-slim`; `.dockerignore` excludes environments, databases and secrets from the build context.
+Built and tested with Docker on Colima (Linux arm64) on November 16, 2026. The container returned 200 for the example, 422 for an invalid numeric string, and the same prediction after a container restart. See the actual [container transcript](container_transcript.txt); host port 18005 was used for the recorded run. The Dockerfile uses `python:3.12-slim`; `.dockerignore` excludes environments, databases and secrets from the build context.
 
 ## Before a real deployment
 
