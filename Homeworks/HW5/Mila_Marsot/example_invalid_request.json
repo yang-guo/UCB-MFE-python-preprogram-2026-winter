@@ -1,0 +1,15 @@
+{
+  "momentum_21": "0.09",
+  "momentum_63": 0.061757283218582426,
+  "momentum_252_21": 0.590790183117998,
+  "volatility_63": 0.39254404589494996,
+  "drawdown_252": -0.003644348385909879,
+  "net_margin": 0.14846538187009278,
+  "operating_roa": 0.03419267299864315,
+  "debt_to_assets": 0.20488466757123475,
+  "cash_to_assets": 0.08086838534599729,
+  "fcf_to_assets": 0.06729986431478968,
+  "accruals_to_assets": -0.04111261872455902,
+  "filing_age_days": 13.0,
+  "dividend_yield": 0.02
+}

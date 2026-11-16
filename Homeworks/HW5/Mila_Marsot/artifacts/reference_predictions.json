@@ -1,0 +1,44 @@
+[
+  {
+    "name": "all_features",
+    "symbol": "NVDA",
+    "signal_date": "2016-03-31",
+    "features": {
+      "momentum_21": 0.08793402123973793,
+      "momentum_63": 0.061757283218582426,
+      "momentum_252_21": 0.590790183117998,
+      "volatility_63": 0.39254404589494996,
+      "drawdown_252": -0.003644348385909879,
+      "net_margin": 0.14846538187009278,
+      "operating_roa": 0.03419267299864315,
+      "debt_to_assets": 0.20488466757123475,
+      "cash_to_assets": 0.08086838534599729,
+      "fcf_to_assets": 0.06729986431478968,
+      "accruals_to_assets": -0.04111261872455902,
+      "filing_age_days": 13.0,
+      "sector": "Technology"
+    },
+    "hw4_prediction": 3.752976926401481
+  },
+  {
+    "name": "missing_financials",
+    "symbol": "ABIO",
+    "signal_date": "2016-03-31",
+    "features": {
+      "momentum_21": -0.008561121837211694,
+      "momentum_63": -0.3046042550158584,
+      "momentum_252_21": -0.36716878607141135,
+      "volatility_63": 0.6321707791664359,
+      "drawdown_252": -0.6717082075051102,
+      "net_margin": null,
+      "operating_roa": -0.08022944357406378,
+      "debt_to_assets": 0.0,
+      "cash_to_assets": 0.9804922423813615,
+      "fcf_to_assets": -0.0662556223783292,
+      "accruals_to_assets": -0.013847475615302977,
+      "filing_age_days": 13.0,
+      "sector": "Healthcare"
+    },
+    "hw4_prediction": 0.24229453417533353
+  }
+]

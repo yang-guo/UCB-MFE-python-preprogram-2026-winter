@@ -1,0 +1,84 @@
+### 1. Build the image and start the container
+$ docker build -q -t mfe-hw5:local .
+sha256:27d2d0dd309b7ddfb80196359654774da674bdd7ac5561ca504c83b79a211b42
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+93fd1a726184488afd505877b5b45da9cee6fba81518ee5fca0b69c0464e868c
+
+### 2. Good request -> 200
+$ cat example_request.json
+{
+  "momentum_21": 0.08793402123973793,
+  "momentum_63": 0.061757283218582426,
+  "momentum_252_21": 0.590790183117998,
+  "volatility_63": 0.39254404589494996,
+  "drawdown_252": -0.003644348385909879,
+  "net_margin": 0.14846538187009278,
+  "operating_roa": 0.03419267299864315,
+  "debt_to_assets": 0.20488466757123475,
+  "cash_to_assets": 0.08086838534599729,
+  "fcf_to_assets": 0.06729986431478968,
+  "accruals_to_assets": -0.04111261872455902,
+  "filing_age_days": 13.0,
+  "sector": "Technology"
+}
+$ curl -i -s http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 13:53:22 GMT
+server: uvicorn
+content-length: 96
+content-type: application/json
+
+{"prediction":3.7529769264014816,"model_version":"hw4-ridge-alpha100-trained-before-2016-03-31"}
+
+### 3. Bad request -> 422
+$ cat example_invalid_request.json
+{
+  "momentum_21": "0.09",
+  "momentum_63": 0.061757283218582426,
+  "momentum_252_21": 0.590790183117998,
+  "volatility_63": 0.39254404589494996,
+  "drawdown_252": -0.003644348385909879,
+  "net_margin": 0.14846538187009278,
+  "operating_roa": 0.03419267299864315,
+  "debt_to_assets": 0.20488466757123475,
+  "cash_to_assets": 0.08086838534599729,
+  "fcf_to_assets": 0.06729986431478968,
+  "accruals_to_assets": -0.04111261872455902,
+  "filing_age_days": 13.0,
+  "dividend_yield": 0.02
+}
+$ curl -i -s http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 13:53:22 GMT
+server: uvicorn
+content-length: 204
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number"},{"loc":["body","sector"],"msg":"Field required"},{"loc":["body","dividend_yield"],"msg":"Extra inputs are not permitted"}]}
+
+### 4. Stop the container and start it again
+$ docker stop mfe-hw5
+mfe-hw5
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+f4277d49361c254709c2f9c60f499421302b574a5eb94f1d6e5907fce0ad0f3e
+
+### 5. Same good request -> 200
+$ curl -i -s http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 13:53:24 GMT
+server: uvicorn
+content-length: 96
+content-type: application/json
+
+{"prediction":3.7529769264014816,"model_version":"hw4-ridge-alpha100-trained-before-2016-03-31"}
+
+### 6. Server log, then stop
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:63012 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63022 - "POST /predict HTTP/1.1" 200 OK
+$ docker stop mfe-hw5
+mfe-hw5
