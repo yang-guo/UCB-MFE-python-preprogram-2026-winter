@@ -1,0 +1,37 @@
+{
+  "model_version": "hw4-hgb-rank-v1",
+  "source": "HW4 03_backtest.ipynb cell 2; HistGradientBoostingRegressor",
+  "features": [
+    "rsi_21",
+    "dma_20",
+    "dma_50",
+    "dma_100",
+    "momentum_252_21",
+    "volatility_63",
+    "roe",
+    "debt_to_equity",
+    "book_to_px",
+    "earnings_yield",
+    "fcf_yield",
+    "ebitda_ev"
+  ],
+  "train_window": "2010-01-01 to 2015-12-31, label_end <= 2016-03-31",
+  "target": "same-date percentile rank of 90-day return minus 0.5 (range ~[-0.5, 0.5])",
+  "sklearn_version": "1.8.0",
+  "reference_input": {
+    "rsi_21": 69.62509208246303,
+    "dma_20": 0.021058160951640037,
+    "dma_50": 0.09162048345223894,
+    "dma_100": 0.1730492022180683,
+    "momentum_252_21": 0.11400048305289445,
+    "volatility_63": 0.2878568173822181,
+    "roe": 0.19853973602920527,
+    "debt_to_equity": 0.4710755405784892,
+    "book_to_px": 0.1633072726538968,
+    "earnings_yield": 0.03242298280435413,
+    "fcf_yield": 0.028800046960586127,
+    "ebitda_ev": 0.0434464505888522
+  },
+  "reference_symbol_date": "2026-08-31",
+  "reference_prediction": 0.016113780140667493
+}

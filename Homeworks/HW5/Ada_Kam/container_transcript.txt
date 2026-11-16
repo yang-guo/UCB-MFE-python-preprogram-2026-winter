@@ -1,0 +1,74 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261117003045
+Username: ADAK\adaka
+RunAs User: ADAK\adaka
+Configuration Name: 
+Machine: ADAK (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\adaka\AppData\Local\Programs\Microsoft VS Code\e646868227\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 30788
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is container_transcript.txt
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local | Out-Host
+95aed7426a966729595b9f5671f0163cc8380c62502012137f460d2d02c020dc
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>Start-Sleep -Seconds 30
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>docker ps --filter name=mfe-hw5 | Out-Host
+CONTAINER ID   IMAGE           COMMAND                  CREATED              STATUS              PORTS                      NAMES
+95aed7426a96   mfe-hw5:local   "uvicorn app:app --hΓÇª"   About a minute ago   Up About a minute   127.0.0.1:8000->8000/tcp   mfe-hw5
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>curl.exe -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary "@example_request.json" | Out-Host
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 16:32:24 GMT
+server: uvicorn
+content-length: 69
+content-type: application/json
+
+{"prediction":0.016113780140667493,"model_version":"hw4-hgb-rank-v1"}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>curl.exe -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary "@bad_request.json" | Out-Host
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>curl.exe -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary "@bad_example_request.json" | Out-Host
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 16:32:49 GMT
+server: uvicorn
+content-length: 117
+content-type: application/json
+
+{"detail":[{"loc":["body","rsi_21"],"msg":"Input should be greater than or equal to 0","type":"greater_than_equal"}]}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>docker stop mfe-hw5 | Out-Host
+mfe-hw5
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local | Out-Host
+e2fab8a862262f0309593d5d00907802b12490a13c4a2c04e7c8643efa05915e
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>Start-Sleep -Seconds 30
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>curl.exe -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary "@example_request.json" | Out-Host
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 16:34:21 GMT
+server: uvicorn
+content-length: 69
+content-type: application/json
+
+{"prediction":0.016113780140667493,"model_version":"hw4-hgb-rank-v1"}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>docker stop mfe-hw5 | Out-Host
+mfe-hw5
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cadaka\x5cgithub\x5cUCB-MFE-python-preprogram-2026-winter\x5cHomeworks\x5cHW5\x5cAda_KamPS C:\Users\adaka\github\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ada_Kam> ]633;B
+PS>Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20261117003433
+**********************
