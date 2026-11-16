@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "image": "mfe-hw5:local",
+  "image_id": "sha256:4d32ab09b4b484043e15b7b825b157ad600ac33b462dcb5d14fab9311d92c941",
+  "checks": [
+    "valid 200",
+    "invalid 422",
+    "same image after stop/start"
+  ]
+}

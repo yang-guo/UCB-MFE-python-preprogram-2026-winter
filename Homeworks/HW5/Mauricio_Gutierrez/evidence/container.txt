@@ -1,0 +1,138 @@
+$ docker version
+Client:
+ Version:           29.9.3
+ API version:       1.56
+ Go version:        go1.26.10
+ Git commit:        5457199
+ Built:             Tue Nov  3 21:46:10 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.99.0 (245822)
+ Engine:
+  Version:          29.9.3
+  API version:      1.56 (minimum version 1.40)
+  Go version:       go1.26.10
+  Git commit:       70efc0e
+  Built:            Tue Nov  3 21:41:42 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.4.2
+  GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
+ runc:
+  Version:          1.5.2
+  GitCommit:        v1.5.2-0-g29dd3dc2
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+$ docker build -t mfe-hw5:local .
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 414B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 0.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 164B done
+#3 DONE 0.0s
+
+#4 [1/7] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#4 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 314B done
+#5 DONE 0.0s
+
+#6 [6/7] COPY artifacts/ ./artifacts/
+#6 CACHED
+
+#7 [2/7] WORKDIR /app
+#7 CACHED
+
+#8 [3/7] COPY requirements.txt .
+#8 CACHED
+
+#9 [5/7] COPY app.py model_service.py model_components.py ./
+#9 CACHED
+
+#10 [4/7] RUN python -m pip install --no-cache-dir -r requirements.txt
+#10 CACHED
+
+#11 [7/7] RUN useradd --create-home service
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers done
+#12 exporting manifest sha256:6521b3bc0c5d9b098633bb11d6834fed0f93d305c05d3cb77652bb23cad7b95f done
+#12 exporting config sha256:44f7dfa54d9a62f34afc451af0eda3812f9de0f82bf944e006f6d61d5d0f38c3 done
+#12 exporting attestation manifest sha256:92e36d9553135cfe082b0e7db93524203f9270f7021d9ada8a421d9f91ecab01 0.0s done
+#12 exporting manifest list sha256:4d32ab09b4b484043e15b7b825b157ad600ac33b462dcb5d14fab9311d92c941 0.0s done
+#12 naming to docker.io/library/mfe-hw5:local
+#12 naming to docker.io/library/mfe-hw5:local done
+#12 unpacking to docker.io/library/mfe-hw5:local 0.0s done
+#12 DONE 0.1s
+
+$ docker run -d --name mfe-hw5-check-168b12e1 -p 127.0.0.1:18766:8000 mfe-hw5:local
+b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+
+$ docker inspect --format {{.Image}} b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+sha256:4d32ab09b4b484043e15b7b825b157ad600ac33b462dcb5d14fab9311d92c941
+
+Running container: initial requests
+Base URL: http://127.0.0.1:18766
+POST /predict (valid)
+{"momentum_21": 0.03558520989713654, "momentum_63": -0.03870967741935483, "momentum_252_21": -0.04941860465116288, "volatility_63": 0.2850211804991309, "drawdown_252": -0.06430545089173578, "net_margin": 0.7757847533632287, "operating_roa": 0.7023809523809523, "debt_to_assets": 0.626984126984127, "cash_to_assets": 0.623015873015873, "filing_age_days": 23.0}
+HTTP 200
+{"prediction":0.033696732346221454,"model_version":"hw4-ridge-alpha100-2016-04-01"}
+POST /predict (invalid)
+{"momentum_21": 0.03558520989713654, "momentum_63": -0.03870967741935483, "momentum_252_21": -0.04941860465116288, "volatility_63": -0.1, "drawdown_252": -0.06430545089173578, "net_margin": 0.7757847533632287, "operating_roa": 0.7023809523809523, "debt_to_assets": 0.626984126984127, "cash_to_assets": 0.623015873015873, "filing_age_days": 23.0}
+HTTP 422
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be greater than or equal to 0","type":"greater_than_equal"}]}
+$ docker stop b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+
+$ docker start b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+
+$ docker inspect --format {{.Image}} b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+sha256:4d32ab09b4b484043e15b7b825b157ad600ac33b462dcb5d14fab9311d92c941
+
+Same image: requests after stop/start
+Base URL: http://127.0.0.1:18766
+POST /predict (valid)
+{"momentum_21": 0.03558520989713654, "momentum_63": -0.03870967741935483, "momentum_252_21": -0.04941860465116288, "volatility_63": 0.2850211804991309, "drawdown_252": -0.06430545089173578, "net_margin": 0.7757847533632287, "operating_roa": 0.7023809523809523, "debt_to_assets": 0.626984126984127, "cash_to_assets": 0.623015873015873, "filing_age_days": 23.0}
+HTTP 200
+{"prediction":0.033696732346221454,"model_version":"hw4-ridge-alpha100-2016-04-01"}
+POST /predict (invalid)
+{"momentum_21": 0.03558520989713654, "momentum_63": -0.03870967741935483, "momentum_252_21": -0.04941860465116288, "volatility_63": -0.1, "drawdown_252": -0.06430545089173578, "net_margin": 0.7757847533632287, "operating_roa": 0.7023809523809523, "debt_to_assets": 0.626984126984127, "cash_to_assets": 0.623015873015873, "filing_age_days": 23.0}
+HTTP 422
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be greater than or equal to 0","type":"greater_than_equal"}]}
+$ docker logs b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:58882 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58898 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58898 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:58932 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58936 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58936 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+
+$ docker rm -f b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548
+b9c35c820722902a2a0f6f747ded5399d05cda188e9fdc167133debafa5b0548

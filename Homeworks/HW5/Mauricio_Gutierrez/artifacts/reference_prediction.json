@@ -1,0 +1,10 @@
+{
+  "source": "HW4 outputs/final_test/forecasts.parquet, saved before the HW5 API",
+  "symbol": "A",
+  "signal_date": "2016-04-01",
+  "fit_date": "2016-04-01",
+  "prediction": 0.033696732346221454,
+  "model_version": "hw4-ridge-alpha100-2016-04-01",
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-08
+}

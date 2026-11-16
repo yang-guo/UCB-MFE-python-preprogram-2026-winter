@@ -1,0 +1,112 @@
+=== 1. Start a container from the image ===
+
+$ docker image inspect --format \{\{.Id\}\} mfe-hw5:local
+sha256:887f7f17dddb9c90b34f5fbd20de1d8e211f038d5f136009a659071e4ca133cc
+
+
+$ docker run -d --name mfe-hw5-curl-2052 -p 127.0.0.1:8000:8000 mfe-hw5:local
+58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+=== 2. Valid request ===
+
+$ cat example_request.json
+{
+  "momentum_21": 0.03558520989713654,
+  "momentum_63": -0.03870967741935483,
+  "momentum_252_21": -0.04941860465116288,
+  "volatility_63": 0.2850211804991309,
+  "drawdown_252": -0.06430545089173578,
+  "net_margin": 0.7757847533632287,
+  "operating_roa": 0.7023809523809523,
+  "debt_to_assets": 0.626984126984127,
+  "cash_to_assets": 0.623015873015873,
+  "filing_age_days": 23.0
+}
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 02:05:43 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":0.033696732346221454,"model_version":"hw4-ridge-alpha100-2016-04-01"}
+Response check passed.
+=== 3. Invalid request: negative volatility_63 ===
+
+$ cat invalid_request.json
+{
+  "momentum_21": 0.03558520989713654,
+  "momentum_63": -0.03870967741935483,
+  "momentum_252_21": -0.04941860465116288,
+  "volatility_63": -0.1,
+  "drawdown_252": -0.06430545089173578,
+  "net_margin": 0.7757847533632287,
+  "operating_roa": 0.7023809523809523,
+  "debt_to_assets": 0.626984126984127,
+  "cash_to_assets": 0.623015873015873,
+  "filing_age_days": 23.0
+}
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 02:05:43 GMT
+server: uvicorn
+content-length: 124
+content-type: application/json
+
+{"detail":[{"loc":["body","volatility_63"],"msg":"Input should be greater than or equal to 0","type":"greater_than_equal"}]}
+Response check passed.
+=== 4. Stop the container ===
+
+$ docker stop 58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+
+
+$ curl -sS --max-time 3 http://127.0.0.1:8000/health
+curl: (7) Failed to connect to 127.0.0.1:8000 after 0 ms: Could not connect to server
+Expected connection failure confirmed.
+=== 5. Start the same container and verify the image ===
+
+$ docker start 58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+
+Same image confirmed: sha256:887f7f17dddb9c90b34f5fbd20de1d8e211f038d5f136009a659071e4ca133cc
+=== 6. Valid request after restart ===
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 02:05:47 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":0.033696732346221454,"model_version":"hw4-ridge-alpha100-2016-04-01"}
+Response check passed.
+=== 7. Server log and cleanup ===
+
+$ docker logs 58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:37684 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37688 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37694 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:37740 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37742 - "POST /predict HTTP/1.1" 200 OK
+
+
+$ docker rm -f 58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+58101fcda27b3f9f01f913702af76b9bda2eb13714bf6aa6a9cf10a211b0859d
+
+All container and response checks passed.
