@@ -40,6 +40,6 @@ start
 run curl -sS -i "$URL/predict" -H 'Content-Type: application/json' \
   --data-binary @example_request.json
 
-echo "## Container log (model loaded once at startup; no traceback for 422s)"
+echo "## Container log after restart (model loaded once at startup)"
 run docker logs "$NAME"
 docker stop "$NAME" >/dev/null

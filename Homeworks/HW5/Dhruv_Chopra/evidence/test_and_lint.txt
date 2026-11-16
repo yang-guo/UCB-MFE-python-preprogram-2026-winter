@@ -7,15 +7,15 @@ $ make test
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-25 passed, 1 warning in 8.91s
+25 passed, 1 warning in 4.67s
 
 $ python -m pytest -q -s -k performance
-TestClient in-process latency over 100 requests: median 7.20 ms, p95 11.76 ms (x86_64, Darwin 24.6.0, Python 3.12.9)
+TestClient in-process latency over 100 requests: median 4.05 ms, p95 6.50 ms (x86_64, Darwin 24.6.0, Python 3.12.9)
 .
-1 passed, 24 deselected in 6.66s
+1 passed, 24 deselected in 2.78s
 
 $ make lint
 .venv/bin/python -m ruff check .
 All checks passed!
 .venv/bin/python -m ruff format --check .
-4 files already formatted
+5 files already formatted

@@ -107,10 +107,12 @@ The image is built from `python:3.12-slim` and contains `requirements.txt`, `app
 
 | Run | Median | p95 |
 |---|---:|---:|
-| `make test` run (`evidence/test_and_lint.txt`) | 7.20 ms | 11.76 ms |
-| earlier run | 5.05 ms | 7.54 ms |
+| `pytest -q -s -k performance` (saved in `evidence/test_and_lint.txt`) | 4.05 ms | 6.50 ms |
+| earlier runs | 5.05–7.20 ms | 7.54–11.76 ms |
 
-The test asserts **median < 50 ms**. The model itself is one 1×40 dot product, so nearly all of the time is FastAPI/Pydantic overhead. 50 ms leaves room for a slower CI machine but would still catch a regression such as reloading the artifact on each request. Real localhost HTTP through Docker would add network and serialization time and was not benchmarked.
+Each run is 5 warm-up requests, then 100 requests timed with `time.perf_counter`.
+
+The test asserts **median < 25 ms**. The model itself is one 1×40 dot product, so nearly all of the time is FastAPI/Pydantic overhead. 25 ms leaves about 3× headroom over the slowest run I saw. It would still catch a regression where the artifact is loaded on every request, because `load_bundle()` takes about 44 ms on this laptop. Real localhost HTTP through Docker would add network and serialization time and was not benchmarked.
 
 ## Evidence
 

@@ -155,10 +155,10 @@ def test_predict_non_finite_model_output_is_500(failure_client, valid_input_data
 def test_predict_performance(client, valid_input_data):
     """In-process TestClient latency (no network, no uvicorn); see README for results.
 
-    Budget: the median must stay under 50 ms. On the development laptop it is a few
-    milliseconds (one 20x40 matrix product plus FastAPI/Pydantic overhead), so 50 ms
-    leaves room for slower CI machines while still catching e.g. accidental
-    reloading of the artifact or refitting on each request (~hundreds of ms).
+    Budget: the median must stay under 25 ms. On the development laptop it is 5-7 ms
+    (one 1x40 dot product plus FastAPI/Pydantic overhead), so 25 ms leaves ~3x room
+    for a slower machine while still catching accidental per-request artifact
+    loading (``load_bundle()`` measured at ~44 ms on the same laptop).
     """
     for _ in range(5):  # warm-up: imports, first-call caches
         assert client.post("/predict", json=valid_input_data).status_code == 200
@@ -178,4 +178,4 @@ def test_predict_performance(client, valid_input_data):
         f"({platform.machine()}, {platform.system()} {platform.release()}, "
         f"Python {platform.python_version()})"
     )
-    assert median < 50
+    assert median < 25

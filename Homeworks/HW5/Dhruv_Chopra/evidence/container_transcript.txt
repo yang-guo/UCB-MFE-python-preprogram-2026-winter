@@ -1,22 +1,22 @@
-# 2026-11-16 18:07:15 UTC, Docker 29.9.3
+# 2026-11-16 18:19:40 UTC, Docker 29.9.3
 
 $ docker image ls mfe-hw5:local
 IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
-mfe-hw5:local   ec43bb8817c8        735MB          169MB        
+mfe-hw5:local   1b3a3a70a5b1        735MB          169MB        
 
 
 $ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
-652533706faa8ddd16cc977820bf3be9980170fb44a2478262a480ec446ec2de
+eac166887869483f541fa02cfcac165e312a7e266e47046e9d44e10c1e821138
 
 ## 1. Valid request (AAPL, 2026-09-28 ranks from HW4)
 
 $ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
 HTTP/1.1 200 OK
-date: Mon, 16 Nov 2026 18:07:39 GMT
+date: Mon, 16 Nov 2026 18:19:48 GMT
 server: uvicorn
 content-length: 82
 content-type: application/json
-x-request-id: be90f43b9ae5
+x-request-id: 5ae32dbce0c2
 
 {"prediction":0.532340808776408,"model_version":"hw4-v1-ridge-a10-fit-2026-07-01"}
 ## 2. Invalid request: numeric string -> 422
@@ -44,7 +44,7 @@ $ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --
   "filing_age_days": 0.6844135522842407
 }
 HTTP/1.1 422 Unprocessable Entity
-date: Mon, 16 Nov 2026 18:07:39 GMT
+date: Mon, 16 Nov 2026 18:19:48 GMT
 server: uvicorn
 content-length: 110
 content-type: application/json
@@ -54,7 +54,7 @@ content-type: application/json
 
 $ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data {"mom_5": 0.5, "mom_21": 0.5}
 HTTP/1.1 422 Unprocessable Entity
-date: Mon, 16 Nov 2026 18:07:39 GMT
+date: Mon, 16 Nov 2026 18:19:48 GMT
 server: uvicorn
 content-length: 1943
 content-type: application/json
@@ -67,19 +67,19 @@ mfe-hw5
 
 
 $ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
-45a46b6e6a7773963a7292994a677f91fcb55b396fccb413bc3470b3a7a62485
+6a6a25d5081ea278241d3764b70bfb16914ec1367db553dce1584996ec076738
 
 
 $ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
 HTTP/1.1 200 OK
-date: Mon, 16 Nov 2026 18:07:57 GMT
+date: Mon, 16 Nov 2026 18:19:53 GMT
 server: uvicorn
 content-length: 82
 content-type: application/json
-x-request-id: 37ff0ac46c03
+x-request-id: fa09f2c72da7
 
 {"prediction":0.532340808776408,"model_version":"hw4-v1-ridge-a10-fit-2026-07-01"}
-## Container log (model loaded once at startup; no traceback for 422s)
+## Container log after restart (model loaded once at startup)
 
 $ docker logs mfe-hw5
 INFO:     Started server process [1]
@@ -87,6 +87,6 @@ INFO:     Waiting for application startup.
 INFO:     loaded model_version=hw4-v1-ridge-a10-fit-2026-07-01
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     172.17.0.1:55178 - "GET /health HTTP/1.1" 200 OK
-INFO:     172.17.0.1:55188 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63322 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63326 - "POST /predict HTTP/1.1" 200 OK
 
