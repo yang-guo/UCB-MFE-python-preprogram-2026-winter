@@ -1,0 +1,49 @@
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+# 2026-11-16 15:05 UTC, Darwin arm64, Docker 
+
+$ docker build -q -t mfe-hw5:local .
+ERROR: failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+service did not start
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @evidence/invalid_request.json
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+
+
+$ docker stop mfe-hw5
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+# Restart the same image
+$ docker image inspect --format {{.Id}} mfe-hw5:local
+
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+service did not start
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type: application/json --data-binary @example_request.json
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+
+
+$ docker logs mfe-hw5
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
+$ docker stop mfe-hw5
+failed to connect to the docker API at unix:///Users/antoineamiel/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/antoineamiel/.docker/run/docker.sock: connect: no such file or directory
+
+
