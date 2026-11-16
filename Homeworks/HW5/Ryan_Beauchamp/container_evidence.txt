@@ -1,0 +1,53 @@
+=== run 1: start container
+Mon Nov 16 05:54:24 UTC 2026
+08baa4db24170051411cf587aa294a5a2fbf09fd980d007a3b0c51e5366c7c0b
+
+=== valid request (expect 200)
+{"prediction":0.04361991939225726,"model_version":"hw4-ridge-rank-a1000-fit-2026-01-02"}
+HTTP 200
+
+=== invalid: momentum_21 missing (expect 422)
+{"detail":[{"type":"missing","loc":["body","momentum_21"],"msg":"Field required"}]}
+HTTP 422
+
+=== invalid: momentum_21 = NaN (expect 422)
+{"detail":[{"type":"finite_number","loc":["body","momentum_21"],"msg":"Input should be a finite number"}]}
+HTTP 422
+
+=== invalid: volatility_63 = 500, above the 100 upper bound (expect 422)
+{"detail":[{"type":"less_than_equal","loc":["body","volatility_63"],"msg":"Input should be less than or equal to 100","ctx":{"le":100.0}}]}
+HTTP 422
+
+=== container logs, run 1
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:51742 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51750 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     172.17.0.1:51764 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     172.17.0.1:51770 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+
+=== stop
+mfe-hw5
+
+=== run 2: start the same image again
+Mon Nov 16 05:54:35 UTC 2026
+80ade169a06a4f28fcd8a3e193260b65962e2c383fe4a9ba1e280897a13b4cab
+
+=== valid request after restart (expect the same 200 and prediction)
+{"prediction":0.04361991939225726,"model_version":"hw4-ridge-rank-a1000-fit-2026-01-02"}
+HTTP 200
+
+=== container logs, run 2
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:36060 - "POST /predict HTTP/1.1" 200 OK
+
+=== image
+IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
+mfe-hw5:local   6d90b1c9f21e        735MB          169MB   U    
+Python 3.12.16
+mfe-hw5

@@ -1,0 +1,3 @@
+=== diff of pip freeze: container (<) vs local .venv (>)
+6a7
+> colorama==0.4.6
