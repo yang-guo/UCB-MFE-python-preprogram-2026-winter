@@ -1,0 +1,18 @@
+{
+  "source": "Original HW4 pipeline.predict(example[FEATURES]) during export",
+  "hw4_commit": "1c2a664f5743d17cbf233becfcc16d68b8123aa4",
+  "symbol": "AAPL",
+  "signal_date": "2016-02-29",
+  "entry_date": "2016-03-01",
+  "input": {
+    "momentum_21": 0.03305004721435312,
+    "momentum_63": -0.17651486639066616,
+    "momentum_252_21": -0.2578836720392431,
+    "volatility_63": 0.3060727868395531,
+    "drawdown_252": -0.26006087250591825,
+    "relative_momentum_63": -0.10711008341050154,
+    "momentum_acceleration": 0.09188833601124183
+  },
+  "prediction": 0.02729199745191903,
+  "model_version": "hw4-ridge-alpha1000-1c2a664-v1"
+}
