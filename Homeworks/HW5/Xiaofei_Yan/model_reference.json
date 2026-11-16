@@ -1,0 +1,33 @@
+{
+  "model_version": "hw4-quarterly-ridge-2026-06-30",
+  "fit_date": "2026-06-30",
+  "prediction_horizon": "next-session entry to first observed close on/after 90 calendar days",
+  "features": [
+    "return_5",
+    "momentum_21",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "relative_momentum_63",
+    "beta_252",
+    "range_21",
+    "volume_ratio_21_252",
+    "log_dollar_volume_21",
+    "operating_roa",
+    "gross_margin",
+    "revenue_yoy",
+    "asset_growth_yoy",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "current_ratio",
+    "filing_age_days"
+  ],
+  "example_date": "2026-06-30",
+  "example_symbol": "A",
+  "expected_prediction": 0.03876615714878504,
+  "reproduced_prediction": 0.03876615714868061,
+  "source": "HW4 outputs/final/predictions/scores_2026-06-30.csv",
+  "training_rows": 7826061
+}
