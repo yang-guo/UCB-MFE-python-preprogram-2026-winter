@@ -1,0 +1,33 @@
+=== Mon Nov 16 12:54:15     2026 - container started
+30644e2f9261432e4a21107b6334d1dd0bd6394493537f16b1faaf77acbe1d87
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 11:54:19 GMT
+server: uvicorn
+content-length: 102
+content-type: application/json
+
+{"prediction":0.5361978083235462,"model_version":"hw4-boosting-rank90d-refit-2026-01-30-854fd7bce9f9"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 11:54:19 GMT
+server: uvicorn
+content-length: 191
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","price"],"msg":"Extra inputs are not permitted","type":"extra_forbidden"}]}
+
+=== stop and restart the same image
+mfe-hw5
+543a7db8536fb734a4dc523c57f0eccf143fd8714395d66930311f3430b60be6
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 11:54:26 GMT
+server: uvicorn
+content-length: 102
+content-type: application/json
+
+{"prediction":0.5361978083235462,"model_version":"hw4-boosting-rank90d-refit-2026-01-30-854fd7bce9f9"}
+
+mfe-hw5

@@ -1,0 +1,15 @@
+{
+  "momentum_21": 0.02570327927228,
+  "momentum_63": 0.034409585060886094,
+  "momentum_252_21": 0.33208279430789145,
+  "volatility_63": 0.3202826043065291,
+  "drawdown_252": -0.06830745706892483,
+  "net_margin": 0.2722520266503377,
+  "operating_roa": 0.09313375045007906,
+  "debt_to_assets": 0.2199699425464299,
+  "cash_to_assets": 0.10317638402571583,
+  "fcf_to_assets": 0.0832685393434325,
+  "accruals_to_assets": -0.011949925117281471,
+  "filing_age_days": 30.0,
+  "sector": "Technology"
+}
