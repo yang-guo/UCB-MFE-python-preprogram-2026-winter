@@ -1,0 +1,12 @@
+{
+  "model_version": "hw4-lasso-alpha-0.01-selected-55-asof-2026-08-31",
+  "artifact": "model.joblib",
+  "training_as_of": "2026-08-31",
+  "training_rows": 388234,
+  "training_label_end_max": "2026-07-30",
+  "example_symbol": "ZYME",
+  "example_date": "2026-08-31",
+  "example_sector": "Healthcare",
+  "expected_prediction": 0.0372359340639856,
+  "numeric_feature_count": 55
+}
