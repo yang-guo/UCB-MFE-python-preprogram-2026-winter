@@ -51,13 +51,23 @@ FEATURE_ORDER = (
     "r_universe_rank_pct",
 )
 
-# Never missing for an HW4-eligible stock: eligibility requires 63 consecutive
-# daily returns, which defines these price features, and every listed stock has
-# a universe rank. All other features can be missing (short price history, no
-# recent filing); the pipeline learned a median and a missing-value indicator
-# for them. export_model.py and the tests check this against the fitted imputer.
+# Never missing in the HW4 training rows, so the pipeline has no missing-value
+# indicator for them. Eligibility requires 63 consecutive daily returns, which
+# defines the five price features, and every listed stock has a universe rank
+# and a market capitalization. The other features can be missing (short price
+# history, no recent filing); the pipeline imputes them with its training median
+# and a missing-value indicator. export_model.py and the tests check this set
+# against the fitted imputer.
 NEVER_MISSING = frozenset(
-    {"r_rev_5", "r_mom_21", "r_mom_63", "r_vol_63", "r_max_ret_21", "r_universe_rank_pct"}
+    {
+        "r_rev_5",
+        "r_mom_21",
+        "r_mom_63",
+        "r_vol_63",
+        "r_max_ret_21",
+        "r_log_size",
+        "r_universe_rank_pct",
+    }
 )
 NULLABLE_FEATURES = frozenset(FEATURE_ORDER) - NEVER_MISSING
 

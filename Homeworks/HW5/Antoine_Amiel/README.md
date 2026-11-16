@@ -57,13 +57,13 @@ The service only loads this artifact. It does not retrain or query the database.
 | `r_book_to_market` | equity / market capitalization | yes |
 | `r_fcf_yield` | TTM free cash flow / market capitalization | yes |
 | `r_filing_age` | days since the latest filing became available | yes |
-| `r_log_size` | log market capitalization ($) | yes |
+| `r_log_size` | log market capitalization ($) | no |
 | `r_universe_rank_pct` | rank in the quarterly top-2000 list (1 = largest) | no |
 
 Rules:
 
 - Values must be JSON numbers with 0 < value ≤ 1. Strings (`"0.5"`), booleans, NaN and infinities are rejected rather than converted.
-- `null` means missing and is allowed only for the features that were missing in some HW4 training rows. The pipeline replaces it with its training median and sets the matching missing-value indicator, as in HW4. The other features were never missing in training, because HW4 eligibility requires them, so `null` is rejected for them.
+- `null` means missing and is allowed only for the features that were missing in some HW4 training rows. The pipeline replaces it with its training median and sets the matching missing-value indicator, as in HW4. The other seven were never missing in the 1,608,045 training rows (HW4 eligibility requires 63 consecutive daily returns, and every listed stock has a universe rank and a market capitalization), so `null` is rejected for them.
 - A missing field or an extra field returns 422, so a request with 27 or 29 features is rejected before inference.
 - The service rebuilds the training representation: a float32 numpy row in the order above (`model_service.FEATURE_ORDER`, equal to HW4 `RANK_FEATURES`), with NaN for null.
 
@@ -82,9 +82,9 @@ Response: `{"prediction": <finite float>, "model_version": "hw4-ridge-fit-2026-0
 Python 3.12, in a separate environment. [`requirements.txt`](requirements.txt) pins the model libraries to the HW4 training environment (the course `uv.lock`: scikit-learn 1.8.0, numpy 2.3.5, scipy 1.16.3, joblib 1.5.3, pandas 2.3.3). From this folder:
 
 ```sh
-python3.12 -m venv .venv
+python3.12 -m venv .venv          # or: uv venv --python 3.12 .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.txt   # or: uv pip install -r requirements.txt
 
 make test      # python -m pytest -q
 make lint      # python -m ruff check . && python -m ruff format --check .

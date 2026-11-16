@@ -31,8 +31,8 @@ class InputData(BaseModel):
     """The 28 HW4 rank features, all required, in training order.
 
     `Rank | None` fields may be null (missing): the HW4 pipeline imputes them with
-    its training median and a missing-value indicator. The other six are never
-    missing for an HW4-eligible stock and must be numbers.
+    its training median and a missing-value indicator. The other seven were never
+    missing in the HW4 training rows and must be numbers.
     Strings, booleans, NaN, infinities, missing fields and extra fields are rejected.
     """
 
@@ -96,7 +96,7 @@ class InputData(BaseModel):
     r_filing_age: Rank | None = Field(
         description=rank_of("days since the latest filing became available")
     )
-    r_log_size: Rank | None = Field(description=rank_of("log market capitalization ($)"))
+    r_log_size: Rank = Field(description=rank_of("log market capitalization ($)"))
     r_universe_rank_pct: Rank = Field(
         description=rank_of("rank in the quarterly top-2000 list (1 = largest)")
     )
