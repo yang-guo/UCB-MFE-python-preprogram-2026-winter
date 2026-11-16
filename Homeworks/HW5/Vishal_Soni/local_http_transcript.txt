@@ -1,0 +1,23 @@
+Local macOS process, NOT a Docker container. Port 18005 was used to avoid conflicts.
+
+$ .venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 18005
+INFO: Application startup complete.
+$ curl -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+content-type: application/json
+
+{"prediction":8.540702680292116,"model_version":"hw4-f38e6db"}
+
+$ curl -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data '{"mom21":"0.1","mom63":0.1,"mom252_21":0.2,"vol63":0.3}'
+HTTP/1.1 422 Unprocessable Entity
+content-type: application/json
+
+{"detail":[{"loc":["body","mom21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+# Stopped the server with Ctrl-C, then started the same local command again.
+INFO: Application startup complete.
+$ curl -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+content-type: application/json
+
+{"prediction":8.540702680292116,"model_version":"hw4-f38e6db"}

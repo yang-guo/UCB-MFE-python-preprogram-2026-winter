@@ -1,0 +1,45 @@
+Docker container verification on Apple Silicon macOS using Colima (Linux arm64).
+Host port 18005 was used to avoid conflicts with any existing service.
+
+$ docker build -t mfe-hw5:local .
+Successfully built a9121633ba66
+Successfully tagged mfe-hw5:local
+
+$ docker run -d --name mfe-hw5 -p 127.0.0.1:18005:8000 mfe-hw5:local
+fe10430961b6ed6547a544b608fac7e1be4794138666a939b2795928c00c49e5
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+$ curl -sS -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 08:35:39 GMT
+server: uvicorn
+content-length: 62
+content-type: application/json
+
+{"prediction":8.540702680292116,"model_version":"hw4-f38e6db"}
+
+$ curl -sS -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data '{"mom21":"0.1","mom63":0.1,"mom252_21":0.2,"vol63":0.3}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 08:35:39 GMT
+server: uvicorn
+content-length: 96
+content-type: application/json
+
+{"detail":[{"loc":["body","mom21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+$ docker restart mfe-hw5
+mfe-hw5
+
+$ curl -sS -i http://127.0.0.1:18005/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 08:35:52 GMT
+server: uvicorn
+content-length: 62
+content-type: application/json
+
+{"prediction":8.540702680292116,"model_version":"hw4-f38e6db"}
