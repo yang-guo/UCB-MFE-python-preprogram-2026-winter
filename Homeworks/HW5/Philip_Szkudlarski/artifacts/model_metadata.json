@@ -1,0 +1,106 @@
+{
+  "model_version": "hw4-run10-trailing126d-2026-09-30-v2",
+  "hw4_final_model": "pairs+fcf+revenue+momentum [trailing 126d] | 90-day review top 40",
+  "hw4_run": "run 10 (2026-11-12), see Homeworks/HW4/Philip_Szkudlarski/README.md",
+  "snapshot_date": "2026-09-30",
+  "decision": "score at the 2026-09-30 close; HW4 would buy at the next session's close",
+  "features": [
+    "pairs_divergence_z",
+    "fcf_quality_score",
+    "revenue_growth_vs_industry",
+    "momentum_percentile"
+  ],
+  "signal_parameters": {
+    "pairs_divergence_z": {
+      "params": {
+        "L": 180,
+        "min_corr": 0.7,
+        "max_bdiff": 0.1,
+        "z": 1.5
+      },
+      "wait": 2,
+      "rule": "fixed (2010-2012)"
+    },
+    "fcf_quality_score": {
+      "params": {
+        "basis": "ttm",
+        "g_min": 0.4,
+        "dil_max": 0.03,
+        "fcfps_min": 0.0
+      },
+      "wait": 2,
+      "rule": "walk-forward"
+    },
+    "revenue_growth_vs_industry": {
+      "params": {
+        "measure": "rev_yoy",
+        "diff_min": 0.0,
+        "accel_min": 0.0,
+        "peer_decel": null
+      },
+      "wait": 2,
+      "rule": "fixed (2010-2012)"
+    },
+    "momentum_percentile": {
+      "params": {
+        "lookback": 252,
+        "skip": 21,
+        "top": 0.1
+      },
+      "wait": 1,
+      "rule": "fixed (2010-2012)"
+    }
+  },
+  "weights_trailing_126d": {
+    "pairs_divergence_z": 0.0,
+    "fcf_quality_score": 0.008488395251333714,
+    "revenue_growth_vs_industry": 0.0,
+    "momentum_percentile": 0.9915115833282471
+  },
+  "expected_90d_excess_return_trailing_126d": {
+    "pairs_divergence_z": -0.00963352064025544,
+    "fcf_quality_score": 0.0006021608080897879,
+    "revenue_growth_vs_industry": -0.0007457497741843182,
+    "momentum_percentile": 0.07033714155217499
+  },
+  "reference_counts": {
+    "pairs_divergence_z": 16,
+    "fcf_quality_score": 128,
+    "revenue_growth_vs_industry": 130,
+    "momentum_percentile": 49
+  },
+  "reference_ranges": {
+    "pairs_divergence_z": [
+      1.5612677335739136,
+      3.771815061569214
+    ],
+    "fcf_quality_score": [
+      0.3341926038265228,
+      0.9324199557304382
+    ],
+    "revenue_growth_vs_industry": [
+      0.0010000000474974513,
+      3.3090720176696777
+    ],
+    "momentum_percentile": [
+      0.9004149436950684,
+      1.0
+    ]
+  },
+  "n_candidates": 157,
+  "checks": {
+    "max_abs_diff_vs_hw4_score": 2.2370525654125117e-07,
+    "max_abs_diff_weights_implied_by_mu_hat": 2.1832010532740753e-08,
+    "max_abs_diff_yearly_weights_vs_hw4_csv": 2.2776031505244987e-08,
+    "hw4_test_buys_with_finite_score": "964/964"
+  },
+  "versions": {
+    "python": "3.12.9",
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3"
+  },
+  "training_data": "Lectures/modeling/data/equities_top2000.duckdb (bCourses)"
+}

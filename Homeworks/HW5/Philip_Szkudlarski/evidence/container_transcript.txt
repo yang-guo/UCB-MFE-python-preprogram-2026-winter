@@ -1,0 +1,61 @@
+=== docker version
+client 29.9.3 / server 29.9.3
+=== docker build -t mfe-hw5:local .
+sha256:9ff75e49e4d5b080dfb99bffc4ca83908f1591683f70786f020ee373edeed73d
+image digest: sha256:9ff75e49e4d5b080dfb99bffc4ca83908f1591683f70786f020ee373edeed73d
+
+=== run 1: docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+e1c52235b153c820828974a22b0a614e83c125324e9ea9a3a7a4ce3590780062
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-run10-trailing126d-2026-09-30-v2","snapshot_date":"2026-09-30"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 18:01:16 GMT
+server: uvicorn
+content-length: 156
+content-type: application/json
+x-request-id: e112f471b08a
+
+{"prediction":2.9735976986327786,"is_candidate":true,"expected_excess_return_90d":0.0697452034600955,"model_version":"hw4-run10-trailing126d-2026-09-30-v2"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{"pairs_divergence_z": null, "fcf_quality_score": "0.6", "revenue_growth_vs_industry": 3.09, "momentum_percentile": 97}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 18:01:16 GMT
+server: uvicorn
+content-length: 220
+content-type: application/json
+
+{"detail":[{"loc":["body","fcf_quality_score"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","momentum_percentile"],"msg":"Input should be less than or equal to 1","type":"less_than_equal"}]}
+Real HTTP http://127.0.0.1:8000/predict: 200 sequential requests after 20 warm-up, keep-alive httpx client, arm64 Darwin Python 3.12.9
+median 1.00 ms, p95 1.37 ms, max 1.44 ms
+
+=== docker stop mfe-hw5 (container removed by --rm)
+mfe-hw5
+service is down
+
+=== run 2: same image restarted
+ea42cc0f66899ea1612260ffd76e8b98c5f393ebeefe75dc8f1b71a0c021e7f2
+$ curl -s http://127.0.0.1:8000/predict --data-binary @example_request.json
+{"prediction":2.9735976986327786,"is_candidate":true,"expected_excess_return_90d":0.0697452034600955,"model_version":"hw4-run10-trailing126d-2026-09-30-v2"}
+
+=== container logs (run 2)
+INFO:     model_loaded version=hw4-run10-trailing126d-2026-09-30-v2
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:58120 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58128 - "POST /predict HTTP/1.1" 200 OK
+
+=== versions and user inside the image
+$ docker run --rm mfe-hw5:local python -c "..."
+appuser | Python 3.12.16 | sklearn 1.8.0 numpy 2.3.5 pandas 2.3.3 scipy 1.16.3 joblib 1.5.3
+$ docker run --rm mfe-hw5:local ls -R /app
+/app:
+app.py
+artifacts
+hw4_model.py
+requirements.txt
+
+/app/artifacts:
+hw4_model.joblib
+model_metadata.json
