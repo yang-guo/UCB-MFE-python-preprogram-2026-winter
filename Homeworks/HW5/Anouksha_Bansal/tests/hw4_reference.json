@@ -1,0 +1,58 @@
+[
+  {
+    "symbol": "AAPL",
+    "signal_date": "2026-09-25",
+    "features": {
+      "r_gross_profitability": 0.38744136691093445,
+      "r_operating_roa": 0.47811359167099,
+      "r_fcf_to_assets": 0.4639498293399811,
+      "r_earnings_yield": -0.1597186028957367,
+      "r_sales_to_price": -0.3858780562877655,
+      "r_sales_growth_yoy": 0.16629956662654877,
+      "r_mom_252_21": 0.1349206417798996
+    },
+    "hw4_recorded_score": 0.0007023527286946774
+  },
+  {
+    "symbol": "JPM",
+    "signal_date": "2026-09-25",
+    "features": {
+      "r_gross_profitability": -0.3509640395641327,
+      "r_operating_roa": -0.21235018968582153,
+      "r_fcf_to_assets": -0.29101359844207764,
+      "r_earnings_yield": 0.319697767496109,
+      "r_sales_to_price": -0.0445544570684433,
+      "r_sales_growth_yoy": 0.19328193366527557,
+      "r_mom_252_21": 0.0015873016091063619
+    },
+    "hw4_recorded_score": -0.009216485545039177
+  },
+  {
+    "symbol": "XOM",
+    "signal_date": "2026-09-25",
+    "features": {
+      "r_gross_profitability": 0.01693590357899666,
+      "r_operating_roa": 0.32647213339805603,
+      "r_fcf_to_assets": 0.3108672797679901,
+      "r_earnings_yield": 0.30250129103660583,
+      "r_sales_to_price": 0.19202709197998047,
+      "r_sales_growth_yoy": 0.3810572624206543,
+      "r_mom_252_21": 0.23968254029750824
+    },
+    "hw4_recorded_score": 0.00785116944462061
+  },
+  {
+    "symbol": "ACHR",
+    "signal_date": "2026-09-25",
+    "features": {
+      "r_gross_profitability": -0.4468473196029663,
+      "r_operating_roa": -0.4801980257034302,
+      "r_fcf_to_assets": -0.4655172526836395,
+      "r_earnings_yield": -0.4682126045227051,
+      "r_sales_to_price": -0.45935383439064026,
+      "r_sales_growth_yoy": null,
+      "r_mom_252_21": -0.44497355818748474
+    },
+    "hw4_recorded_score": -0.02532307058572769
+  }
+]
