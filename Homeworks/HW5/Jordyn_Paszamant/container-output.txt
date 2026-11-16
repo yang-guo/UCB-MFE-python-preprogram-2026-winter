@@ -1,0 +1,61 @@
+$ make build
+#9 34.19 [notice] To update, run: pip install --upgrade pip
+#9 DONE 34.9s
+
+#10 [5/6] COPY app.py model.py ./
+#10 DONE 0.1s
+
+#11 [6/6] COPY artifacts/hw4_random_forest.joblib artifacts/hw4_random_forest.joblib
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 9.2s done
+#12 exporting manifest sha256:51dd968f8779216ca1b958aa9d05f3419e4b56375374d7ffe233687ba1225a65 done
+#12 exporting config sha256:ef339c5a5c60e4e0f08377fb096d227d5d0a680ba89ffe20cbee8c1e6be71052 done
+#12 exporting attestation manifest sha256:1e1857bb88984aea073efe58c7a62767ceea10877d33ed806a1490da0d9665c0 done
+#12 exporting manifest list sha256:4ba76b47eab1425197926f3690bda4070c76c17b1ec26067a658beedeb3efeb2 done
+#12 naming to docker.io/library/mfe-hw5:local done
+#12 unpacking to docker.io/library/mfe-hw5:local
+#12 unpacking to docker.io/library/mfe-hw5:local 3.2s done
+#12 DONE 12.5s
+Image ID sha256:4ba76b47eab1425197926f3690bda4070c76c17b1ec26067a658beedeb3efeb2 (linux/arm64)
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+f48fc9dd9db3c1c38cfd8bca1d98a8041d4ef303d8c1cd892bbdd80de5f8039e
+Container image sha256:4ba76b47eab1425197926f3690bda4070c76c17b1ec26067a658beedeb3efeb2
+$ curl -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 13 Nov 2026 15:29:23 GMT
+server: uvicorn
+content-length: 70
+content-type: application/json
+
+{"prediction":0.13136749485372498,"model_version":"hw4-rf-2016-04-01"}
+
+$ curl -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary \{\}
+HTTP/1.1 422 Unprocessable Entity
+date: Fri, 13 Nov 2026 15:29:23 GMT
+server: uvicorn
+content-length: 587
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_63"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_126"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_252"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_21"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_63"],"msg":"Field required","type":"missing"},{"loc":["body","ma_ratio_50"],"msg":"Field required","type":"missing"},{"loc":["body","ma_ratio_200"],"msg":"Field required","type":"missing"}]}
+
+$ docker stop mfe-hw5
+f48fc9dd9db3c1c38cfd8bca1d98a8041d4ef303d8c1cd892bbdd80de5f8039e
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+fe9a25b8ea60eff23f2f9fb6d4ffba510d9469e8f740fb76517b112c853fb247
+Container image sha256:4ba76b47eab1425197926f3690bda4070c76c17b1ec26067a658beedeb3efeb2
+$ curl -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 13 Nov 2026 15:29:25 GMT
+server: uvicorn
+content-length: 70
+content-type: application/json
+
+{"prediction":0.13136749485372498,"model_version":"hw4-rf-2016-04-01"}
+
+$ docker stop mfe-hw5
+fe9a25b8ea60eff23f2f9fb6d4ffba510d9469e8f740fb76517b112c853fb247

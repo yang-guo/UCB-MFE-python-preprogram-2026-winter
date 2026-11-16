@@ -1,0 +1,29 @@
+Local API verification on macOS 15.7.4, Apple M2 (8 cores, 8 GB RAM)
+$ python --version
+Python 3.12.9
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+3 files already formatted
+$ make test
+python -m pytest -q
+.................                                                        [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  .venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+17 passed, 1 warning in 1.92s
+$ python -m pytest -q -s tests/test_app.py::test_predict_performance
+TestClient on Darwin arm64, Python 3.12.9, n=30: median 6.09 ms, p95 7.43 ms
+.
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+
+  .venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 1 warning in 1.44s

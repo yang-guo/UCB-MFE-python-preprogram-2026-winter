@@ -1,0 +1,6 @@
+**
+!requirements.txt
+!app.py
+!model.py
+!artifacts/
+!artifacts/hw4_random_forest.joblib
