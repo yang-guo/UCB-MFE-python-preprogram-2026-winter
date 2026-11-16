@@ -1,0 +1,8 @@
+# Send only the application and its fitted artifacts to Docker.
+**
+!requirements.txt
+!app.py
+!model_contract.py
+!model_components.py
+!artifacts/
+!artifacts/**
