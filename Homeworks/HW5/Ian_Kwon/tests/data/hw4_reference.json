@@ -1,0 +1,51 @@
+{
+  "source": "HW4 quantlab.scoring.walk_forward_scores, research mode, frozen config P1_top50__R1-f06421a6; scores of the last development refit (2015-10-02) on signal date 2015-12-31",
+  "model_version": "hw4-P1_top50__R1-f06421a6",
+  "cases": [
+    {
+      "case": "all features present (AAPL)",
+      "date": "2015-12-31",
+      "symbol": "AAPL",
+      "features": {
+        "gross_profitability_csr": 0.10099337748344372,
+        "operating_roa_csr": 0.4067328918322296,
+        "accruals_to_assets_csr": 0.09889502762430935,
+        "book_to_market_csr": -0.2560706401766004,
+        "vol_63_csr": -0.1940463065049614,
+        "mom_252_21_csr": 0.07885714285714285,
+        "ret_21_csr": -0.314773980154355
+      },
+      "hw4_score": 0.10577686157588898
+    },
+    {
+      "case": "a missing feature rank (null = median)",
+      "date": "2015-12-31",
+      "symbol": "ACRS",
+      "features": {
+        "gross_profitability_csr": -0.4633002207505519,
+        "operating_roa_csr": -0.49613686534216334,
+        "accruals_to_assets_csr": 0.2618784530386741,
+        "book_to_market_csr": -0.4817880794701987,
+        "vol_63_csr": 0.4829106945975744,
+        "mom_252_21_csr": null,
+        "ret_21_csr": 0.4867695700110254
+      },
+      "hw4_score": -0.3818262690300268
+    },
+    {
+      "case": "highest HW4 score on the date",
+      "date": "2015-12-31",
+      "symbol": "DHIL",
+      "features": {
+        "gross_profitability_csr": 0.3399558498896247,
+        "operating_roa_csr": 0.48675496688741726,
+        "accruals_to_assets_csr": -0.4685082872928177,
+        "book_to_market_csr": -0.304635761589404,
+        "vol_63_csr": -0.3098125689084895,
+        "mom_252_21_csr": 0.46399999999999997,
+        "ret_21_csr": -0.42943770672546855
+      },
+      "hw4_score": 0.31340480258777337
+    }
+  ]
+}

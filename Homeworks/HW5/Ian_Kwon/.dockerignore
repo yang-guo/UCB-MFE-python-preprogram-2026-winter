@@ -1,0 +1,14 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.db
+*.log
+# Not needed at runtime (the Dockerfile copies only app code, quantlab/ and artifacts/).
+tests/
+scripts/
+evidence/

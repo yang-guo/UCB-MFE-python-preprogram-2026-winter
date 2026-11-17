@@ -1,0 +1,61 @@
+{
+  "model_version": "hw4-P1_top50__R1-f06421a6",
+  "hw4_experiment_id": "P1_top50__R1-f06421a6",
+  "hw4_config_sha256": "f06421a68f05a4f6fbe7bab9abaa57786485cb0b11f7147c25134eedc3902a93",
+  "model_class": "quantlab.models.FixedComposite",
+  "model_params": {
+    "signs": [
+      1,
+      1,
+      -1,
+      1,
+      -1,
+      1,
+      -1
+    ]
+  },
+  "features": [
+    "gross_profitability_csr",
+    "operating_roa_csr",
+    "accruals_to_assets_csr",
+    "book_to_market_csr",
+    "vol_63_csr",
+    "mom_252_21_csr",
+    "ret_21_csr"
+  ],
+  "feature_registry_names": [
+    "gross_profitability",
+    "operating_roa",
+    "accruals_to_assets",
+    "book_to_market",
+    "vol_63",
+    "mom_252_21",
+    "ret_21"
+  ],
+  "coef": [
+    0.14285714285714285,
+    0.14285714285714285,
+    -0.14285714285714285,
+    0.14285714285714285,
+    -0.14285714285714285,
+    0.14285714285714285,
+    -0.14285714285714285
+  ],
+  "fit_date": "2015-10-02",
+  "train_rows": 476371,
+  "train_max_label_end": "2015-09-29",
+  "target": "target_rank",
+  "holding_calendar_days": 90,
+  "input_range": [
+    -0.5,
+    0.5
+  ],
+  "artifact": "model.joblib",
+  "artifact_sha256": "80da27f3b979b78474b7b5b373b36110bae6106e0326c24439421f7a83106465",
+  "python_version": "3.12.9",
+  "sklearn_version": "1.8.0",
+  "numpy_version": "2.3.5",
+  "joblib_version": "1.5.3",
+  "exported_at": "2026-11-17T01:51:38+00:00",
+  "data_mode": "research (no final-test data loaded)"
+}
