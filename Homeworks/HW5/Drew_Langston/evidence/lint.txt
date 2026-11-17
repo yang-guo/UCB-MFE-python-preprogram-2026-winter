@@ -1,0 +1,4 @@
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+2 files already formatted

@@ -1,0 +1,13 @@
+{
+  "method": "Sequential in-process TestClient; time.perf_counter",
+  "warmup_requests": 5,
+  "measured_requests": 30,
+  "median_ms": 1.7118747346103191,
+  "p95_ms": 1.8430707976222038,
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "processor": "arm",
+  "logical_cpus": 10,
+  "python": "3.12.9",
+  "budget": "Reported without an arbitrary latency cutoff"
+}
