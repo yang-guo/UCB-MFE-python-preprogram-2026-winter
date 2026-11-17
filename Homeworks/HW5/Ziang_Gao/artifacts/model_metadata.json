@@ -1,0 +1,152 @@
+{
+  "model_version": "hw4-round1-ridge-fit-2016-03-31",
+  "source": "HW4 round 1, hw4.ipynb section 7 (Ridge alpha=100, feature set C)",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "mom63_vs_sector",
+    "mom21_vs_sector",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days"
+  ],
+  "target": "return from the next session's close to the first close on or after 90 calendar days, as a fraction (0.05 = 5%)",
+  "units": "momentum and ratio features are fractions; filing_age_days is in days",
+  "fit_date": "2016-03-31",
+  "training_rows": 573544,
+  "last_training_signal": "2015-12-24",
+  "target_clip": {
+    "low": -0.5156186948095429,
+    "high": 0.8437499999999998
+  },
+  "versions": {
+    "python": "3.12.9",
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3"
+  },
+  "reference": {
+    "symbol": "AAPL",
+    "signal_date": "2016-03-31",
+    "input": {
+      "momentum_21": 0.08439560439560445,
+      "momentum_63": 0.0077614379084967045,
+      "momentum_252_21": -0.17721518987341767,
+      "mom63_vs_sector": 0.024011122846744504,
+      "mom21_vs_sector": 0.027397808095506515,
+      "net_margin": 0.24199968367777308,
+      "operating_roa": 0.08241499706768865,
+      "debt_to_assets": 0.21468269663534323,
+      "cash_to_assets": 0.05690388838122775,
+      "fcf_to_assets": 0.0799804967199029,
+      "accruals_to_assets": -0.031034764937739528,
+      "filing_age_days": 63.0
+    },
+    "prediction": 0.04437086266893087,
+    "origin": "course_data.make_pipeline fitted in export_model.py, the same call as fit_clipped in hw4.ipynb, before the API existed"
+  },
+  "feature_stats_training": {
+    "momentum_21": {
+      "min": -0.8404907945,
+      "q0.1%": -0.4782608696,
+      "median": 0.0110345108,
+      "q99.9%": 0.8,
+      "max": 3.5133425034,
+      "missing_share": 0.0
+    },
+    "momentum_63": {
+      "min": -0.8,
+      "q0.1%": -0.6514838691,
+      "median": 0.0333333333,
+      "q99.9%": 1.576482886,
+      "max": 4.81081111,
+      "missing_share": 0.0
+    },
+    "momentum_252_21": {
+      "min": -0.9604316547,
+      "q0.1%": -0.8310884474,
+      "median": 0.1443340358,
+      "q99.9%": 8.3610083161,
+      "max": 100159.420734375,
+      "missing_share": 0.0001760981
+    },
+    "mom63_vs_sector": {
+      "min": -0.9874581979,
+      "q0.1%": -0.6620453657,
+      "median": 0.0,
+      "q99.9%": 1.4958939019,
+      "max": 4.8279132041,
+      "missing_share": 0.0
+    },
+    "mom21_vs_sector": {
+      "min": -0.8820293146,
+      "q0.1%": -0.4712122687,
+      "median": 0.0,
+      "q99.9%": 0.7793344799,
+      "max": 3.4985398719,
+      "missing_share": 0.0
+    },
+    "net_margin": {
+      "min": -39378.0,
+      "q0.1%": -765.1111111111,
+      "median": 0.0652504644,
+      "q99.9%": 9.333809279,
+      "max": 3499.6559660812,
+      "missing_share": 0.0189662868
+    },
+    "operating_roa": {
+      "min": -115752.514967205,
+      "q0.1%": -8.7347286833,
+      "median": 0.015042801,
+      "q99.9%": 2.6997990332,
+      "max": 34157.0105635441,
+      "missing_share": 0.0018865161
+    },
+    "debt_to_assets": {
+      "min": 0.0,
+      "q0.1%": 0.0,
+      "median": 0.1792315668,
+      "q99.9%": 7.8262017671,
+      "max": 389447.7448744546,
+      "missing_share": 0.0019510273
+    },
+    "cash_to_assets": {
+      "min": -0.8083930309,
+      "q0.1%": 0.0,
+      "median": 0.0700968215,
+      "q99.9%": 0.990749066,
+      "max": 945654.1926772429,
+      "missing_share": 0.0018865161
+    },
+    "fcf_to_assets": {
+      "min": -13744.7204524304,
+      "q0.1%": -1.3596373494,
+      "median": 0.0068015726,
+      "q99.9%": 1.7267057245,
+      "max": 257024.4534782214,
+      "missing_share": 0.0042612249
+    },
+    "accruals_to_assets": {
+      "min": -948.1285016584,
+      "q0.1%": -5.0039491005,
+      "median": -0.0082094855,
+      "q99.9%": 0.9003354097,
+      "max": 19777.5286425613,
+      "missing_share": 0.0042612249
+    },
+    "filing_age_days": {
+      "min": 0.0,
+      "q0.1%": 0.0,
+      "median": 46.0,
+      "q99.9%": 414.0,
+      "max": 615.0,
+      "missing_share": 0.0
+    }
+  }
+}

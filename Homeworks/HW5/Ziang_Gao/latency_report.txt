@@ -1,0 +1,7 @@
+Latency of POST /predict
+Method: in-process Starlette TestClient (no network, no real HTTP socket),
+  10 warm-up requests, then 200 successful requests in sequence,
+  each timed with time.perf_counter around client.post.
+Hardware: Apple M4, 10 logical CPUs, macOS-27.0.1-arm64-arm-64bit
+Python 3.12.9
+median 1.16 ms | p95 3.07 ms | max 13.13 ms
