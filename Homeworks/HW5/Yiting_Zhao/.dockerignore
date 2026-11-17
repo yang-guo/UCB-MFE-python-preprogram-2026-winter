@@ -1,0 +1,5 @@
+*
+!requirements.txt
+!app.py
+!model_service.py
+!artifacts/ridge_model.joblib
