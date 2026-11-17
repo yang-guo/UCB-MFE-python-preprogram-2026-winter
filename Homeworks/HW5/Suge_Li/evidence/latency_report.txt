@@ -1,0 +1,13 @@
+method: in-process Starlette TestClient (not localhost HTTP)
+requests: 1 warmup excluded, then 20 successful POST /predict
+timer: time.perf_counter around the client call
+median: average of the 10th and 11th sorted samples
+p95: nearest rank, index ceil(0.95 * 20) - 1
+median_seconds: 0.001952
+p95_seconds: 0.002270
+min_seconds: 0.001805
+max_seconds: 0.026649
+platform: macOS-14.3.1-arm64-arm-64bit
+machine: arm64
+cpu_count: 8
+budget: median < 1 second on this machine for a local guard only
