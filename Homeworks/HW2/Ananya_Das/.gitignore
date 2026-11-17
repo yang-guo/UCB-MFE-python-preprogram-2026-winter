@@ -1,0 +1,16 @@
+# Local database copies and credentials never leave this machine.
+data/
+*.db
+*.db.*
+*.db-journal
+*.sqlite
+*.sqlite3
+*.duckdb
+*.duckdb.wal
+.env
+.env.*
+
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store

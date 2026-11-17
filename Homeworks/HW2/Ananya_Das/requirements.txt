@@ -1,0 +1,10 @@
+# Tested with Python 3.12 (the course .venv). Install with: pip install -r requirements.txt
+pandas==2.3.3
+numpy==2.3.5
+matplotlib==3.10.7
+papermill==2.6.0
+scrapbook==0.5.0
+nbformat==5.10.4
+ipykernel==7.1.0
+tqdm==4.67.1
+pytest==9.2.0
