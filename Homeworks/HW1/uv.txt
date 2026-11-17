@@ -1,0 +1,13 @@
+From Homeworks/HW1/Shubham_Gupta (Bash or Git Bash):
+
+uv venv --python 3.12.9 HW1
+source HW1/bin/activate
+python --version
+uv pip install "requests==2.24.0"
+uv pip show requests
+uv pip install --upgrade requests
+uv pip show requests
+
+Python: 3.12.9
+Downgrade confirmed: requests 2.24.0
+Upgrade confirmed: requests 2.34.2, the latest release on PyPI at verification.
