@@ -1,0 +1,12 @@
+# API/tools from the supplied HW5 starter.
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.2
+httpx==0.28.1
+pytest==9.2.0
+ruff==0.17.3
+# Exact HW4 FF5 export environment versions.
+numpy==2.5.4
+pandas==3.1.1
+scipy==1.18.1
+scikit-learn==1.9.1

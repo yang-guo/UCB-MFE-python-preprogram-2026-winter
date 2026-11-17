@@ -1,0 +1,31 @@
+# Python environments, caches and notebook checkpoints
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local secrets and downloaded databases
+.env
+.env.*
+*.duckdb
+*.duckdb.*
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+data/
+
+# Temporary files and local editor/OS state
+*.tmp
+*.log
+.DS_Store
+.idea/
+
+# Keep artifacts/, reference examples and evidence/: required for HW5.
