@@ -1,0 +1,8 @@
+2015 fold: fit_date=2015-01-02, train_rows=462,318
+  ic_mean: reproduced=np.float64(0.06985711083527543) recorded=0.06985711083527543
+  decile_spread: reproduced=np.float64(0.04565494219581659) recorded=0.04565494219581659
+  mse_rank: reproduced=0.0825649134972883 recorded=0.0825649134972883
+  r2_rank: reproduced=0.009220760896943903 recorded=0.009220760896943903
+  serving pipeline identical on 496,704 holdout rows
+Saved /Users/anjalibandewar/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Anjali_Sudhakar_Bandewar/model/hw4_hgb_fold2015.joblib and /Users/anjalibandewar/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Anjali_Sudhakar_Bandewar/model/reference_prediction.json
+{"momentum_1m": -0.046511627906976716, "momentum_3m": 0.09854677565849235, "momentum_6m": 0.1731328806983512, "momentum_12m": 0.41214244016345614, "universe_rank": 4, "profit_margin": 0.20100657597986848, "ebitda_margin": 0.3218194335636113, "debt_to_equity": 0.31641370901951643, "asset_turnover": 0.18169074228235974, "fcf_margin": 0.22310851553782968, "fundamental_age_days": 97.0} -> 0.4888339526811931

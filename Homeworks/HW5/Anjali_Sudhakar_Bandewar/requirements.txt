@@ -1,0 +1,17 @@
+# Service and homework tools.
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.2
+httpx==0.28.1
+pytest==9.2.0
+ruff==0.17.3
+
+# Model stack pinned to the HW4 training environment that fitted the artifact
+# (Python 3.12.9; `pip freeze` of that environment). Loading sklearn artifacts across
+# versions is unsupported, so these must match exactly.
+numpy==2.5.4
+pandas==3.1.0
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+threadpoolctl==3.8.0

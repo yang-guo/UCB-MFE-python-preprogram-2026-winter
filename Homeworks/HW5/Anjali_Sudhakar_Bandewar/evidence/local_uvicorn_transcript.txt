@@ -1,0 +1,18 @@
+=== LOCAL uvicorn (NOT the Docker container): real localhost HTTP pre-check, 2026-11-17T05:46:38Z
+$ curl -sS -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 05:46:38 GMT
+server: uvicorn
+content-length: 92
+content-type: application/json
+
+{"prediction":0.4888339526811931,"model_version":"hw4-hgb-fold2015-lr0.05-leaves15-iter100"}
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary @evidence/invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 05:46:38 GMT
+server: uvicorn
+content-length: 275
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","momentum_1m"],"msg":"Input should be a valid number"},{"type":"missing","loc":["body","fundamental_age_days"],"msg":"Field required"},{"type":"extra_forbidden","loc":["body","adj_close"],"msg":"Extra inputs are not permitted"}]}

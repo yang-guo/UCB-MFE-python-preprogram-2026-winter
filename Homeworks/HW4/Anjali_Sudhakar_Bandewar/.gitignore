@@ -1,0 +1,6 @@
+# Generated outputs; rebuild by running the scripts in src/.
+results/
+
+# Local DuckDB databases, distributed via bCourses.
+data/*.duckdb
+data/*.duckdb.wal
