@@ -1,0 +1,49 @@
+{
+  "model_version": "hw4-ff5-universe-2015-10-30-v1",
+  "signal_date": "2015-10-30",
+  "execution_date": "2015-11-02",
+  "configuration": {
+    "window": 60,
+    "min_obs": 24,
+    "top_q": 0.2,
+    "bottom_q": 0.2,
+    "lookback_months": 12,
+    "factors": [
+      "MKT",
+      "SMB",
+      "HML",
+      "RMW",
+      "CMA"
+    ],
+    "target": "90-calendar-day return"
+  },
+  "universe_count": 2000,
+  "eligible_count": 1466,
+  "model_count": 1399,
+  "expected_factor_vector": {
+    "MKT": 0.007690397402656007,
+    "SMB": 0.0008682295776333929,
+    "HML": -0.04270218133233253,
+    "RMW": -0.0008423709103398125,
+    "CMA": -0.032673950126811846
+  },
+  "library_versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  },
+  "hw4_commit": "5212932d7d2e9de49785ee2c7e0395579b42d694",
+  "source_sha256": {
+    "strategies/factor.py": "fe1036bab1b1e649bc4361cff1c49c6517bd5b75796f342ce259dc4edf00b756",
+    "backtesting/famafrench.py": "57e41b654fb7cfb84fcf10635f0a5f6878e25908b1439bd6748e043c3d109e1d",
+    "backtesting/market_data.py": "39780b7fe0b9851477019d8da795783de1fe0a01c30429aef24348009383c37c",
+    "data_loading.py": "a18fa6b2534d397fddc211eb4e3c47caad4d2a9c9413507e628a8b3714731e21"
+  },
+  "artifact_sha256": "1bf269c0ee73e2dace2a81be22530c5362bdace0f3ee6d3800e33740639c5fac",
+  "membership_sha256": "3e097462cedb1bc89649aa86b247fd698fd48ebd7ebb04e460827869bd0b6b1f",
+  "provenance": "Original full-universe HW4 FactorTiltStrategy.refit scores at 2015-10-30, reconstructed offline before API wrapping.",
+  "snapshot_note": "Reconstructed dated fit, not recovered from the original notebook kernel.",
+  "target": "Adjusted stock return: next-session entry; first benchmark session on/after entry+90 calendar days exit. Only exits strictly before signal enter fitting.",
+  "factor_note": "Three monthly compounded factor returns approximate the exact 90-calendar-day stock target; inherited unchanged from HW4."
+}

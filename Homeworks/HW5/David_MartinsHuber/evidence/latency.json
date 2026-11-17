@@ -1,0 +1,12 @@
+{
+  "method": "in-process Starlette TestClient including JSON/validation/inference, no network",
+  "warmup_requests": 5,
+  "requests": 30,
+  "median_ms": 2.363162002438912,
+  "p95_ms": 2.98395699901448,
+  "hardware": "macOS-15.7.9-x86_64-i386-64bit",
+  "machine": "x86_64",
+  "processor": "Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz",
+  "python": "3.12.13",
+  "budget": "Measured and reported without a universal latency budget."
+}

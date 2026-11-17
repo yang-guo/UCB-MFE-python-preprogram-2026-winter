@@ -1,0 +1,46 @@
+$ docker run -d --name mfe-hw5-david-check -p 127.0.0.1:18005:8000 mfe-hw5:local 
+ d6eacc4019d1352bcd8a3c32e32de02bacedf0d4fa962164ca5808d7b31055aa
+$ docker inspect --format {{.Image}} mfe-hw5-david-check 
+ sha256:a21d879ad331d228e41fe4b5b7ba190a1447607cd9e28899d7eefb43d6250bbc
+POST http://127.0.0.1:18005/predict {"symbol": "AAPL", "MKT": 0.007690397402656007, "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 200 {"prediction":0.039849224628863006,"model_version":"hw4-ff5-universe-2015-10-30-v1","symbol":"AAPL","prediction_horizon_calendar_days":90}
+POST http://127.0.0.1:18005/predict {"symbol": "AAPL", "MKT": "invalid", "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 422 {"detail":[{"loc":["body","MKT"],"msg":"Input should be a valid number","type":"float_type"}]}
+POST http://127.0.0.1:18005/predict {"symbol": "ZZZZZZZ", "MKT": 0.007690397402656007, "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 404 {"detail":{"code":"SYMBOL_OUTSIDE_UNIVERSE","symbol":"ZZZZZZZ","snapshot_date":"2015-10-30","model_version":"hw4-ff5-universe-2015-10-30-v1"}}
+POST http://127.0.0.1:18005/predict {"symbol": "AAM", "MKT": 0.007690397402656007, "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 404 {"detail":{"code":"MODEL_UNAVAILABLE","symbol":"AAM","snapshot_date":"2015-10-30","model_version":"hw4-ff5-universe-2015-10-30-v1","reason":"STRATEGY_INELIGIBLE"}}
+POST http://127.0.0.1:18005/predict {"symbol": "A", "MKT": 0.007690397402656007, "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 200 {"prediction":-0.012080654860509535,"model_version":"hw4-ff5-universe-2015-10-30-v1","symbol":"A","prediction_horizon_calendar_days":90}
+$ docker stop mfe-hw5-david-check 
+ mfe-hw5-david-check
+$ docker start mfe-hw5-david-check 
+ mfe-hw5-david-check
+$ docker inspect --format {{.Image}} mfe-hw5-david-check 
+ sha256:a21d879ad331d228e41fe4b5b7ba190a1447607cd9e28899d7eefb43d6250bbc
+POST http://127.0.0.1:18005/predict {"symbol": "AAPL", "MKT": 0.007690397402656007, "SMB": 0.0008682295776333929, "HML": -0.04270218133233253, "RMW": -0.0008423709103398125, "CMA": -0.032673950126811846} 
+HTTP 200 {"prediction":0.039849224628863006,"model_version":"hw4-ff5-universe-2015-10-30-v1","symbol":"AAPL","prediction_horizon_calendar_days":90}
+PASS: real container multiple stocks, invalid input, outside-universe/unavailable-model codes, and same-image stop/start.
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+$ docker logs mfe-hw5-david-check 
+ INFO:     172.17.0.1:62172 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62186 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62192 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     172.17.0.1:62202 - "POST /predict HTTP/1.1" 404 Not Found
+INFO:     172.17.0.1:62216 - "POST /predict HTTP/1.1" 404 Not Found
+INFO:     172.17.0.1:62220 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62236 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62244 - "POST /predict HTTP/1.1" 200 OK
+$ docker rm -f mfe-hw5-david-check 
+ mfe-hw5-david-check
