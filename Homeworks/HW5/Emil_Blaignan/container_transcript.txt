@@ -1,0 +1,70 @@
+HW5 container evidence
+
+$ docker build -t mfe-hw5:local . > /dev/null && echo build ok
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+build ok
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local > /dev/null && sleep 6 && docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}'
+NAMES     IMAGE           PORTS
+mfe-hw5   mfe-hw5:local   127.0.0.1:8000->8000/tcp
+
+# 1. Valid request
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 01:17:00 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":-0.0007694396017638215,"model_version":"hw4-fm-linear-2015-12-31-v1"}
+
+# 2. Rejected request, a field the model does not know about
+
+$ python3 -c "import json; d=json.load(open('example_request.json')); d['bogus']=1.0; print(json.dumps(d))" > /tmp/bad_request.json
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @/tmp/bad_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 01:17:00 GMT
+server: uvicorn
+content-length: 101
+content-type: application/json
+
+{"detail":[{"loc":["body","bogus"],"type":"extra_forbidden","msg":"Extra inputs are not permitted"}]}
+
+# 3. Rejected request, NaN and missing fields
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d '{"momentum_21": NaN}' | head -1
+HTTP/1.1 422 Unprocessable Entity
+
+# 4. Stop and start the same image again
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local > /dev/null && sleep 6 && echo restarted
+restarted
+
+$ curl -i -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 01:17:06 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":-0.0007694396017638215,"model_version":"hw4-fm-linear-2015-12-31-v1"}
+
+# 5. Container log
+
+$ docker logs mfe-hw5 2>&1 | tail -5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:53170 - "POST /predict HTTP/1.1" 200 OK
+
+$ docker stop mfe-hw5
+mfe-hw5

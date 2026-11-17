@@ -1,0 +1,43 @@
+HW5 test and lint output
+
+$ python --version
+Python 3.12.1
+
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+5 files already formatted
+
+$ python -m pytest -v -s
+============================= test session starts ==============================
+platform darwin -- Python 3.12.1, pytest-9.2.0, pluggy-1.7.0 -- <submission folder>/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: <submission folder>
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 13 items
+
+tests/test_app.py::test_predict_valid_input PASSED
+tests/test_app.py::test_predict_invalid_input[missing] PASSED
+tests/test_app.py::test_predict_invalid_input[extra] PASSED
+tests/test_app.py::test_predict_invalid_input[wrong_type] PASSED
+tests/test_app.py::test_predict_invalid_input[bool_value] PASSED
+tests/test_app.py::test_predict_invalid_input[null_value] PASSED
+tests/test_app.py::test_predict_invalid_input[nan_value] PASSED
+tests/test_app.py::test_predict_invalid_input[inf_value] PASSED
+tests/test_app.py::test_predict_invalid_input[out_of_bounds] PASSED
+tests/test_app.py::test_predict_invalid_input[wrong_count] PASSED
+tests/test_app.py::test_predict_invalid_input[list_body] PASSED
+tests/test_app.py::test_predict_model_failure PASSED
+tests/test_app.py::test_predict_performance Median: 1.06 ms, p95: 1.17 ms
+PASSED
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <submission folder>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 13 passed, 1 warning in 1.68s =========================
