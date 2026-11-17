@@ -1,0 +1,15 @@
+{
+  "momentum_21": "0.08",
+  "momentum_63": 0.0077614379084967045,
+  "momentum_252_21": -0.17721518987341767,
+  "mom63_vs_sector": 0.024011122846744504,
+  "mom21_vs_sector": 0.027397808095506515,
+  "net_margin": 0.24199968367777308,
+  "operating_roa": 0.08241499706768865,
+  "debt_to_assets": 0.21468269663534323,
+  "cash_to_assets": 0.05690388838122775,
+  "fcf_to_assets": 0.0799804967199029,
+  "accruals_to_assets": -0.031034764937739528,
+  "filing_age_days": 63.0,
+  "surprise": 1
+}

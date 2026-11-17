@@ -1,0 +1,45 @@
+=== 2026-11-17 06:40:08 UTC | image sha256:8b6ae901f1965b45d88a308a1167e6f7ee2dd45687b510a44b2481d69badaddd
+
+=== 1. Start the container
+container b18a57fbfae7 | mfe-hw5:local | Up 1 second | 127.0.0.1:8000->8000/tcp
+
+=== 2. Valid request (expect 200, a prediction, and the model version)
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:40:09 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.04437086266893087,"model_version":"hw4-round1-ridge-fit-2016-03-31"}
+
+=== 3. Invalid request: a numeric string and an extra field (expect 422)
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 06:40:09 GMT
+server: uvicorn
+content-length: 194
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","momentum_21"],"msg":"Input should be a valid number"},{"type":"extra_forbidden","loc":["body","surprise"],"msg":"Extra inputs are not permitted"}]}
+
+=== 4. Stop the container, then start the same image again
+stopped and removed
+container d17e02485f72 | mfe-hw5:local | Up 1 second | 127.0.0.1:8000->8000/tcp
+
+=== 5. Valid request after the restart (the model is in the image, so it is still there)
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:40:11 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":0.04437086266893087,"model_version":"hw4-round1-ridge-fit-2016-03-31"}
+
+=== 6. Server log of the second container
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:62786 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62802 - "POST /predict HTTP/1.1" 200 OK
