@@ -1,0 +1,19 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+# Added for this submission: data, credentials and files the service does not need.
+*.db
+*.sqlite
+*.parquet
+*.pem
+*.key
+data/
+evidence/
+tests/
+export_model.py

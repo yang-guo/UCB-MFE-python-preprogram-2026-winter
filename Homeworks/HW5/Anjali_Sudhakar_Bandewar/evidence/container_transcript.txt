@@ -1,0 +1,96 @@
+=== 2026-11-17T06:11:47Z on Darwin arm64, Docker version 29.9.3, build 5457199
+
+$ docker build -q -t mfe-hw5:local .
+sha256:fda708cda3f9d6b370710fc26fd98089ea9aca0b51994868da15013ac510c868
+
+$ docker image inspect mfe-hw5:local --format image\ id:\ \{\{.Id\}\}
+image id: sha256:fda708cda3f9d6b370710fc26fd98089ea9aca0b51994868da15013ac510c868
+
+=== 1. First container: valid request (example_request.json)
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+2758d67f6c2f6c6e70e7464e24230b2ae59516c271aed36d86f741b95251eaa6
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:11:51 GMT
+server: uvicorn
+content-length: 92
+content-type: application/json
+
+{"prediction":0.4888339526811931,"model_version":"hw4-hgb-fold2015-lr0.05-leaves15-iter100"}
+
+=== 2. Invalid request (numeric string, missing field, extra field) -> 422
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @evidence/invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 06:11:51 GMT
+server: uvicorn
+content-length: 275
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","momentum_1m"],"msg":"Input should be a valid number"},{"type":"missing","loc":["body","fundamental_age_days"],"msg":"Field required"},{"type":"extra_forbidden","loc":["body","adj_close"],"msg":"Extra inputs are not permitted"}]}
+
+=== 3. Stop and restart the same image
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+369879d0fc4895fa21cbdb5fac937385607afab255be762fb9d8691475ad1ca0
+
+$ docker inspect mfe-hw5 --format running\ container\ image:\ \{\{.Image\}\}
+running container image: sha256:fda708cda3f9d6b370710fc26fd98089ea9aca0b51994868da15013ac510c868
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:11:53 GMT
+server: uvicorn
+content-length: 92
+content-type: application/json
+
+{"prediction":0.4888339526811931,"model_version":"hw4-hgb-fold2015-lr0.05-leaves15-iter100"}
+
+=== 4. Real-HTTP latency against the container (25 sequential curl requests after 5 warm-up)
+n=25 median=4.6 ms p95=8.8 ms (curl time_total)
+
+=== Server log
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:63798 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63808 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63824 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63832 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63836 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63848 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63856 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63872 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63886 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63890 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63906 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63916 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63918 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63926 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63932 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63944 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63960 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63974 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63980 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:63992 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64002 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64006 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64018 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64034 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64040 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64042 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64044 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64046 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64062 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64072 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64084 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64098 - "POST /predict HTTP/1.1" 200 OK
+
+$ docker stop mfe-hw5
+mfe-hw5

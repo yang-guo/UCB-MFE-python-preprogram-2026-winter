@@ -1,0 +1,40 @@
+{
+  "source": "HW4 train_baselines.hgb_pipeline fitted on HW4 make_fold(2015) training rows",
+  "model_version": "hw4-hgb-fold2015-lr0.05-leaves15-iter100",
+  "symbol": "AAPL",
+  "feature_date": "2015-01-02",
+  "input": {
+    "momentum_1m": -0.046511627906976716,
+    "momentum_3m": 0.09854677565849235,
+    "momentum_6m": 0.1731328806983512,
+    "momentum_12m": 0.41214244016345614,
+    "universe_rank": 4,
+    "profit_margin": 0.20100657597986848,
+    "ebitda_margin": 0.3218194335636113,
+    "debt_to_equity": 0.31641370901951643,
+    "asset_turnover": 0.18169074228235974,
+    "fcf_margin": 0.22310851553782968,
+    "fundamental_age_days": 97.0
+  },
+  "prediction": 0.4888339526811931,
+  "fit_date": "2015-01-02",
+  "train_rows": 462318,
+  "hyperparameters": {
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 15,
+    "max_iter": 100
+  },
+  "reproduced_holdout_metrics": {
+    "ic_mean": 0.06985711083527543,
+    "decile_spread": 0.04565494219581659,
+    "mse_rank": 0.0825649134972883,
+    "r2_rank": 0.009220760896943903
+  },
+  "training_environment": {
+    "python": "3.12.9",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "joblib": "1.6.0"
+  }
+}
