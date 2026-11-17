@@ -1,0 +1,29 @@
+# Local uvicorn (no Docker on this machine): python -m uvicorn app:app --host 127.0.0.1 --port 8000
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 23:59:40 GMT
+server: uvicorn
+content-length: 79
+content-type: application/json
+
+{"prediction":0.05013280233818613,"model_version":"hw4-ridge-refit-2026-06-30"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d '{"momentum_21": "0.05"}'
+HTTP/1.1 422 Unprocessable Entity
+date: Mon, 16 Nov 2026 23:59:40 GMT
+server: uvicorn
+content-length: 976
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","momentum_63"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_252_21"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_63"],"msg":"Field required","type":"missing"},{"loc":["body","drawdown_252"],"msg":"Field required","type":"missing"},{"loc":["body","net_margin"],"msg":"Field required","type":"missing"},{"loc":["body","operating_roa"],"msg":"Field required","type":"missing"},{"loc":["body","debt_to_assets"],"msg":"Field required","type":"missing"},{"loc":["body","cash_to_assets"],"msg":"Field required","type":"missing"},{"loc":["body","fcf_to_assets"],"msg":"Field required","type":"missing"},{"loc":["body","accruals_to_assets"],"msg":"Field required","type":"missing"},{"loc":["body","filing_age_days"],"msg":"Field required","type":"missing"},{"loc":["body","sector"],"msg":"Field required","type":"missing"}]}
+
+# server stopped and restarted
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Mon, 16 Nov 2026 23:59:42 GMT
+server: uvicorn
+content-length: 79
+content-type: application/json
+
+{"prediction":0.05013280233818613,"model_version":"hw4-ridge-refit-2026-06-30"}
+
