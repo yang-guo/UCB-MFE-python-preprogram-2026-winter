@@ -1,0 +1,44 @@
+{
+  "model_version": "hw4-ridge-ranks-20141231-v1",
+  "model": "sklearn Ridge(alpha=100.0, positive=True) from HW4 model.fit_weights",
+  "role_in_hw4": "comparison model of development.md, refit before each validation year",
+  "hw4_source": "branch hw_4_Qianhao_Meng, commit 80640fc7, model.fit_weights and model.walk_forward_scores",
+  "reproduction_check": "fit date, training rows and rounded weight shares match the audit values recorded in HW4 development.md. The HW4 source files are not verified against the commit by this script",
+  "fit_date": "2014-12-31",
+  "training_rows": 59183,
+  "last_label_end": "2014-12-30",
+  "target": "gross adjusted-price return from the next session's close to the first quoted close on or after 90 calendar days, clipped to the training 1% and 99% quantiles",
+  "target_clip": [
+    -0.35735381713386116,
+    0.49517302249140216
+  ],
+  "features": [
+    "rank_momentum_252_21",
+    "rank_drawdown_252",
+    "rank_volatility_63",
+    "rank_operating_roa"
+  ],
+  "feature_rule": "same-date percentile ranks among eligible stocks, higher is better, low volatility already reversed, missing component = 0.5",
+  "coef": [
+    0.004636803748873581,
+    0.0,
+    0.0,
+    0.010149144993495104
+  ],
+  "intercept": 0.03711423464451818,
+  "weight_shares": [
+    0.3136,
+    0.0,
+    0.0,
+    0.6864
+  ],
+  "database": "equities_top2000.duckdb",
+  "packages": {
+    "python": "3.12.14",
+    "pandas": "2.3.3",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}

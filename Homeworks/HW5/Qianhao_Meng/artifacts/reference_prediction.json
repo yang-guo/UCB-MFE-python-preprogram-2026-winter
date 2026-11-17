@@ -1,0 +1,12 @@
+{
+  "symbol": "A",
+  "signal_date": "2014-12-31",
+  "input": {
+    "rank_momentum_252_21": 0.3744075829383886,
+    "rank_drawdown_252": 0.4786729857819905,
+    "rank_volatility_63": 0.5412490362374711,
+    "rank_operating_roa": 0.22762345679012347
+  },
+  "expected_prediction": 0.041160472595577126,
+  "source": "model.walk_forward_scores on the HW4 development panel, 2014-12-31 fit, recorded before the model was wrapped in the API"
+}
