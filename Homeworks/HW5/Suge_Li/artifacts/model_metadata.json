@@ -1,0 +1,81 @@
+{
+  "model_version": "hw4-ridge-rank-dev-labels-before-2016-04-01",
+  "estimator": "Ridge(alpha=100)",
+  "target": "same-date percentile rank of the 90-calendar-day forward return",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days"
+  ],
+  "panel_end": "2016-04-15",
+  "signal_start": "2010-01-01",
+  "signal_end": "2015-12-31",
+  "label_end_before": "2016-04-01",
+  "rank_cap": 400,
+  "training_rows": 26718,
+  "signal_min": "2010-01-29",
+  "signal_max": "2015-11-30",
+  "learned_clip_bounds": {
+    "momentum_21": {
+      "p01": -0.17422852392239496,
+      "p99": 0.2099272883953858
+    },
+    "momentum_63": {
+      "p01": -0.26451017309838315,
+      "p99": 0.3906691945070703
+    },
+    "momentum_252_21": {
+      "p01": -0.34485546157055175,
+      "p99": 1.422585961910133
+    },
+    "volatility_63": {
+      "p01": 0.10575887187570587,
+      "p99": 0.6370116954185727
+    },
+    "drawdown_252": {
+      "p01": -0.44717017535588877,
+      "p99": 0.0
+    },
+    "net_margin": {
+      "p01": -0.37190902391213976,
+      "p99": 0.5667933553558532
+    },
+    "operating_roa": {
+      "p01": -0.03132418576088557,
+      "p99": 0.10903522624447429
+    },
+    "debt_to_assets": {
+      "p01": 0.0,
+      "p99": 0.7884154578912248
+    },
+    "cash_to_assets": {
+      "p01": 0.0012268965106532119,
+      "p99": 0.4261545405223346
+    },
+    "fcf_to_assets": {
+      "p01": -0.056721590071880296,
+      "p99": 0.10323440902307146
+    },
+    "accruals_to_assets": {
+      "p01": -0.08384510585592675,
+      "p99": 0.06003200358804446
+    },
+    "filing_age_days": {
+      "p01": 0.0,
+      "p99": 117.0
+    }
+  },
+  "sklearn_version": "1.8.0",
+  "numpy_version": "2.3.5",
+  "pandas_version": "2.3.3",
+  "trading_rule_note": "Homework 4 froze mom_roa for the backtest. This artifact is the ridge_rank candidate fit on the development labels."
+}

@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 07:46:52 GMT
+server: uvicorn
+content-length: 95
+content-type: application/json
+
+{"prediction":0.4934823349732353,"model_version":"hw4-ridge-rank-dev-labels-before-2016-04-01"}
