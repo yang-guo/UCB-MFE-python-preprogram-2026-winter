@@ -1,0 +1,48 @@
+Local Uvicorn smoke test over HTTP
+$ /workspace/scratch/cad3283d63da/hw5/.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8000
+INFO:     Started server process [110]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49056 - "GET /openapi.json HTTP/1.1" 200 OK
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": 0.08439560439560445, "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+INFO:     127.0.0.1:49068 - "POST /predict HTTP/1.1" 200 OK
+HTTP 200 OK
+{"prediction":0.034697474382189356,"model_version":"hw4-ridge-20160401-v1"}
+
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": "0.1", "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+INFO:     127.0.0.1:49070 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+HTTP 422 Unprocessable Entity
+{"detail":[{"loc":["body","ret21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+$ stop Uvicorn process 110
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [110]
+$ /workspace/scratch/cad3283d63da/hw5/.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8000
+INFO:     Started server process [128]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49112 - "GET /openapi.json HTTP/1.1" 200 OK
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": 0.08439560439560445, "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+INFO:     127.0.0.1:49116 - "POST /predict HTTP/1.1" 200 OK
+HTTP 200 OK
+{"prediction":0.034697474382189356,"model_version":"hw4-ridge-20160401-v1"}
+
+$ stop Uvicorn process 128
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [128]
+PASS: same prediction and model version after restart.
