@@ -1,0 +1,60 @@
+# 2026-11-17T02:04:19Z | Windows 11, HW5 .venv (Python 3.12.3)
+
+$ python -m ruff check .
+All checks passed!
+
+$ python -m ruff format --check .
+6 files already formatted
+
+$ python -m pytest -v
+============================= test session starts =============================
+platform win32 -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\jyk71\OneDrive\Desktop\Berkeley MFE Pre-Program Prep Materials\MFE Python\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ian_Kwon\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\jyk71\OneDrive\Desktop\Berkeley MFE Pre-Program Prep Materials\MFE Python\UCB-MFE-python-preprogram-2026-winter\Homeworks\HW5\Ian_Kwon
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... collected 38 items
+
+tests/test_app.py::test_predict_valid_input PASSED                       [  2%]
+tests/test_app.py::test_api_reproduces_hw4_reference_scores[AAPL] PASSED [  5%]
+tests/test_app.py::test_api_reproduces_hw4_reference_scores[ACRS] PASSED [  7%]
+tests/test_app.py::test_api_reproduces_hw4_reference_scores[DHIL] PASSED [ 10%]
+tests/test_app.py::test_example_request_file_matches_reference PASSED    [ 13%]
+tests/test_app.py::test_field_order_in_json_does_not_change_the_prediction PASSED [ 15%]
+tests/test_app.py::test_null_rank_counts_as_median_like_hw4 PASSED       [ 18%]
+tests/test_app.py::test_range_bounds_are_accepted PASSED                 [ 21%]
+tests/test_app.py::test_model_is_loaded_once_per_process PASSED          [ 23%]
+tests/test_app.py::test_health_reports_loaded_version PASSED             [ 26%]
+tests/test_app.py::test_predict_invalid_input[missing field (6 features)] PASSED [ 28%]
+tests/test_app.py::test_predict_invalid_input[extra field (8 features)] PASSED [ 31%]
+tests/test_app.py::test_predict_invalid_input[misspelled field] PASSED   [ 34%]
+tests/test_app.py::test_predict_invalid_input[empty object] PASSED       [ 36%]
+tests/test_app.py::test_predict_invalid_input[fixed-length list instead of named fields] PASSED [ 39%]
+tests/test_app.py::test_predict_invalid_input[list with 6 values] PASSED [ 42%]
+tests/test_app.py::test_predict_invalid_input[numeric string] PASSED     [ 44%]
+tests/test_app.py::test_predict_invalid_input[boolean] PASSED            [ 47%]
+tests/test_app.py::test_predict_invalid_input[nested object] PASSED      [ 50%]
+tests/test_app.py::test_predict_invalid_input[list as a value] PASSED    [ 52%]
+tests/test_app.py::test_predict_invalid_input[null body] PASSED          [ 55%]
+tests/test_app.py::test_predict_invalid_input[above 0.5] PASSED          [ 57%]
+tests/test_app.py::test_predict_invalid_input[below -0.5] PASSED         [ 60%]
+tests/test_app.py::test_predict_invalid_input[raw ratio instead of a rank] PASSED [ 63%]
+tests/test_app.py::test_non_finite_values_are_rejected[NaN] PASSED       [ 65%]
+tests/test_app.py::test_non_finite_values_are_rejected[Infinity] PASSED  [ 68%]
+tests/test_app.py::test_non_finite_values_are_rejected[-Infinity] PASSED [ 71%]
+tests/test_app.py::test_malformed_json_is_rejected[] PASSED              [ 73%]
+tests/test_app.py::test_malformed_json_is_rejected[not json] PASSED      [ 76%]
+tests/test_app.py::test_malformed_json_is_rejected[{"gross_profitability_csr": 0.1,] PASSED [ 78%]
+tests/test_app.py::test_validation_error_names_the_offending_field PASSED [ 81%]
+tests/test_app.py::test_contract_fields_match_training_order PASSED      [ 84%]
+tests/test_app.py::test_predict_model_failure PASSED                     [ 86%]
+tests/test_app.py::test_bad_model_output_is_an_error_not_a_prediction[nan] PASSED [ 89%]
+tests/test_app.py::test_bad_model_output_is_an_error_not_a_prediction[inf] PASSED [ 92%]
+tests/test_app.py::test_bad_model_output_is_an_error_not_a_prediction[two-predictions] PASSED [ 94%]
+tests/test_app.py::test_bad_model_output_is_an_error_not_a_prediction[no-prediction] PASSED [ 97%]
+tests/test_app.py::test_predict_performance 
+[latency] in-process FastAPI TestClient (no network), 200 sequential POST /predict after 10 warm-up requests, time.perf_counter per request: median 2.70 ms, p95 3.52 ms, max 4.29 ms | Windows-11-10.0.26200-SP0, AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD, 16 logical CPUs, Python 3.12.3
+PASSED                       [100%]
+
+============================= 38 passed in 4.09s ==============================

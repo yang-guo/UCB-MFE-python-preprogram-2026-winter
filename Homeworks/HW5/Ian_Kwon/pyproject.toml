@@ -1,0 +1,22 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    # starlette 1.10 suggests httpx2 for TestClient; the course pins httpx 0.28.1.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+]
+
+[tool.ruff]
+line-length = 96
+target-version = "py312"
+
+[tool.ruff.format]
+# Byte-for-byte copy of the HW4 module that the pickled model imports; it is still
+# linted, but not reformatted, so it stays identical to the HW4 branch.
+exclude = ["quantlab/models.py"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "model_service", "quantlab"]

@@ -1,0 +1,152 @@
+# 2026-11-17T02:20:22Z | Linux 6.18.58.1-microsoft-standard-WSL2 | Docker 29.1.3
+
+## Build
+$ docker build -t mfe-hw5:local .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  59.39kB
+Step 1/12 : FROM python:3.12-slim
+ ---> 5e2bdb1b0d54
+Step 2/12 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> bf5c907352e2
+Step 3/12 : WORKDIR /app
+ ---> Using cache
+ ---> 7646f1ed6299
+Step 4/12 : COPY requirements.txt .
+ ---> Using cache
+ ---> 607beb56c1b8
+Step 5/12 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> 5e6c906d1133
+Step 6/12 : COPY app.py model_service.py ./
+ ---> Using cache
+ ---> a77936f22cd9
+Step 7/12 : COPY quantlab/ quantlab/
+ ---> Using cache
+ ---> eaf157bc6891
+Step 8/12 : COPY artifacts/ artifacts/
+ ---> Using cache
+ ---> 60676152150a
+Step 9/12 : RUN useradd --create-home --uid 10001 appuser
+ ---> Using cache
+ ---> 7f20232e97ac
+Step 10/12 : USER appuser
+ ---> Using cache
+ ---> e9198b1d3198
+Step 11/12 : EXPOSE 8000
+ ---> Using cache
+ ---> 133486a20a96
+Step 12/12 : CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+ ---> Using cache
+ ---> e2c592b9cb72
+Successfully built e2c592b9cb72
+Successfully tagged mfe-hw5:local
+$ docker image ls mfe-hw5:local
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.
+IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
+mfe-hw5:local   e2c592b9cb72        722MB          166MB        
+
+## Run the container
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+be5307b7898e1c4eeb41c198067fdebad3e101c51d20fa5a79587aaa04349cb7
+$ docker ps --filter name=mfe-hw5 --format '{{.Names}}  {{.Image}}  {{.Status}}  {{.Ports}}'
+mfe-hw5  mfe-hw5:local  Up 2 seconds  127.0.0.1:8000->8000/tcp
+
+## Valid request (example_request.json: AAPL on 2015-12-31, HW4 score 0.10577686157588898)
+$ cat example_request.json
+{
+  "gross_profitability_csr": 0.10099337748344372,
+  "operating_roa_csr": 0.4067328918322296,
+  "accruals_to_assets_csr": 0.09889502762430935,
+  "book_to_market_csr": -0.2560706401766004,
+  "vol_63_csr": -0.1940463065049614,
+  "mom_252_21_csr": 0.07885714285714285,
+  "ret_21_csr": -0.314773980154355
+}
+$ curl -i -sS http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 02:20:25 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 6adf04c8c37e
+
+{"prediction":0.10577686157588896,"model_version":"hw4-P1_top50__R1-f06421a6"}
+
+## Invalid request: numeric string instead of a number -> 422
+$ curl -i -sS http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{
+  "gross_profitability_csr": 0.10099337748344372,
+  "operating_roa_csr": 0.4067328918322296,
+  "accruals_to_assets_csr": 0.09889502762430935,
+  "book_to_market_csr": -0.2560706401766004,
+  "vol_63_csr": "-0.19",
+  "mom_252_21_csr": 0.07885714285714285,
+  "ret_21_csr": -0.314773980154355
+}'
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 02:20:25 GMT
+server: uvicorn
+content-length: 101
+content-type: application/json
+
+{"detail":[{"loc":["body","vol_63_csr"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+## Invalid request: NaN and a missing field -> 422
+$ curl -i -sS http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{
+  "gross_profitability_csr": 0.10099337748344372,
+  "operating_roa_csr": 0.4067328918322296,
+  "accruals_to_assets_csr": 0.09889502762430935,
+  "book_to_market_csr": -0.2560706401766004,
+  "mom_252_21_csr": 0.07885714285714285,
+  "ret_21_csr": NaN
+}'
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 02:20:25 GMT
+server: uvicorn
+content-length: 175
+content-type: application/json
+
+{"detail":[{"loc":["body","vol_63_csr"],"msg":"Field required","type":"missing"},{"loc":["body","ret_21_csr"],"msg":"Input should be a finite number","type":"finite_number"}]}
+
+## Stop the container, then start the same image again
+$ docker stop mfe-hw5
+mfe-hw5
+$ docker ps --all --filter name=mfe-hw5 --format '{{.Names}} {{.Status}}'
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+a61112ff70d126b70aaf69bce7393e34647da921813d3ea00b9622a02942090c
+$ curl -sS http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-P1_top50__R1-f06421a6"}
+$ curl -i -sS http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 02:20:28 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 13d04c742f2e
+
+{"prediction":0.10577686157588896,"model_version":"hw4-P1_top50__R1-f06421a6"}
+
+## Real HTTP latency against the container (curl, new TCP connection per request)
+100 requests after 10 warm-up: median 2.16 ms, p95 2.52 ms, max 2.75 ms
+
+## Container log (startup line and request log)
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     model_loaded version=hw4-P1_top50__R1-f06421a6
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:46556 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46558 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46562 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46566 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46576 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46592 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46598 - "POST /predict HTTP/1.1" 200 OK
+
+## Clean up
+$ docker stop mfe-hw5
+mfe-hw5
+# demo finished OK

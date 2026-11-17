@@ -1,0 +1,220 @@
+# Makefile targets, run on 2026-11-16 (Pacific).
+# test/lint/format: Windows (GNU Make 4.4.1, Git Bash, HW5 .venv).
+# build/run/demo: WSL2 Ubuntu (GNU Make 4.3), where Docker Engine runs.
+
+########## Windows
+# 2026-11-17T02:18:25Z | Windows 11, Git Bash, GNU Make 4.4.1, HW5 .venv activated (Python 3.12.3)
+
+$ make test
+python -m pytest -q
+.....................................
+[latency] in-process FastAPI TestClient (no network), 200 sequential POST /predict after 10 warm-up requests, time.perf_counter per request: median 3.75 ms, p95 4.84 ms, max 16.04 ms | Windows-11-10.0.26200-SP0, AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD, 16 logical CPUs, Python 3.12.3
+.                                   [100%]
+38 passed in 5.05s
+[make test exit code: 0]
+
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+6 files already formatted
+[make lint exit code: 0]
+
+$ make format
+python -m ruff format .
+6 files left unchanged
+[make format exit code: 0]
+
+########## WSL2
+# 2026-11-17T02:19:23Z | WSL2 Ubuntu 22.04.3 LTS | GNU Make 4.3 | Docker 29.1.3
+
+$ make build
+docker build -t mfe-hw5:local .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  59.39kB
+Step 1/12 : FROM python:3.12-slim
+ ---> 5e2bdb1b0d54
+Step 2/12 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PIP_DISABLE_PIP_VERSION_CHECK=1
+ ---> Using cache
+ ---> bf5c907352e2
+Step 3/12 : WORKDIR /app
+ ---> Using cache
+ ---> 7646f1ed6299
+Step 4/12 : COPY requirements.txt .
+ ---> 607beb56c1b8
+Step 5/12 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Running in 7e62fafc7ffd
+Collecting fastapi==0.162.0 (from -r requirements.txt (line 2))
+  Downloading fastapi-0.162.0-py3-none-any.whl.metadata (26 kB)
+Collecting uvicorn==0.54.0 (from -r requirements.txt (line 3))
+  Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting pydantic==2.14.2 (from -r requirements.txt (line 4))
+  Downloading pydantic-2.14.2-py3-none-any.whl.metadata (137 kB)
+Collecting httpx==0.28.1 (from -r requirements.txt (line 5))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting pytest==9.2.0 (from -r requirements.txt (line 6))
+  Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting ruff==0.17.3 (from -r requirements.txt (line 7))
+  Downloading ruff-0.17.3-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+Collecting numpy==2.3.5 (from -r requirements.txt (line 11))
+  Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting pandas==2.3.3 (from -r requirements.txt (line 12))
+  Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting scikit-learn==1.8.0 (from -r requirements.txt (line 13))
+  Downloading scikit_learn-1.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+Collecting scipy==1.16.3 (from -r requirements.txt (line 14))
+  Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (62 kB)
+Collecting joblib==1.5.3 (from -r requirements.txt (line 15))
+  Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting threadpoolctl==3.6.0 (from -r requirements.txt (line 16))
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting starlette>=0.46.0 (from fastapi==0.162.0->-r requirements.txt (line 2))
+  Downloading starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi==0.162.0->-r requirements.txt (line 2))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from fastapi==0.162.0->-r requirements.txt (line 2))
+  Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi==0.162.0->-r requirements.txt (line 2))
+  Downloading annotated_doc-0.0.6-py3-none-any.whl.metadata (6.5 kB)
+Collecting opentelemetry-api>=1.44.0 (from fastapi==0.162.0->-r requirements.txt (line 2))
+  Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+Collecting click>=7.0 (from uvicorn==0.54.0->-r requirements.txt (line 3))
+  Downloading click-8.5.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting h11>=0.8 (from uvicorn==0.54.0->-r requirements.txt (line 3))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting annotated-types>=0.6.0 (from pydantic==2.14.2->-r requirements.txt (line 4))
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.50.2 (from pydantic==2.14.2->-r requirements.txt (line 4))
+  Downloading pydantic_core-2.50.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.5 kB)
+Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 5))
+  Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 5))
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 5))
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx==0.28.1->-r requirements.txt (line 5))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting iniconfig>=2 (from pytest==9.2.0->-r requirements.txt (line 6))
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging>=24 (from pytest==9.2.0->-r requirements.txt (line 6))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy<2,>=1.6 (from pytest==9.2.0->-r requirements.txt (line 6))
+  Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pygments>=2.15 (from pytest==9.2.0->-r requirements.txt (line 6))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting python-dateutil>=2.8.2 (from pandas==2.3.3->-r requirements.txt (line 12))
+  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting pytz>=2020.1 (from pandas==2.3.3->-r requirements.txt (line 12))
+  Downloading pytz-2026.6-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas==2.3.3->-r requirements.txt (line 12))
+  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Downloading fastapi-0.162.0-py3-none-any.whl (148 kB)
+Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+Downloading pydantic-2.14.2-py3-none-any.whl (490 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+Downloading ruff-0.17.3-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.6/10.6 MB 24.9 MB/s eta 0:00:00
+Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 23.1 MB/s eta 0:00:00
+Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 21.4 MB/s eta 0:00:00
+Downloading scikit_learn-1.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (8.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.9/8.9 MB 25.4 MB/s eta 0:00:00
+Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.7/35.7 MB 24.2 MB/s eta 0:00:00
+Downloading joblib-1.5.3-py3-none-any.whl (309 kB)
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading pydantic_core-2.50.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 31.2 MB/s eta 0:00:00
+Downloading annotated_doc-0.0.6-py3-none-any.whl (5.3 kB)
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading click-8.5.1-py3-none-any.whl (126 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 27.0 MB/s eta 0:00:00
+Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Downloading pytz-2026.6-py2.py3-none-any.whl (506 kB)
+Downloading starlette-1.10.0-py3-none-any.whl (80 kB)
+Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Installing collected packages: pytz, tzdata, typing-extensions, threadpoolctl, ruff, pygments, pluggy, packaging, numpy, joblib, iniconfig, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, scipy, python-dateutil, pytest, pydantic-core, opentelemetry-api, httpcore, anyio, starlette, scikit-learn, pydantic, pandas, httpx, fastapi
+Successfully installed annotated-doc-0.0.6 annotated-types-0.8.0 anyio-4.16.0 certifi-2026.10.23 click-8.5.1 fastapi-0.162.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 joblib-1.5.3 numpy-2.3.5 opentelemetry-api-1.45.2 packaging-26.3 pandas-2.3.3 pluggy-1.7.0 pydantic-2.14.2 pydantic-core-2.50.2 pygments-2.21.0 pytest-9.2.0 python-dateutil-4.0.0 pytz-2026.6 ruff-0.17.3 scikit-learn-1.8.0 scipy-1.16.3 starlette-1.10.0 threadpoolctl-3.6.0 typing-extensions-4.16.0 typing-inspection-0.4.5 tzdata-2026.6 uvicorn-0.54.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m ---> Removed intermediate container 7e62fafc7ffd
+ ---> 5e6c906d1133
+Step 6/12 : COPY app.py model_service.py ./
+ ---> a77936f22cd9
+Step 7/12 : COPY quantlab/ quantlab/
+ ---> eaf157bc6891
+Step 8/12 : COPY artifacts/ artifacts/
+ ---> 60676152150a
+Step 9/12 : RUN useradd --create-home --uid 10001 appuser
+ ---> Running in d8517e1c36a5
+ ---> Removed intermediate container d8517e1c36a5
+ ---> 7f20232e97ac
+Step 10/12 : USER appuser
+ ---> Running in 9e2327f44115
+ ---> Removed intermediate container 9e2327f44115
+ ---> e9198b1d3198
+Step 11/12 : EXPOSE 8000
+ ---> Running in 194070459c16
+ ---> Removed intermediate container 194070459c16
+ ---> 133486a20a96
+Step 12/12 : CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+ ---> Running in 99e7c0386677
+ ---> Removed intermediate container 99e7c0386677
+ ---> e2c592b9cb72
+Successfully built e2c592b9cb72
+Successfully tagged mfe-hw5:local
+[make build exit code: 0]
+
+$ make run        # foreground server; started in the background here, then stopped
+$ curl -i http://127.0.0.1:8000/predict -H "Content-Type: application/json" --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 02:20:21 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 68b2afe6990d
+
+{"prediction":0.10577686157588896,"model_version":"hw4-P1_top50__R1-f06421a6"}
+$ docker stop mfe-hw5
+mfe-hw5
+--- output of make run ---
+docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     model_loaded version=hw4-P1_top50__R1-f06421a6
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:46408 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46422 - "POST /predict HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+[make run exit code: 0]
+
+$ make demo       # full output: evidence/container_transcript.txt
+bash -o pipefail -c 'bash scripts/container_demo.sh 2>&1 | tee evidence/container_transcript.txt'
+... (build, valid/invalid requests, restart; see container_transcript.txt) ...
+## Clean up
+$ docker stop mfe-hw5
+mfe-hw5
+# demo finished OK
+[make demo exit code: 0]
+
+running containers after the targets: 0
