@@ -1,0 +1,198 @@
+{
+  "model_version": "hw4-ridge-final-refit-2026-01-02",
+  "description": "My HW4 stock-return model: the last refit of the HW4 final test (`hw4.py final`), rebuilt with HW4's own functions and frozen settings.",
+  "model": {
+    "type": "sklearn.pipeline.Pipeline",
+    "steps": [
+      {
+        "name": "impute",
+        "class": "SimpleImputer",
+        "params": {
+          "add_indicator": false,
+          "copy": true,
+          "fill_value": 0.5,
+          "keep_empty_features": true,
+          "missing_values": "nan",
+          "strategy": "constant"
+        }
+      },
+      {
+        "name": "ridge",
+        "class": "Ridge",
+        "params": {
+          "alpha": 10000000.0,
+          "copy_X": true,
+          "fit_intercept": true,
+          "max_iter": null,
+          "positive": false,
+          "random_state": null,
+          "solver": "auto",
+          "tol": 0.0001
+        }
+      }
+    ],
+    "ridge_coefficients": {
+      "mom_21": 1.55255627631704e-06,
+      "mom_252_21": 4.3257850744434694e-05,
+      "vol_63": -1.9422126789182893e-05,
+      "drawdown_252": 3.8664786861338925e-05,
+      "operating_roa": 6.714944470964699e-05,
+      "accruals_to_assets": -1.615387103521298e-06,
+      "debt_to_assets": 1.4338127377848719e-05,
+      "log_cap": 1.34580267341932e-05
+    },
+    "ridge_intercept": 0.004880138725070977
+  },
+  "features": {
+    "order": [
+      "mom_21",
+      "mom_252_21",
+      "vol_63",
+      "drawdown_252",
+      "operating_roa",
+      "accruals_to_assets",
+      "debt_to_assets",
+      "log_cap"
+    ],
+    "price_features": [
+      "mom_21",
+      "mom_252_21",
+      "vol_63",
+      "drawdown_252"
+    ],
+    "financial_features": [
+      "operating_roa",
+      "accruals_to_assets",
+      "debt_to_assets"
+    ],
+    "units": "Each feature is a percentile rank among that signal date's eligible stocks (pandas rank(pct=True)), so values lie in (0, 1]. Raw definitions: mom_21 = 21-session return; mom_252_21 = return from 252 to 21 sessions ago; vol_63 = annualized std of 63 daily returns; drawdown_252 = price / 252-session high - 1; operating_roa, accruals_to_assets, debt_to_assets = latest quarterly filing, usable from filing date + 1 day, blank after 550 days; log_cap = log of the quarter's market-cap proxy.",
+    "training_min": {
+      "mom_21": 0.0005037783375314861,
+      "mom_252_21": 0.0005068423720223011,
+      "vol_63": 0.0005045408678102926,
+      "drawdown_252": 0.0005065856129685917,
+      "operating_roa": 0.0005040322580645161,
+      "accruals_to_assets": 0.0005042864346949068,
+      "debt_to_assets": 0.0033333333333333335,
+      "log_cap": 0.0005037783375314861
+    },
+    "training_max": {
+      "mom_21": 1.0,
+      "mom_252_21": 1.0,
+      "vol_63": 1.0,
+      "drawdown_252": 0.9997367035281727,
+      "operating_roa": 1.0,
+      "accruals_to_assets": 1.0,
+      "debt_to_assets": 1.0,
+      "log_cap": 1.0
+    },
+    "training_missing_share": {
+      "mom_21": 1.4e-05,
+      "mom_252_21": 0.031029,
+      "vol_63": 0.000626,
+      "drawdown_252": 0.029473,
+      "operating_roa": 0.000279,
+      "accruals_to_assets": 0.000552,
+      "debt_to_assets": 0.000279,
+      "log_cap": 0.0
+    }
+  },
+  "missing_values": {
+    "in_hw4": "A feature is NaN when its raw value is unavailable for that stock/date.",
+    "pipeline": "SimpleImputer(strategy='constant', fill_value=0.5): a missing rank becomes the middle rank. Nothing is learned in preprocessing."
+  },
+  "training": {
+    "fit_date": "2026-01-02",
+    "train_start": "2010-01-01",
+    "first_signal_date": "2010-01-29",
+    "last_signal_date": "2025-09-30",
+    "last_target_end": "2025-12-30",
+    "rule": "month-end rows from train_start whose 90-day target ended before fit_date",
+    "n_rows": 362402,
+    "n_signal_dates": 189,
+    "n_symbols": 3661,
+    "data_loaded_through": "2026-09-30",
+    "database": "equities_top2000.duckdb",
+    "loader_warnings": [
+      "Quarantining 275 non-positive/non-finite adjusted prices.",
+      "Quarantining 28 price rows not on the market calendar."
+    ],
+    "final_test_refit_dates": [
+      "2016-03-31",
+      "2017-01-03",
+      "2018-01-02",
+      "2019-01-02",
+      "2020-01-02",
+      "2021-01-04",
+      "2022-01-03",
+      "2023-01-03",
+      "2024-01-02",
+      "2025-01-02",
+      "2026-01-02"
+    ]
+  },
+  "target": {
+    "definition": "90-day return minus the date's median, capped at the date's 1st/99th percentiles",
+    "holding_days": 90,
+    "entry": "next session's close after the signal date",
+    "exit": "first close on or after entry + 90 calendar days",
+    "training_cap_quantile": 0.01
+  },
+  "output": {
+    "name": "prediction",
+    "units": "fraction (0.01 = 1 percentage point)",
+    "interpretation": "Predicted 90-day return minus that date's median eligible stock. HW4 used it only to rank stocks; with alpha = 1e7 predictions stay close to the intercept."
+  },
+  "reference_data": {
+    "signal_date": "2026-08-31",
+    "stocks_scored_that_day": 1938,
+    "file": "reference_prediction.json"
+  },
+  "hw4_config": {
+    "frozen_on": "2026-11-16",
+    "ridge_alpha": 10000000.0,
+    "features": [
+      "mom_21",
+      "mom_252_21",
+      "vol_63",
+      "drawdown_252",
+      "operating_roa",
+      "accruals_to_assets",
+      "debt_to_assets",
+      "log_cap"
+    ],
+    "train_start": "2010-01-01",
+    "training_dates": "month-end sessions",
+    "target": "90-day return minus the date's median, capped at the date's 1st/99th percentiles",
+    "target_winsor": 0.01,
+    "max_daily_move": 4.0,
+    "refit": "first signal date, then the first session of each January",
+    "top_n": 20,
+    "cohort_fraction": 0.3333333333333333,
+    "ramp_months": 3,
+    "name_cap": 0.05,
+    "sector_cap": 0.25,
+    "min_price": 5.0,
+    "liquidity_window": 63,
+    "liquidity_min_quotes": 60,
+    "fee_bps": 10,
+    "max_stale_sessions": 5
+  },
+  "provenance": {
+    "hw4_folder": "Homeworks/HW4/Ananya_Das",
+    "hw4_commit": "92ecd938797eb312a8e26f3a421aa5a8fcbcdfe1",
+    "hw4_py_sha256": "a3f3c74cc152227454b3eaedf0fc6e9915d33d9450e5c72a0241f1e9b90a0da2",
+    "frozen_config_sha256": "4bfc88e62e1ea62347c450afcc2532730a9a047f8b4cc9b87211a172da9f70ad",
+    "export_script": "export_model.py",
+    "exported_at_utc": "2026-11-17T13:12:12+00:00"
+  },
+  "environment": {
+    "python": "3.12.9",
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  }
+}

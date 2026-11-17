@@ -1,0 +1,95 @@
+{
+  "model_version": "hw4-ridge-final-refit-2026-01-02",
+  "feature_order": [
+    "mom_21",
+    "mom_252_21",
+    "vol_63",
+    "drawdown_252",
+    "operating_roa",
+    "accruals_to_assets",
+    "debt_to_assets",
+    "log_cap"
+  ],
+  "how_recorded": "HW4's ModelStrategy features for the signal date (builder.features_on), scored by the pipeline from hw4.fit on a one-row DataFrame with HW4's column names, before any API code. cross_section_prediction is the same stock scored with the whole day, as HW4's strategy did. Missing features are null (NaN in HW4). is_hw4_backtest_score is false when HW4's backtest scored that date with an earlier yearly refit (hw4_backtest_refit); the features are still real HW4 test-period inputs and the prediction is the served pipeline's.",
+  "tolerance": 1e-12,
+  "reference": {
+    "category": "complete",
+    "symbol": "A",
+    "signal_date": "2026-08-31",
+    "missing_features": [],
+    "hw4_backtest_refit": "2026-01-02",
+    "is_hw4_backtest_score": true,
+    "features": {
+      "mom_21": 0.8199174406604747,
+      "mom_252_21": 0.4978969505783386,
+      "vol_63": 0.25748194014447884,
+      "drawdown_252": 0.8934942287513117,
+      "operating_roa": 0.7301341589267286,
+      "accruals_to_assets": 0.8384932920536635,
+      "debt_to_assets": 0.48348813209494323,
+      "log_cap": 0.8555211558307534
+    },
+    "prediction": 0.004998615115138454,
+    "prediction_hex": "0x1.4796d871df212p-8",
+    "cross_section_prediction": 0.004998615115138454
+  },
+  "additional_examples": [
+    {
+      "category": "missing_price_feature",
+      "symbol": "ALMR",
+      "signal_date": "2026-08-31",
+      "missing_features": [
+        "mom_252_21",
+        "drawdown_252"
+      ],
+      "hw4_backtest_refit": "2026-01-02",
+      "is_hw4_backtest_score": true,
+      "features": {
+        "mom_21": 0.9267285861713106,
+        "mom_252_21": null,
+        "vol_63": 0.9406604747162023,
+        "drawdown_252": null,
+        "operating_roa": 0.07688338493292053,
+        "accruals_to_assets": 0.630546955624355,
+        "debt_to_assets": 0.31166150670794635,
+        "log_cap": 0.15841073271413827
+      },
+      "prediction": 0.00491501385259442,
+      "prediction_hex": "0x1.421c3fc19b90ep-8",
+      "cross_section_prediction": 0.00491501385259442
+    },
+    {
+      "category": "missing_financial_feature",
+      "symbol": "SPHR",
+      "signal_date": "2024-10-31",
+      "missing_features": [
+        "operating_roa",
+        "accruals_to_assets",
+        "debt_to_assets"
+      ],
+      "hw4_backtest_refit": "2024-01-02",
+      "is_hw4_backtest_score": false,
+      "features": {
+        "mom_21": 0.09872122762148337,
+        "mom_252_21": 0.6128697457187338,
+        "vol_63": 0.8408393039918116,
+        "drawdown_252": 0.29677754677754675,
+        "operating_roa": null,
+        "accruals_to_assets": null,
+        "debt_to_assets": null,
+        "log_cap": 0.13248081841432224
+      },
+      "prediction": 0.00494366639922651,
+      "prediction_hex": "0x1.43fcf581cb88dp-8",
+      "cross_section_prediction": 0.00494366639922651
+    }
+  ],
+  "not_found": [
+    {
+      "category": "missing_log_cap",
+      "searched": "126 final-test month-ends, 2016-03-31 to 2026-08-31 (247,638 stock-dates)",
+      "result": "no observation with only log_cap missing",
+      "any_missing_in_test_period": 0
+    }
+  ]
+}
