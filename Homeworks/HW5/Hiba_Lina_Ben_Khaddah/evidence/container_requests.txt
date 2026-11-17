@@ -1,0 +1,40 @@
+HW5 container request evidence
+Verified locally on November 16, 2026
+Image: mfe-hw5:local
+
+1. Valid request
+
+$ curl -i http://127.0.0.1:8000/predict \
+    -H 'Content-Type: application/json' \
+    --data-binary @example_request.json
+
+HTTP/1.1 200 OK
+content-type: application/json
+
+{"prediction":0.02147808903157589,"model_version":"hiba-hw4-rank-tree-v1"}
+
+2. Invalid request
+
+$ curl -i http://127.0.0.1:8000/predict \
+    -H 'Content-Type: application/json' \
+    --data '{}'
+
+HTTP/1.1 422 Unprocessable Entity
+content-type: application/json
+
+{"detail":"Invalid request"}
+
+3. Request after stopping and restarting the same image
+
+$ docker run --rm --name mfe-hw5 \
+    -p 127.0.0.1:8000:8000 \
+    mfe-hw5:local
+
+$ curl -i http://127.0.0.1:8000/predict \
+    -H 'Content-Type: application/json' \
+    --data-binary @example_request.json
+
+HTTP/1.1 200 OK
+content-type: application/json
+
+{"prediction":0.02147808903157589,"model_version":"hiba-hw4-rank-tree-v1"}

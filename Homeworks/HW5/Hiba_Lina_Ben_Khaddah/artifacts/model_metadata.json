@@ -1,0 +1,26 @@
+{
+  "model_version": "hiba-hw4-rank-tree-v1",
+  "model_type": "HistGradientBoostingRegressor with fitted preprocessing",
+  "prediction": "within-date percentile rank of the 90-calendar-day return minus 0.5",
+  "feature_order": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "sector"
+  ],
+  "fit_cutoff": "2016-03-31",
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.3.3",
+  "scikit_learn": "1.8.0",
+  "joblib": "1.5.3"
+}
