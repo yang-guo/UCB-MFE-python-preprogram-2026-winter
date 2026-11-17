@@ -1,0 +1,5 @@
+$ make lint PYTHON=.venv/bin/python
+.venv/bin/python -m ruff check .
+All checks passed!
+.venv/bin/python -m ruff format --check .
+12 files already formatted

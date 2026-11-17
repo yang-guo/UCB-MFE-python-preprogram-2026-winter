@@ -1,0 +1,9 @@
+# Allowlist keeps databases, environments, credentials and research out of context.
+**
+!requirements.txt
+!app.py
+!model_service.py
+!preprocessing.py
+!artifacts/
+!artifacts/model.joblib
+!artifacts/metadata.json

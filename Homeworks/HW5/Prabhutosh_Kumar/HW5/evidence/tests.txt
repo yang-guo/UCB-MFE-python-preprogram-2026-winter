@@ -1,0 +1,14 @@
+$ .venv/bin/python -m pytest -q -s
+..............................
+LATENCY_REPORT {"clock": "time.perf_counter; milliseconds; includes validation and serialization", "machine": "arm64", "median_ms": 2.769603976048529, "method": "in-process Starlette TestClient; 5 warmups, 50 sequential requests", "p95_ms": 3.0493276310153306, "platform": "macOS-26.5.2-arm64-arm-64bit", "python": "3.12.5"}
+...
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+33 passed, 1 warning in 49.78s
+
+Recorded from the executed pytest output. Local absolute path in the warning
+was shortened; no tests were skipped. The installed course-template stack
+emits this deprecation warning but supports the exercised httpx TestClient.

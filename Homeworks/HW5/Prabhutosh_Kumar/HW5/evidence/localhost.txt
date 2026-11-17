@@ -1,0 +1,22 @@
+Actual localhost HTTP against uvicorn; this is NOT container evidence.
+POST http://127.0.0.1:8765/predict
+Content-Type: application/json
+{"features": [0.0326209223847018, -0.0565262076053443, -0.063717746182201, 0.2835024318698643, -0.0776186887716654, 0.117704280155642, 0.0212270610791563, 0.2373322377430841, 0.2644480964119419, 0.0099972610243768, 0.0013694878115584, 22.0, -0.0096233159197141, 0.2324334235655057]}
+HTTP 200
+date: Mon, 16 Nov 2026 05:48:14 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+Connection: close
+{"prediction":0.0303447807130536,"model_version":"hw4-ridge-alpha10-fit20160401-v1"}
+POST http://127.0.0.1:8765/predict
+Content-Type: application/json
+{"features": [0.1]}
+HTTP 422
+date: Mon, 16 Nov 2026 05:48:14 GMT
+server: uvicorn
+content-length: 126
+content-type: application/json
+Connection: close
+{"detail":[{"loc":["body","features"],"msg":"List should have at least 14 items after validation, not 1","type":"too_short"}]}
+PASS: valid and invalid localhost requests.

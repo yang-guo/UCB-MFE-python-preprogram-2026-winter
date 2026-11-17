@@ -1,0 +1,67 @@
+{
+  "model_version": "hw4-ridge-alpha10-fit20160401-v1",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "reversal_5",
+    "volatility_21"
+  ],
+  "holding_days": 90,
+  "fit_audit": {
+    "fit_date": "2016-04-01 00:00:00",
+    "alpha": 10.0,
+    "training_rows": 139554,
+    "latest_training_signal": "2015-11-30 00:00:00",
+    "latest_label_end": "2016-02-29 00:00:00"
+  },
+  "hw4_commit": "7f958c5cecf7dd066eb63704dfae7bcc4369068b",
+  "python": "3.12.9",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "artifact_sha256": "03e7c5384b365b167ea80f9583963fb35c0bb7dc2bc3c424a1fbaee4bc3978b0",
+  "historical_rows_verified": 249796,
+  "max_abs_prediction_difference": 1.3189319428286161e-16,
+  "reference": {
+    "source": "HW4 outputs/results/predictions.csv (saved before API wrapping)",
+    "date": "2016-03-31",
+    "symbol": "A",
+    "request": {
+      "features": [
+        0.0326209223847018,
+        -0.0565262076053443,
+        -0.063717746182201,
+        0.2835024318698643,
+        -0.0776186887716654,
+        0.117704280155642,
+        0.0212270610791563,
+        0.2373322377430841,
+        0.2644480964119419,
+        0.0099972610243768,
+        0.0013694878115584,
+        22.0,
+        -0.0096233159197141,
+        0.2324334235655057
+      ]
+    },
+    "prediction": 0.0303447807130536,
+    "rtol": 1e-09,
+    "atol": 1e-10
+  },
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9"
+}
