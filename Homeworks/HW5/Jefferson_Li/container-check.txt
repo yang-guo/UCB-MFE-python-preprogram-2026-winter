@@ -1,0 +1,32 @@
+# HW5 container verification
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+bb2e07f207bb3ea2de2e2d3e890d1cf6e78b0fa7a15a69c15700c74e112dade3
+Image sha256:0dea790264486c98926879e1a5ae039a6da4cc2c5259323a1071cc39bddd83b4
+
+$ cat example_request.json
+{
+  "momentum_63": 1.373333343936209,
+  "volatility_63": 0.7370962292560452
+}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+{"prediction":0.5395505648644271,"model_version":"hw4-ridge-v1"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{"momentum_63":0.2}'
+HTTP/1.1 422 Unprocessable Entity
+{"detail":[{"loc":["body","volatility_63"],"msg":"Field required","type":"missing"}]}
+
+$ docker stop mfe-hw5
+mfe-hw5
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+3473f2d5e9b4f663c7cd9025a590bb8302332321dd9ef855f180831263afbce6
+Image sha256:0dea790264486c98926879e1a5ae039a6da4cc2c5259323a1071cc39bddd83b4
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+{"prediction":0.5395505648644271,"model_version":"hw4-ridge-v1"}
+
+$ docker stop mfe-hw5
+mfe-hw5
