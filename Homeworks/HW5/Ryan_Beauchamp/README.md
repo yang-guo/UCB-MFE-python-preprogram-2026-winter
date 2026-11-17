@@ -74,15 +74,17 @@ With the container running:
 curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
 ```
 
-Expected: HTTP 200, `prediction` 0.04361991939225726 (the same value HW4 recorded for this row) and the model version above. Port 8000 must be free, or change the host port. Interactive docs are at `/docs`.
+Expected: HTTP 200, `prediction` 0.04361991939225726 (the same value HW4 recorded for this row) and the model version above. `make format` rewrites files with `ruff format .`. The Makefile uses whichever `python` is on the PATH; if the venv isn't activated, run for example `make test PYTHON=.venv/Scripts/python.exe`. Port 8000 must be free, or change the host port. Interactive docs are at `/docs`.
+The container needs a few seconds to load and verify the model before it accepts requests. Wait for `Application startup complete` in `docker logs mfe-hw5` before sending the request; an immediate `curl` on a busy machine once gave `Empty reply from server`.
 
 ## Evidence in this folder
 
 - `test_output.txt`: 91 tests pass. `lint_output.txt`: `ruff check` and `ruff format --check` clean. `latency_report.txt`: see below. In these three files I trimmed my local folder path from one deprecation-warning line; nothing else was edited.
 - `docker_build_output.txt`: the image build. `container_evidence.txt`: valid request (200), three rejected requests (422: missing field, NaN, out-of-range), container logs, then the same image stopped and started again and a valid request answered with the identical prediction. `freeze_diff.txt`: `pip freeze` in the container vs. my local venv; the only difference is `colorama` (Windows-only), so the transitive dependency versions matched on this build.
 - **Tests (91):** valid inputs (6 HW4 reference rows vs. a separately loaded pipeline and vs. HW4's recorded scores, tolerance 1e-9); invalid inputs return 422 **and** a spy shows the model was never called; 500 on inference failure without leaking the error; startup rejects a tampered artifact or wrong library version.
-- **Latency:** `latency_report.txt` shows median 20.3 ms and p95 23.2 ms over 100 timed requests after 5 warm-ups, using the in-process test client (includes validation, JSON and `model.predict`; excludes network and uvicorn) on Windows 11, Intel 8-cpu laptop, Python 3.12.9. It varies with machine load (16.3/19.9 ms on a quiet earlier run; 39/68 ms on a busy one). I did not measure why.
+- **Latency:** `latency_report.txt` shows median 20.3 ms and p95 23.2 ms over 100 timed requests after 5 warm-ups, using the in-process test client (includes validation, JSON and `model.predict`; excludes network and uvicorn) on Windows 11, Intel 8-cpu laptop, Python 3.12.9. It varies with machine load (standalone runs of the same test gave medians from about 10.7 ms to 20.3 ms; one run while my machine was busy gave 39 ms median and 68 ms p95). I did not measure why.
 - **Mutation check:** I broke the code on purpose in a scratch copy. Allowing extra fields: caught. Widening the volatility upper bound from 100 to 1000: **not caught at first**, because my tests imported the bounds from `app.py`, so the test moved with the code. I hard-coded the expected bounds in the tests, and the same change now fails exactly one test. Turning off `allow_inf_nan=False`: still passes, because the range checks already reject NaN and infinity, so it is a redundant second layer.
+- **Fresh-clone check:** I cloned this branch into a new folder, created a new venv, installed `requirements.txt`, ran the tests (91 pass) and ruff (clean), built the image and sent the example request to the container (200, same prediction).
 
 ## Limitations and untested assumptions
 
