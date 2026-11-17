@@ -1,0 +1,45 @@
+$ docker image inspect mfe-hw5:local --format '{{.Id}}'
+sha256:d7b4da182f3232f7e2a739079aa81338aba122323014408c8078f0f058a7cb9b
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+11702eee04edbac6f1f18fca6000e28d8bf54b489d84b42084f9cb00d9512ec1
+running image: sha256:d7b4da182f3232f7e2a739079aa81338aba122323014408c8078f0f058a7cb9b
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 02:09:03 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":-0.09155196684529192,"model_version":"hw4-hgb-deep-static-2016-04-01"}
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{"momentum_5":"0.02"}'
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 02:09:03 GMT
+server: uvicorn
+content-length: 2337
+content-type: application/json
+
+{"detail":[{"type":"value_error","loc":["body","momentum_5"],"msg":"Value error, must be a JSON number","input":"0.02","ctx":{"error":{}}},{"type":"missing","loc":["body","momentum_21"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","momentum_63"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","momentum_126"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","momentum_252_21"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","volatility_21"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","volatility_63"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","drawdown_252"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","volume_ratio_21"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","large_cap_score"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","net_margin"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","operating_roa"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","debt_to_assets"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","cash_to_assets"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","fcf_to_assets"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","accruals_to_assets"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","filing_age_days"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","market_momentum_63"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","market_volatility_63"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","sector_relative_momentum"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","sector_profitability_rank"],"msg":"Field required","input":{"momentum_5":"0.02"}},{"type":"missing","loc":["body","sector"],"msg":"Field required","input":{"momentum_5":"0.02"}}]}
+
+$ docker stop mfe-hw5
+mfe-hw5
+$ docker ps --filter name=mfe-hw5
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+b79c8b0754b8a9e5394bf42b992ab665f9dc6c7c14116aaf9cedf8f7e0a3242a
+running image: sha256:d7b4da182f3232f7e2a739079aa81338aba122323014408c8078f0f058a7cb9b
+
+$ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 02:09:07 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+
+{"prediction":-0.09155196684529192,"model_version":"hw4-hgb-deep-static-2016-04-01"}
