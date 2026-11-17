@@ -1,0 +1,21 @@
+{
+  "book_to_market": 0.1,
+  "earnings_yield": 0.1,
+  "sales_to_market": 0.1,
+  "cash_flow_to_market": 0.1,
+  "momentum_1m": 0.1,
+  "momentum_3m": 0.1,
+  "momentum_6m": 0.1,
+  "momentum_12m": 0.1,
+  "momentum_12m_1m": 0.1,
+  "roe": "0.12",
+  "roa": 0.1,
+  "gross_profitability": 0.1,
+  "operating_cash_flow_to_assets": 0.1,
+  "net_margin": 0.1,
+  "debt_to_assets": 0.1,
+  "volatility_21d": 0.1,
+  "volatility_63d": 0.1,
+  "volatility_126d": 0.1,
+  "extra_feature": 1.0
+}
