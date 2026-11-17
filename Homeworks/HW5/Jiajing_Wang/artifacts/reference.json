@@ -1,0 +1,18 @@
+{
+  "expected_prediction": 0.4715127006306038,
+  "symbol": "A",
+  "signal": "2016-03-31",
+  "entry": "2016-04-01",
+  "alpha": 1000,
+  "training_rows": 135394,
+  "last_label": "2016-02-29",
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.8.0",
+    "duckdb": "1.5.6"
+  }
+}

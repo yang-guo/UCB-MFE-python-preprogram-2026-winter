@@ -1,0 +1,6 @@
+Image: mfe-hw5:local (make build, linux/arm64)
+Container 1
+POST /predict -> HTTP 200 {"prediction": 0.4715127006306037, "model_version": "hw4-ridge-v1"}
+POST /predict -> HTTP 422 {"detail": "Invalid input"}
+Container 2 (after restart)
+POST /predict -> HTTP 200 {"prediction": 0.4715127006306037, "model_version": "hw4-ridge-v1"}
