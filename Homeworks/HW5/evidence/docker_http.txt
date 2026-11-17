@@ -1,0 +1,50 @@
+Testing Docker image mfe-hw5:local (sha256:d298dd313bfa63ec3143a54ddde1bfe2840089dfa841a75c0e7d2ff9d487a040)
+$ docker run --rm --name mfe-hw5-smoke -p 127.0.0.1:8000:8000 sha256:d298dd313bfa63ec3143a54ddde1bfe2840089dfa841a75c0e7d2ff9d487a040
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:47838 - "GET /openapi.json HTTP/1.1" 200 OK
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": 0.08439560439560445, "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+INFO:     172.17.0.1:47840 - "POST /predict HTTP/1.1" 200 OK
+HTTP 200 OK
+{"prediction":0.034697474382189356,"model_version":"hw4-ridge-20160401-v1"}
+
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": "0.1", "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+HTTP 422 Unprocessable Entity
+{"detail":[{"loc":["body","ret21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+$ docker stop mfe-hw5-smoke
+INFO:     172.17.0.1:47842 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+mfe-hw5-smoke
+$ docker run --rm --name mfe-hw5-smoke -p 127.0.0.1:8000:8000 sha256:d298dd313bfa63ec3143a54ddde1bfe2840089dfa841a75c0e7d2ff9d487a040
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:47980 - "GET /openapi.json HTTP/1.1" 200 OK
+POST http://127.0.0.1:8000/predict
+Content-Type: application/json
+
+{"ret21": 0.08439560439560445, "ret63": 0.0077614379084967045, "ret126": 0.009410801963993576, "ret252skip21": -0.17721518987341767, "vol63": 0.018988735256992833, "op_margin": 0.31857602277520036, "cashflow_assets": 0.09363961211658324, "debt_assets": 0.21468269663534323}
+INFO:     172.17.0.1:47986 - "POST /predict HTTP/1.1" 200 OK
+HTTP 200 OK
+{"prediction":0.034697474382189356,"model_version":"hw4-ridge-20160401-v1"}
+
+$ docker stop mfe-hw5-smoke
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1]
+mfe-hw5-smoke
+PASS: same prediction and model version after restart.

@@ -1,0 +1,9 @@
+# Only send the files the Dockerfile needs.
+**
+!Dockerfile
+!requirements.txt
+!app.py
+!model_service.py
+!artifacts/
+!artifacts/hw4_ridge.joblib
+!artifacts/hw4_ridge.json

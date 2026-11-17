@@ -1,0 +1,45 @@
+HW4 final test replay matches the original training counts and portfolio metrics.
+{
+  "reference": {
+    "symbol": "AAPL",
+    "signal_date": "2016-03-31",
+    "entry_date": "2016-04-01",
+    "request": {
+      "ret21": 0.08439560439560445,
+      "ret63": 0.0077614379084967045,
+      "ret126": 0.009410801963993576,
+      "ret252skip21": -0.17721518987341767,
+      "vol63": 0.018988735256992833,
+      "op_margin": 0.31857602277520036,
+      "cashflow_assets": 0.09363961211658324,
+      "debt_assets": 0.21468269663534323
+    },
+    "expected_prediction": 0.034697474382189356,
+    "model_version": "hw4-ridge-20160401-v1"
+  },
+  "manifest": {
+    "model_version": "hw4-ridge-20160401-v1",
+    "features": [
+      "ret21",
+      "ret63",
+      "ret126",
+      "ret252skip21",
+      "vol63",
+      "op_margin",
+      "cashflow_assets",
+      "debt_assets"
+    ],
+    "sha256": "1776085e2059701299dc69e141db99b14dda79693af92372b6a95f9b3e1238f8",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.0",
+      "joblib": "1.5.3",
+      "threadpoolctl": "3.6.0"
+    },
+    "hw4_source_sha256": "3d532dc9b6aefe1a87957de5233b2d9a828712b72c9884721cb36254859ae927",
+    "training_rows": 615519,
+    "latest_training_exit": "2016-03-28"
+  }
+}
