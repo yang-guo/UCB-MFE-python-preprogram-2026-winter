@@ -1,0 +1,80 @@
+# HW5 (Dev Rao) checks. Adapted from .github/workflows/lesson-9.yml: same triggers and
+# lint/test steps, pointed at Homeworks/HW5/Dev_Rao and its pinned requirements.txt,
+# plus a job that builds the Docker image and sends real requests to it.
+name: HW5 Dev_Rao checks
+on:
+  pull_request:
+    paths:
+      - 'Homeworks/HW5/Dev_Rao/**'
+      - '.github/workflows/hw5-dev-rao.yml'
+  push:
+    paths:
+      - 'Homeworks/HW5/Dev_Rao/**'
+      - '.github/workflows/hw5-dev-rao.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: hw5-dev-rao-${{ github.ref }}
+  cancel-in-progress: true
+defaults:
+  run:
+    working-directory: Homeworks/HW5/Dev_Rao
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: Homeworks/HW5/Dev_Rao/requirements.txt
+      - run: python -m pip install -r requirements.txt
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - run: python -m pytest -q -rA
+
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: checks
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build image
+        run: docker build -t mfe-hw5:local .
+      - name: Start container
+        run: |
+          docker run -d --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8000/health && exit 0
+            sleep 1
+          done
+          docker logs mfe-hw5
+          exit 1
+      - name: Valid request returns 200 with the HW4 model version
+        run: |
+          code=$(curl -sS -o out.json -w '%{http_code}' http://127.0.0.1:8000/predict \
+            -H 'Content-Type: application/json' --data-binary @example_request.json)
+          cat out.json; echo
+          test "$code" = "200"
+          grep -q '"model_version":"hw4-composite-frozen-2026-11-13"' out.json
+      - name: Invalid request returns 422
+        run: |
+          code=$(curl -sS -o bad.json -w '%{http_code}' http://127.0.0.1:8000/predict \
+            -H 'Content-Type: application/json' --data-binary '{"r_ey": "0.5"}')
+          cat bad.json; echo
+          test "$code" = "422"
+      - name: Docker reports the container healthy
+        run: |
+          for i in $(seq 1 20); do
+            s=$(docker inspect --format '{{.State.Health.Status}}' mfe-hw5)
+            echo "health: $s"
+            [ "$s" = "healthy" ] && exit 0
+            sleep 3
+          done
+          exit 1
+      - name: Container logs
+        if: always()
+        run: docker logs mfe-hw5 || true

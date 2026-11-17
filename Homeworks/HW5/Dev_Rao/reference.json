@@ -1,0 +1,114 @@
+{
+  "source": "HW4 final test (run once, 2026-11-13): features from outputs/cache_top2000.duckdb table panel; hw4_score from outputs/final_scores.csv written by run_final_test.py",
+  "feature_order": [
+    "r_ey",
+    "r_bm",
+    "r_sp",
+    "r_fcfy",
+    "r_gp_a",
+    "r_roe",
+    "r_roa",
+    "r_accruals_a",
+    "r_asset_growth",
+    "r_share_iss",
+    "r_mom_12_1",
+    "r_sector_mom_126",
+    "r_ni_chg_a",
+    "r_ivol_63",
+    "r_max_ret_21"
+  ],
+  "cases": [
+    {
+      "signal_date": "2016-03-31",
+      "symbol": "KLAC",
+      "features": {
+        "r_ey": 0.5865384340286255,
+        "r_bm": 0.05912408605217934,
+        "r_sp": 0.2916666567325592,
+        "r_fcfy": 0.7363343834877014,
+        "r_gp_a": 0.7612179517745972,
+        "r_roe": 0.9908333420753479,
+        "r_roa": 0.8830128312110901,
+        "r_accruals_a": 0.2813504934310913,
+        "r_asset_growth": 0.12758111953735352,
+        "r_share_iss": 0.11340206116437912,
+        "r_mom_12_1": 0.909686803817749,
+        "r_sector_mom_126": 0.5648215413093567,
+        "r_ni_chg_a": 0.95652174949646,
+        "r_ivol_63": 0.010196649469435215,
+        "r_max_ret_21": 0.15076474845409393
+      },
+      "hw4_score": 0.2732430696487427,
+      "n_missing": 0
+    },
+    {
+      "signal_date": "2016-03-31",
+      "symbol": "AAP",
+      "features": {
+        "r_ey": null,
+        "r_bm": 0.27080291509628296,
+        "r_sp": null,
+        "r_fcfy": null,
+        "r_gp_a": null,
+        "r_roe": null,
+        "r_roa": null,
+        "r_accruals_a": null,
+        "r_asset_growth": 0.4476401209831238,
+        "r_share_iss": 0.6266568303108215,
+        "r_mom_12_1": 0.6926438212394714,
+        "r_sector_mom_126": 0.38929352164268494,
+        "r_ni_chg_a": 0.31171703338623047,
+        "r_ivol_63": 0.35324108600616455,
+        "r_max_ret_21": 0.3139111399650574
+      },
+      "hw4_score": -0.0338425561785697,
+      "n_missing": 7
+    },
+    {
+      "signal_date": "2020-02-21",
+      "symbol": "VIAC",
+      "features": {
+        "r_ey": 0.9819238185882568,
+        "r_bm": 0.8247994780540466,
+        "r_sp": 0.8825048208236694,
+        "r_fcfy": 0.6106080412864685,
+        "r_gp_a": 0.5468043684959412,
+        "r_roe": 0.8557432293891907,
+        "r_roa": 0.7243382930755615,
+        "r_accruals_a": 0.95536869764328,
+        "r_asset_growth": 0.9770471453666687,
+        "r_share_iss": 0.9882352948188782,
+        "r_mom_12_1": null,
+        "r_sector_mom_126": 0.13031423091888428,
+        "r_ni_chg_a": 0.8443893194198608,
+        "r_ivol_63": null,
+        "r_max_ret_21": 0.23783117532730103
+      },
+      "hw4_score": 0.026943540200591,
+      "n_missing": 2
+    },
+    {
+      "signal_date": "2026-09-25",
+      "symbol": "A",
+      "features": {
+        "r_ey": 0.42933619022369385,
+        "r_bm": 0.265263170003891,
+        "r_sp": 0.1997857540845871,
+        "r_fcfy": 0.3665231466293335,
+        "r_gp_a": 0.6609534025192261,
+        "r_roe": 0.7536723017692566,
+        "r_roa": 0.8270878195762634,
+        "r_accruals_a": 0.7610333561897278,
+        "r_asset_growth": 0.6975505948066711,
+        "r_share_iss": 0.41076186299324036,
+        "r_mom_12_1": 0.6418383717536926,
+        "r_sector_mom_126": 0.7671052813529968,
+        "r_ni_chg_a": 0.5156998634338379,
+        "r_ivol_63": 0.32842105627059937,
+        "r_max_ret_21": 0.6826315522193909
+      },
+      "hw4_score": 0.0034524828661233,
+      "n_missing": 0
+    }
+  ]
+}

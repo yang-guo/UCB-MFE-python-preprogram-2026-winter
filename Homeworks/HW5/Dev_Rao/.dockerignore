@@ -1,0 +1,25 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.log
+# not needed in the image (data access / dev only)
+tests/
+evidence/
+*.md
+make_reference.py
+export_model.py
+measure_http_latency.py
+reference.json
+example_request.json
+*.db
+*.parquet
+outputs/
+.idea/
+.vscode/
+*.pem
+*.key

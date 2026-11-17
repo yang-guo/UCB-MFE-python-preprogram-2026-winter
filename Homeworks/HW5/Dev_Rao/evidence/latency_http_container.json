@@ -1,0 +1,8 @@
+{
+  "method": "real HTTP to Docker container at http://127.0.0.1:8000/predict, httpx keep-alive, sequential, 20 warm-up + 200 timed",
+  "n": 200,
+  "median_ms": 5.313,
+  "p95_ms": 6.508,
+  "max_ms": 11.395,
+  "client_machine": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel | Windows 11"
+}

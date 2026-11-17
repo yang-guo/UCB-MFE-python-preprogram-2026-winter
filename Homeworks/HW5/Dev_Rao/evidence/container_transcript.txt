@@ -1,0 +1,82 @@
+# HW5 container transcript - 2026-11-17 05:20:24 UTC
+
+$ docker image ls mfe-hw5:local --format \{\{.Repository\}\}:\{\{.Tag\}\}\ \ id=\{\{.ID\}\}\ \ size=\{\{.Size\}\}
+mfe-hw5:local  id=9b75cd2552c9  size=722MB
+
+## start the container (detached here so the script can continue)
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+0b32094c1d232496e6e864bab4f6dad127bab1817b63e972b69822c358255335
+
+## 1. valid request (KLAC, 2016-03-31 signal from the HW4 final test)
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 05:20:25 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+x-request-id: 910b94729a5e
+
+{"prediction":0.27324307470892867,"model_version":"hw4-composite-frozen-2026-11-13"}
+## 2. invalid request: numeric string + extra field -> 422, no prediction
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary \{\"r_ey\":\ \"0.5\"\,\ \"sector\":\ \"Technology\"\}
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 05:20:25 GMT
+server: uvicorn
+content-length: 1149
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","r_ey"],"msg":"Input should be a valid number"},{"type":"missing","loc":["body","r_bm"],"msg":"Field required"},{"type":"missing","loc":["body","r_sp"],"msg":"Field required"},{"type":"missing","loc":["body","r_fcfy"],"msg":"Field required"},{"type":"missing","loc":["body","r_gp_a"],"msg":"Field required"},{"type":"missing","loc":["body","r_roe"],"msg":"Field required"},{"type":"missing","loc":["body","r_roa"],"msg":"Field required"},{"type":"missing","loc":["body","r_accruals_a"],"msg":"Field required"},{"type":"missing","loc":["body","r_asset_growth"],"msg":"Field required"},{"type":"missing","loc":["body","r_share_iss"],"msg":"Field required"},{"type":"missing","loc":["body","r_mom_12_1"],"msg":"Field required"},{"type":"missing","loc":["body","r_sector_mom_126"],"msg":"Field required"},{"type":"missing","loc":["body","r_ni_chg_a"],"msg":"Field required"},{"type":"missing","loc":["body","r_ivol_63"],"msg":"Field required"},{"type":"missing","loc":["body","r_max_ret_21"],"msg":"Field required"},{"type":"extra_forbidden","loc":["body","sector"],"msg":"Extra inputs are not permitted"}]}
+## 3. invalid request: NaN in an otherwise valid body -> 422
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @/tmp/hw5_nan.json
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 05:20:25 GMT
+server: uvicorn
+content-length: 99
+content-type: application/json
+
+{"detail":[{"type":"finite_number","loc":["body","r_ey"],"msg":"Input should be a finite number"}]}
+## 4. stop the container, start the SAME image again
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+0f15fdea357293d427f3797004fc0a30f527225770aab133895e07bfb28dadfa
+
+
+$ curl -sS -i http://127.0.0.1:8000/health
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 05:20:28 GMT
+server: uvicorn
+content-length: 68
+content-type: application/json
+
+{"status":"ready","model_version":"hw4-composite-frozen-2026-11-13"}
+## 5. valid request after restart (same prediction and model_version)
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H Content-Type:\ application/json --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 05:20:28 GMT
+server: uvicorn
+content-length: 84
+content-type: application/json
+x-request-id: 89aa89ce3b80
+
+{"prediction":0.27324307470892867,"model_version":"hw4-composite-frozen-2026-11-13"}
+## container log (startup lines + access log)
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     loaded model hw4-composite-frozen-2026-11-13
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:52808 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:52820 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:52832 - "POST /predict HTTP/1.1" 200 OK
+

@@ -1,0 +1,8 @@
+{
+  "method": "in-process fastapi.testclient.TestClient, sequential, 10 warm-up + 200 timed",
+  "n": 200,
+  "median_ms": 4.243,
+  "p95_ms": 5.075,
+  "max_ms": 35.917,
+  "machine": "Intel64 Family 6 Model 189 Stepping 1, GenuineIntel | Windows 11 | Python 3.12.9"
+}

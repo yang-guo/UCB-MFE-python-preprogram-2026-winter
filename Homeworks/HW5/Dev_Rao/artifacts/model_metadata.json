@@ -1,0 +1,66 @@
+{
+  "model_version": "hw4-composite-frozen-2026-11-13",
+  "description": "HW4 fixed-sign multi-factor composite (value, quality, investment, momentum, low risk) of same-date percentile ranks",
+  "hw4_source": "Homeworks/HW4/Dev_Rao, branch hw_4_dev_rao, commit 10d27ee",
+  "hw4_frozen_config_sha256": "140d39c7ebbb88042ce8d1293f54d3a45075e20a7d9dfa70f63a19e7fe017487",
+  "training_cutoff": "none: no parameters are fitted; config frozen 2026-11-13 on development data 2010-2015 only",
+  "refits": "none (nothing to refit); the same model scored every HW4 test signal",
+  "prediction": "unitless composite score in [-0.5, 0.5]; higher = higher expected 90-calendar-day forward return rank (next-session entry, 90-day hold)",
+  "features": [
+    "r_ey",
+    "r_bm",
+    "r_sp",
+    "r_fcfy",
+    "r_gp_a",
+    "r_roe",
+    "r_roa",
+    "r_accruals_a",
+    "r_asset_growth",
+    "r_share_iss",
+    "r_mom_12_1",
+    "r_sector_mom_126",
+    "r_ni_chg_a",
+    "r_ivol_63",
+    "r_max_ret_21"
+  ],
+  "feature_units": "same-date percentile rank among eligible stocks, in (0, 1]",
+  "themes": {
+    "value": {
+      "r_ey": 1,
+      "r_bm": 1,
+      "r_sp": 1,
+      "r_fcfy": 1
+    },
+    "quality": {
+      "r_gp_a": 1,
+      "r_roe": 1,
+      "r_roa": 1,
+      "r_accruals_a": -1
+    },
+    "investment": {
+      "r_asset_growth": -1,
+      "r_share_iss": -1
+    },
+    "momentum": {
+      "r_mom_12_1": 1,
+      "r_sector_mom_126": 1,
+      "r_ni_chg_a": 1
+    },
+    "low_risk": {
+      "r_ivol_63": -1,
+      "r_max_ret_21": -1
+    }
+  },
+  "categorical_levels": {},
+  "exported_at_utc": "2026-11-17T05:17:38+00:00",
+  "versions": {
+    "python": "3.12.9",
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3"
+  },
+  "artifact_sha256": "26fc572cbdf334c8102e47c7f548190ee7dd4c404297a85744c17308f453fa83",
+  "artifact_bytes": 763
+}
