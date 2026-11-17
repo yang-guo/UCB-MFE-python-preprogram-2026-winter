@@ -1,0 +1,111 @@
+{
+  "model_file": "model.joblib",
+  "model_sha256": "bb59b45b0b1018dafdd8f8af0bca59faf941f7a7d1b02a476c3aab10a4bc2d19",
+  "model_version": "hgb_w-20261117-bb59b45b",
+  "sklearn_version": "1.9.1",
+  "target": "90-day forward return (same units as training `target`)",
+  "features": [
+    {
+      "name": "momentum_21",
+      "kind": "numeric",
+      "min": -70235.98693386065,
+      "max": 210703.96083173947,
+      "unit": ""
+    },
+    {
+      "name": "momentum_63",
+      "kind": "numeric",
+      "min": -69846.36081325226,
+      "max": 209535.0824703968,
+      "unit": ""
+    },
+    {
+      "name": "momentum_252_21",
+      "kind": "numeric",
+      "min": -50081.210354500276,
+      "max": 150239.63109733342,
+      "unit": ""
+    },
+    {
+      "name": "volatility_63",
+      "kind": "numeric",
+      "min": -135769.25494911213,
+      "max": 407307.7648473364,
+      "unit": ""
+    },
+    {
+      "name": "drawdown_252",
+      "kind": "numeric",
+      "min": -1.4999895164233576,
+      "max": 0.49999650547445257,
+      "unit": ""
+    },
+    {
+      "name": "net_margin",
+      "kind": "numeric",
+      "min": -466500000001749.8,
+      "max": 155500000005249.47,
+      "unit": ""
+    },
+    {
+      "name": "operating_roa",
+      "kind": "numeric",
+      "min": -260055.3698124113,
+      "max": 196109.12327080377,
+      "unit": ""
+    },
+    {
+      "name": "debt_to_assets",
+      "kind": "numeric",
+      "min": -194723.8783623621,
+      "max": 584171.6192867269,
+      "unit": ""
+    },
+    {
+      "name": "cash_to_assets",
+      "kind": "numeric",
+      "min": -498310.78401936934,
+      "max": 1494929.1184859844,
+      "unit": ""
+    },
+    {
+      "name": "fcf_to_assets",
+      "kind": "numeric",
+      "min": -149129.30741775624,
+      "max": 392409.04044354724,
+      "unit": ""
+    },
+    {
+      "name": "accruals_to_assets",
+      "kind": "numeric",
+      "min": -121326.81475348973,
+      "max": 84670.45562293172,
+      "unit": ""
+    },
+    {
+      "name": "filing_age_days",
+      "kind": "numeric",
+      "min": -316.0,
+      "max": 948.0,
+      "unit": ""
+    },
+    {
+      "name": "sector",
+      "kind": "categorical",
+      "categories": [
+        "Basic Materials",
+        "Communication Services",
+        "Consumer Cyclical",
+        "Consumer Defensive",
+        "Energy",
+        "Financial Services",
+        "Healthcare",
+        "Industrials",
+        "Real Estate",
+        "Technology",
+        "Utilities"
+      ],
+      "unit": "category label"
+    }
+  ]
+}
