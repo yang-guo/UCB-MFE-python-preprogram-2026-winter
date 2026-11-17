@@ -1,6 +1,6 @@
 # HW5: Gobind Singh
 
-Serves the HW4 Ridge pipeline `ridge-alpha100-top2000-2010-2015`. The artifact is `ridge_90d_full.joblib`, fit on development signals from 2010 through 2015. The service loads that file once and does not retrain or open the HW4 database. `course_data.py` contains `QuantileClipper`, the custom transformer the pickle imports.
+Serves the HW4 Ridge pipeline `ridge-alpha100-top2000-2010-2015`. The artifact is `ridge_90d_full.joblib`, fit on development signals from 2010 through 2015. The service loads that file once and does not retrain or open the HW4 database. `course_data.py` is the `QuantileClipper` class copied from `Lectures/modeling/course_data.py`, so the pickle can import it. The API, tests, and Dockerfile were written with Cursor.
 
 The example row is symbol A on 2016-03-01 from the HW4 score panel. A direct `pipeline.predict` call on that row returns about `-0.20290557`. `example_request.json` is that same row.
 
@@ -45,7 +45,7 @@ curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data
 
 `pytest` uses the real saved model for the valid request and compares it with a direct pipeline call and the reference value above. Invalid payloads are rejected with 422 before `predict` runs. The failure test replaces `predict` with a function that raises and expects 500.
 
-Latency was measured in-process with FastAPI's `TestClient` on this machine: 20 requests after one warmup, timed with `time.perf_counter`. Median about 0.013 seconds, p95 about 0.014 seconds. The test allows a p95 under 0.5 seconds for that in-process measurement.
+Latency was measured on an Ubuntu 22.04 x86_64 laptop, in-process with FastAPI's `TestClient`: 20 requests after one warmup, timed with `time.perf_counter`. Median about 0.013 seconds, p95 about 0.014 seconds. The test allows a p95 under 0.5 seconds for that in-process measurement.
 
 Container evidence is in `success.png` (200 from the running image), `invalid.png` (rejected request), and `restart.png` (the same image started again, then the same valid request).
 
