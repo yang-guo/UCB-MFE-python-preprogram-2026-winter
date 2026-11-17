@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 01:29:31 GMT
+server: uvicorn
+content-length: 71
+content-type: application/json
+
+{"prediction":-0.25636256564901394,"model_version":"hw4-ridge-2026-v1"}

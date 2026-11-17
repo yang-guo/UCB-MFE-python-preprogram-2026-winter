@@ -1,0 +1,28 @@
+{
+  "model_version": "hw4-ridge-2026-v1",
+  "source_notebook": "hw4_stock_strategy_clean.ipynb",
+  "source_sha256": "1e759a6cea7dfd760fc5bd2e6ca57b79772d7fb3dc4b0265a6650a0038c77719",
+  "fit_date": "2025-12-31",
+  "training_rows": 365800,
+  "latest_training_exit": "2025-12-30",
+  "ridge_alpha": 0.1,
+  "features": [
+    "momentum_126",
+    "momentum_252_21",
+    "volatility_63",
+    "operating_roa",
+    "accruals_to_assets",
+    "debt_to_assets",
+    "sector"
+  ],
+  "holding_days": 90,
+  "prediction_units": "return fraction",
+  "library_versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.8.0"
+  }
+}
