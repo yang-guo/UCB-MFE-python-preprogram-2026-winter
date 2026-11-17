@@ -1,0 +1,39 @@
+$ python mutation_check.py
+caught  features sent to the model in reverse order
+        by test_predict_valid_input
+caught  missing rank scored as 0.5 instead of 0.0
+        by test_predict_reproduces_hw4[HAS]
+caught  row built in float64 instead of float32
+        by test_predict_valid_input
+caught  model logic accepts a non-finite prediction
+        by test_each_layer_refuses_a_non_finite_prediction
+caught  artifact checksum not verified
+        by test_load_refuses_a_file_that_is_not_the_exported_artifact
+caught  scikit-learn version not verified
+        by test_load_refuses_another_scikit_learn_version
+caught  artifact unpickled again on every request
+        by test_model_is_loaded_once_and_requests_never_load_or_fit
+caught  a model is fitted on every request
+        by test_model_is_loaded_once_and_requests_never_load_or_fit
+caught  model loaded inside the request handler
+        by test_predict_valid_input
+caught  strings and booleans converted to numbers
+        by test_predict_invalid_input[numeric string]
+caught  extra fields accepted
+        by test_predict_invalid_input[25 fields: one extra]
+caught  no bounds on the ranks
+        by test_predict_invalid_input[just above the highest rank]
+caught  null accepted for a feature HW4 always had
+        by test_null_is_accepted_only_where_hw4_had_missing_values[mom_21]
+caught  default 422 handler restored (NaN in a body becomes a 500)
+        by test_predict_rejects_non_finite_numbers[NaN]
+caught  inference error answered with a 200 and prediction 0.0
+        by test_predict_model_failure
+caught  exception text sent to the client
+        by test_predict_model_failure
+caught  request schema not compared with the model at startup
+        by test_startup_fails_if_request_schema_and_model_disagree
+caught  wrong model version in the response
+        by test_predict_valid_input
+
+18 of 18 bugs caught

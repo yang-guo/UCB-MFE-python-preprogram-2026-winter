@@ -1,0 +1,95 @@
+# 1. Build the image and start a container.
+
+$ docker build -q -t mfe-hw5:local .
+sha256:9f400ea2d311babdcab22d7cecf561d488af9133874dff5409a5170baded2888
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+9b4ebba7259b47b63c7b9db65e8add2eddba46cc9ac74ad6f04dc7c64a0ccd5a
+
+$ docker inspect mfe-hw5 --format '{{.Image}}'
+sha256:9f400ea2d311babdcab22d7cecf561d488af9133874dff5409a5170baded2888
+
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-ridge_rank-2026-01-05"}
+
+# 2. Valid request: NVDA on 2026-09-28, a real row of my HW4 experiment.
+
+$ curl -si http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 16:11:02 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: 8874ecf7431a
+
+{"prediction":0.04386884346604347,"model_version":"hw4-ridge_rank-2026-01-05"}
+
+
+# 3. Invalid requests are rejected with 422: a raw dollar volume where its rank is
+#    expected, a number sent as a string, and a NaN.
+
+$ sed 's/"dollar_vol_63": 0.49947286/"dollar_vol_63": 2500000000/' example_request.json | curl -si http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @-
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 16:11:02 GMT
+server: uvicorn
+content-length: 120
+content-type: application/json
+
+{"detail":[{"loc":["body","dollar_vol_63"],"msg":"Input should be less than or equal to 0.5","type":"less_than_equal"}]}
+
+$ sed 's/"mom_21": 0.32076964/"mom_21": "0.32076964"/' example_request.json | curl -si http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @-
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 16:11:02 GMT
+server: uvicorn
+content-length: 97
+content-type: application/json
+
+{"detail":[{"loc":["body","mom_21"],"msg":"Input should be a valid number","type":"float_type"}]}
+
+$ sed 's/"mom_63": 0.3798102/"mom_63": NaN/' example_request.json | curl -si http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @-
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 16:11:02 GMT
+server: uvicorn
+content-length: 101
+content-type: application/json
+
+{"detail":[{"loc":["body","mom_63"],"msg":"Input should be a finite number","type":"finite_number"}]}
+
+
+# 4. Stop the container, start the same image again: the model is still served.
+
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+ef55b54dbfa3ab4b3739853417c0d8d30d5168c92702e443f1bf785e44de5b55
+
+$ docker inspect mfe-hw5 --format '{{.Image}}'
+sha256:9f400ea2d311babdcab22d7cecf561d488af9133874dff5409a5170baded2888
+
+$ curl -si http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 16:11:03 GMT
+server: uvicorn
+content-length: 78
+content-type: application/json
+x-request-id: cf3483eabf43
+
+{"prediction":0.04386884346604347,"model_version":"hw4-ridge_rank-2026-01-05"}
+
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     model_loaded version=hw4-ridge_rank-2026-01-05
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:48710 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48716 - "POST /predict HTTP/1.1" 200 OK
+
+
+# 5. Latency over real localhost HTTP into the container, measured by curl
+#    (time_total, a new connection per request, 200 requests after 20 warm-up).
+200 of 200 returned 200; median 1.4 ms, p95 1.7 ms
+
+$ docker stop mfe-hw5
+mfe-hw5

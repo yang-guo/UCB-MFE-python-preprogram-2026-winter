@@ -1,0 +1,19 @@
+$ make lint
+python -m ruff check .
+All checks passed!
+python -m ruff format --check .
+6 files already formatted
+
+$ make test
+python -m pytest -q
+..............................................................
+[latency] POST /predict, in-process TestClient, 200 requests after 20 warm-up: median 0.95 ms, p95 1.04 ms (arm64, Darwin, Python 3.12.9)
+.          [100%]
+63 passed in 1.20s
+
+$ docker run --rm -v "$PWD/tests:/app/tests:ro" -v "$PWD/example_request.json:/app/example_request.json:ro" -v "$PWD/pyproject.toml:/app/pyproject.toml:ro" mfe-hw5:local python -m pytest -q -p no:cacheprovider
+..............................................................
+[latency] POST /predict, in-process TestClient, 200 requests after 20 warm-up: median 1.15 ms, p95 1.30 ms (aarch64, Linux, Python 3.12.16)
+.          [100%]
+63 passed in 0.94s
+
