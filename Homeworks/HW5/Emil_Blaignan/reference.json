@@ -1,0 +1,23 @@
+{
+  "source": "HW4 weekly row NUE signal date 2012-11-05, scored by the fitted pipeline directly in train_model.py (no API).",
+  "input": {
+    "momentum_21": 0.07822030857552931,
+    "momentum_63": 0.04813393791419607,
+    "momentum_252_21": 0.041479820627802644,
+    "volatility_63": 0.22741758732486073,
+    "drawdown_252": -0.07253086419753085,
+    "net_margin": 0.021918620335923424,
+    "operating_roa": 0.019463022072972146,
+    "debt_to_assets": 0.29033893188165755,
+    "cash_to_assets": 0.07530450884789328,
+    "fcf_to_assets": 0.0015383400582098777,
+    "accruals_to_assets": -0.008992612094105021,
+    "beta_mkt": 1.215417092700032,
+    "beta_mom": -0.3123118490461909,
+    "resid_mom": -1.4331813713296901,
+    "idisc": -0.003968253968253954,
+    "adv_log": 18.225100605413612
+  },
+  "expected_prediction": -0.0007694396017638215,
+  "model_version": "hw4-fm-linear-2015-12-31-v1"
+}
