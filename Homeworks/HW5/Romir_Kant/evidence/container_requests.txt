@@ -1,0 +1,78 @@
+HW5 container evidence, 2026-11-16 22:45 PST. Image mfe-hw5:local, started with:
+PS> docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+
+# 1. The container is running
+PS> docker ps --filter name=mfe-hw5 --format '{{.Names}} | {{.Image}} | {{.Status}} | {{.Ports}}'
+mfe-hw5 | mfe-hw5:local | Up 10 seconds | 127.0.0.1:8000->8000/tcp
+
+
+# 2. Valid request (example_request.json: AAPL, signal date 2026-03-27)
+PS> curl.exe -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '@example_request.json'
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:45:27 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":0.043031901081589566,"model_version":"hw4-ridge-rank-fit-2026-03-27"}
+
+
+# 3. Invalid request (mom_1m sent as the string "0.1")
+PS> curl.exe -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '@evidence/invalid_request.json'
+HTTP/1.1 422 Unprocessable Entity
+date: Tue, 17 Nov 2026 06:45:27 GMT
+server: uvicorn
+content-length: 97
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","mom_1m"],"msg":"Input should be a valid number"}]}
+
+
+# 4. Stop the container (--rm also removes it)
+PS> docker stop mfe-hw5
+mfe-hw5
+
+
+# 5. Nothing is running now
+PS> docker ps -a --filter name=mfe-hw5 --format '{{.Names}} | {{.Status}}'
+
+
+
+# 6. The same request while it is stopped fails to connect
+PS> curl.exe -s -S -m 5 http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '@example_request.json'
+curl: (7) Failed to connect to 127.0.0.1:8000 after 1 ms: Could not connect to server
+
+
+# 7. Start the same image again
+PS> docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+
+# 8. A new container from the same image is running
+PS> docker ps --filter name=mfe-hw5 --format '{{.Names}} | {{.Image}} | {{.Status}} | {{.Ports}}'
+mfe-hw5 | mfe-hw5:local | Up 9 seconds | 127.0.0.1:8000->8000/tcp
+
+
+# 9. The same valid request after the restart
+PS> curl.exe -s -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '@example_request.json'
+HTTP/1.1 200 OK
+date: Tue, 17 Nov 2026 06:45:45 GMT
+server: uvicorn
+content-length: 83
+content-type: application/json
+
+{"prediction":0.043031901081589566,"model_version":"hw4-ridge-rank-fit-2026-03-27"}
+
+
+# 10. Container log: the model is loaded once, at startup
+PS> docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     172.17.0.1:39006 - "POST /predict HTTP/1.1" 200 OK
+INFO:     Waiting for application startup.
+INFO:     loaded model hw4-ridge-rank-fit-2026-03-27
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+
+# 11. Stop the container
+PS> docker stop mfe-hw5
+mfe-hw5
+
