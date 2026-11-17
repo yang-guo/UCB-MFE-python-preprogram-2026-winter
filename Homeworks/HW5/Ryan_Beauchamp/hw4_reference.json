@@ -1,0 +1,134 @@
+[
+  {
+    "symbol": "AAPL",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": 0.04361991939225726,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": -0.07274242132923148,
+      "momentum_63": 0.17435064935064948,
+      "momentum_252_21": 0.5581186339125224,
+      "volatility_63": 0.27210727931246487,
+      "drawdown_252": -0.08197969543147199,
+      "net_margin": 0.2660274859692042,
+      "operating_roa": 0.0967036935232644,
+      "debt_to_assets": 0.22828108073148254,
+      "cash_to_assets": 0.0978974997439919,
+      "fcf_to_assets": 0.0720352913911211,
+      "accruals_to_assets": 0.0023606642197681374,
+      "filing_age_days": 59.0,
+      "sector": "Technology"
+    }
+  },
+  {
+    "symbol": "A",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": 0.008399502762001042,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": -0.019921788533903806,
+      "momentum_63": 0.18852899069434503,
+      "momentum_252_21": 0.14651890702986226,
+      "volatility_63": 0.45369916935170146,
+      "drawdown_252": -0.15162547103531954,
+      "net_margin": 0.18474114441416895,
+      "operating_roa": 0.030539609644087255,
+      "debt_to_assets": 0.2567929582854956,
+      "cash_to_assets": 0.1383084577114428,
+      "fcf_to_assets": 0.028319938767699962,
+      "accruals_to_assets": 0.00474550325296594,
+      "filing_age_days": 28.0,
+      "sector": "Healthcare"
+    }
+  },
+  {
+    "symbol": "AA",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": -0.007440310623165082,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": -0.3284389489953632,
+      "momentum_63": -0.17395437262357405,
+      "momentum_252_21": 1.7522155264090746,
+      "volatility_63": 0.5855315876186961,
+      "drawdown_252": -0.3777300393841747,
+      "net_margin": 0.13310366426558096,
+      "operating_roa": 0.025600961538461538,
+      "debt_to_assets": 0.1467548076923077,
+      "cash_to_assets": 0.08275240384615384,
+      "fcf_to_assets": -0.017908653846153845,
+      "accruals_to_assets": 0.036298076923076926,
+      "filing_age_days": 60.0,
+      "sector": "Basic Materials"
+    }
+  },
+  {
+    "symbol": "AAL",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": 0.008223024105993137,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": 0.2342896174863387,
+      "momentum_63": 0.775049115913556,
+      "momentum_252_21": 0.2978723404255321,
+      "volatility_63": 0.5188543926712558,
+      "drawdown_252": 0.0,
+      "net_margin": -0.02745830937320299,
+      "operating_roa": -0.0006432583388245631,
+      "debt_to_assets": 0.5474285355674794,
+      "cash_to_assets": 0.014167372681916595,
+      "fcf_to_assets": 0.05353164517242461,
+      "accruals_to_assets": -0.07224889390944178,
+      "filing_age_days": 67.0,
+      "sector": "Industrials"
+    }
+  },
+  {
+    "symbol": "AAOI",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": -0.03222566642687977,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": -0.06470551101571875,
+      "momentum_63": 0.7391712642328911,
+      "momentum_252_21": 5.0415713196033565,
+      "volatility_63": 1.451810797212996,
+      "drawdown_252": -0.33590318242940387,
+      "net_margin": -0.0944860530355158,
+      "operating_roa": -0.008296298756161875,
+      "debt_to_assets": 0.11091086859201765,
+      "cash_to_assets": 0.28698066708858094,
+      "fcf_to_assets": -0.091691631345717,
+      "accruals_to_assets": 0.04538792588699382,
+      "filing_age_days": 53.0,
+      "sector": "Technology"
+    }
+  },
+  {
+    "symbol": "AAON",
+    "signal_date": "2026-06-30",
+    "fit_date": "2026-01-02",
+    "hw4_score": 0.0013266672734207246,
+    "source_file": "Homeworks/HW4/Ryan_Beauchamp/outputs/final/scores.parquet",
+    "features": {
+      "momentum_21": -0.09450392576730904,
+      "momentum_63": 0.6218358476093071,
+      "momentum_252_21": 0.9105413882449203,
+      "volatility_63": 0.8342596405072107,
+      "drawdown_252": -0.14370570367870406,
+      "net_margin": 0.08012098137385901,
+      "operating_roa": 0.03188166587696791,
+      "debt_to_assets": 0.2519215382139696,
+      "cash_to_assets": 7.263738523293133e-06,
+      "fcf_to_assets": -0.006220553921524804,
+      "accruals_to_assets": 0.0032524786110837943,
+      "filing_age_days": 53.0,
+      "sector": "Industrials"
+    }
+  }
+]
