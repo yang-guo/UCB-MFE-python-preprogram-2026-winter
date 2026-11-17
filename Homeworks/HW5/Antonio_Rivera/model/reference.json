@@ -1,0 +1,22 @@
+{
+  "source": "HW4 outputs/scores_final_ridge_F1_baseline.parquet (score recorded by hw4_walkforward.py during the HW4 final run)",
+  "symbol": "A",
+  "date": "2026-09-29",
+  "fit_date": "2026-07-01",
+  "features": {
+    "momentum_21": 0.13774050962038475,
+    "momentum_63": 0.31769931491379944,
+    "momentum_252_21": 0.2543008560945781,
+    "volatility_63": 0.28910219078599375,
+    "drawdown_252": -0.001027338622224816,
+    "net_margin": 0.19275825346112885,
+    "operating_roa": 0.03178921744111119,
+    "debt_to_assets": 0.282737882150784,
+    "cash_to_assets": 0.12586811770602133,
+    "fcf_to_assets": 0.03143123075821579,
+    "accruals_to_assets": -0.011240781842915444,
+    "filing_age_days": 27.0,
+    "sector": "Healthcare"
+  },
+  "hw4_score": 0.512245321993285
+}
