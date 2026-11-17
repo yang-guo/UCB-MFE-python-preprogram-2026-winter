@@ -1,0 +1,8 @@
+# Allow-list: nothing reaches the Docker build context unless it is named here. This keeps
+# .venv, .git, .env files, databases (*.duckdb), logs, caches and tests out by default.
+*
+!requirements.txt
+!app.py
+!inference.py
+!artifacts/
+**/.DS_Store

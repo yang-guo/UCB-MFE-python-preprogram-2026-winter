@@ -1,0 +1,119 @@
+{
+  "model_version": "hw4-ridge_rank-2026-01-05",
+  "artifact": "hw4_ridge_rank.joblib",
+  "artifact_sha256": "2ee384f2b4ccc26e6b97baff1ba35a701e78fe30c1d73170024268eddc734db5",
+  "hw4_source": "Homeworks/HW4/Guillaume_Estepa, commit 68d7d59 (pull request #248)",
+  "hw4_config": {
+    "model": "ridge_rank",
+    "n_stocks": 50,
+    "max_liquidity_rank": 1000,
+    "n_tranches": 3,
+    "cost_rate": 0.001,
+    "sector_cap": 0.3,
+    "refit": "at test start, then first signal of each calendar year",
+    "chosen_on": "validation 2012-01-01..2015-12-31",
+    "database": "equities_top2000.duckdb"
+  },
+  "estimator": "Ridge(alpha=1000.0)",
+  "database": {
+    "file": "equities_top2000.duckdb",
+    "sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9"
+  },
+  "fit": {
+    "fit_date": "2026-01-05",
+    "train_rows": 1656617,
+    "first_train_signal": "2010-01-04",
+    "last_train_signal": "2025-10-01",
+    "last_label_end": "2025-12-31",
+    "scored_rows": 79925,
+    "first_scored_signal": "2026-01-05",
+    "last_scored_signal": "2026-09-28"
+  },
+  "input": "24 same-date cross-sectional percentile ranks minus 0.5, float32, in this order",
+  "features": [
+    "mom_21",
+    "mom_63",
+    "mom_126",
+    "mom_252_21",
+    "vol_63",
+    "beta_252",
+    "max_ret_21",
+    "drawdown_252",
+    "ma_gap_200",
+    "dollar_vol_63",
+    "volume_trend",
+    "net_margin",
+    "operating_roa",
+    "gross_profitability",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "revenue_growth",
+    "asset_growth",
+    "earnings_yield",
+    "fcf_yield",
+    "book_to_market",
+    "filing_age_days"
+  ],
+  "never_missing_features": [
+    "mom_21",
+    "mom_252_21",
+    "vol_63",
+    "dollar_vol_63"
+  ],
+  "missing_share_in_training": {
+    "mom_21": 0.0,
+    "mom_63": 9e-05,
+    "mom_126": 0.00015,
+    "mom_252_21": 0.0,
+    "vol_63": 0.0,
+    "beta_252": 0.00021,
+    "max_ret_21": 4e-05,
+    "drawdown_252": 0.0001,
+    "ma_gap_200": 7e-05,
+    "dollar_vol_63": 0.0,
+    "volume_trend": 0.0001,
+    "net_margin": 0.03095,
+    "operating_roa": 0.01674,
+    "gross_profitability": 0.01676,
+    "debt_to_assets": 0.01678,
+    "cash_to_assets": 0.01672,
+    "fcf_to_assets": 0.01885,
+    "accruals_to_assets": 0.01885,
+    "revenue_growth": 0.13139,
+    "asset_growth": 0.11251,
+    "earnings_yield": 0.08304,
+    "fcf_yield": 0.08788,
+    "book_to_market": 0.01709,
+    "filing_age_days": 0.01497
+  },
+  "preprocessing": "missing rank -> 0.0, the middle rank (HW4 model.design_matrix)",
+  "target": "90-calendar-day forward return as a same-date percentile rank minus 0.5",
+  "target_clipped_to_training_quantiles_1_99": [
+    -0.48973116433969516,
+    0.49027552674230146
+  ],
+  "predictions_of_this_fit": {
+    "mean": 0.00024974559995169965,
+    "std": 0.01951985175213167,
+    "min": -0.10430669784545898,
+    "max": 0.0596800372004509
+  },
+  "checks": {
+    "fit_log_equals_hw4_results": true,
+    "max_abs_coefficient_gap_to_hw4_csv": 4.930459111929242e-06,
+    "rows_compared_with_hw4_predictions": 79925,
+    "batch_predictions_identical_to_hw4": true,
+    "max_abs_gap_single_row_vs_hw4": 1.4901161193847656e-08
+  },
+  "versions": {
+    "python": "3.12.9",
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0",
+    "pandas (export only)": "2.3.3"
+  }
+}

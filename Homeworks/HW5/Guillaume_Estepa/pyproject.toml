@@ -1,0 +1,15 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    # The template pins httpx 0.28.1; Starlette 1.10 announces that its TestClient will need
+    # httpx2 in a future release. Known and harmless here, so keep the test output readable.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated:UserWarning",
+]
+
+[tool.ruff]
+line-length = 96
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
