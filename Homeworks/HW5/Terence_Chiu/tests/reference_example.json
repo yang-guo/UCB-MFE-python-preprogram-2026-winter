@@ -1,0 +1,23 @@
+{
+  "source": "HW4 panel (course_data.prepare_panel on equities_top2000.duckdb), first HW4 signal date",
+  "symbol": "BOOT",
+  "date": "2016-03-31",
+  "input": {
+    "momentum_21": -0.05337361530715001,
+    "momentum_63": -0.23763179237631793,
+    "momentum_252_21": -0.584866220735786,
+    "volatility_63": 1.1730559058897343,
+    "drawdown_252": -0.7234480892351816,
+    "net_margin": 0.05121697052238421,
+    "operating_roa": 0.03755740183797477,
+    "debt_to_assets": 0.4319054713320946,
+    "cash_to_assets": 0.033181005734139055,
+    "fcf_to_assets": 0.09234697957991805,
+    "accruals_to_assets": -0.09322300276942364,
+    "filing_age_days": 57.0,
+    "sector": "Consumer Cyclical"
+  },
+  "expected_prediction": 0.0800623524957497,
+  "eligible_rows_that_date": 1993,
+  "complete_rows_that_date": 1870
+}
