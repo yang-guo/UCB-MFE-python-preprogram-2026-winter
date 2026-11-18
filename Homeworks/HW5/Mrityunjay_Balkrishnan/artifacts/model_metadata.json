@@ -1,0 +1,39 @@
+{
+  "model_version": "hw4-ridge-alpha1000-fit-2026-06-30",
+  "fit_date": "2026-06-30",
+  "selected_ridge_alpha": 1000.0,
+  "training_rows": 340637,
+  "training_start": "2010-01-29",
+  "latest_training_signal": "2026-02-27",
+  "latest_mature_label_exit": "2026-06-01",
+  "validation_years": [
+    2012,
+    2013,
+    2014,
+    2015
+  ],
+  "features_in_order": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "sector"
+  ],
+  "sample_symbol_provenance": "A",
+  "sample_signal_date": "2026-06-30",
+  "python_version": "3.12.9",
+  "numpy_version": "2.3.5",
+  "pandas_version": "2.3.3",
+  "scikit_learn_version": "1.8.0",
+  "training_source": "Homeworks/HW4/Mrityunjay_Balkrishnan/hw4.py",
+  "database_name": "equities_top2000.duckdb",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9"
+}

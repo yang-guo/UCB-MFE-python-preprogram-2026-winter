@@ -1,0 +1,21 @@
+HW5 live local API evidence (not a container run)
+Date: 2026-11-18
+Environment: Python 3.12.9, Apple M2 MacBook Air
+
+Command:
+  python -m uvicorn app:app --host 127.0.0.1 --port 8000
+
+Request with example_request.json:
+  curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+Response:
+  HTTP/1.1 200 OK
+  {"prediction":0.046910665365911985,"model_version":"hw4-ridge-alpha1000-fit-2026-06-30"}
+
+Invalid request (numeric string; required fields omitted):
+  curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary '{"momentum_21":"0.1"}'
+Response:
+  HTTP/1.1 422 Unprocessable Entity
+
+The local server was stopped and started again with the same command. The valid request then returned HTTP 200 with the same prediction and model version. Server logs showed clean startup and shutdown both times.
+
+Docker Engine/CLI and Docker Desktop were absent on this workstation. No Docker image was built or run; this transcript is local API evidence only and does not meet HW5 Milestone 5's container requirement.

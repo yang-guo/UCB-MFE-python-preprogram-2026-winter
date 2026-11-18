@@ -1,0 +1,7 @@
+{
+  "model_version": "hw4-ridge-alpha1000-fit-2026-06-30",
+  "source": "Direct pipeline prediction before the API wrapper",
+  "signal_date": "2026-06-30",
+  "symbol_for_provenance": "A",
+  "prediction": 0.046910665365911985
+}
