@@ -1,0 +1,121 @@
+Latest observation: 2024-12-06; reporting window: 2024-06-01 to 2024-11-30
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK AAPL
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK AMGN
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK AMZN
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK AXP
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK BA
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK CAT
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK CRM
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK CSCO
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK CVX
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK DIS
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK GS
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK HD
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK HON
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK IBM
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK JNJ
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK JPM
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK KO
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK MCD
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK MMM
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK MRK
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK MSFT
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK NKE
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK NVDA
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK PG
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK SHW
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK TRV
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK UNH
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK V
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK VZ
+/home/agent/.local/lib/python3.12/site-packages/jupyter_client/localinterfaces.py:56: UserWarning: Unexpected error discovering local network interfaces: [Errno 95] Operation not supported
+  ret = f(**kwargs)
+OK WMT
+
+Top ten by Sharpe
+ticker  avg_daily_return  avg_volatility  max_drawdown  sharpe_ratio  total_return                          report_path
+    HD          0.002692        0.208085     -0.079293      3.151266      0.272889   reports/2026-11-18/HD_report.ipynb
+   MCD          0.002218        0.137368     -0.064319      3.036290      0.225712  reports/2026-11-18/MCD_report.ipynb
+  AAPL          0.002900        0.256241     -0.117502      2.885491      0.212528 reports/2026-11-18/AAPL_report.ipynb
+   SHW          0.002451        0.147345     -0.052827      2.695244      0.288435  reports/2026-11-18/SHW_report.ipynb
+   IBM          0.002235        0.206847     -0.129038      2.636306      0.398844  reports/2026-11-18/IBM_report.ipynb
+  CSCO          0.002133        0.243658     -0.077882      2.319750      0.236166 reports/2026-11-18/CSCO_report.ipynb
+   WMT          0.001363        0.264786     -0.058026      2.168417      0.232516  reports/2026-11-18/WMT_report.ipynb
+  NVDA          0.004130        0.489352     -0.266864      2.022628      0.200209 reports/2026-11-18/NVDA_report.ipynb
+    PG          0.001302        0.154639     -0.088826      1.977971      0.101715   reports/2026-11-18/PG_report.ipynb
+   DIS          0.001865        0.218146     -0.167801      1.951830      0.148289  reports/2026-11-18/DIS_report.ipynb
+
+Bottom ten by Sharpe
+ticker  avg_daily_return  avg_volatility  max_drawdown  sharpe_ratio  total_return                          report_path
+    BA         -0.002261        0.409057     -0.234040     -1.698708     -0.176598   reports/2026-11-18/BA_report.ipynb
+   MRK         -0.001443        0.176245     -0.269079     -1.552824     -0.198486  reports/2026-11-18/MRK_report.ipynb
+   NKE         -0.001303        0.275115     -0.268544     -0.803487     -0.161818  reports/2026-11-18/NKE_report.ipynb
+     V         -0.000570        0.121985     -0.084126     -0.796654      0.077009    reports/2026-11-18/V_report.ipynb
+  AMGN          0.000172             NaN     -0.072678      0.103498      0.053794 reports/2026-11-18/AMGN_report.ipynb
+   JNJ          0.000188        0.114503     -0.046899      0.222574      0.126100  reports/2026-11-18/JNJ_report.ipynb
+   UNH          0.000340        0.179683     -0.081120      0.279201      0.135432  reports/2026-11-18/UNH_report.ipynb
+   MMM          0.000498        0.156361     -0.046254      0.664269      0.361887  reports/2026-11-18/MMM_report.ipynb
+  AMZN          0.000967        0.351140     -0.194900      0.726064      0.165695 reports/2026-11-18/AMZN_report.ipynb
+    KO          0.000513        0.116791     -0.147006      0.808335      0.041105   reports/2026-11-18/KO_report.ipynb
+
+Completed 30/30; failures 0
