@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2013-02-04",
+    "symbol": "CCO",
+    "input": {
+      "book_value": 1.1147826145574693,
+      "small_large": 2509979940.0,
+      "profitability": 0.13373864279744413,
+      "investment_aggression": -0.017334605246461385,
+      "beta": -1.0109610258272559
+    },
+    "predictions": {
+      "book_value": 0.2,
+      "small_large": -0.16609785248500064,
+      "profitability": 0.2,
+      "investment_aggression": 0.2,
+      "beta": 0.2
+    }
+  },
+  {
+    "date": "2012-08-21",
+    "symbol": "ADSK",
+    "input": {
+      "book_value": 0.22310640044955787,
+      "small_large": 8191159000.0,
+      "profitability": 0.16441851986875683,
+      "investment_aggression": -0.00906108866175422,
+      "beta": 1.6196366712520023
+    },
+    "predictions": {
+      "book_value": 0.2,
+      "small_large": 0.2,
+      "profitability": 0.2,
+      "investment_aggression": 0.2,
+      "beta": 0.2
+    }
+  },
+  {
+    "date": "2014-09-15",
+    "symbol": "KODK",
+    "input": {
+      "book_value": 0.5981559768116321,
+      "small_large": 916149000.0,
+      "profitability": -0.054924242424242424,
+      "investment_aggression": -0.002458588877317086,
+      "beta": -0.0
+    },
+    "predictions": {
+      "book_value": 0.2,
+      "small_large": -0.2,
+      "profitability": 0.2,
+      "investment_aggression": 0.2,
+      "beta": 0.2
+    }
+  },
+  {
+    "date": "2012-05-16",
+    "symbol": "CATY",
+    "input": {
+      "book_value": 1.1896216351354272,
+      "small_large": 1299171900.0000002,
+      "profitability": 0.38339525578736783,
+      "investment_aggression": -7.314376824912473e-05,
+      "beta": 0.2774295089023724
+    },
+    "predictions": {
+      "book_value": 0.2,
+      "small_large": -0.2,
+      "profitability": 0.2,
+      "investment_aggression": 0.2,
+      "beta": 0.2
+    }
+  },
+  {
+    "date": "2014-07-22",
+    "symbol": "PZZA",
+    "input": {
+      "book_value": 0.0698857159552772,
+      "small_large": 1809883440.0,
+      "profitability": 0.07973052765853549,
+      "investment_aggression": -0.0262392842941457,
+      "beta": -0.0
+    },
+    "predictions": {
+      "book_value": 0.2,
+      "small_large": -0.2,
+      "profitability": 0.2,
+      "investment_aggression": 0.2,
+      "beta": 0.2
+    }
+  }
+]
