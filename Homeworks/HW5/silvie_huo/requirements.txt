@@ -5,7 +5,7 @@ pydantic==2.14.2
 httpx==0.28.1
 pytest==9.2.0
 ruff==0.17.3
-
+duckdb==2.0.0
 # Model stack from the course uv.lock. Match YOUR HW4 training environment
 # before installing, and include any additional libraries/custom transformers.
 numpy==2.3.5

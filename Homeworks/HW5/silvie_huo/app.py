@@ -10,11 +10,13 @@ from typing import Literal
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, create_model
 
 logging.basicConfig(level=logging.INFO)
 
-# pre-processed: extracted feature schema from course_data.py (HW4) into 
+# pre-processed: extracted feature schema from course_data.py (HW4) into
 # artifacts/feature_contract.json
 # with additional fields such as feature names, units, ranges and data types
 
@@ -35,26 +37,41 @@ class _InputBase(BaseModel):
     finite (no NaN/Inf), and inside the documented [min, max]. Unknown fields are rejected.
     Field order here is documentation only; the server rebuilds the row in training order.
     """
+
     model_config = ConfigDict(extra="forbid")
 
 
 def _field(spec):
     if spec["kind"] == "numeric":
         desc = f"{spec['unit']}. Allowed range [{spec['min']:.6g}, {spec['max']:.6g}]."
-        return (float, Field(..., strict=True, allow_inf_nan=False,
-                             ge=spec["min"], le=spec["max"], description=desc))
+        return (
+            float,
+            Field(
+                ...,
+                strict=True,
+                allow_inf_nan=False,
+                ge=spec["min"],
+                le=spec["max"],
+                description=desc,
+            ),
+        )
     desc = f"Categorical. Allowed values: {', '.join(spec['categories'])}."
     return (Literal[tuple(spec["categories"])], Field(..., description=desc))
 
 
-InputData = create_model("InputData", __base__=_InputBase,
-                         **{f["name"]: _field(f) for f in CONTRACT["features"]})
+InputData = create_model(
+    "InputData", __base__=_InputBase, **{f["name"]: _field(f) for f in CONTRACT["features"]}
+)
 
 
 class OutputData(BaseModel):
-    prediction: float = Field(allow_inf_nan=False,
-                              description="Predicted 90-day forward return (training-target units).")
-    model_version: str = Field(description="Version of the serialized model that produced this value.")
+    prediction: float = Field(
+        allow_inf_nan=False,
+        description="Predicted 90-day forward return (training-target units).",
+    )
+    model_version: str = Field(
+        description="Version of the serialized model that produced this value."
+    )
 
 
 @asynccontextmanager
@@ -68,10 +85,11 @@ async def lifespan(app: FastAPI):
     app.state.model_version = CONTRACT["model_version"]
     log.info("loaded model %s", app.state.model_version)
     yield
-    app.state.model = None                         # release the reference on shutdown
+    app.state.model = None  # release the reference on shutdown
 
 
 app = FastAPI(lifespan=lifespan)
+
 
 @app.get("/")
 def root():
@@ -82,9 +100,6 @@ def root():
 def health(request: Request):
     return {"status": "ok", "model_version": request.app.state.model_version}
 
-
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
 
 @app.exception_handler(RequestValidationError)
 async def validation_handler(request: Request, exc: RequestValidationError):
@@ -101,11 +116,13 @@ def predict(data: InputData, request: Request) -> OutputData:
             raise RuntimeError("model not loaded")
         row = data.model_dump()
         # Same representation as training: a DataFrame with the training column names and order.
-        X = pd.DataFrame([row], columns=FEATURE_NAMES).astype({n: "float64" for n in NUMERIC_NAMES})
+        X = pd.DataFrame([row], columns=FEATURE_NAMES).astype(
+            {n: "float64" for n in NUMERIC_NAMES}
+        )
         pred = float(model.predict(X)[0])
         if not math.isfinite(pred):
             raise ValueError(f"non-finite prediction: {pred}")
     except Exception:
-        log.exception("inference failed")          # full traceback stays in server logs
+        log.exception("inference failed")  # full traceback stays in server logs
         raise HTTPException(status_code=500, detail="Internal inference error") from None
     return OutputData(prediction=pred, model_version=request.app.state.model_version)

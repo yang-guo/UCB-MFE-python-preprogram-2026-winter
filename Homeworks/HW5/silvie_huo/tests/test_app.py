@@ -1,12 +1,13 @@
 """Tests for POST /predict, run against the real saved HW4 model.
 
-Reference result (test_predict_matches_hw4_reference): tests/reference_case.json is written in pre-processing. 
+Reference result (test_predict_matches_hw4_reference): tests/reference_case.json is written in pre-processing.
 Its input is a real row from the HW4 panel, and its expected value is the fitted
 pipeline's own .predict on that row, recorded before any API code existed. Tolerance: rel=1e-6,
-abs=1e-9. The artifact and sklearn version are identical, 1e-6 is orders of magnitude 
+abs=1e-9. The artifact and sklearn version are identical, 1e-6 is orders of magnitude
 below any economically meaningful difference in a 90-day return, and abs=1e-9 handles predictions near zero.
 
 """
+
 import json
 import logging
 import math
@@ -29,7 +30,7 @@ from app import app
 
 CONTRACT = app_module.CONTRACT
 FEATURES = CONTRACT["features"]
-NAMES = app_module.FEATURE_NAMES                       # training column order
+NAMES = app_module.FEATURE_NAMES  # training column order
 NUMERIC = [f for f in FEATURES if f["kind"] == "numeric"]
 CATEGORICAL = [f for f in FEATURES if f["kind"] == "categorical"]
 
@@ -37,8 +38,8 @@ HERE = Path(__file__).resolve().parent
 REFERENCE_FILE = HERE / "reference_case.json"
 PERF_REPORT = HERE / "perf_report.json"
 
-REF_TOL = dict(rel=1e-6, abs=1e-9)                     # recorded reference vs API
-DIRECT_TOL = dict(rel=1e-9, abs=1e-12)                 # same artifact, same code path
+REF_TOL = dict(rel=1e-6, abs=1e-9)  # recorded reference vs API
+DIRECT_TOL = dict(rel=1e-9, abs=1e-12)  # same artifact, same code path
 
 # Loose regression guard, not a benchmark: its job is to catch accidental per-request model
 # loading/fitting (hundreds of ms to seconds), while a one-row in-process predict is a few ms.
@@ -49,9 +50,10 @@ WARMUP, N_TIMED = 5, 30
 
 # ---------- fixtures ----------
 
+
 @pytest.fixture
 def client():
-    with TestClient(app) as test_client:               # context manager runs startup/shutdown
+    with TestClient(app) as test_client:  # context manager runs startup/shutdown
         yield test_client
 
 
@@ -65,8 +67,10 @@ def failure_client():
 @pytest.fixture
 def valid_input_data():
     """Deterministic valid payload: midpoint of each numeric range, first allowed category."""
-    return {f["name"]: ((f["min"] + f["max"]) / 2 if f["kind"] == "numeric" else f["categories"][0])
-            for f in FEATURES}
+    return {
+        f["name"]: ((f["min"] + f["max"]) / 2 if f["kind"] == "numeric" else f["categories"][0])
+        for f in FEATURES
+    }
 
 
 @pytest.fixture(scope="module")
@@ -81,7 +85,9 @@ def reference_case():
         pytest.fail("tests/reference_case.json is missing; run `python export_model.py`")
     ref = json.loads(REFERENCE_FILE.read_text())
     if ref["model_sha256"] != CONTRACT["model_sha256"]:
-        pytest.fail("reference_case.json belongs to a different model; re-run `python export_model.py`")
+        pytest.fail(
+            "reference_case.json belongs to a different model; re-run `python export_model.py`"
+        )
     return ref
 
 
@@ -111,6 +117,7 @@ def post_raw(client, body: str):
 
 # ---------- 1. valid prediction ----------
 
+
 def test_predict_valid_input(client, valid_input_data, saved_model):
     r = client.post("/predict", json=valid_input_data)
     assert r.status_code == 200
@@ -122,7 +129,9 @@ def test_predict_valid_input(client, valid_input_data, saved_model):
     assert body["model_version"] == CONTRACT["model_version"]
 
     # API result equals a direct pipeline call on an independently loaded artifact
-    assert body["prediction"] == pytest.approx(direct_predict(saved_model, valid_input_data), **DIRECT_TOL)
+    assert body["prediction"] == pytest.approx(
+        direct_predict(saved_model, valid_input_data), **DIRECT_TOL
+    )
 
     # key order in the JSON must not matter: server rebuilds the row in training order
     reversed_payload = dict(reversed(list(valid_input_data.items())))
@@ -134,13 +143,16 @@ def test_predict_matches_hw4_reference(client, reference_case):
     """Recorded HW4 input -> recorded HW4 prediction, sent through the API."""
     r = client.post("/predict", json=reference_case["input"])
     assert r.status_code == 200
-    assert r.json()["prediction"] == pytest.approx(reference_case["expected_prediction"], **REF_TOL)
+    assert r.json()["prediction"] == pytest.approx(
+        reference_case["expected_prediction"], **REF_TOL
+    )
 
 
 def test_reference_matches_direct_call(saved_model, reference_case):
     """The saved artifact still reproduces the number recorded at export time."""
     assert direct_predict(saved_model, reference_case["input"]) == pytest.approx(
-        reference_case["expected_prediction"], **REF_TOL)
+        reference_case["expected_prediction"], **REF_TOL
+    )
 
 
 def test_spy_sees_training_representation(client, valid_input_data, predict_spy):
@@ -161,12 +173,13 @@ def test_openapi_documents_contract(client):
 
 # ---------- 2. input validation (422, model never called) ----------
 
+
 def _drop(name):
     return lambda v: json.dumps({k: x for k, x in v.items() if k != name})
 
 
 def _set(name, value):
-    return lambda v: json.dumps({**v, name: value})        # NaN/Infinity serialize as literals
+    return lambda v: json.dumps({**v, name: value})  # NaN/Infinity serialize as literals
 
 
 CASES = [
@@ -206,11 +219,12 @@ if CATEGORICAL:
 def test_predict_invalid_input(client, valid_input_data, predict_spy, build_body):
     r = post_raw(client, build_body(valid_input_data))
     assert r.status_code == 422
-    assert "detail" in r.json()                        # the app's own 422 handler defines this body
+    assert "detail" in r.json()  # the app's own 422 handler defines this body
     assert predict_spy == [], "rejected requests must not reach inference"
 
 
 # ---------- 3. inference failure (500) ----------
+
 
 @pytest.mark.parametrize("failure", ["raises", "nan", "inf"])
 def test_predict_model_failure(failure_client, valid_input_data, monkeypatch, caplog, failure):
@@ -219,7 +233,9 @@ def test_predict_model_failure(failure_client, valid_input_data, monkeypatch, ca
             raise ValueError("secret internal detail")
         return np.array([float("nan") if failure == "nan" else float("inf")])
 
-    monkeypatch.setattr(app.state.model, "predict", broken)   # mock only here; positive tests use the real model
+    monkeypatch.setattr(
+        app.state.model, "predict", broken
+    )  # mock only here; positive tests use the real model
 
     with caplog.at_level(logging.ERROR, logger=app_module.log.name):
         r = failure_client.post("/predict", json=valid_input_data)
@@ -234,13 +250,16 @@ def test_predict_model_failure(failure_client, valid_input_data, monkeypatch, ca
 
 # ---------- 4. performance ----------
 
+
 def hardware_description():
-    return {"platform": platform.platform(),
-            "processor": platform.processor() or platform.machine(),
-            "logical_cpus": os.cpu_count(),
-            "python": platform.python_version(),
-            "sklearn": sklearn.__version__,
-            "fastapi": fastapi.__version__}
+    return {
+        "platform": platform.platform(),
+        "processor": platform.processor() or platform.machine(),
+        "logical_cpus": os.cpu_count(),
+        "python": platform.python_version(),
+        "sklearn": sklearn.__version__,
+        "fastapi": fastapi.__version__,
+    }
 
 
 def test_predict_performance(client, valid_input_data):
@@ -261,12 +280,18 @@ def test_predict_performance(client, valid_input_data):
         assert r.status_code == 200
 
     times_ms.sort()
-    result = {"measurement": "in-process fastapi TestClient (httpx->ASGI), not localhost HTTP",
-              "timer": "time.perf_counter", "warmup_requests": WARMUP, "timed_requests": N_TIMED,
-              "median_ms": statistics.median(times_ms),
-              "p95_ms": times_ms[math.ceil(0.95 * len(times_ms)) - 1],
-              "min_ms": times_ms[0], "max_ms": times_ms[-1],
-              "p95_budget_ms": P95_BUDGET_MS, "hardware": hardware_description()}
+    result = {
+        "measurement": "in-process fastapi TestClient (httpx->ASGI), not localhost HTTP",
+        "timer": "time.perf_counter",
+        "warmup_requests": WARMUP,
+        "timed_requests": N_TIMED,
+        "median_ms": statistics.median(times_ms),
+        "p95_ms": times_ms[math.ceil(0.95 * len(times_ms)) - 1],
+        "min_ms": times_ms[0],
+        "max_ms": times_ms[-1],
+        "p95_budget_ms": P95_BUDGET_MS,
+        "hardware": hardware_description(),
+    }
     PERF_REPORT.write_text(json.dumps(result, indent=2))
     print("\n" + json.dumps(result, indent=2))
     assert result["p95_ms"] < P95_BUDGET_MS

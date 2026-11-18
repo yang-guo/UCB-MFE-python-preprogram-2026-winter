@@ -1,0 +1,15 @@
+{
+  "momentum_21": -0.019292604501607746,
+  "momentum_63": -0.11182294700058248,
+  "momentum_252_21": -0.11471676629661265,
+  "volatility_63": 0.25278026540918747,
+  "drawdown_252": -0.1958871605589243,
+  "net_margin": 0.010507277581603651,
+  "operating_roa": 0.015083261628789797,
+  "debt_to_assets": 0.3351217290074404,
+  "cash_to_assets": 0.016449865870324442,
+  "fcf_to_assets": 0.0057954142835450724,
+  "accruals_to_assets": -0.016373943412461407,
+  "filing_age_days": 68.0,
+  "sector": "Consumer Cyclical"
+}
