@@ -1,0 +1,60 @@
+# 2026-11-18 17:18 CET, macOS 26.6.2, Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz, 32 GB, Python 3.12.9
+
+$ make lint
+.venv/bin/python -m ruff check .
+All checks passed!
+.venv/bin/python -m ruff format --check .
+6 files already formatted
+
+$ python -m pytest -v -s
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.2.0, pluggy-1.7.0 -- .venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/genrikh/School/UCB/Courses/Pre Program Courses/Python for Financial Engineers/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Genrikh_Kuznetsov
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0
+collecting ... .venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+collected 36 items
+
+tests/test_app.py::test_predict_valid_input PASSED
+tests/test_app.py::test_predict_matches_hw4_recorded_score[AAPL] PASSED
+tests/test_app.py::test_predict_matches_hw4_recorded_score[ACM] PASSED
+tests/test_app.py::test_example_request_file_is_valid PASSED
+tests/test_app.py::test_whole_numbers_accepted_for_float_fields PASSED
+tests/test_app.py::test_predict_invalid_input[missing required field] PASSED
+tests/test_app.py::test_predict_invalid_input[missing nullable field (must send null)] PASSED
+tests/test_app.py::test_predict_invalid_input[too few features (12)] PASSED
+tests/test_app.py::test_predict_invalid_input[too many features (extra field)] PASSED
+tests/test_app.py::test_predict_invalid_input[null in non-nullable field] PASSED
+tests/test_app.py::test_predict_invalid_input[numeric string] PASSED
+tests/test_app.py::test_predict_invalid_input[boolean for float] PASSED
+tests/test_app.py::test_predict_invalid_input[boolean for int] PASSED
+tests/test_app.py::test_predict_invalid_input[float for int] PASSED
+tests/test_app.py::test_predict_invalid_input[list instead of number] PASSED
+tests/test_app.py::test_predict_invalid_input[return below -100%] PASSED
+tests/test_app.py::test_predict_invalid_input[return above cap] PASSED
+tests/test_app.py::test_predict_invalid_input[negative volatility] PASSED
+tests/test_app.py::test_predict_invalid_input[positive drawdown] PASSED
+tests/test_app.py::test_predict_invalid_input[negative debt ratio] PASSED
+tests/test_app.py::test_predict_invalid_input[ratio out of range] PASSED
+tests/test_app.py::test_predict_invalid_input[negative filing age] PASSED
+tests/test_app.py::test_predict_invalid_input[unknown sector] PASSED
+tests/test_app.py::test_predict_invalid_input[sector wrong case] PASSED
+tests/test_app.py::test_predict_invalid_input[flat list instead of object] PASSED
+tests/test_app.py::test_predict_invalid_input[empty object] PASSED
+tests/test_app.py::test_non_finite_values_rejected[nan-momentum_21] PASSED
+tests/test_app.py::test_non_finite_values_rejected[nan-net_margin] PASSED
+tests/test_app.py::test_non_finite_values_rejected[inf-momentum_21] PASSED
+tests/test_app.py::test_non_finite_values_rejected[inf-net_margin] PASSED
+tests/test_app.py::test_non_finite_values_rejected[-inf-momentum_21] PASSED
+tests/test_app.py::test_non_finite_values_rejected[-inf-net_margin] PASSED
+tests/test_app.py::test_malformed_json_rejected PASSED
+tests/test_app.py::test_predict_model_failure PASSED
+tests/test_app.py::test_non_finite_model_output_is_an_error PASSED
+tests/test_app.py::test_predict_performance 
+Latency, in-process TestClient (no network), 200 sequential requests after 5 warm-up: median 9.23 ms, p95 11.64 ms, max 13.69 ms  [macOS-26.6.2-x86_64-i386-64bit, x86_64, Python 3.12.9]
+PASSED
+
+============================== 36 passed in 6.67s ==============================
