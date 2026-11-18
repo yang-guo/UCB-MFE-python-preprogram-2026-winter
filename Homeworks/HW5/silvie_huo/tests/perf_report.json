@@ -1,0 +1,19 @@
+{
+  "measurement": "in-process fastapi TestClient (httpx->ASGI), not localhost HTTP",
+  "timer": "time.perf_counter",
+  "warmup_requests": 5,
+  "timed_requests": 30,
+  "median_ms": 19.880936975823715,
+  "p95_ms": 20.202582993078977,
+  "min_ms": 16.119665990117937,
+  "max_ms": 20.253958005923778,
+  "p95_budget_ms": 250.0,
+  "hardware": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "processor": "arm",
+    "logical_cpus": 10,
+    "python": "3.12.16",
+    "sklearn": "1.9.1",
+    "fastapi": "0.162.0"
+  }
+}

@@ -1,0 +1,13 @@
+FROM python:3.12-slim
+
+# TODO: Set the working directory to /app.
+# TODO: Copy requirements.txt and install its dependencies.
+# TODO: Copy app.py, your fitted HW4 artifact, and any custom transformer modules.
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py course_data.py ./
+COPY artifacts/ artifacts/
+EXPOSE 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
