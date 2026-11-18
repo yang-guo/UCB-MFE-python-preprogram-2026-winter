@@ -1,0 +1,35 @@
+{
+  "model_version": "hw4-ridge-rank-a1e6-fit2026-06-30",
+  "model": "Ridge(alpha=1e+06) after hw4_pipeline preprocessing",
+  "target": "same-day percentile rank of the 90-calendar-day forward return, minus 0.5",
+  "prediction_meaning": "relative score; higher = expected to rank higher in 90-day return among that day's eligible stocks. Not a return forecast.",
+  "fit_date": "2026-06-30",
+  "training_rows": 8038367,
+  "training_signal_dates": [
+    "2010-01-04",
+    "2026-03-30"
+  ],
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252",
+    "net_margin",
+    "operating_roa",
+    "debt_to_assets",
+    "cash_to_assets",
+    "fcf_to_assets",
+    "accruals_to_assets",
+    "filing_age_days",
+    "sector"
+  ],
+  "hw4_scores_reproduced": 5951,
+  "hw4_max_abs_difference": 0.0,
+  "python": "3.12.9",
+  "sklearn": "1.8.0",
+  "numpy": "2.3.5",
+  "pandas": "2.3.3",
+  "joblib": "1.5.3",
+  "model_sha256": "da646787b284e11f7a9a893efa8277558f80e2999772cd03052bf983bcc81992"
+}

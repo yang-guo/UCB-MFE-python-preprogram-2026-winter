@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# Only needed by train_model.py to read the HW4 parquet outputs; not installed in Docker.
+pyarrow==22.0.0

@@ -1,0 +1,45 @@
+{
+  "source": "Homeworks/HW4/Genrikh_Kuznetsov/outputs/test_scores.parquet, rows with fit_date 2026-06-30, written by the HW4 notebook (section 5) before any API code existed.",
+  "examples": [
+    {
+      "symbol": "AAPL",
+      "signal_date": "2026-08-31",
+      "hw4_score": 0.034079615723295494,
+      "input": {
+        "momentum_21": 0.025703279301524162,
+        "momentum_63": 0.03440958634018898,
+        "momentum_252_21": 0.3320828080177307,
+        "volatility_63": 0.32028260827064514,
+        "drawdown_252": -0.06830745935440063,
+        "net_margin": 0.27225202322006226,
+        "operating_roa": 0.09313374757766724,
+        "debt_to_assets": 0.2199699431657791,
+        "cash_to_assets": 0.10317638516426086,
+        "fcf_to_assets": 0.08326853811740875,
+        "accruals_to_assets": -0.011949924752116203,
+        "filing_age_days": 30,
+        "sector": "Technology"
+      }
+    },
+    {
+      "symbol": "ACM",
+      "signal_date": "2026-08-31",
+      "hw4_score": -0.039989602687261684,
+      "input": {
+        "momentum_21": -0.06851775199174881,
+        "momentum_63": -0.06671280413866043,
+        "momentum_252_21": -0.4192539155483246,
+        "volatility_63": 0.4182945489883423,
+        "drawdown_252": -0.4947171211242676,
+        "net_margin": -0.024180250242352486,
+        "operating_roa": -0.006317505147308111,
+        "debt_to_assets": 0.2770370543003082,
+        "cash_to_assets": 63.35947036743164,
+        "fcf_to_assets": null,
+        "accruals_to_assets": null,
+        "filing_age_days": 20,
+        "sector": "Industrials"
+      }
+    }
+  ]
+}

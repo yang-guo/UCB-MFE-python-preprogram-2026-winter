@@ -1,0 +1,101 @@
+# HW5 container demo - 2026-11-18 17:18:14 CET - macOS 26.6.2, Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz, Docker 29.9.3
+
+$ docker image ls mfe-hw5:local
+IMAGE           ID             DISK USAGE   CONTENT SIZE   EXTRA
+mfe-hw5:local   cdd74e8e8e42        722MB          166MB        
+
+## 1. Start the container (detached here so the transcript can continue; 'make run' runs it in the foreground)
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+834839ef898222c3f8becb6eb80c0ad208e87443cdef63cde0ee17a75ae8078f
+
+$ docker ps --filter name=mfe-hw5 --format '{{.Names}}  {{.Image}}  {{.Status}}  {{.Ports}}'
+mfe-hw5  mfe-hw5:local  Up 3 seconds  127.0.0.1:8000->8000/tcp
+
+## 2. Valid request (AAPL, 2026-08-31; HW4 recorded score 0.034079615723295494)
+$ cat example_request.json
+{
+  "momentum_21": 0.025703279301524162,
+  "momentum_63": 0.03440958634018898,
+  "momentum_252_21": 0.3320828080177307,
+  "volatility_63": 0.32028260827064514,
+  "drawdown_252": -0.06830745935440063,
+  "net_margin": 0.27225202322006226,
+  "operating_roa": 0.09313374757766724,
+  "debt_to_assets": 0.2199699431657791,
+  "cash_to_assets": 0.10317638516426086,
+  "fcf_to_assets": 0.08326853811740875,
+  "accruals_to_assets": -0.011949924752116203,
+  "filing_age_days": 30,
+  "sector": "Technology"
+}
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Wed, 18 Nov 2026 16:18:18 GMT
+server: uvicorn
+content-length: 87
+content-type: application/json
+x-request-id: 8372ee8b4314
+
+{"prediction":0.034079615723295494,"model_version":"hw4-ridge-rank-a1e6-fit2026-06-30"}
+
+## 3. Invalid requests are rejected with 422
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{"momentum_21": "0.02", "momentum_63": 0.03440958634018898, "momentum_252_21": 0.3320828080177307, "volatility_63": 0.32028260827064514, "drawdown_252": -0.06830745935440063, "net_margin": 0.27225202322006226, "operating_roa": 0.09313374757766724, "debt_to_assets": 0.2199699431657791, "cash_to_assets": 0.10317638516426086, "fcf_to_assets": 0.08326853811740875, "accruals_to_assets": -0.011949924752116203, "filing_age_days": 30, "sector": "Crypto"}'
+HTTP/1.1 422 Unprocessable Entity
+date: Wed, 18 Nov 2026 16:18:18 GMT
+server: uvicorn
+content-length: 367
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","sector"],"msg":"Input should be 'Basic Materials', 'Communication Services', 'Consumer Cyclical', 'Consumer Defensive', 'Energy', 'Financial Services', 'Healthcare', 'Industrials', 'Real Estate', 'Technology' or 'Utilities'","type":"literal_error"}]}
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data '{"momentum_21": NaN, "momentum_63": 0.03440958634018898, "momentum_252_21": 0.3320828080177307, "volatility_63": 0.32028260827064514, "drawdown_252": -0.06830745935440063, "operating_roa": 0.09313374757766724, "debt_to_assets": 0.2199699431657791, "cash_to_assets": 0.10317638516426086, "fcf_to_assets": 0.08326853811740875, "accruals_to_assets": -0.011949924752116203, "filing_age_days": 30, "sector": "Technology"}'
+HTTP/1.1 422 Unprocessable Entity
+date: Wed, 18 Nov 2026 16:18:18 GMT
+server: uvicorn
+content-length: 176
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a finite number","type":"finite_number"},{"loc":["body","net_margin"],"msg":"Field required","type":"missing"}]}
+
+## 4. Server log (one line per request; no input echoed)
+$ docker logs mfe-hw5
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Loaded model hw4-ridge-rank-a1e6-fit2026-06-30
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     172.17.0.1:59920 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64038 - "POST /predict HTTP/1.1" 200 OK
+INFO:     172.17.0.1:64040 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+INFO:     172.17.0.1:64046 - "POST /predict HTTP/1.1" 422 Unprocessable Entity
+
+## 5. Stop the container, start the same image again, request again
+$ docker stop mfe-hw5
+mfe-hw5
+
+$ docker ps -a --filter name=mfe-hw5 --format '{{.Names}} {{.Status}}'
+
+$ docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+485ab52fc3756ad91e8d596d031573c163104121aba96e2314814f6a59add40f
+
+$ curl -s http://127.0.0.1:8000/health
+{"status":"ready","model_version":"hw4-ridge-rank-a1e6-fit2026-06-30"}
+
+$ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Wed, 18 Nov 2026 16:18:23 GMT
+server: uvicorn
+content-length: 87
+content-type: application/json
+x-request-id: 356fc16fcd4f
+
+{"prediction":0.034079615723295494,"model_version":"hw4-ridge-rank-a1e6-fit2026-06-30"}
+
+## 6. Latency over real localhost HTTP to the container
+$ .venv/bin/python measure_latency.py -n 200
+Real HTTP to http://127.0.0.1:8000/predict: 200 sequential requests after 10 warm-up: median 12.50 ms, p95 15.92 ms, max 19.43 ms
+
+$ docker stop mfe-hw5
+mfe-hw5
+
