@@ -1,0 +1,9 @@
+**
+!requirements.txt
+!app.py
+!model_tools.py
+!artifacts/
+!artifacts/**
+!example_request.json
+!Dockerfile
+!.dockerignore

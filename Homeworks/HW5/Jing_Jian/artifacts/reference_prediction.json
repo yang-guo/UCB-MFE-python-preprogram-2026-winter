@@ -1,0 +1,16 @@
+{
+  "input": {
+    "momentum_21": -0.01960341564029633,
+    "momentum_63": -0.05466932665636892,
+    "momentum_252_21": -0.20009401213916045,
+    "volatility_63": 0.3392160101315914,
+    "drawdown_252": -0.21473331822265584
+  },
+  "prediction": 0.04650912738960207,
+  "symbol": "AAL",
+  "signal_date": "2016-03-31",
+  "source": "HW4 outputs/full/final_scores.csv, recorded before the HW5 API existed",
+  "source_sha256": "e707dab6e77f546f230abcfef2e0c4d091dbd91cc32ca925c449719a3843e01d",
+  "rtol": 1e-10,
+  "atol": 1e-12
+}

@@ -1,0 +1,13 @@
+hw_5_Jing_Jian/bin/python -m ruff check .
+All checks passed!
+hw_5_Jing_Jian/bin/python -m ruff format --check .
+6 files already formatted
+hw_5_Jing_Jian/bin/python -m pytest -q
+.....................................................................    [100%]
+=============================== warnings summary ===============================
+hw_5_Jing_Jian/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/jingjian/Personal/UCB_MFE/Python/UCB-MFE-python-preprogram-2026-winter/Homeworks/HW5/Jing_Jian/hw_5_Jing_Jian/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+69 passed, 1 warning in 2.13s
