@@ -1,0 +1,20 @@
+Local Python process (NOT container evidence)
+$ python -m uvicorn app:app --host 127.0.0.1 --port 8001
+POST /predict
+{
+  "momentum_21": -0.01960341564029633,
+  "momentum_63": -0.05466932665636892,
+  "momentum_252_21": -0.20009401213916045,
+  "volatility_63": 0.3392160101315914,
+  "drawdown_252": -0.21473331822265584
+}
+
+HTTP 200
+{"prediction":0.04650912738960207,"model_version":"hw4-price-top20-ridge100-20160331-v1"}
+
+POST /predict
+{"momentum_21": "0.1"}
+HTTP 422
+{"detail":[{"loc":["body","momentum_21"],"msg":"Input should be a valid number","type":"float_type"},{"loc":["body","momentum_63"],"msg":"Field required","type":"missing"},{"loc":["body","momentum_252_21"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_63"],"msg":"Field required","type":"missing"},{"loc":["body","drawdown_252"],"msg":"Field required","type":"missing"}]}
+
+GET /docs: HTTP 200

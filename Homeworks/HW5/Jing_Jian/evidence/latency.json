@@ -1,0 +1,12 @@
+{
+  "method": "in-process FastAPI/Starlette TestClient; sequential POST requests",
+  "clock": "time.perf_counter",
+  "warmup_requests": 5,
+  "measured_requests": 50,
+  "median_ms": 2.6901249948423356,
+  "p95_ms": 3.5287583246827126,
+  "hardware": "macOS-15.6.1-arm64-arm-64bit arm64",
+  "processor": "arm",
+  "python": "3.12.9",
+  "budget": "No universal latency assertion; report observed successful-request latency"
+}

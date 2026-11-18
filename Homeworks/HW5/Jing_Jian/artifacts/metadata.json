@@ -1,0 +1,40 @@
+{
+  "model_version": "hw4-price-top20-ridge100-20160331-v1",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252"
+  ],
+  "fit_audit": {
+    "fit_before_signal": "2016-03-31",
+    "training_rows": 13334,
+    "latest_training_signal": "2015-11-30",
+    "latest_training_outcome": "2016-02-29",
+    "target_clip_lower": -0.26993395094433703,
+    "target_clip_upper": 0.3243673802878967
+  },
+  "model_sha256": "5fe32fd063faae9695ff17143da4dfea12270c81ea05d4960699604a29fddeb2",
+  "database_sha256": "a028641d96c12e6f29d5dd34e3a6ebc059074dd38351648bf0d970b1dd4095b9",
+  "hw4_code_sha256": {
+    "research.py": "bc1a502ed79e920c49972c141d898cbaccf146eb6213b84c6daab33de9413b42",
+    "backtester.py": "5fc11ff2cb2f16998dd21b63c8a3a88b80ebf17b561102ca2b944efec892de41",
+    "course_data.py": "f14a55a6ebd00c9f50e2f6ffa3c91fa47f2d7e70c6e3241b04f05469c04d1ea6"
+  },
+  "training_versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.16.3",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "reference_predictions_verified": 186,
+  "maximum_absolute_prediction_difference": 9.71445146547012e-17,
+  "loader_warnings": [
+    "Quarantining 1 price rows outside the supplied market calendar; inspect the raw database and delivery audit.",
+    "Quarantining 275 invalid adjusted-price rows; inspect the raw database and delivery audit."
+  ],
+  "horizon": "next-session adjusted-close entry to 90-calendar-day maturity, next session if needed"
+}
