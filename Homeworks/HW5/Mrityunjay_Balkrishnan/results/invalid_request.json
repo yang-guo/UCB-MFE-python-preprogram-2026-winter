@@ -1,0 +1,15 @@
+{
+  "momentum_21": "0.1",
+  "momentum_63": 0.18852899069434503,
+  "momentum_252_21": 0.14651890702986226,
+  "volatility_63": 0.4536991693517013,
+  "drawdown_252": -0.15162547103531954,
+  "net_margin": 0.18474114441416895,
+  "operating_roa": 0.030539609644087255,
+  "debt_to_assets": 0.2567929582854956,
+  "cash_to_assets": 0.1383084577114428,
+  "fcf_to_assets": 0.028319938767699962,
+  "accruals_to_assets": 0.00474550325296594,
+  "filing_age_days": 28.0,
+  "sector": "Healthcare"
+}

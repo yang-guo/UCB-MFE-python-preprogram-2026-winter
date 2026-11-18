@@ -1,0 +1,35 @@
+HW5 Docker container request evidence
+Date: 2026-11-18
+Image: mfe-hw5:local (built successfully from this submission's Dockerfile)
+
+Build:
+  docker build -t mfe-hw5:local .
+  Result: image built successfully; Dockerfile base python:3.12-slim
+
+Start container:
+  docker run --rm --name mfe-hw5 -d -p 127.0.0.1:8000:8000 mfe-hw5:local
+  Container: 088ea8ae500971db836ed0104b3c8fe30d5d95c072eceb78b4e40c7d346b1e95
+  Logs: Application startup complete; Uvicorn listening on port 8000.
+
+Valid request:
+  curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+  HTTP/1.1 200 OK
+  {"prediction":0.046910665365911985,"model_version":"hw4-ridge-alpha1000-fit-2026-06-30"}
+
+Invalid request (`momentum_21` supplied as a string; full payload in `results/invalid_request.json`):
+  curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @results/invalid_request.json
+  HTTP/1.1 422 Unprocessable Entity
+  {"detail":[{"loc":["body","momentum_21"],"msg":"Value error, must be a JSON number or null","type":"value_error"}]}
+
+Restart the same image:
+  docker stop mfe-hw5
+  docker run --rm --name mfe-hw5 -d -p 127.0.0.1:8000:8000 mfe-hw5:local
+  Container: 5d67607367e8a75e3219aa7b9382c90f6c2b7bea0becdd71d2ab877a8607749c
+  Logs: Application startup complete; Uvicorn listening on port 8000.
+
+Post-restart valid request:
+  curl -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+  HTTP/1.1 200 OK
+  {"prediction":0.046910665365911985,"model_version":"hw4-ridge-alpha1000-fit-2026-06-30"}
+
+The verification container was stopped after the checks.
