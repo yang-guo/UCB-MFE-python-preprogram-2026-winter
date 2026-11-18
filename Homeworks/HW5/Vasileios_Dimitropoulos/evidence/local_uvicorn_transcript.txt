@@ -1,0 +1,30 @@
+# Local uvicorn (no Docker), 2026-11-18T00:12:29Z
++ curl -sS -i http://127.0.0.1:8000/health
+HTTP/1.1 200 OK
+date: Wed, 18 Nov 2026 00:12:28 GMT
+server: uvicorn
+content-length: 72
+content-type: application/json
+
+{"status":"ready","model_version":"hw4-ridge-a1000-rank-fit-2026-07-06"}+ echo
+
++ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Wed, 18 Nov 2026 00:12:28 GMT
+server: uvicorn
+content-length: 88
+content-type: application/json
+x-request-id: b5ebf6e9d38f
+
+{"prediction":0.04108925851957752,"model_version":"hw4-ridge-a1000-rank-fit-2026-07-06"}+ echo
+
++ curl -sS -i http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data-binary @example_invalid_request.json
+HTTP/1.1 422 Unprocessable Entity
+date: Wed, 18 Nov 2026 00:12:28 GMT
+server: uvicorn
+content-length: 253
+content-type: application/json
+
+{"detail":[{"type":"float_type","loc":["body","r_mom_5"],"msg":"Input should be a valid number"},{"type":"missing","loc":["body","r_roe"],"msg":"Field required"},{"type":"extra_forbidden","loc":["body","symbol"],"msg":"Extra inputs are not permitted"}]}+ echo
+
+[latency] local uvicorn, real localhost HTTP (http://127.0.0.1:8000), 200 sequential requests after 10 warm-up: median 4.19 ms, p95 5.53 ms, max 33.10 ms (client: Python 3.12.9, Windows 11, Intel64 Family 6 Model 189 Stepping 1, GenuineIntel, 8 logical CPUs)

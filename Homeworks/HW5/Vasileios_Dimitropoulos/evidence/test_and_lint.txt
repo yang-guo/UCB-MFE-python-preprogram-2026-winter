@@ -1,0 +1,11 @@
+# Tests and lint, 2026-11-18T00:44:37Z, Python 3.12.9, Windows 11
+$ python -m pytest -q
+......................................
+[latency] in-process TestClient, 50 requests after 5 warm-up: median 4.42 ms, p95 5.34 ms (Python 3.12.9, Windows 11, Intel64 Family 6 Model 189 Stepping 1, GenuineIntel, 8 logical CPUs)
+........                           [100%]
+46 passed in 2.15s
+
+$ python -m ruff check .
+All checks passed!
+$ python -m ruff format --check .
+7 files already formatted
