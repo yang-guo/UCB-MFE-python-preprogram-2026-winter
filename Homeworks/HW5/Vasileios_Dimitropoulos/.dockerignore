@@ -1,0 +1,16 @@
+.venv/
+.git/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+*.duckdb
+*.duckdb.wal
+*.db
+*.parquet
+*.log
+# Not needed at runtime (the image copies only app.py, model_pipeline.py, artifacts/).
+tests/
+scripts/
+evidence/
