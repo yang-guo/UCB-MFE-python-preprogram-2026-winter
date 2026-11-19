@@ -1,0 +1,38 @@
+{
+  "model_version": "hw4-ridge-alpha-1000-fit-2016-03-31",
+  "source_hw4_commit": "c18b63174ebdb251568be66f06afe0ea25361824",
+  "fit_date": "2016-03-31",
+  "selected_alpha": 1000.0,
+  "training_rows": 135004,
+  "training_signals": "2010-01-01 through 2015-12-31; only targets mature before fit date",
+  "features": [
+    "momentum_21",
+    "momentum_63",
+    "momentum_252_21",
+    "volatility_63",
+    "drawdown_252"
+  ],
+  "target": "Adjusted-price return from next-session close to first market session on or after 90 calendar days",
+  "feature_units": "Returns and annualized volatility are fractions, not percentages",
+  "training_target_clip_quantiles": [
+    0.01,
+    0.99
+  ],
+  "training_target_clip_bounds": [
+    -0.43942440639364605,
+    0.6553828417833902
+  ],
+  "preprocessing": [
+    "QuantileClipper(0.01, 0.99)",
+    "median imputation",
+    "standard scaling"
+  ],
+  "python_version": "3.12.9",
+  "sklearn_version": "1.8.0",
+  "numpy_version": "2.3.5",
+  "pandas_version": "2.3.3",
+  "joblib_version": "1.5.3",
+  "reference_signal_date": "2016-03-31",
+  "reference_symbol": "A",
+  "reference_prediction": 0.036878474294762584
+}

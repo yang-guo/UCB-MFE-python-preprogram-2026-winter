@@ -1,0 +1,48 @@
+HW5 verification record
+
+Docker image
+Command: docker build -t mfe-hw5:local .
+Result: completed successfully (11/11 build steps).
+
+Container request checks
+Image: mfe-hw5:local
+
+Container command:
+docker run --rm --name mfe-hw5 -p 127.0.0.1:8000:8000 mfe-hw5:local
+
+Valid request before restart:
+curl -i http://127.0.0.1:8000/predict \
+  -H 'Content-Type: application/json' \
+  --data-binary @artifacts/example_request.json
+HTTP 200 OK
+{"prediction":0.036878474294762584,"model_version":"hw4-ridge-alpha-1000-fit-2016-03-31"}
+
+Invalid request before restart:
+curl -i http://127.0.0.1:8000/predict \
+  -H 'Content-Type: application/json' \
+  --data '{"momentum_21":"not-a-number"}'
+HTTP 422 Unprocessable Entity
+{"detail":"Invalid request"}
+
+The container was stopped with Ctrl+C and the same image was started again using the container command above.
+
+Valid request after restart:
+The valid curl request above was repeated.
+HTTP 200 OK
+{"prediction":0.036878474294762584,"model_version":"hw4-ridge-alpha-1000-fit-2016-03-31"}
+
+Invalid request after restart:
+The invalid curl request above was repeated.
+HTTP 422 Unprocessable Entity
+{"detail":"Invalid request"}
+
+Automated checks
+Command: python -m pytest -q
+Result: 5 passed in 2.18s.
+Command: python -m ruff check .
+Result: All checks passed.
+Command: python -m ruff format --check .
+Result: 4 files already formatted.
+
+Latency report
+Measured with a warmed-up in-process TestClient over 20 successful requests on an Apple Silicon Mac with Python 3.12.9: median 0.833 ms; p95 0.999 ms. This is not a real network or container latency measurement.
