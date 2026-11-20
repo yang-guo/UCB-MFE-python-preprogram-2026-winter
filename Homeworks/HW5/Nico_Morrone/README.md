@@ -58,6 +58,9 @@ All 17 tests and both Ruff checks passed. I compared the API prediction with a d
 
 The container returned `200`, then `422` for the empty request, then `200` after restart. Both successful requests returned `0.03241820288799492` with the same model version. [Container transcript](container-transcript.txt)
 
+
+I chose the input bounds based on how each feature is calculated. With nonnegative prices, momentum cannot fall below −100%, and drawdown ranges from −100% to 0%. Volatility is nonnegative because it is based on a standard deviation. Beta and relative momentum can take any finite value because their formulas give them no fixed bounds.
+
 ## Before Production
 
 I would add authentication, readiness checks, and monitoring for stale features, prediction drift, and inference errors. I would also verify the model artifact before loading it and run the container as a non-root user.
