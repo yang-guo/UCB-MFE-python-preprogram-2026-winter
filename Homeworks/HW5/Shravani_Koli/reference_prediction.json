@@ -1,0 +1,10 @@
+{
+  "model_version": "hw4-ridge-alpha100-v1",
+  "input": {
+    "return_20d": 0.010194624652456019,
+    "return_60d": 0.030575539568345578,
+    "volatility_20d": 0.01794796572806772
+  },
+  "expected_prediction": 0.030672250407788662,
+  "source": "Direct prediction from HW4 fit_final_model before FastAPI"
+}
