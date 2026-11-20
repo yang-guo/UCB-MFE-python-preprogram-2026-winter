@@ -1,0 +1,37 @@
++-zsh:11> docker ps --filter 'name=mfe-hw5'
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                      NAMES
+7123b0ab8272   mfe-hw5:local   "python -m uvicorn a…"   26 seconds ago   Up 25 seconds   127.0.0.1:8001->8000/tcp   mfe-hw5
++-zsh:12> curl -sS -i http://127.0.0.1:8001/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 20 Nov 2026 23:21:32 GMT
+server: uvicorn
+content-length: 73
+content-type: application/json
+
+{"prediction":0.03241820288799492,"model_version":"hw4-ridge-alpha10-v1"}+-zsh:15> printf '\n\n'
+
+
++-zsh:16> curl -sS -i http://127.0.0.1:8001/predict -H 'Content-Type: application/json' --data '{}'
+HTTP/1.1 422 Unprocessable Entity
+date: Fri, 20 Nov 2026 23:21:32 GMT
+server: uvicorn
+content-length: 384
+content-type: application/json
+
+{"detail":[{"loc":["body","momentum_63d"],"msg":"Field required","type":"missing"},{"loc":["body","volatility_21d"],"msg":"Field required","type":"missing"},{"loc":["body","beta_126d"],"msg":"Field required","type":"missing"},{"loc":["body","max_drawdown_63d"],"msg":"Field required","type":"missing"},{"loc":["body","relative_momentum_63d"],"msg":"Field required","type":"missing"}]}+-zsh:19> printf '\n'
+
++-zsh:23> docker stop mfe-hw5
+mfe-hw5
++-zsh:24> docker run -d --rm --name mfe-hw5 -p 127.0.0.1:8001:8000 mfe-hw5:local
+f4c2f625a024d4181b99cb64166c2c77d8fdea69ddc740c52e750509658091ee
++-zsh:29> curl -sS -i http://127.0.0.1:8001/predict -H 'Content-Type: application/json' --data-binary @example_request.json
+HTTP/1.1 200 OK
+date: Fri, 20 Nov 2026 23:22:10 GMT
+server: uvicorn
+content-length: 73
+content-type: application/json
+
+{"prediction":0.03241820288799492,"model_version":"hw4-ridge-alpha10-v1"}+-zsh:32> printf '\n'
+
++-zsh:33> docker stop mfe-hw5
+mfe-hw5

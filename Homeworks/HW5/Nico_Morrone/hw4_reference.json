@@ -1,0 +1,14 @@
+{
+  "symbol": "A",
+  "signal_date": "2016-03-31",
+  "prediction": 0.03241820288799492,
+  "model_version": "hw4-ridge-alpha10-v1",
+  "training_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.5.0"
+  }
+}
